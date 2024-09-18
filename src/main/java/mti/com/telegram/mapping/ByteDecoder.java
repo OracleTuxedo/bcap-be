@@ -104,9 +104,9 @@ public class ByteDecoder {
                                         throw var42;
                                     }
 
-                                    var37 = new Integer(var39);
+                                    var37 = Integer.parseInt(var39);
                                     var3 += 8;
-                                    ArrayList var41 = new ArrayList();
+                                    ArrayList<Object> var41 = new ArrayList<Object>();
 
                                     for(int var44 = 0; var44 < var37; ++var44) {
                                         Type var47 = var4[var6].getGenericType();
@@ -130,9 +130,9 @@ public class ByteDecoder {
                                     continue;
                                 case MESSAGE:
                                     byte[] var43 = TelegramUtil.cutBytes(var1, var3, 2);
-                                    var37 = new Integer(new String(var43));
+                                    var37 = Integer.parseInt(new String(var43));
                                     var3 += 2;
-                                    ArrayList var46 = new ArrayList();
+                                    ArrayList<Object> var46 = new ArrayList<Object>();
 
                                     for(int var45 = 0; var45 < var37; ++var45) {
                                         Type var49 = var4[var6].getGenericType();
