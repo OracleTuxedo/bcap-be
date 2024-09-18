@@ -10,12 +10,10 @@ import java.math.RoundingMode;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.text.NumberFormat;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 import mti.com.telegram.exception.TelegramNestedRuntimeException;
-import mti.com.telegram.model.FieldType;
-import mti.com.telegram.model.Kind;
-import mti.com.telegram.model.NumberType;
 import mti.com.telegram.model.TrimType;
 import mti.com.telegram.model.annotation.DATATYPE;
 import mti.com.telegram.model.annotation.FIELD;
@@ -26,1055 +24,1174 @@ import org.apache.logging.log4j.Logger;
 public class TelegramUtil {
     private static final Logger logger = LogManager.getLogger(TelegramUtil.class);
 
-    public static String getStringFromDecimalNumberRound(Object paramObject, Field paramField) throws Exception {
-        BigDecimal bigDecimal;
-        DATATYPE dATATYPE = paramField.<DATATYPE>getAnnotation(DATATYPE.class);
-        int i = dATATYPE.decimal();
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setGroupingUsed(false);
-        numberFormat.setMaximumFractionDigits(i);
-        numberFormat.setRoundingMode(RoundingMode.HALF_UP);
-        double d = 0.0D;
-        switch (dATATYPE.type()) {
-            case DATA:
-                bigDecimal = (BigDecimal) paramObject;
-                d = bigDecimal.doubleValue();
-                break;
-            case MESSAGE:
-                d = ((Double) paramObject).doubleValue();
-                break;
-            case null:
-                d = ((Float) paramObject).doubleValue();
-                break;
-        }
-        return numberFormat.format(d);
+    public TelegramUtil() {
     }
 
-    public static String getStringFromDecimalNumberCeil(Object paramObject, Field paramField) throws Exception {
-        BigDecimal bigDecimal;
-        DATATYPE dATATYPE = paramField.<DATATYPE>getAnnotation(DATATYPE.class);
-        int i = dATATYPE.decimal();
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setGroupingUsed(false);
-        numberFormat.setMaximumFractionDigits(i);
-        numberFormat.setRoundingMode(RoundingMode.CEILING);
-        double d = 0.0D;
-        switch (dATATYPE.type()) {
-            case DATA:
-                bigDecimal = (BigDecimal) paramObject;
-                d = bigDecimal.doubleValue();
+    public static String getStringFromDecimalNumberRound(Object var0, Field var1) throws Exception {
+        DATATYPE var2 = (DATATYPE) var1.getAnnotation(DATATYPE.class);
+        int var3 = var2.decimal();
+        NumberFormat var4 = NumberFormat.getInstance();
+        var4.setGroupingUsed(false);
+        var4.setMaximumFractionDigits(var3);
+        var4.setRoundingMode(RoundingMode.HALF_UP);
+        double var5 = 0.0;
+        switch (var2.type()) {
+            case DECIMAL:
+                BigDecimal var7 = (BigDecimal) var0;
+                var5 = var7.doubleValue();
                 break;
-            case MESSAGE:
-                d = ((Double) paramObject).doubleValue();
+            case DOUBLE:
+                var5 = (Double) var0;
                 break;
-            case null:
-                d = ((Float) paramObject).doubleValue();
-                break;
+            case FLOAT:
+                var5 = ((Float) var0).doubleValue();
         }
-        return numberFormat.format(d);
+
+        return var4.format(var5);
     }
 
-    public static String getStringFromDecimalNumberFloor(Object paramObject, Field paramField) throws Exception {
-        BigDecimal bigDecimal;
-        DATATYPE dATATYPE = paramField.<DATATYPE>getAnnotation(DATATYPE.class);
-        int i = dATATYPE.decimal();
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setGroupingUsed(false);
-        numberFormat.setMaximumFractionDigits(i);
-        numberFormat.setRoundingMode(RoundingMode.FLOOR);
-        double d = 0.0D;
-        switch (dATATYPE.type()) {
-            case DATA:
-                bigDecimal = (BigDecimal) paramObject;
-                d = bigDecimal.doubleValue();
+    public static String getStringFromDecimalNumberCeil(Object var0, Field var1) throws Exception {
+        DATATYPE var2 = (DATATYPE) var1.getAnnotation(DATATYPE.class);
+        int var3 = var2.decimal();
+        NumberFormat var4 = NumberFormat.getInstance();
+        var4.setGroupingUsed(false);
+        var4.setMaximumFractionDigits(var3);
+        var4.setRoundingMode(RoundingMode.CEILING);
+        double var5 = 0.0;
+        switch (var2.type()) {
+            case DECIMAL:
+                BigDecimal var7 = (BigDecimal) var0;
+                var5 = var7.doubleValue();
                 break;
-            case MESSAGE:
-                d = ((Double) paramObject).doubleValue();
+            case DOUBLE:
+                var5 = (Double) var0;
                 break;
-            case null:
-                d = ((Float) paramObject).doubleValue();
-                break;
+            case FLOAT:
+                var5 = ((Float) var0).doubleValue();
         }
-        return numberFormat.format(d);
+
+        return var4.format(var5);
     }
 
-    public static byte[] convertStringToBytes(Object paramObject, Field paramField, String paramString)
-            throws Exception {
-        byte[] arrayOfByte = null;
-        FIELD fIELD = paramField.<FIELD>getAnnotation(FIELD.class);
-        if (paramObject == null)
-            return arrayOfByte;
-        String str = (paramObject != null) ? (String) paramObject : "";
-        int i = fIELD.length();
-        int j = (str.getBytes(paramString)).length;
-        if (j > i) {
-            byte[] arrayOfByte1 = str.getBytes(paramString);
-            arrayOfByte = (new String(arrayOfByte1, 0, i)).getBytes(paramString);
+    public static String getStringFromDecimalNumberFloor(Object var0, Field var1) throws Exception {
+        DATATYPE var2 = (DATATYPE) var1.getAnnotation(DATATYPE.class);
+        int var3 = var2.decimal();
+        NumberFormat var4 = NumberFormat.getInstance();
+        var4.setGroupingUsed(false);
+        var4.setMaximumFractionDigits(var3);
+        var4.setRoundingMode(RoundingMode.FLOOR);
+        double var5 = 0.0;
+        switch (var2.type()) {
+            case DECIMAL:
+                BigDecimal var7 = (BigDecimal) var0;
+                var5 = var7.doubleValue();
+                break;
+            case DOUBLE:
+                var5 = (Double) var0;
+                break;
+            case FLOAT:
+                var5 = ((Float) var0).doubleValue();
+        }
+
+        return var4.format(var5);
+    }
+
+    public static byte[] convertStringToBytes(Object var0, Field var1, String var2) throws Exception {
+        byte[] var3 = null;
+        FIELD var4 = (FIELD) var1.getAnnotation(FIELD.class);
+        if (var0 == null) {
+            return var3;
         } else {
-            TrimType trimType = fIELD.trim();
-            switch (fIELD.type()) {
-                case DATA:
-                    if (trimType == TrimType.LTRIM) {
-                        arrayOfByte = lpadString2Byte(str, i, " ", paramString);
+            String var5 = var0 != null ? (String) var0 : "";
+            int var6 = var4.length();
+            int var7 = var5.getBytes(var2).length;
+            if (var7 > var6) {
+                byte[] var8 = var5.getBytes(var2);
+                var3 = (new String(var8, 0, var6)).getBytes(var2);
+            } else {
+                TrimType var9 = var4.trim();
+                switch (var4.type()) {
+                    case STRING:
+                        if (var9 == TrimType.LTRIM) {
+                            var3 = lpadString2Byte(var5, var6, " ", var2);
+                        } else {
+                            var3 = rpadString2Byte(var5, var6, " ", var2);
+                        }
                         break;
-                    }
-                    arrayOfByte = rpadString2Byte(str, i, " ", paramString);
-                    break;
-                case MESSAGE:
-                    if (trimType == TrimType.LTRIM) {
-                        arrayOfByte = lpadString2Byte(str, i, "0", paramString);
-                        break;
-                    }
-                    arrayOfByte = rpadString2Byte(str, i, "0", paramString);
-                    break;
+                    case NUMBER:
+                        if (var9 == TrimType.LTRIM) {
+                            var3 = lpadString2Byte(var5, var6, "0", var2);
+                        } else {
+                            var3 = rpadString2Byte(var5, var6, "0", var2);
+                        }
+                }
             }
+
+            return var3;
         }
-        return arrayOfByte;
     }
 
-    public static String convertByteToHexString(byte[] paramArrayOfbyte) {
-        if (paramArrayOfbyte == null)
+    public static String convertByteToHexString(byte[] var0) {
+        if (var0 == null) {
             return null;
-        StringBuilder stringBuilder = new StringBuilder();
-        for (byte b : paramArrayOfbyte) {
-            stringBuilder.append(Integer.toString((b & 0xF0) >> 4, 16));
-            stringBuilder.append(Integer.toString(b & 0xF, 16));
+        } else {
+            StringBuilder var1 = new StringBuilder();
+            byte[] var2 = var0;
+            int var3 = var0.length;
+
+            for (int var4 = 0; var4 < var3; ++var4) {
+                byte var5 = var2[var4];
+                var1.append(Integer.toString((var5 & 240) >> 4, 16));
+                var1.append(Integer.toString(var5 & 15, 16));
+            }
+
+            return var1.toString();
         }
-        return stringBuilder.toString();
     }
 
-    public static byte[] rpadString2Byte(String paramString1, int paramInt, String paramString2, String paramString3)
-            throws Exception {
-        byte[] arrayOfByte1 = null;
-        StringBuffer stringBuffer = new StringBuffer();
-        int i = paramInt;
-        int j = 0;
-        byte[] arrayOfByte2 = null;
-        if (paramString1 != null && !"".equals(paramString1)) {
-            arrayOfByte2 = paramString1.getBytes(paramString3);
-            j = arrayOfByte2.length;
-            i -= j;
-            if (j <= paramInt) {
-                stringBuffer.append(paramString1);
-                for (byte b = 0; b < i; b++)
-                    stringBuffer.append(paramString2);
+    public static byte[] rpadString2Byte(String var0, int var1, String var2, String var3) throws Exception {
+        byte[] var4 = null;
+        StringBuffer var5 = new StringBuffer();
+        boolean var7 = false;
+        Object var8 = null;
+        int var9;
+        if (var0 != null && !"".equals(var0)) {
+            byte[] var12 = var0.getBytes(var3);
+            int var11 = var12.length;
+            int var6 = var1 - var11;
+            if (var11 <= var1) {
+                var5.append(var0);
+
+                for (var9 = 0; var9 < var6; ++var9) {
+                    var5.append(var2);
+                }
             } else {
-                byte[] arrayOfByte = cutBytes(arrayOfByte2, 0, paramInt);
-                stringBuffer.append(new String(arrayOfByte, paramString3));
+                byte[] var10 = cutBytes(var12, 0, var1);
+                var5.append(new String(var10, var3));
             }
         } else {
-            for (byte b = 0; b < paramInt; b++)
-                stringBuffer.append(paramString2);
+            for (var9 = 0; var9 < var1; ++var9) {
+                var5.append(var2);
+            }
         }
-        if (stringBuffer.toString() != null)
-            arrayOfByte1 = stringBuffer.toString().getBytes(paramString3);
-        return arrayOfByte1;
+
+        if (var5.toString() != null) {
+            var4 = var5.toString().getBytes(var3);
+        }
+
+        return var4;
     }
 
-    public static byte[] lpadString2Byte(String paramString1, int paramInt, String paramString2, String paramString3)
-            throws Exception {
-        byte[] arrayOfByte1 = null;
-        StringBuffer stringBuffer = new StringBuffer();
-        int i = paramInt;
-        int j = 0;
-        byte[] arrayOfByte2 = null;
-        if (paramString1 != null && !"".equals(paramString1)) {
-            arrayOfByte2 = paramString1.getBytes(paramString3);
-            j = arrayOfByte2.length;
-            i -= j;
-            if (j <= paramInt) {
-                for (byte b = 0; b < i; b++)
-                    stringBuffer.append(paramString2);
-                stringBuffer.append(paramString1);
+    public static byte[] lpadString2Byte(String var0, int var1, String var2, String var3) throws Exception {
+        byte[] var4 = null;
+        StringBuffer var5 = new StringBuffer();
+        boolean var7 = false;
+        Object var8 = null;
+        int var9;
+        if (var0 != null && !"".equals(var0)) {
+            byte[] var12 = var0.getBytes(var3);
+            int var11 = var12.length;
+            int var6 = var1 - var11;
+            if (var11 <= var1) {
+                for (var9 = 0; var9 < var6; ++var9) {
+                    var5.append(var2);
+                }
+
+                var5.append(var0);
             } else {
-                byte[] arrayOfByte = cutBytes(arrayOfByte2, 0, paramInt);
-                stringBuffer.append(new String(arrayOfByte, paramString3));
+                byte[] var10 = cutBytes(var12, 0, var1);
+                var5.append(new String(var10, var3));
             }
         } else {
-            for (byte b = 0; b < paramInt; b++)
-                stringBuffer.append(paramString2);
-        }
-        if (stringBuffer.toString() != null)
-            arrayOfByte1 = stringBuffer.toString().getBytes(paramString3);
-        return arrayOfByte1;
-    }
-
-    public static byte[] lpadString2ByteWithDecimal(String paramString1, int paramInt1, String paramString2,
-            String paramString3, int paramInt2) throws Exception {
-        byte[] arrayOfByte = null;
-        int i = 0;
-        int j = paramString1.indexOf(".");
-        boolean bool = false;
-        if (j > 0) {
-            String str = paramString1.substring(j + 1);
-            i = paramInt2 - (str.getBytes(paramString3)).length;
-        } else {
-            i = paramInt2;
-            bool = true;
-        }
-        int k = paramInt1 - (paramString1.getBytes(paramString3)).length - i;
-        if (bool && paramInt2 > 0)
-            k--;
-        char[] arrayOfChar = paramString1.toCharArray();
-        if (arrayOfChar[0] == '-') {
-            StringBuffer stringBuffer = new StringBuffer();
-            stringBuffer.append("-");
-            byte b;
-            for (b = 0; b < k; b++)
-                stringBuffer.append(paramString2);
-            stringBuffer.append(paramString1.substring(1));
-            for (b = 0; b < i; b++) {
-                if (b == 0 && bool)
-                    stringBuffer.append(".");
-                stringBuffer.append(paramString2);
+            for (var9 = 0; var9 < var1; ++var9) {
+                var5.append(var2);
             }
-            if (stringBuffer.toString() != null)
-                arrayOfByte = stringBuffer.toString().getBytes(paramString3);
+        }
+
+        if (var5.toString() != null) {
+            var4 = var5.toString().getBytes(var3);
+        }
+
+        return var4;
+    }
+
+    public static byte[] lpadString2ByteWithDecimal(String var0, int var1, String var2, String var3, int var4)
+            throws Exception {
+        byte[] var5 = null;
+        boolean var6 = false;
+        int var7 = var0.indexOf(".");
+        boolean var8 = false;
+        int var13;
+        if (var7 > 0) {
+            String var9 = var0.substring(var7 + 1);
+            var13 = var4 - var9.getBytes(var3).length;
         } else {
-            StringBuffer stringBuffer = new StringBuffer();
-            byte b;
-            for (b = 0; b < k; b++)
-                stringBuffer.append(paramString2);
-            stringBuffer.append(paramString1);
-            for (b = 0; b < i; b++) {
-                if (b == 0 && bool)
-                    stringBuffer.append(".");
-                stringBuffer.append(paramString2);
+            var13 = var4;
+            var8 = true;
+        }
+
+        int var14 = var1 - var0.getBytes(var3).length - var13;
+        if (var8 && var4 > 0) {
+            --var14;
+        }
+
+        char[] var10 = var0.toCharArray();
+        StringBuffer var11;
+        int var12;
+        if (var10[0] == '-') {
+            var11 = new StringBuffer();
+            var11.append("-");
+
+            for (var12 = 0; var12 < var14; ++var12) {
+                var11.append(var2);
             }
-            if (stringBuffer.toString() != null)
-                arrayOfByte = stringBuffer.toString().getBytes(paramString3);
-        }
-        return arrayOfByte;
-    }
 
-    public static String rightNumberPaddingStringWithDecimal(String paramString1, int paramInt1, String paramString2,
-            String paramString3, int paramInt2) throws Exception {
-        byte[] arrayOfByte = null;
-        int i = 0;
-        int j = paramString1.indexOf(".");
-        boolean bool = false;
-        if (j > 0) {
-            String str = paramString1.substring(j + 1);
-            i = paramInt2 - (str.getBytes(paramString3)).length;
+            var11.append(var0.substring(1));
+
+            for (var12 = 0; var12 < var13; ++var12) {
+                if (var12 == 0 && var8) {
+                    var11.append(".");
+                }
+
+                var11.append(var2);
+            }
+
+            if (var11.toString() != null) {
+                var5 = var11.toString().getBytes(var3);
+            }
         } else {
-            i = paramInt2;
-            bool = true;
+            var11 = new StringBuffer();
+
+            for (var12 = 0; var12 < var14; ++var12) {
+                var11.append(var2);
+            }
+
+            var11.append(var0);
+
+            for (var12 = 0; var12 < var13; ++var12) {
+                if (var12 == 0 && var8) {
+                    var11.append(".");
+                }
+
+                var11.append(var2);
+            }
+
+            if (var11.toString() != null) {
+                var5 = var11.toString().getBytes(var3);
+            }
         }
-        StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append(paramString1);
-        for (byte b = 0; b < i; b++) {
-            if (b == 0 && bool)
-                stringBuffer.append(".");
-            stringBuffer.append(paramString2);
-        }
-        if (stringBuffer.toString() != null)
-            arrayOfByte = stringBuffer.toString().getBytes(paramString3);
-        return new String(arrayOfByte);
+
+        return var5;
     }
 
-    public static int getPacketSize(Object paramObject) throws Exception {
-        int i = 0;
-        for (Field field : paramObject.getClass().getDeclaredFields()) {
-            DATATYPE dATATYPE;
-            Object object = field.get(paramObject);
-            FIELD fIELD = field.<FIELD>getAnnotation(FIELD.class);
-            switch (fIELD.type()) {
-                case null:
-                    i += getPacketSize((List<Object>) object);
-                    switch (fIELD.kind()) {
+    public static String rightNumberPaddingStringWithDecimal(String var0, int var1, String var2, String var3, int var4)
+            throws Exception {
+        byte[] var5 = null;
+        boolean var6 = false;
+        int var7 = var0.indexOf(".");
+        boolean var8 = false;
+        int var11;
+        if (var7 > 0) {
+            String var9 = var0.substring(var7 + 1);
+            var11 = var4 - var9.getBytes(var3).length;
+        } else {
+            var11 = var4;
+            var8 = true;
+        }
+
+        StringBuffer var12 = new StringBuffer();
+        var12.append(var0);
+
+        for (int var10 = 0; var10 < var11; ++var10) {
+            if (var10 == 0 && var8) {
+                var12.append(".");
+            }
+
+            var12.append(var2);
+        }
+
+        if (var12.toString() != null) {
+            var5 = var12.toString().getBytes(var3);
+        }
+
+        return new String(var5);
+    }
+
+    public static int getPacketSize(Object var0) throws Exception {
+        int var1 = 0;
+        Field[] var2 = var0.getClass().getDeclaredFields();
+        int var3 = var2.length;
+
+        for (int var4 = 0; var4 < var3; ++var4) {
+            Field var5 = var2[var4];
+            Object var6 = var5.get(var0);
+            FIELD var7 = (FIELD) var5.getAnnotation(FIELD.class);
+            switch (var7.type()) {
+                case NUMBER:
+                    DATATYPE var8 = (DATATYPE) var5.getAnnotation(DATATYPE.class);
+                    var1 += var7.length();
+                    var1 += var8.point_length();
+                    var1 += var8.sign_length();
+                    break;
+                case LIST:
+                    var1 += getPacketSize((List) var6);
+                    switch (var7.kind()) {
                         case DATA:
-                            i += 8;
-                            break;
+                            var1 += 8;
+                            continue;
                         case MESSAGE:
-                            i += 2;
-                            break;
+                            var1 += 2;
+                        default:
+                            continue;
                     }
-                    break;
-                case null:
-                    if (object == null)
-                        object = getObjectFromField(field);
-                    i += getPacketSize(object);
-                    break;
-                case MESSAGE:
-                    dATATYPE = field.<DATATYPE>getAnnotation(DATATYPE.class);
-                    i += fIELD.length();
-                    i += dATATYPE.point_length();
-                    i += dATATYPE.sign_length();
+                case VO:
+                    if (var6 == null) {
+                        var6 = getObjectFromField(var5);
+                    }
+
+                    var1 += getPacketSize(var6);
                     break;
                 default:
-                    i += fIELD.length();
-                    break;
+                    var1 += var7.length();
             }
         }
-        return i;
+
+        return var1;
     }
 
-    public static int getPacketSize(Object paramObject, byte[] paramArrayOfbyte, boolean paramBoolean)
-            throws Exception {
-        int i = 0;
-        for (Field field : paramObject.getClass().getDeclaredFields()) {
-            String str;
-            boolean bool;
-            int j;
-            byte[] arrayOfByte2;
-            DATATYPE dATATYPE;
-            Object object = field.get(paramObject);
-            FIELD fIELD = field.<FIELD>getAnnotation(FIELD.class);
-            byte[] arrayOfByte1 = null;
-            switch (fIELD.type()) {
-                case null:
-                    switch (fIELD.kind()) {
+    public static int getPacketSize(Object var0, byte[] var1, boolean var2) throws Exception {
+        int var3 = 0;
+        Field[] var4 = var0.getClass().getDeclaredFields();
+        int var5 = var4.length;
+
+        for (int var6 = 0; var6 < var5; ++var6) {
+            Field var7 = var4[var6];
+            Object var8 = var7.get(var0);
+            FIELD var9 = (FIELD) var7.getAnnotation(FIELD.class);
+            byte[] var10 = null;
+            switch (var9.type()) {
+                case NUMBER:
+                    DATATYPE var15 = (DATATYPE) var7.getAnnotation(DATATYPE.class);
+                    var3 += var9.length();
+                    var3 += var15.point_length();
+                    var3 += var15.sign_length();
+                    break;
+                case LIST:
+                    switch (var9.kind()) {
                         case DATA:
-                            arrayOfByte1 = cutBytes(paramArrayOfbyte, i, 8);
-                            i += true;
+                            var10 = cutBytes(var1, var3, 8);
+                            var3 += 8;
                             break;
                         case MESSAGE:
-                            arrayOfByte1 = cutBytes(paramArrayOfbyte, i, 2);
-                            i += true;
-                            break;
+                            var10 = cutBytes(var1, var3, 2);
+                            var3 += 2;
                     }
-                    str = (new String(arrayOfByte1)).trim();
-                    bool = Pattern.matches("^[0-9]*$", str);
-                    if (!bool) {
-                        TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
+
+                    String var11 = (new String(var10)).trim();
+                    boolean var12 = Pattern.matches("^[0-9]*$", var11);
+                    if (!var12) {
+                        TelegramNestedRuntimeException var16 = new TelegramNestedRuntimeException(
                                 "NumberFormat Exception");
-                        telegramNestedRuntimeException.setMsg("Data Count String is [" + str + "]. is not NumberType");
-                        throw telegramNestedRuntimeException;
+                        var16.setMsg("Data Count String is [" + var11 + "]. is not NumberType");
+                        throw var16;
                     }
-                    j = Integer.parseInt(str);
-                    if (paramBoolean && j > 10000L) {
-                        TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
+
+                    int var13 = Integer.parseInt(var11);
+                    if (var2 && (long) var13 > 10000L) {
+                        TelegramNestedRuntimeException var17 = new TelegramNestedRuntimeException(
                                 "NumberFormat Exception");
-                        telegramNestedRuntimeException
-                                .setMsg("Data Count [" + str + "] is over Maximuim [" + 10000L + "]");
-                        throw telegramNestedRuntimeException;
+                        var17.setMsg("Data Count [" + var11 + "] is over Maximuim [" + 10000L + "]");
+                        throw var17;
                     }
-                    i += getListFieldSizeByCount(field, j);
+
+                    var3 += getListFieldSizeByCount(var7, var13);
                     break;
-                case null:
-                    if (object == null)
-                        object = getObjectFromField(field);
-                    arrayOfByte2 = cutBytes(paramArrayOfbyte, i, paramArrayOfbyte.length - i);
-                    i += getPacketSize(object, arrayOfByte2, paramBoolean);
-                    break;
-                case MESSAGE:
-                    dATATYPE = field.<DATATYPE>getAnnotation(DATATYPE.class);
-                    i += fIELD.length();
-                    i += dATATYPE.point_length();
-                    i += dATATYPE.sign_length();
+                case VO:
+                    if (var8 == null) {
+                        var8 = getObjectFromField(var7);
+                    }
+
+                    byte[] var14 = cutBytes(var1, var3, var1.length - var3);
+                    var3 += getPacketSize(var8, var14, var2);
                     break;
                 default:
-                    i += fIELD.length();
-                    break;
+                    var3 += var9.length();
             }
         }
-        return i;
+
+        return var3;
     }
 
-    public static int getPacketSize(List<Object> paramList) throws Exception {
-        int i = 0;
-        if (paramList != null)
-            for (Object object : paramList)
-                i += getPacketSize(object);
-        return i;
-    }
-
-    public static int getPacketSize(Object[] paramArrayOfObject) throws Exception {
-        int i = 0;
-        if (paramArrayOfObject != null)
-            for (Object object : paramArrayOfObject)
-                i += getPacketSize(object);
-        return i;
-    }
-
-    public static int getListFieldSizeByCount(Field paramField, int paramInt) throws Exception {
-        Type type = paramField.getGenericType();
-        ParameterizedType parameterizedType = (ParameterizedType) type;
-        Type[] arrayOfType = parameterizedType.getActualTypeArguments();
-        Class<Object> clazz = (Class) arrayOfType[0];
-        Object object = clazz.newInstance();
-        int i = getPacketSize(object);
-        return i * paramInt;
-    }
-
-    public static byte[] cutBytes(byte[] paramArrayOfbyte, int paramInt1, int paramInt2) throws Exception {
-        byte[] arrayOfByte = new byte[paramInt2];
-        int i = paramInt1 + paramInt2;
-        int j = paramInt1;
-        for (byte b = 0; j < i; b++) {
-            arrayOfByte[b] = paramArrayOfbyte[j];
-            j++;
+    public static int getPacketSize(List<Object> var0) throws Exception {
+        int var1 = 0;
+        Object var3;
+        if (var0 != null) {
+            for (Iterator var2 = var0.iterator(); var2.hasNext(); var1 += getPacketSize(var3)) {
+                var3 = var2.next();
+            }
         }
-        return arrayOfByte;
+
+        return var1;
     }
 
-    public static byte[] cutBytes1(byte[] paramArrayOfbyte, int paramInt1, int paramInt2) throws Exception {
-        byte[] arrayOfByte = new byte[paramInt2];
-        int i = paramInt1 + paramInt2;
-        System.out
-                .println("소스[" + paramInt1 + ":" + i + ":" + paramInt2 + "] : [" + new String(paramArrayOfbyte) + "]");
-        System.out.println("소스 길이 : " + paramArrayOfbyte.length);
-        int j = paramInt1;
-        for (byte b = 0; j < i; b++) {
-            arrayOfByte[b] = paramArrayOfbyte[j];
-            System.out.println("bytes[" + j + "] : " + (new Byte(paramArrayOfbyte[j])).toString());
-            j++;
+    public static int getPacketSize(Object[] var0) throws Exception {
+        int var1 = 0;
+        if (var0 != null) {
+            Object[] var2 = var0;
+            int var3 = var0.length;
+
+            for (int var4 = 0; var4 < var3; ++var4) {
+                Object var5 = var2[var4];
+                var1 += getPacketSize(var5);
+            }
         }
-        for (j = 0; j < paramArrayOfbyte.length; j++)
-            System.out.print("bytes[" + j + "] : " + (new Byte(paramArrayOfbyte[j])).toString() + ",");
+
+        return var1;
+    }
+
+    public static int getListFieldSizeByCount(Field var0, int var1) throws Exception {
+        Type var2 = var0.getGenericType();
+        ParameterizedType var3 = (ParameterizedType) var2;
+        Type[] var4 = var3.getActualTypeArguments();
+        Class var5 = (Class) var4[0];
+        Object var6 = var5.newInstance();
+        int var7 = getPacketSize(var6);
+        return var7 * var1;
+    }
+
+    public static byte[] cutBytes(byte[] var0, int var1, int var2) throws Exception {
+        byte[] var3 = new byte[var2];
+        int var4 = var1 + var2;
+        int var5 = var1;
+
+        for (int var6 = 0; var5 < var4; ++var6) {
+            var3[var6] = var0[var5];
+            ++var5;
+        }
+
+        return var3;
+    }
+
+    public static byte[] cutBytes1(byte[] var0, int var1, int var2) throws Exception {
+        byte[] var3 = new byte[var2];
+        int var4 = var1 + var2;
+        System.out.println("소스[" + var1 + ":" + var4 + ":" + var2 + "] : [" + new String(var0) + "]");
+        System.out.println("소스 길이 : " + var0.length);
+        int var5 = var1;
+
+        for (int var6 = 0; var5 < var4; ++var6) {
+            var3[var6] = var0[var5];
+            System.out.println("bytes[" + var5 + "] : " + (new Byte(var0[var5])).toString());
+            ++var5;
+        }
+
+        for (var5 = 0; var5 < var0.length; ++var5) {
+            System.out.print("bytes[" + var5 + "] : " + (new Byte(var0[var5])).toString() + ",");
+        }
+
         System.out.println("");
-        System.out.println("Result : " + new String(arrayOfByte));
-        return arrayOfByte;
+        System.out.println("Result : " + new String(var3));
+        return var3;
     }
 
-    public static String byte2StringTrimmed(byte[] paramArrayOfbyte, String paramString) throws Exception {
-        return (paramArrayOfbyte == null) ? null : (new String(paramArrayOfbyte, paramString)).trim();
+    public static String byte2StringTrimmed(byte[] var0, String var1) throws Exception {
+        return var0 == null ? null : (new String(var0, var1)).trim();
     }
 
-    public static String getSetterMethodName(String paramString) {
-        String str = getAccessorName(paramString);
-        StringBuffer stringBuffer = new StringBuffer(paramString.length() + 3);
-        stringBuffer.append("set");
-        stringBuffer.append(str);
-        return stringBuffer.toString();
+    public static String getSetterMethodName(String var0) {
+        String var1 = getAccessorName(var0);
+        StringBuffer var2 = new StringBuffer(var0.length() + 3);
+        var2.append("set");
+        var2.append(var1);
+        return var2.toString();
     }
 
-    public static String getAccessorName(String paramString) {
-        if (paramString != null && paramString.length() > 0) {
-            char[] arrayOfChar = paramString.toCharArray();
-            StringBuffer stringBuffer = new StringBuffer(paramString.length());
-            stringBuffer.append(Character.toUpperCase(arrayOfChar[0]));
-            stringBuffer.append(paramString.substring(1));
-            return stringBuffer.toString();
+    public static String getAccessorName(String var0) {
+        if (var0 != null && var0.length() > 0) {
+            char[] var1 = var0.toCharArray();
+            StringBuffer var2 = new StringBuffer(var0.length());
+            var2.append(Character.toUpperCase(var1[0]));
+            var2.append(var0.substring(1));
+            return var2.toString();
+        } else {
+            return "";
         }
-        return "";
     }
 
-    public static void invokeMethod(Method paramMethod, Object paramObject1, Object paramObject2) throws Exception {
+    public static void invokeMethod(Method var0, Object var1, Object var2) throws Exception {
         try {
-            paramMethod.invoke(paramObject1, new Object[] { paramObject2 });
-        } catch (Exception exception) {
-            TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                    exception.toString());
-            telegramNestedRuntimeException.setMethod(paramMethod.getName());
-            telegramNestedRuntimeException.setObjName(paramObject1.getClass().getName());
-            throw telegramNestedRuntimeException;
+            var0.invoke(var1, var2);
+        } catch (Exception var5) {
+            TelegramNestedRuntimeException var4 = new TelegramNestedRuntimeException(var5.toString());
+            var4.setMethod(var0.getName());
+            var4.setObjName(var1.getClass().getName());
+            throw var4;
         }
     }
 
-    public static Object getObjectFromField(Field paramField) throws Exception {
-        Object object = null;
-        Type type = paramField.getGenericType();
-        String str = type.getTypeName();
-        if (type instanceof ParameterizedType) {
-            ParameterizedType parameterizedType = (ParameterizedType) type;
-            Type[] arrayOfType = parameterizedType.getActualTypeArguments();
-            Class<Object> clazz = (Class) arrayOfType[0];
-            object = clazz.newInstance();
+    public static Object getObjectFromField(Field var0) throws Exception {
+        Object var1 = null;
+        Type var2 = var0.getGenericType();
+        String var3 = var2.getTypeName();
+        if (var2 instanceof ParameterizedType) {
+            ParameterizedType var4 = (ParameterizedType) var2;
+            Type[] var5 = var4.getActualTypeArguments();
+            Class var6 = (Class) var5[0];
+            var1 = var6.newInstance();
         } else {
-            object = Class.forName(str).newInstance();
+            var1 = Class.forName(var3).newInstance();
         }
-        return object;
+
+        return var1;
     }
 
-    public static void setterMethodForNumberInvoke(Object paramObject, Field paramField, String paramString1,
-            byte[] paramArrayOfbyte, String paramString2, String paramString3) throws Exception {
-        Method method = null;
-        Type type = paramField.getGenericType();
-        String str1 = type.getTypeName();
-        DATATYPE dATATYPE = paramField.<DATATYPE>getAnnotation(DATATYPE.class);
-        String str2 = byte2StringTrimmed(paramArrayOfbyte, paramString2);
-        double d = Double.parseDouble(str2);
-        if (isPrimitiveType(type)) {
-            method = paramField.getDeclaringClass().getDeclaredMethod(paramString1, new Class[] { int.class });
-            if ("int".equals(str1)
-                    && verifyIntegerNumber(Integer.valueOf((new Double(d)).intValue()), paramField, paramString3))
-                invokeMethod(method, paramObject, Integer.valueOf((new Double(d)).intValue()));
-            method = paramField.getDeclaringClass().getDeclaredMethod(paramString1, new Class[] { short.class });
-            if ("short".equals(str1)
-                    && verifyShortNumber(Short.valueOf((new Double(d)).shortValue()), paramField, paramString3))
-                invokeMethod(method, paramObject, Short.valueOf((new Double(d)).shortValue()));
-            method = paramField.getDeclaringClass().getDeclaredMethod(paramString1, new Class[] { long.class });
-            if ("long".equals(str1)
-                    && verifyLongNumber(Long.valueOf((new Double(d)).longValue()), paramField, paramString3))
-                invokeMethod(method, paramObject, Long.valueOf((new Double(d)).longValue()));
-            method = paramField.getDeclaringClass().getDeclaredMethod(paramString1, new Class[] { float.class });
-            if ("float".equals(str1)
-                    && verifyFloatNumber(Float.valueOf((new Double(d)).floatValue()), paramField, paramString3))
-                invokeMethod(method, paramObject, Float.valueOf((new Double(d)).floatValue()));
-            method = paramField.getDeclaringClass().getDeclaredMethod(paramString1, new Class[] { double.class });
-            if ("double".equals(str1)
-                    && verifyDoubleNumber(Double.valueOf((new Double(d)).doubleValue()), paramField, paramString3))
-                invokeMethod(method, paramObject, Double.valueOf((new Double(d)).doubleValue()));
+    public static void setterMethodForNumberInvoke(Object var0, Field var1, String var2, byte[] var3, String var4,
+            String var5) throws Exception {
+        Method var6 = null;
+        Type var7 = var1.getGenericType();
+        String var8 = var7.getTypeName();
+        DATATYPE var9 = (DATATYPE) var1.getAnnotation(DATATYPE.class);
+        String var10 = byte2StringTrimmed(var3, var4);
+        double var11 = Double.parseDouble(var10);
+        if (isPrimitiveType(var7)) {
+            if ("int".equals(var8)) {
+                var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Integer.TYPE);
+                if (verifyIntegerNumber((new Double(var11)).intValue(), var1, var5)) {
+                    invokeMethod(var6, var0, (new Double(var11)).intValue());
+                }
+            }
+
+            if ("short".equals(var8)) {
+                var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Short.TYPE);
+                if (verifyShortNumber((new Double(var11)).shortValue(), var1, var5)) {
+                    invokeMethod(var6, var0, (new Double(var11)).shortValue());
+                }
+            }
+
+            if ("long".equals(var8)) {
+                var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Long.TYPE);
+                if (verifyLongNumber((new Double(var11)).longValue(), var1, var5)) {
+                    invokeMethod(var6, var0, (new Double(var11)).longValue());
+                }
+            }
+
+            if ("float".equals(var8)) {
+                var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Float.TYPE);
+                if (verifyFloatNumber((new Double(var11)).floatValue(), var1, var5)) {
+                    invokeMethod(var6, var0, (new Double(var11)).floatValue());
+                }
+            }
+
+            if ("double".equals(var8)) {
+                var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Double.TYPE);
+                if (verifyDoubleNumber(new Double(var11), var1, var5)) {
+                    invokeMethod(var6, var0, new Double(var11));
+                }
+            }
         } else {
-            BigDecimal bigDecimal;
-            switch (dATATYPE.type()) {
-                case DATA:
-                    method = paramField.getDeclaringClass().getDeclaredMethod(paramString1,
-                            new Class[] { BigDecimal.class });
-                    bigDecimal = BigDecimal.valueOf((new Double(d)).doubleValue());
-                    if (verifyDoubleNumber(Double.valueOf(d), paramField, paramString3))
-                        invokeMethod(method, paramObject, bigDecimal);
+            switch (var9.type()) {
+                case DECIMAL:
+                    var6 = var1.getDeclaringClass().getDeclaredMethod(var2, BigDecimal.class);
+                    BigDecimal var13 = BigDecimal.valueOf(new Double(var11));
+                    if (verifyDoubleNumber(var11, var1, var5)) {
+                        invokeMethod(var6, var0, var13);
+                    }
                     break;
-                case MESSAGE:
-                    method = paramField.getDeclaringClass().getDeclaredMethod(paramString1,
-                            new Class[] { Double.class });
-                    if (verifyDoubleNumber(Double.valueOf(d), paramField, paramString3))
-                        invokeMethod(method, paramObject, new Double(d));
+                case DOUBLE:
+                    var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Double.class);
+                    if (verifyDoubleNumber(var11, var1, var5)) {
+                        invokeMethod(var6, var0, new Double(var11));
+                    }
                     break;
-                case null:
-                    method = paramField.getDeclaringClass().getDeclaredMethod(paramString1,
-                            new Class[] { Float.class });
-                    if (verifyFloatNumber(new Float((float) d), paramField, paramString3))
-                        invokeMethod(method, paramObject, new Float((float) d));
+                case FLOAT:
+                    var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Float.class);
+                    if (verifyFloatNumber(new Float((float) var11), var1, var5)) {
+                        invokeMethod(var6, var0, new Float((float) var11));
+                    }
                     break;
-                case null:
-                    method = paramField.getDeclaringClass().getDeclaredMethod(paramString1,
-                            new Class[] { Integer.class });
-                    if (verifyIntegerNumber(new Integer((int) d), paramField, paramString3))
-                        invokeMethod(method, paramObject, new Integer((int) d));
+                case INT:
+                    var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Integer.class);
+                    if (verifyIntegerNumber(new Integer((int) var11), var1, var5)) {
+                        invokeMethod(var6, var0, new Integer((int) var11));
+                    }
                     break;
-                case null:
-                    method = paramField.getDeclaringClass().getDeclaredMethod(paramString1, new Class[] { Long.class });
-                    if (verifyLongNumber(new Long((int) d), paramField, paramString3))
-                        invokeMethod(method, paramObject, new Long((int) d));
+                case LONG:
+                    var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Long.class);
+                    if (verifyLongNumber(new Long((long) ((int) var11)), var1, var5)) {
+                        invokeMethod(var6, var0, new Long((long) ((int) var11)));
+                    }
                     break;
-                case null:
-                    method = paramField.getDeclaringClass().getDeclaredMethod(paramString1,
-                            new Class[] { Short.class });
-                    if (verifyShortNumber(new Short((short) (int) d), paramField, paramString3))
-                        invokeMethod(method, paramObject, new Short((short) (int) d));
-                    break;
+                case SHORT:
+                    var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Short.class);
+                    if (verifyShortNumber(new Short((short) ((int) var11)), var1, var5)) {
+                        invokeMethod(var6, var0, new Short((short) ((int) var11)));
+                    }
             }
         }
+
     }
 
-    public static boolean isPrimitiveType(Type paramType) {
-        boolean bool = false;
-        String str = paramType.getTypeName();
-        if ("int".equals(str) || "short".equals(str) || "long".equals(str) || "float".equals(str)
-                || "double".equals(str))
-            bool = true;
-        return bool;
+    public static boolean isPrimitiveType(Type var0) {
+        boolean var1 = false;
+        String var2 = var0.getTypeName();
+        if ("int".equals(var2) || "short".equals(var2) || "long".equals(var2) || "float".equals(var2)
+                || "double".equals(var2)) {
+            var1 = true;
+        }
+
+        return var1;
     }
 
-    public static void viewObjectMethod(Object paramObject) {
-        Field[] arrayOfField = paramObject.getClass().getDeclaredFields();
-        int i = arrayOfField.length;
-        System.out.println("****************** " + paramObject.getClass().getName());
-        for (byte b = 0; b < i; b++) {
-            Class<?> clazz = arrayOfField[b].getDeclaringClass();
-            Method[] arrayOfMethod = clazz.getMethods();
-            for (byte b1 = 0; b1 < arrayOfMethod.length; b1++) {
-                System.out.println(clazz.getName() + "                    " + arrayOfMethod[b1].getName());
-                Type[] arrayOfType = arrayOfMethod[b1].getGenericParameterTypes();
-                for (byte b2 = 0; b2 < arrayOfType.length; b2++)
-                    System.out.println(clazz.getName() + "                        " + arrayOfType[b2].getTypeName());
+    public static void viewObjectMethod(Object var0) {
+        Field[] var1 = var0.getClass().getDeclaredFields();
+        int var2 = var1.length;
+        System.out.println("****************** " + var0.getClass().getName());
+
+        for (int var3 = 0; var3 < var2; ++var3) {
+            Class var4 = var1[var3].getDeclaringClass();
+            Method[] var5 = var4.getMethods();
+
+            for (int var6 = 0; var6 < var5.length; ++var6) {
+                System.out.println(var4.getName() + "                    " + var5[var6].getName());
+                Type[] var7 = var5[var6].getGenericParameterTypes();
+
+                for (int var8 = 0; var8 < var7.length; ++var8) {
+                    System.out.println(var4.getName() + "                        " + var7[var8].getTypeName());
+                }
             }
         }
+
         System.out.println("*****************************************************");
     }
 
-    public static String getHexaString(byte[] paramArrayOfbyte) {
-        String str = null;
+    public static String getHexaString(byte[] var0) {
+        String var1 = null;
+
         try {
-            StringBuffer stringBuffer = new StringBuffer(paramArrayOfbyte.length * 2);
-            for (byte b = 0; b < paramArrayOfbyte.length; b++) {
-                String str1 = "0" + Integer.toHexString(0xFF & paramArrayOfbyte[b]);
-                stringBuffer.append(str1.substring(str1.length() - 2));
+            StringBuffer var2 = new StringBuffer(var0.length * 2);
+
+            for (int var4 = 0; var4 < var0.length; ++var4) {
+                String var3 = "0" + Integer.toHexString(255 & var0[var4]);
+                var2.append(var3.substring(var3.length() - 2));
             }
-            str = stringBuffer.toString();
-        } catch (Exception exception) {
-            ExceptionUtil.logPrintStackTrace(logger, exception);
+
+            var1 = var2.toString();
+        } catch (Exception var5) {
+            ExceptionUtil.logPrintStackTrace(logger, var5);
         }
-        return str;
+
+        return var1;
     }
 
     public static String getMacAddress() {
-        String str = null;
+        String var0 = null;
+
         try {
-            InetAddress inetAddress = InetAddress.getLocalHost();
-            NetworkInterface networkInterface = NetworkInterface.getByInetAddress(inetAddress);
-            if (networkInterface != null) {
-                byte[] arrayOfByte = networkInterface.getHardwareAddress();
-                str = getHexaString(arrayOfByte);
+            InetAddress var1 = InetAddress.getLocalHost();
+            NetworkInterface var2 = NetworkInterface.getByInetAddress(var1);
+            if (var2 != null) {
+                byte[] var3 = var2.getHardwareAddress();
+                var0 = getHexaString(var3);
             }
-        } catch (IOException iOException) {
-            ExceptionUtil.logPrintStackTrace(logger, iOException);
+        } catch (IOException var4) {
+            ExceptionUtil.logPrintStackTrace(logger, var4);
         }
-        return str;
+
+        return var0;
     }
 
     public static String getIpAddress() {
-        String str = null;
+        String var0 = null;
+
         try {
-            InetAddress inetAddress = InetAddress.getLocalHost();
-            str = inetAddress.getHostAddress();
-        } catch (IOException iOException) {
-            ExceptionUtil.logPrintStackTrace(logger, iOException);
+            InetAddress var1 = InetAddress.getLocalHost();
+            var0 = var1.getHostAddress();
+        } catch (IOException var2) {
+            ExceptionUtil.logPrintStackTrace(logger, var2);
         }
-        return str;
+
+        return var0;
     }
 
-    public static boolean verifyShortNumber(Object paramObject, Field paramField, String paramString) throws Exception {
-        boolean bool = true;
-        FIELD fIELD = paramField.<FIELD>getAnnotation(FIELD.class);
-        DATATYPE dATATYPE = paramField.<DATATYPE>getAnnotation(DATATYPE.class);
-        int i = fIELD.length();
-        int j = dATATYPE.sign_length();
-        int k = i + j;
-        Type type = paramField.getGenericType();
-        if (isPrimitiveType(type)) {
-            String str = type.getTypeName();
-            if ("short".equals(str)) {
-                short s = ((Short) paramObject).shortValue();
-                String str1 = (new Short(s)).toString();
-                int m = str1.length();
-                if (s < 0) {
-                    if (m > k) {
-                        String str2 = "Short Value Verify is Failed";
-                        TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                                str2);
-                        telegramNestedRuntimeException.setFieldName(paramField.getName());
-                        telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                        telegramNestedRuntimeException.setParser(paramString);
-                        telegramNestedRuntimeException.setMsg("Value : " + str1 + "[" + k + ":" + m + "]");
-                        throw telegramNestedRuntimeException;
+    public static boolean verifyShortNumber(Object var0, Field var1, String var2) throws Exception {
+        boolean var3 = true;
+        FIELD var4 = (FIELD) var1.getAnnotation(FIELD.class);
+        DATATYPE var5 = (DATATYPE) var1.getAnnotation(DATATYPE.class);
+        int var6 = var4.length();
+        int var7 = var5.sign_length();
+        int var8 = var6 + var7;
+        Type var9 = var1.getGenericType();
+        if (isPrimitiveType(var9)) {
+            String var10 = var9.getTypeName();
+            if ("short".equals(var10)) {
+                short var11 = (Short) var0;
+                String var12 = (new Short(var11)).toString();
+                int var13 = var12.length();
+                String var14;
+                TelegramNestedRuntimeException var15;
+                if (var11 < 0) {
+                    if (var13 > var8) {
+                        var14 = "Short Value Verify is Failed";
+                        var15 = new TelegramNestedRuntimeException(var14);
+                        var15.setFieldName(var1.getName());
+                        var15.setFtype(var4.type().getTypeName());
+                        var15.setParser(var2);
+                        var15.setMsg("Value : " + var12 + "[" + var8 + ":" + var13 + "]");
+                        throw var15;
                     }
-                } else if (m > i) {
-                    String str2 = "Short Value Verify is Failed";
-                    TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                            str2);
-                    telegramNestedRuntimeException.setFieldName(paramField.getName());
-                    telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                    telegramNestedRuntimeException.setParser(paramString);
-                    telegramNestedRuntimeException.setMsg("Value : " + str1 + "[" + i + ":" + m + "]");
-                    throw telegramNestedRuntimeException;
+                } else if (var13 > var6) {
+                    var14 = "Short Value Verify is Failed";
+                    var15 = new TelegramNestedRuntimeException(var14);
+                    var15.setFieldName(var1.getName());
+                    var15.setFtype(var4.type().getTypeName());
+                    var15.setParser(var2);
+                    var15.setMsg("Value : " + var12 + "[" + var6 + ":" + var13 + "]");
+                    throw var15;
                 }
             } else {
                 new Exception("Insert Object is not Short Type");
             }
-        } else if (paramField.getType().isAssignableFrom(Short.class)) {
-            Short short_ = (Short) paramObject;
-            String str = short_.toString();
-            int m = str.length();
-            if (short_.shortValue() < 0) {
-                if (m > k) {
-                    String str1 = "Short Value Verify is Failed";
-                    TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                            str1);
-                    telegramNestedRuntimeException.setFieldName(paramField.getName());
-                    telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                    telegramNestedRuntimeException.setParser(paramString);
-                    telegramNestedRuntimeException.setMsg("Value : " + str + "[" + k + ":" + m + "]");
-                    throw telegramNestedRuntimeException;
+        } else if (var1.getType().isAssignableFrom(Short.class)) {
+            Short var16 = (Short) var0;
+            String var17 = var16.toString();
+            int var18 = var17.length();
+            String var19;
+            TelegramNestedRuntimeException var20;
+            if (var16 < 0) {
+                if (var18 > var8) {
+                    var19 = "Short Value Verify is Failed";
+                    var20 = new TelegramNestedRuntimeException(var19);
+                    var20.setFieldName(var1.getName());
+                    var20.setFtype(var4.type().getTypeName());
+                    var20.setParser(var2);
+                    var20.setMsg("Value : " + var17 + "[" + var8 + ":" + var18 + "]");
+                    throw var20;
                 }
-            } else if (m > i) {
-                String str1 = "Short Value Verify is Failed";
-                TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                        str1);
-                telegramNestedRuntimeException.setFieldName(paramField.getName());
-                telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                telegramNestedRuntimeException.setParser(paramString);
-                telegramNestedRuntimeException.setMsg("Value : " + str + "[" + i + ":" + m + "]");
-                throw telegramNestedRuntimeException;
+            } else if (var18 > var6) {
+                var19 = "Short Value Verify is Failed";
+                var20 = new TelegramNestedRuntimeException(var19);
+                var20.setFieldName(var1.getName());
+                var20.setFtype(var4.type().getTypeName());
+                var20.setParser(var2);
+                var20.setMsg("Value : " + var17 + "[" + var6 + ":" + var18 + "]");
+                throw var20;
             }
         } else {
             new Exception("Insert Object is not Short Type");
         }
-        return bool;
+
+        return var3;
     }
 
-    public static boolean verifyIntegerNumber(Object paramObject, Field paramField, String paramString)
-            throws Exception {
-        boolean bool = true;
-        FIELD fIELD = paramField.<FIELD>getAnnotation(FIELD.class);
-        DATATYPE dATATYPE = paramField.<DATATYPE>getAnnotation(DATATYPE.class);
-        int i = fIELD.length();
-        int j = dATATYPE.sign_length();
-        int k = i + j;
-        Type type = paramField.getGenericType();
-        if (isPrimitiveType(type)) {
-            String str = type.getTypeName();
-            if ("int".equals(str)) {
-                int m = ((Integer) paramObject).intValue();
-                String str1 = (new Integer(m)).toString();
-                int n = str1.length();
-                if (m < 0) {
-                    if (n > k) {
-                        String str2 = "Integer Value Verify is Failed";
-                        TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                                str2);
-                        telegramNestedRuntimeException.setFieldName(paramField.getName());
-                        telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                        telegramNestedRuntimeException.setParser(paramString);
-                        telegramNestedRuntimeException.setMsg("Value : " + str1 + "[" + k + ":" + n + "]");
-                        throw telegramNestedRuntimeException;
+    public static boolean verifyIntegerNumber(Object var0, Field var1, String var2) throws Exception {
+        boolean var3 = true;
+        FIELD var4 = (FIELD) var1.getAnnotation(FIELD.class);
+        DATATYPE var5 = (DATATYPE) var1.getAnnotation(DATATYPE.class);
+        int var6 = var4.length();
+        int var7 = var5.sign_length();
+        int var8 = var6 + var7;
+        Type var9 = var1.getGenericType();
+        if (isPrimitiveType(var9)) {
+            String var10 = var9.getTypeName();
+            if ("int".equals(var10)) {
+                int var11 = (Integer) var0;
+                String var12 = (new Integer(var11)).toString();
+                int var13 = var12.length();
+                String var14;
+                TelegramNestedRuntimeException var15;
+                if (var11 < 0) {
+                    if (var13 > var8) {
+                        var14 = "Integer Value Verify is Failed";
+                        var15 = new TelegramNestedRuntimeException(var14);
+                        var15.setFieldName(var1.getName());
+                        var15.setFtype(var4.type().getTypeName());
+                        var15.setParser(var2);
+                        var15.setMsg("Value : " + var12 + "[" + var8 + ":" + var13 + "]");
+                        throw var15;
                     }
-                } else if (n > i) {
-                    String str2 = "Integer Value Verify is Failed";
-                    TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                            str2);
-                    telegramNestedRuntimeException.setFieldName(paramField.getName());
-                    telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                    telegramNestedRuntimeException.setParser(paramString);
-                    telegramNestedRuntimeException.setMsg("Value : " + str1 + "[" + i + ":" + n + "]");
-                    throw telegramNestedRuntimeException;
+                } else if (var13 > var6) {
+                    var14 = "Integer Value Verify is Failed";
+                    var15 = new TelegramNestedRuntimeException(var14);
+                    var15.setFieldName(var1.getName());
+                    var15.setFtype(var4.type().getTypeName());
+                    var15.setParser(var2);
+                    var15.setMsg("Value : " + var12 + "[" + var6 + ":" + var13 + "]");
+                    throw var15;
                 }
             } else {
                 new Exception("Insert Object is not Integer Type");
             }
-        } else if (paramField.getType().isAssignableFrom(Integer.class)) {
-            Integer integer = (Integer) paramObject;
-            String str = integer.toString();
-            int m = str.length();
-            if (integer.intValue() < 0) {
-                if (m > k) {
-                    String str1 = "Integer Value Verify is Failed";
-                    TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                            str1);
-                    telegramNestedRuntimeException.setFieldName(paramField.getName());
-                    telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                    telegramNestedRuntimeException.setParser(paramString);
-                    telegramNestedRuntimeException.setMsg("Value : " + str + "[" + k + ":" + m + "]");
-                    throw telegramNestedRuntimeException;
+        } else if (var1.getType().isAssignableFrom(Integer.class)) {
+            Integer var16 = (Integer) var0;
+            String var17 = var16.toString();
+            int var18 = var17.length();
+            String var19;
+            TelegramNestedRuntimeException var20;
+            if (var16 < 0) {
+                if (var18 > var8) {
+                    var19 = "Integer Value Verify is Failed";
+                    var20 = new TelegramNestedRuntimeException(var19);
+                    var20.setFieldName(var1.getName());
+                    var20.setFtype(var4.type().getTypeName());
+                    var20.setParser(var2);
+                    var20.setMsg("Value : " + var17 + "[" + var8 + ":" + var18 + "]");
+                    throw var20;
                 }
-            } else if (m > i) {
-                String str1 = "Integer Value Verify is Failed";
-                TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                        str1);
-                telegramNestedRuntimeException.setFieldName(paramField.getName());
-                telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                telegramNestedRuntimeException.setParser(paramString);
-                telegramNestedRuntimeException.setMsg("Value : " + str + "[" + i + ":" + m + "]");
-                throw telegramNestedRuntimeException;
+            } else if (var18 > var6) {
+                var19 = "Integer Value Verify is Failed";
+                var20 = new TelegramNestedRuntimeException(var19);
+                var20.setFieldName(var1.getName());
+                var20.setFtype(var4.type().getTypeName());
+                var20.setParser(var2);
+                var20.setMsg("Value : " + var17 + "[" + var6 + ":" + var18 + "]");
+                throw var20;
             }
         } else {
             new Exception("Insert Object is not Integer Type");
         }
-        return bool;
+
+        return var3;
     }
 
-    public static boolean verifyLongNumber(Object paramObject, Field paramField, String paramString) throws Exception {
-        boolean bool = true;
-        FIELD fIELD = paramField.<FIELD>getAnnotation(FIELD.class);
-        DATATYPE dATATYPE = paramField.<DATATYPE>getAnnotation(DATATYPE.class);
-        int i = fIELD.length();
-        int j = dATATYPE.sign_length();
-        int k = i + j;
-        Type type = paramField.getGenericType();
-        if (isPrimitiveType(type)) {
-            String str = type.getTypeName();
-            if ("long".equals(str)) {
-                long l = ((Long) paramObject).longValue();
-                String str1 = (new Long(l)).toString();
-                int m = str1.length();
-                if (l < 0L) {
-                    if (m > k) {
-                        String str2 = "Long Value Verify is Failed";
-                        TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                                str2);
-                        telegramNestedRuntimeException.setFieldName(paramField.getName());
-                        telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                        telegramNestedRuntimeException.setParser(paramString);
-                        telegramNestedRuntimeException.setMsg("Value : " + str1 + "[" + k + ":" + m + "]");
-                        throw telegramNestedRuntimeException;
+    public static boolean verifyLongNumber(Object var0, Field var1, String var2) throws Exception {
+        boolean var3 = true;
+        FIELD var4 = (FIELD) var1.getAnnotation(FIELD.class);
+        DATATYPE var5 = (DATATYPE) var1.getAnnotation(DATATYPE.class);
+        int var6 = var4.length();
+        int var7 = var5.sign_length();
+        int var8 = var6 + var7;
+        Type var9 = var1.getGenericType();
+        String var13;
+        if (isPrimitiveType(var9)) {
+            String var10 = var9.getTypeName();
+            if ("long".equals(var10)) {
+                long var11 = (Long) var0;
+                var13 = (new Long(var11)).toString();
+                int var14 = var13.length();
+                String var15;
+                TelegramNestedRuntimeException var16;
+                if (var11 < 0L) {
+                    if (var14 > var8) {
+                        var15 = "Long Value Verify is Failed";
+                        var16 = new TelegramNestedRuntimeException(var15);
+                        var16.setFieldName(var1.getName());
+                        var16.setFtype(var4.type().getTypeName());
+                        var16.setParser(var2);
+                        var16.setMsg("Value : " + var13 + "[" + var8 + ":" + var14 + "]");
+                        throw var16;
                     }
-                } else if (m > i) {
-                    String str2 = "Long Value Verify is Failed";
-                    TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                            str2);
-                    telegramNestedRuntimeException.setFieldName(paramField.getName());
-                    telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                    telegramNestedRuntimeException.setParser(paramString);
-                    telegramNestedRuntimeException.setMsg("Value : " + str1 + "[" + i + ":" + m + "]");
-                    throw telegramNestedRuntimeException;
+                } else if (var14 > var6) {
+                    var15 = "Long Value Verify is Failed";
+                    var16 = new TelegramNestedRuntimeException(var15);
+                    var16.setFieldName(var1.getName());
+                    var16.setFtype(var4.type().getTypeName());
+                    var16.setParser(var2);
+                    var16.setMsg("Value : " + var13 + "[" + var6 + ":" + var14 + "]");
+                    throw var16;
                 }
             } else {
                 new Exception("Insert Object is not Long Type");
             }
-        } else if (paramField.getType().isAssignableFrom(Long.class)) {
-            Long long_ = (Long) paramObject;
-            String str = long_.toString();
-            int m = str.length();
-            if (long_.longValue() < 0L) {
-                if (m > k) {
-                    String str1 = "Long Value Verify is Failed";
-                    TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                            str1);
-                    telegramNestedRuntimeException.setFieldName(paramField.getName());
-                    telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                    telegramNestedRuntimeException.setParser(paramString);
-                    telegramNestedRuntimeException.setMsg("Value : " + str + "[" + k + ":" + m + "]");
-                    throw telegramNestedRuntimeException;
+        } else if (var1.getType().isAssignableFrom(Long.class)) {
+            Long var17 = (Long) var0;
+            String var18 = var17.toString();
+            int var12 = var18.length();
+            TelegramNestedRuntimeException var19;
+            if (var17 < 0L) {
+                if (var12 > var8) {
+                    var13 = "Long Value Verify is Failed";
+                    var19 = new TelegramNestedRuntimeException(var13);
+                    var19.setFieldName(var1.getName());
+                    var19.setFtype(var4.type().getTypeName());
+                    var19.setParser(var2);
+                    var19.setMsg("Value : " + var18 + "[" + var8 + ":" + var12 + "]");
+                    throw var19;
                 }
-            } else if (m > i) {
-                String str1 = "Long Value Verify is Failed";
-                TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                        str1);
-                telegramNestedRuntimeException.setFieldName(paramField.getName());
-                telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                telegramNestedRuntimeException.setParser(paramString);
-                telegramNestedRuntimeException.setMsg("Value : " + str + "[" + i + ":" + m + "]");
-                throw telegramNestedRuntimeException;
+            } else if (var12 > var6) {
+                var13 = "Long Value Verify is Failed";
+                var19 = new TelegramNestedRuntimeException(var13);
+                var19.setFieldName(var1.getName());
+                var19.setFtype(var4.type().getTypeName());
+                var19.setParser(var2);
+                var19.setMsg("Value : " + var18 + "[" + var6 + ":" + var12 + "]");
+                throw var19;
             }
         } else {
             new Exception("Insert Object is not Long Type");
         }
-        return bool;
+
+        return var3;
     }
 
-    public static boolean verifyFloatNumber(Object paramObject, Field paramField, String paramString) throws Exception {
-        boolean bool = true;
-        FIELD fIELD = paramField.<FIELD>getAnnotation(FIELD.class);
-        DATATYPE dATATYPE = paramField.<DATATYPE>getAnnotation(DATATYPE.class);
-        int i = fIELD.length();
-        int j = dATATYPE.decimal();
-        int k = dATATYPE.sign_length();
-        int m = dATATYPE.point_length();
-        int n = i + k + m;
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setGroupingUsed(false);
-        numberFormat.setMaximumFractionDigits(j);
-        Type type = paramField.getGenericType();
-        if (isPrimitiveType(type)) {
-            String str = type.getTypeName();
-            if ("float".equals(str)) {
-                float f = ((Float) paramObject).floatValue();
-                String str1 = numberFormat.format((new Float(f)).doubleValue());
-                str1 = rightNumberPaddingStringWithDecimal(str1, n, "0", "UTF-8", j);
-                if (!verifyDecimalStringValue(str1, j)) {
-                    String str2 = "Float Value Verify is Failed";
-                    TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                            str2);
-                    telegramNestedRuntimeException.setFieldName(paramField.getName());
-                    telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                    telegramNestedRuntimeException.setParser(paramString);
-                    telegramNestedRuntimeException.setMsg("decimal is not correct : " + str1 + " decimal[" + j + "]");
-                    throw telegramNestedRuntimeException;
+    public static boolean verifyFloatNumber(Object var0, Field var1, String var2) throws Exception {
+        boolean var3 = true;
+        FIELD var4 = (FIELD) var1.getAnnotation(FIELD.class);
+        DATATYPE var5 = (DATATYPE) var1.getAnnotation(DATATYPE.class);
+        int var6 = var4.length();
+        int var7 = var5.decimal();
+        int var8 = var5.sign_length();
+        int var9 = var5.point_length();
+        int var10 = var6 + var8 + var9;
+        NumberFormat var11 = NumberFormat.getInstance();
+        var11.setGroupingUsed(false);
+        var11.setMaximumFractionDigits(var7);
+        Type var12 = var1.getGenericType();
+        String var15;
+        String var22;
+        TelegramNestedRuntimeException var24;
+        if (isPrimitiveType(var12)) {
+            String var13 = var12.getTypeName();
+            if ("float".equals(var13)) {
+                float var14 = (Float) var0;
+                var15 = var11.format((new Float(var14)).doubleValue());
+                var15 = rightNumberPaddingStringWithDecimal(var15, var10, "0", "UTF-8", var7);
+                if (!verifyDecimalStringValue(var15, var7)) {
+                    var22 = "Float Value Verify is Failed";
+                    var24 = new TelegramNestedRuntimeException(var22);
+                    var24.setFieldName(var1.getName());
+                    var24.setFtype(var4.type().getTypeName());
+                    var24.setParser(var2);
+                    var24.setMsg("decimal is not correct : " + var15 + " decimal[" + var7 + "]");
+                    throw var24;
                 }
-                int i1 = str1.length();
-                if (f < 0.0F) {
-                    if (i1 > n) {
-                        String str2 = "Float Value Verify is Failed";
-                        TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                                str2);
-                        telegramNestedRuntimeException.setFieldName(paramField.getName());
-                        telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                        telegramNestedRuntimeException.setParser(paramString);
-                        telegramNestedRuntimeException.setMsg("Value : " + str1 + "[" + n + ":" + i1 + "]");
-                        throw telegramNestedRuntimeException;
+
+                int var16 = var15.length();
+                String var17;
+                TelegramNestedRuntimeException var18;
+                if (var14 < 0.0F) {
+                    if (var16 > var10) {
+                        var17 = "Float Value Verify is Failed";
+                        var18 = new TelegramNestedRuntimeException(var17);
+                        var18.setFieldName(var1.getName());
+                        var18.setFtype(var4.type().getTypeName());
+                        var18.setParser(var2);
+                        var18.setMsg("Value : " + var15 + "[" + var10 + ":" + var16 + "]");
+                        throw var18;
                     }
-                } else if (i1 > i + m) {
-                    String str2 = "Float Value Verify is Failed";
-                    TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                            str2);
-                    telegramNestedRuntimeException.setFieldName(paramField.getName());
-                    telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                    telegramNestedRuntimeException.setParser(paramString);
-                    telegramNestedRuntimeException.setMsg("Value : " + str1 + "[" + (i + m) + ":" + i1 + "]");
-                    throw telegramNestedRuntimeException;
+                } else if (var16 > var6 + var9) {
+                    var17 = "Float Value Verify is Failed";
+                    var18 = new TelegramNestedRuntimeException(var17);
+                    var18.setFieldName(var1.getName());
+                    var18.setFtype(var4.type().getTypeName());
+                    var18.setParser(var2);
+                    var18.setMsg("Value : " + var15 + "[" + (var6 + var9) + ":" + var16 + "]");
+                    throw var18;
                 }
             } else {
                 new Exception("Insert Object is not Float Type");
             }
-        } else if (paramField.getType().isAssignableFrom(Float.class)) {
-            Float float_ = (Float) paramObject;
-            String str = numberFormat.format(float_.doubleValue());
-            str = rightNumberPaddingStringWithDecimal(str, n, "0", "UTF-8", j);
-            if (!verifyDecimalStringValue(str, j)) {
-                String str1 = "Float Value Verify is Failed";
-                TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                        str1);
-                telegramNestedRuntimeException.setFieldName(paramField.getName());
-                telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                telegramNestedRuntimeException.setParser(paramString);
-                telegramNestedRuntimeException.setMsg("decimal is not correct : " + str + " decimal[" + j + "]");
-                throw telegramNestedRuntimeException;
+        } else if (var1.getType().isAssignableFrom(Float.class)) {
+            Float var19 = (Float) var0;
+            String var20 = var11.format(var19.doubleValue());
+            var20 = rightNumberPaddingStringWithDecimal(var20, var10, "0", "UTF-8", var7);
+            if (!verifyDecimalStringValue(var20, var7)) {
+                var15 = "Float Value Verify is Failed";
+                TelegramNestedRuntimeException var23 = new TelegramNestedRuntimeException(var15);
+                var23.setFieldName(var1.getName());
+                var23.setFtype(var4.type().getTypeName());
+                var23.setParser(var2);
+                var23.setMsg("decimal is not correct : " + var20 + " decimal[" + var7 + "]");
+                throw var23;
             }
-            int i1 = str.length();
-            if (float_.floatValue() < 0.0F) {
-                if (i1 > n) {
-                    String str1 = "Float Value Verify is Failed";
-                    TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                            str1);
-                    telegramNestedRuntimeException.setFieldName(paramField.getName());
-                    telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                    telegramNestedRuntimeException.setParser(paramString);
-                    telegramNestedRuntimeException.setMsg("Value : " + str + "[" + n + ":" + i1 + "]");
-                    throw telegramNestedRuntimeException;
+
+            int var21 = var20.length();
+            if (var19 < 0.0F) {
+                if (var21 > var10) {
+                    var22 = "Float Value Verify is Failed";
+                    var24 = new TelegramNestedRuntimeException(var22);
+                    var24.setFieldName(var1.getName());
+                    var24.setFtype(var4.type().getTypeName());
+                    var24.setParser(var2);
+                    var24.setMsg("Value : " + var20 + "[" + var10 + ":" + var21 + "]");
+                    throw var24;
                 }
-            } else if (i1 > i + m) {
-                String str1 = "Float Value Verify is Failed";
-                TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                        str1);
-                telegramNestedRuntimeException.setFieldName(paramField.getName());
-                telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                telegramNestedRuntimeException.setParser(paramString);
-                telegramNestedRuntimeException.setMsg("Value : " + str + "[" + (i + m) + ":" + i1 + "]");
-                throw telegramNestedRuntimeException;
+            } else if (var21 > var6 + var9) {
+                var22 = "Float Value Verify is Failed";
+                var24 = new TelegramNestedRuntimeException(var22);
+                var24.setFieldName(var1.getName());
+                var24.setFtype(var4.type().getTypeName());
+                var24.setParser(var2);
+                var24.setMsg("Value : " + var20 + "[" + (var6 + var9) + ":" + var21 + "]");
+                throw var24;
             }
         } else {
             new Exception("Insert Object is not Float Type");
         }
-        return bool;
+
+        return var3;
     }
 
-    public static boolean verifyDoubleNumber(Object paramObject, Field paramField, String paramString)
-            throws Exception {
-        boolean bool = true;
-        FIELD fIELD = paramField.<FIELD>getAnnotation(FIELD.class);
-        DATATYPE dATATYPE = paramField.<DATATYPE>getAnnotation(DATATYPE.class);
-        int i = fIELD.length();
-        int j = dATATYPE.decimal();
-        int k = dATATYPE.sign_length();
-        int m = dATATYPE.point_length();
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setGroupingUsed(false);
-        numberFormat.setMaximumFractionDigits(j);
-        int n = i + k + m;
-        Type type = paramField.getGenericType();
-        if (isPrimitiveType(type)) {
-            String str = type.getTypeName();
-            if ("double".equals(str)) {
-                double d = ((Double) paramObject).doubleValue();
-                String str1 = numberFormat.format(d);
-                str1 = rightNumberPaddingStringWithDecimal(str1, n, "0", "UTF-8", j);
-                if (!verifyDecimalStringValue(str1, j)) {
-                    String str2 = "Double Value Verify is Failed";
-                    TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                            str2);
-                    telegramNestedRuntimeException.setFieldName(paramField.getName());
-                    telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                    telegramNestedRuntimeException.setParser(paramString);
-                    telegramNestedRuntimeException.setMsg("decimal is not correct : " + str1 + " decimal[" + j + "]");
-                    throw telegramNestedRuntimeException;
+    public static boolean verifyDoubleNumber(Object var0, Field var1, String var2) throws Exception {
+        boolean var3 = true;
+        FIELD var4 = (FIELD) var1.getAnnotation(FIELD.class);
+        DATATYPE var5 = (DATATYPE) var1.getAnnotation(DATATYPE.class);
+        int var6 = var4.length();
+        int var7 = var5.decimal();
+        int var8 = var5.sign_length();
+        int var9 = var5.point_length();
+        NumberFormat var10 = NumberFormat.getInstance();
+        var10.setGroupingUsed(false);
+        var10.setMaximumFractionDigits(var7);
+        int var11 = var6 + var8 + var9;
+        Type var12 = var1.getGenericType();
+        String var16;
+        if (isPrimitiveType(var12)) {
+            String var13 = var12.getTypeName();
+            if ("double".equals(var13)) {
+                double var14 = (Double) var0;
+                var16 = var10.format(var14);
+                var16 = rightNumberPaddingStringWithDecimal(var16, var11, "0", "UTF-8", var7);
+                if (!verifyDecimalStringValue(var16, var7)) {
+                    String var24 = "Double Value Verify is Failed";
+                    TelegramNestedRuntimeException var26 = new TelegramNestedRuntimeException(var24);
+                    var26.setFieldName(var1.getName());
+                    var26.setFtype(var4.type().getTypeName());
+                    var26.setParser(var2);
+                    var26.setMsg("decimal is not correct : " + var16 + " decimal[" + var7 + "]");
+                    throw var26;
                 }
-                int i1 = str1.length();
-                if (d < 0.0D) {
-                    if (i1 > n) {
-                        String str2 = "Double Value Verify is Failed";
-                        TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                                str2);
-                        telegramNestedRuntimeException.setFieldName(paramField.getName());
-                        telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                        telegramNestedRuntimeException.setParser(paramString);
-                        telegramNestedRuntimeException.setMsg("Value : " + str1 + "[" + n + ":" + i1 + "]");
-                        throw telegramNestedRuntimeException;
+
+                int var17 = var16.length();
+                String var18;
+                TelegramNestedRuntimeException var19;
+                if (var14 < 0.0) {
+                    if (var17 > var11) {
+                        var18 = "Double Value Verify is Failed";
+                        var19 = new TelegramNestedRuntimeException(var18);
+                        var19.setFieldName(var1.getName());
+                        var19.setFtype(var4.type().getTypeName());
+                        var19.setParser(var2);
+                        var19.setMsg("Value : " + var16 + "[" + var11 + ":" + var17 + "]");
+                        throw var19;
                     }
-                } else if (i1 > i + m) {
-                    String str2 = "Double Value Verify is Failed";
-                    TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                            str2);
-                    telegramNestedRuntimeException.setFieldName(paramField.getName());
-                    telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                    telegramNestedRuntimeException.setParser(paramString);
-                    telegramNestedRuntimeException.setMsg("Value : " + str1 + "[" + (i + m) + ":" + i1 + "]");
-                    throw telegramNestedRuntimeException;
+                } else if (var17 > var6 + var9) {
+                    var18 = "Double Value Verify is Failed";
+                    var19 = new TelegramNestedRuntimeException(var18);
+                    var19.setFieldName(var1.getName());
+                    var19.setFtype(var4.type().getTypeName());
+                    var19.setParser(var2);
+                    var19.setMsg("Value : " + var16 + "[" + (var6 + var9) + ":" + var17 + "]");
+                    throw var19;
                 }
             } else {
                 new Exception("Insert Object is not Double Type");
             }
-        } else if (paramField.getType().isAssignableFrom(Double.class)) {
-            Double double_ = (Double) paramObject;
-            String str = numberFormat.format(double_);
-            str = rightNumberPaddingStringWithDecimal(str, n, "0", "UTF-8", j);
-            if (!verifyDecimalStringValue(str, j)) {
-                String str1 = "Double Value Verify is Failed";
-                TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                        str1);
-                telegramNestedRuntimeException.setFieldName(paramField.getName());
-                telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                telegramNestedRuntimeException.setParser(paramString);
-                telegramNestedRuntimeException.setMsg("decimal is not correct : " + str + " decimal[" + j + "]");
-                throw telegramNestedRuntimeException;
+        } else if (var1.getType().isAssignableFrom(Double.class)) {
+            Double var20 = (Double) var0;
+            String var21 = var10.format(var20);
+            var21 = rightNumberPaddingStringWithDecimal(var21, var11, "0", "UTF-8", var7);
+            if (!verifyDecimalStringValue(var21, var7)) {
+                String var22 = "Double Value Verify is Failed";
+                TelegramNestedRuntimeException var23 = new TelegramNestedRuntimeException(var22);
+                var23.setFieldName(var1.getName());
+                var23.setFtype(var4.type().getTypeName());
+                var23.setParser(var2);
+                var23.setMsg("decimal is not correct : " + var21 + " decimal[" + var7 + "]");
+                throw var23;
             }
-            int i1 = str.length();
-            if (double_.doubleValue() < 0.0D) {
-                if (i1 > n) {
-                    String str1 = "Double Value Verify is Failed";
-                    TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                            str1);
-                    telegramNestedRuntimeException.setFieldName(paramField.getName());
-                    telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                    telegramNestedRuntimeException.setParser(paramString);
-                    telegramNestedRuntimeException.setMsg("Value : " + str + "[" + n + ":" + i1 + "]");
-                    throw telegramNestedRuntimeException;
+
+            int var15 = var21.length();
+            TelegramNestedRuntimeException var25;
+            if (var20 < 0.0) {
+                if (var15 > var11) {
+                    var16 = "Double Value Verify is Failed";
+                    var25 = new TelegramNestedRuntimeException(var16);
+                    var25.setFieldName(var1.getName());
+                    var25.setFtype(var4.type().getTypeName());
+                    var25.setParser(var2);
+                    var25.setMsg("Value : " + var21 + "[" + var11 + ":" + var15 + "]");
+                    throw var25;
                 }
-            } else if (i1 > i + m) {
-                String str1 = "Double Value Verify is Failed";
-                TelegramNestedRuntimeException telegramNestedRuntimeException = new TelegramNestedRuntimeException(
-                        str1);
-                telegramNestedRuntimeException.setFieldName(paramField.getName());
-                telegramNestedRuntimeException.setFtype(fIELD.type().getTypeName());
-                telegramNestedRuntimeException.setParser(paramString);
-                telegramNestedRuntimeException.setMsg("Value : " + str + "[" + (i + m) + ":" + i1 + "]");
-                throw telegramNestedRuntimeException;
+            } else if (var15 > var6 + var9) {
+                var16 = "Double Value Verify is Failed";
+                var25 = new TelegramNestedRuntimeException(var16);
+                var25.setFieldName(var1.getName());
+                var25.setFtype(var4.type().getTypeName());
+                var25.setParser(var2);
+                var25.setMsg("Value : " + var21 + "[" + (var6 + var9) + ":" + var15 + "]");
+                throw var25;
             }
         } else {
             new Exception("Insert Object is not Double Type");
         }
-        return bool;
+
+        return var3;
     }
 
-    public static boolean verifyDecimalStringValue(String paramString, int paramInt) {
-        boolean bool = false;
-        if (!paramString.contains(".")) {
-            bool = true;
+    public static boolean verifyDecimalStringValue(String var0, int var1) {
+        boolean var2 = false;
+        if (!var0.contains(".")) {
+            var2 = true;
         } else {
-            String str = paramString.substring(paramString.indexOf(".") + 1);
-            if (paramInt >= str.length())
-                bool = true;
+            String var3 = var0.substring(var0.indexOf(".") + 1);
+            if (var1 >= var3.length()) {
+                var2 = true;
+            }
         }
-        return bool;
+
+        return var2;
     }
 
-    public static String addLeftZeroPaddingByLength(String paramString, int paramInt) {
-        String str = "";
-        if (paramString == null) {
-            StringBuffer stringBuffer = new StringBuffer();
-            for (byte b = 0; b < paramInt; b++)
-                stringBuffer.append("0");
-            str = stringBuffer.toString();
-        } else if (paramString.length() > paramInt) {
-            str = paramString.substring(paramString.length() - paramInt, paramString.length());
-        } else if (paramString.length() == paramInt) {
-            str = paramString;
+    public static String addLeftZeroPaddingByLength(String var0, int var1) {
+        String var2 = "";
+        if (var0 == null) {
+            StringBuffer var3 = new StringBuffer();
+
+            for (int var4 = 0; var4 < var1; ++var4) {
+                var3.append("0");
+            }
+
+            var2 = var3.toString();
+        } else if (var0.length() > var1) {
+            var2 = var0.substring(var0.length() - var1, var0.length());
+        } else if (var0.length() == var1) {
+            var2 = var0;
         } else {
-            int i = paramInt - paramString.length();
-            StringBuffer stringBuffer = new StringBuffer();
-            for (byte b = 0; b < i; b++)
-                stringBuffer.append("0");
-            stringBuffer.append(paramString);
-            str = stringBuffer.toString();
+            int var6 = var1 - var0.length();
+            StringBuffer var7 = new StringBuffer();
+
+            for (int var5 = 0; var5 < var6; ++var5) {
+                var7.append("0");
+            }
+
+            var7.append(var0);
+            var2 = var7.toString();
         }
-        return str;
+
+        return var2;
     }
 
-    public static String addRightZeroPaddingByLength(String paramString, int paramInt) {
-        String str = "";
-        if (paramString == null) {
-            StringBuffer stringBuffer = new StringBuffer();
-            for (byte b = 0; b < paramInt; b++)
-                stringBuffer.append("0");
-            str = stringBuffer.toString();
-        } else if (paramString.length() > paramInt) {
-            str = paramString.substring(0, paramInt);
-        } else if (paramString.length() == paramInt) {
-            str = paramString;
+    public static String addRightZeroPaddingByLength(String var0, int var1) {
+        String var2 = "";
+        if (var0 == null) {
+            StringBuffer var3 = new StringBuffer();
+
+            for (int var4 = 0; var4 < var1; ++var4) {
+                var3.append("0");
+            }
+
+            var2 = var3.toString();
+        } else if (var0.length() > var1) {
+            var2 = var0.substring(0, var1);
+        } else if (var0.length() == var1) {
+            var2 = var0;
         } else {
-            int i = paramInt - paramString.length();
-            StringBuffer stringBuffer = new StringBuffer();
-            stringBuffer.append(paramString);
-            for (byte b = 0; b < i; b++)
-                stringBuffer.append("0");
-            str = stringBuffer.toString();
+            int var6 = var1 - var0.length();
+            StringBuffer var7 = new StringBuffer();
+            var7.append(var0);
+
+            for (int var5 = 0; var5 < var6; ++var5) {
+                var7.append("0");
+            }
+
+            var2 = var7.toString();
         }
-        return str;
+
+        return var2;
     }
 
-    public static void main(String[] paramArrayOfString) {
-        String str = "abcd";
-        System.out.println(addRightZeroPaddingByLength(str, 5));
+    public static void main(String[] var0) {
+        String var1 = "abcd";
+        System.out.println(addRightZeroPaddingByLength(var1, 5));
     }
 }
