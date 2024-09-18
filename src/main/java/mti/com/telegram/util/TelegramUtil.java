@@ -28,7 +28,7 @@ public class TelegramUtil {
     }
 
     public static String getStringFromDecimalNumberRound(Object var0, Field var1) throws Exception {
-        DATATYPE var2 = (DATATYPE)var1.getAnnotation(DATATYPE.class);
+        DATATYPE var2 = var1.getAnnotation(DATATYPE.class);
         int var3 = var2.decimal();
         NumberFormat var4 = NumberFormat.getInstance();
         var4.setGroupingUsed(false);
@@ -51,7 +51,7 @@ public class TelegramUtil {
     }
 
     public static String getStringFromDecimalNumberCeil(Object var0, Field var1) throws Exception {
-        DATATYPE var2 = (DATATYPE)var1.getAnnotation(DATATYPE.class);
+        DATATYPE var2 = var1.getAnnotation(DATATYPE.class);
         int var3 = var2.decimal();
         NumberFormat var4 = NumberFormat.getInstance();
         var4.setGroupingUsed(false);
@@ -74,7 +74,7 @@ public class TelegramUtil {
     }
 
     public static String getStringFromDecimalNumberFloor(Object var0, Field var1) throws Exception {
-        DATATYPE var2 = (DATATYPE)var1.getAnnotation(DATATYPE.class);
+        DATATYPE var2 = var1.getAnnotation(DATATYPE.class);
         int var3 = var2.decimal();
         NumberFormat var4 = NumberFormat.getInstance();
         var4.setGroupingUsed(false);
@@ -98,7 +98,7 @@ public class TelegramUtil {
 
     public static byte[] convertStringToBytes(Object var0, Field var1, String var2) throws Exception {
         byte[] var3 = null;
-        FIELD var4 = (FIELD)var1.getAnnotation(FIELD.class);
+        FIELD var4 = var1.getAnnotation(FIELD.class);
         if (var0 == null) {
             return var3;
         } else {
@@ -323,10 +323,10 @@ public class TelegramUtil {
         for(int var4 = 0; var4 < var3; ++var4) {
             Field var5 = var2[var4];
             Object var6 = var5.get(var0);
-            FIELD var7 = (FIELD)var5.getAnnotation(FIELD.class);
+            FIELD var7 = var5.getAnnotation(FIELD.class);
             switch (var7.type()) {
                 case NUMBER:
-                    DATATYPE var8 = (DATATYPE)var5.getAnnotation(DATATYPE.class);
+                    DATATYPE var8 = var5.getAnnotation(DATATYPE.class);
                     var1 += var7.length();
                     var1 += var8.point_length();
                     var1 += var8.sign_length();
@@ -365,11 +365,11 @@ public class TelegramUtil {
         for(int var6 = 0; var6 < var5; ++var6) {
             Field var7 = var4[var6];
             Object var8 = var7.get(var0);
-            FIELD var9 = (FIELD)var7.getAnnotation(FIELD.class);
+            FIELD var9 = var7.getAnnotation(FIELD.class);
             byte[] var10 = null;
             switch (var9.type()) {
                 case NUMBER:
-                    DATATYPE var15 = (DATATYPE)var7.getAnnotation(DATATYPE.class);
+                    DATATYPE var15 = var7.getAnnotation(DATATYPE.class);
                     var3 += var9.length();
                     var3 += var15.point_length();
                     var3 += var15.sign_length();
@@ -477,15 +477,15 @@ public class TelegramUtil {
 
         for(int var6 = 0; var5 < var4; ++var6) {
             var3[var6] = var0[var5];
-            System.out.println("bytes[" + var5 + "] : " + (new Byte(var0[var5])).toString());
+            logger.info("bytes[{}] : {}", var5, (Byte.valueOf(var0[var5])).toString());
             ++var5;
         }
 
         for(var5 = 0; var5 < var0.length; ++var5) {
-            System.out.print("bytes[" + var5 + "] : " + (new Byte(var0[var5])).toString() + ",");
+            System.out.print("bytes[" + var5 + "] : " + (Byte.valueOf(var0[var5])) + ",");
         }
 
-        System.out.println("");
+        System.out.println();
         System.out.println("Result : " + new String(var3));
         return var3;
     }
@@ -496,19 +496,17 @@ public class TelegramUtil {
 
     public static String getSetterMethodName(String var0) {
         String var1 = getAccessorName(var0);
-        StringBuffer var2 = new StringBuffer(var0.length() + 3);
-        var2.append("set");
-        var2.append(var1);
-        return var2.toString();
+        String var2 = "set" +
+                var1;
+        return var2;
     }
 
     public static String getAccessorName(String var0) {
         if (var0 != null && var0.length() > 0) {
             char[] var1 = var0.toCharArray();
-            StringBuffer var2 = new StringBuffer(var0.length());
-            var2.append(Character.toUpperCase(var1[0]));
-            var2.append(var0.substring(1));
-            return var2.toString();
+            String var2 = Character.toUpperCase(var1[0]) +
+                    var0.substring(1);
+            return var2;
         } else {
             return "";
         }
@@ -529,8 +527,7 @@ public class TelegramUtil {
         Object var1 = null;
         Type var2 = var0.getGenericType();
         String var3 = var2.getTypeName();
-        if (var2 instanceof ParameterizedType) {
-            ParameterizedType var4 = (ParameterizedType)var2;
+        if (var2 instanceof ParameterizedType var4) {
             Type[] var5 = var4.getActualTypeArguments();
             Class var6 = (Class)var5[0];
             var1 = var6.newInstance();
@@ -545,49 +542,49 @@ public class TelegramUtil {
         Method var6 = null;
         Type var7 = var1.getGenericType();
         String var8 = var7.getTypeName();
-        DATATYPE var9 = (DATATYPE)var1.getAnnotation(DATATYPE.class);
+        DATATYPE var9 = var1.getAnnotation(DATATYPE.class);
         String var10 = byte2StringTrimmed(var3, var4);
         double var11 = Double.parseDouble(var10);
         if (isPrimitiveType(var7)) {
             if ("int".equals(var8)) {
                 var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Integer.TYPE);
-                if (verifyIntegerNumber((new Double(var11)).intValue(), var1, var5)) {
-                    invokeMethod(var6, var0, (new Double(var11)).intValue());
+                if (verifyIntegerNumber((Double.valueOf(var11)).intValue(), var1, var5)) {
+                    invokeMethod(var6, var0, (Double.valueOf(var11)).intValue());
                 }
             }
 
             if ("short".equals(var8)) {
                 var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Short.TYPE);
-                if (verifyShortNumber((new Double(var11)).shortValue(), var1, var5)) {
-                    invokeMethod(var6, var0, (new Double(var11)).shortValue());
+                if (verifyShortNumber((Double.valueOf(var11)).shortValue(), var1, var5)) {
+                    invokeMethod(var6, var0, (Double.valueOf(var11)).shortValue());
                 }
             }
 
             if ("long".equals(var8)) {
                 var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Long.TYPE);
-                if (verifyLongNumber((new Double(var11)).longValue(), var1, var5)) {
-                    invokeMethod(var6, var0, (new Double(var11)).longValue());
+                if (verifyLongNumber((Double.valueOf(var11)).longValue(), var1, var5)) {
+                    invokeMethod(var6, var0, (Double.valueOf(var11)).longValue());
                 }
             }
 
             if ("float".equals(var8)) {
                 var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Float.TYPE);
-                if (verifyFloatNumber((new Double(var11)).floatValue(), var1, var5)) {
-                    invokeMethod(var6, var0, (new Double(var11)).floatValue());
+                if (verifyFloatNumber((Double.valueOf(var11)).floatValue(), var1, var5)) {
+                    invokeMethod(var6, var0, (Double.valueOf(var11)).floatValue());
                 }
             }
 
             if ("double".equals(var8)) {
                 var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Double.TYPE);
-                if (verifyDoubleNumber(new Double(var11), var1, var5)) {
-                    invokeMethod(var6, var0, new Double(var11));
+                if (verifyDoubleNumber(var11, var1, var5)) {
+                    invokeMethod(var6, var0, var11);
                 }
             }
         } else {
             switch (var9.type()) {
                 case DECIMAL:
                     var6 = var1.getDeclaringClass().getDeclaredMethod(var2, BigDecimal.class);
-                    BigDecimal var13 = BigDecimal.valueOf(new Double(var11));
+                    BigDecimal var13 = BigDecimal.valueOf(var11);
                     if (verifyDoubleNumber(var11, var1, var5)) {
                         invokeMethod(var6, var0, var13);
                     }
@@ -595,31 +592,31 @@ public class TelegramUtil {
                 case DOUBLE:
                     var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Double.class);
                     if (verifyDoubleNumber(var11, var1, var5)) {
-                        invokeMethod(var6, var0, new Double(var11));
+                        invokeMethod(var6, var0, var11);
                     }
                     break;
                 case FLOAT:
                     var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Float.class);
-                    if (verifyFloatNumber(new Float((float)var11), var1, var5)) {
-                        invokeMethod(var6, var0, new Float((float)var11));
+                    if (verifyFloatNumber((float) var11, var1, var5)) {
+                        invokeMethod(var6, var0, (float) var11);
                     }
                     break;
                 case INT:
                     var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Integer.class);
-                    if (verifyIntegerNumber(new Integer((int)var11), var1, var5)) {
-                        invokeMethod(var6, var0, new Integer((int)var11));
+                    if (verifyIntegerNumber((int) var11, var1, var5)) {
+                        invokeMethod(var6, var0, (int) var11);
                     }
                     break;
                 case LONG:
                     var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Long.class);
-                    if (verifyLongNumber(new Long((long)((int)var11)), var1, var5)) {
-                        invokeMethod(var6, var0, new Long((long)((int)var11)));
+                    if (verifyLongNumber((long) (int) var11, var1, var5)) {
+                        invokeMethod(var6, var0, (long) (int) var11);
                     }
                     break;
                 case SHORT:
                     var6 = var1.getDeclaringClass().getDeclaredMethod(var2, Short.class);
-                    if (verifyShortNumber(new Short((short)((int)var11)), var1, var5)) {
-                        invokeMethod(var6, var0, new Short((short)((int)var11)));
+                    if (verifyShortNumber((short) ((int) var11), var1, var5)) {
+                        invokeMethod(var6, var0, (short) ((int) var11));
                     }
             }
         }
@@ -709,8 +706,8 @@ public class TelegramUtil {
 
     public static boolean verifyShortNumber(Object var0, Field var1, String var2) throws Exception {
         boolean var3 = true;
-        FIELD var4 = (FIELD)var1.getAnnotation(FIELD.class);
-        DATATYPE var5 = (DATATYPE)var1.getAnnotation(DATATYPE.class);
+        FIELD var4 = var1.getAnnotation(FIELD.class);
+        DATATYPE var5 = var1.getAnnotation(DATATYPE.class);
         int var6 = var4.length();
         int var7 = var5.sign_length();
         int var8 = var6 + var7;
@@ -719,7 +716,7 @@ public class TelegramUtil {
             String var10 = var9.getTypeName();
             if ("short".equals(var10)) {
                 short var11 = (Short)var0;
-                String var12 = (new Short(var11)).toString();
+                String var12 = (Short.valueOf(var11)).toString();
                 int var13 = var12.length();
                 String var14;
                 TelegramNestedRuntimeException var15;
@@ -779,8 +776,8 @@ public class TelegramUtil {
 
     public static boolean verifyIntegerNumber(Object var0, Field var1, String var2) throws Exception {
         boolean var3 = true;
-        FIELD var4 = (FIELD)var1.getAnnotation(FIELD.class);
-        DATATYPE var5 = (DATATYPE)var1.getAnnotation(DATATYPE.class);
+        FIELD var4 = var1.getAnnotation(FIELD.class);
+        DATATYPE var5 = var1.getAnnotation(DATATYPE.class);
         int var6 = var4.length();
         int var7 = var5.sign_length();
         int var8 = var6 + var7;
@@ -789,7 +786,7 @@ public class TelegramUtil {
             String var10 = var9.getTypeName();
             if ("int".equals(var10)) {
                 int var11 = (Integer)var0;
-                String var12 = (new Integer(var11)).toString();
+                String var12 = (Integer.valueOf(var11)).toString();
                 int var13 = var12.length();
                 String var14;
                 TelegramNestedRuntimeException var15;
@@ -849,8 +846,8 @@ public class TelegramUtil {
 
     public static boolean verifyLongNumber(Object var0, Field var1, String var2) throws Exception {
         boolean var3 = true;
-        FIELD var4 = (FIELD)var1.getAnnotation(FIELD.class);
-        DATATYPE var5 = (DATATYPE)var1.getAnnotation(DATATYPE.class);
+        FIELD var4 = var1.getAnnotation(FIELD.class);
+        DATATYPE var5 = var1.getAnnotation(DATATYPE.class);
         int var6 = var4.length();
         int var7 = var5.sign_length();
         int var8 = var6 + var7;
@@ -860,7 +857,7 @@ public class TelegramUtil {
             String var10 = var9.getTypeName();
             if ("long".equals(var10)) {
                 long var11 = (Long)var0;
-                var13 = (new Long(var11)).toString();
+                var13 = (Long.valueOf(var11)).toString();
                 int var14 = var13.length();
                 String var15;
                 TelegramNestedRuntimeException var16;
@@ -919,8 +916,8 @@ public class TelegramUtil {
 
     public static boolean verifyFloatNumber(Object var0, Field var1, String var2) throws Exception {
         boolean var3 = true;
-        FIELD var4 = (FIELD)var1.getAnnotation(FIELD.class);
-        DATATYPE var5 = (DATATYPE)var1.getAnnotation(DATATYPE.class);
+        FIELD var4 = var1.getAnnotation(FIELD.class);
+        DATATYPE var5 = var1.getAnnotation(DATATYPE.class);
         int var6 = var4.length();
         int var7 = var5.decimal();
         int var8 = var5.sign_length();
@@ -937,7 +934,7 @@ public class TelegramUtil {
             String var13 = var12.getTypeName();
             if ("float".equals(var13)) {
                 float var14 = (Float)var0;
-                var15 = var11.format((new Float(var14)).doubleValue());
+                var15 = var11.format(( Float.valueOf(var14)).doubleValue());
                 var15 = rightNumberPaddingStringWithDecimal(var15, var10, "0", "UTF-8", var7);
                 if (!verifyDecimalStringValue(var15, var7)) {
                     var22 = "Float Value Verify is Failed";
@@ -1017,8 +1014,8 @@ public class TelegramUtil {
 
     public static boolean verifyDoubleNumber(Object var0, Field var1, String var2) throws Exception {
         boolean var3 = true;
-        FIELD var4 = (FIELD)var1.getAnnotation(FIELD.class);
-        DATATYPE var5 = (DATATYPE)var1.getAnnotation(DATATYPE.class);
+        FIELD var4 = var1.getAnnotation(FIELD.class);
+        DATATYPE var5 = var1.getAnnotation(DATATYPE.class);
         int var6 = var4.length();
         int var7 = var5.decimal();
         int var8 = var5.sign_length();
@@ -1137,7 +1134,7 @@ public class TelegramUtil {
 
             var2 = var3.toString();
         } else if (var0.length() > var1) {
-            var2 = var0.substring(var0.length() - var1, var0.length());
+            var2 = var0.substring(var0.length() - var1);
         } else if (var0.length() == var1) {
             var2 = var0;
         } else {
