@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 import mti.com.telegram.exception.TelegramNestedRuntimeException;
-import mti.com.telegram.model.FieldType;
-import mti.com.telegram.model.Kind;
+// import mti.com.telegram.model.FieldType;
+// import mti.com.telegram.model.Kind;
 import mti.com.telegram.model.annotation.DATATYPE;
 import mti.com.telegram.model.annotation.FIELD;
 import mti.com.telegram.util.TelegramUtil;
@@ -82,12 +82,12 @@ public class ByteDecoder {
                 byte[] arrayOfByte4;
                 boolean bool;
                 int n;
-                ArrayList arrayList1;
+                ArrayList<Object> arrayList1;
                 byte[] arrayOfByte5;
                 byte b1;
                 byte[] arrayOfByte6;
                 String str6;
-                ArrayList arrayList2;
+                ArrayList<Object> arrayList2;
                 Method method3;
                 byte b2;
                 byte[] arrayOfByte7;
@@ -118,7 +118,8 @@ public class ByteDecoder {
                         str4 = TelegramUtil.getSetterMethodName(str);
                         method2 = arrayOfField[b].getDeclaringClass().getDeclaredMethod(str4,
                                 new Class[] { List.class });
-                        switch (fIELD.kind()) {
+                        // switch (fIELD.kind()) { // TODO
+                        switch (fIELD.type()) {
                             case STRING:
                                 arrayOfByte3 = TelegramUtil.cutBytes(paramArrayOfbyte, i, 8);
                                 str5 = (new String(arrayOfByte3)).trim();
@@ -133,15 +134,15 @@ public class ByteDecoder {
                                             .setMsg("Data Count String is [" + str5 + "]. is not NumberType");
                                     throw telegramNestedRuntimeException;
                                 }
-                                m = (new Integer(str5)).intValue();
+                                m = Integer.parseInt(str5);
                                 i += 8;
-                                arrayList1 = new ArrayList();
+                                arrayList1 = new ArrayList<Object>();
                                 for (b1 = 0; b1 < m; b1++) {
                                     Type type = arrayOfField[b].getGenericType();
                                     ParameterizedType parameterizedType = (ParameterizedType) type;
                                     Type[] arrayOfType = parameterizedType.getActualTypeArguments();
-                                    Class<Object> clazz = (Class) arrayOfType[0];
-                                    Object object1 = clazz.newInstance();
+                                    Class<Object> clazz = (Class<Object>) arrayOfType[0];
+                                    Object object1 = clazz.getDeclaredConstructor().newInstance();
                                     int i1 = TelegramUtil.getPacketSize(object1);
                                     byte[] arrayOfByte = TelegramUtil.cutBytes(paramArrayOfbyte, i, i1);
                                     parseBytes(arrayOfByte, object1);
@@ -158,15 +159,15 @@ public class ByteDecoder {
                                 break;
                             case NUMBER:
                                 arrayOfByte6 = TelegramUtil.cutBytes(paramArrayOfbyte, i, 2);
-                                m = (new Integer(new String(arrayOfByte6))).intValue();
+                                m = Integer.parseInt(new String(arrayOfByte6)); // TODO
                                 i += 2;
-                                arrayList2 = new ArrayList();
+                                arrayList2 = new ArrayList<Object>();
                                 for (b2 = 0; b2 < m; b2++) {
                                     Type type = arrayOfField[b].getGenericType();
                                     ParameterizedType parameterizedType = (ParameterizedType) type;
                                     Type[] arrayOfType = parameterizedType.getActualTypeArguments();
-                                    Class<Object> clazz = (Class) arrayOfType[0];
-                                    Object object1 = clazz.newInstance();
+                                    Class<Object> clazz = (Class<Object>) arrayOfType[0];
+                                    Object object1 = clazz.getDeclaredConstructor().newInstance();
                                     int i1 = TelegramUtil.getPacketSize(object1);
                                     byte[] arrayOfByte = TelegramUtil.cutBytes(paramArrayOfbyte, i, i1);
                                     parseBytes(arrayOfByte, object1);
@@ -174,6 +175,8 @@ public class ByteDecoder {
                                     i += i1;
                                 }
                                 TelegramUtil.invokeMethod(method2, paramObject, arrayList2);
+                                break;
+                            default:
                                 break;
                         }
                         break;
@@ -207,6 +210,8 @@ public class ByteDecoder {
                                 new Class[] { byte[].class });
                         TelegramUtil.invokeMethod(method4, paramObject, arrayOfByte7);
                         i += k;
+                        break;
+                    default:
                         break;
                 }
             } catch (Exception exception) {
