@@ -237,7 +237,7 @@ public class TelegramBuilder {
 
     public TelegramDataOutList makeTelegramOutList(Object paramObject) {
         TelegramDataOutList telegramDataOutList = new TelegramDataOutList();
-        ArrayList arrayList = new ArrayList();
+        ArrayList<Object> arrayList = new ArrayList<Object>();
         telegramDataOutList.setData(arrayList);
         return telegramDataOutList;
     }
