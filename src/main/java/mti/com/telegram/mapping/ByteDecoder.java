@@ -173,15 +173,14 @@ public class ByteDecoder {
 
                             TelegramUtil.invokeMethod(var25, var2, var20);
                             var3 += var22;
-                        case CHAR:
-                        default:
-                            break;
                         case BYTES:
                             byte[] var26 = TelegramUtil.cutBytes(var1, var3, var8);
                             String var27 = TelegramUtil.getSetterMethodName(var9);
                             Method var28 = var4[var6].getDeclaringClass().getDeclaredMethod(var27, byte[].class);
                             TelegramUtil.invokeMethod(var28, var2, var26);
                             var3 += var8;
+                        default:
+                            break;
                     }
                 } catch (Exception var34) {
                     TelegramNestedRuntimeException var11 = new TelegramNestedRuntimeException(var34.toString());
