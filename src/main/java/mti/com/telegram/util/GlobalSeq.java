@@ -7,6 +7,6 @@ public class GlobalSeq {
         if (g_seq == 1000)
             g_seq = 1;
         g_seq++;
-        return TelegramDateUtil.addLeftZeroFor3Bytes((new Integer(g_seq)).toString());
+        return TelegramDateUtil.addLeftZeroFor3Bytes(Integer.toString(g_seq));
     }
 }
