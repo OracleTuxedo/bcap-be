@@ -1,3 +1,8 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package mti.com.telegram.mapping;
 
 import java.lang.reflect.Field;
@@ -104,9 +109,9 @@ public class ByteDecoder {
                                         throw var42;
                                     }
 
-                                    var37 = Integer.parseInt(var39);
+                                    var37 = new Integer(var39);
                                     var3 += 8;
-                                    ArrayList<Object> var41 = new ArrayList<Object>();
+                                    ArrayList var41 = new ArrayList();
 
                                     for(int var44 = 0; var44 < var37; ++var44) {
                                         Type var47 = var4[var6].getGenericType();
@@ -130,9 +135,9 @@ public class ByteDecoder {
                                     continue;
                                 case MESSAGE:
                                     byte[] var43 = TelegramUtil.cutBytes(var1, var3, 2);
-                                    var37 = Integer.parseInt(new String(var43));
+                                    var37 = new Integer(new String(var43));
                                     var3 += 2;
-                                    ArrayList<Object> var46 = new ArrayList<Object>();
+                                    ArrayList var46 = new ArrayList();
 
                                     for(int var45 = 0; var45 < var37; ++var45) {
                                         Type var49 = var4[var6].getGenericType();
@@ -173,14 +178,15 @@ public class ByteDecoder {
 
                             TelegramUtil.invokeMethod(var25, var2, var20);
                             var3 += var22;
+                        case CHAR:
+                        default:
+                            break;
                         case BYTES:
                             byte[] var26 = TelegramUtil.cutBytes(var1, var3, var8);
                             String var27 = TelegramUtil.getSetterMethodName(var9);
                             Method var28 = var4[var6].getDeclaringClass().getDeclaredMethod(var27, byte[].class);
                             TelegramUtil.invokeMethod(var28, var2, var26);
                             var3 += var8;
-                        default:
-                            break;
                     }
                 } catch (Exception var34) {
                     TelegramNestedRuntimeException var11 = new TelegramNestedRuntimeException(var34.toString());
