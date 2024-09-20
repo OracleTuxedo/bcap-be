@@ -36,7 +36,7 @@ public class ByteEncoder {
 
             for(int var7 = 0; var7 < var6; ++var7) {
                 Field var8 = var5[var7];
-                FIELD var9 = (FIELD)var8.getAnnotation(FIELD.class);
+                FIELD var9 = var8.getAnnotation(FIELD.class);
                 Object var10 = var8.get(var1);
 
                 try {
@@ -63,7 +63,7 @@ public class ByteEncoder {
                                 }
                             case NUMBER:
                                 var16 = var9.length();
-                                DATATYPE var13 = (DATATYPE)var8.getAnnotation(DATATYPE.class);
+                                DATATYPE var13 = var8.getAnnotation(DATATYPE.class);
                                 var16 += var13.sign_length();
                                 var16 += var13.point_length();
                                 var17 = new byte[var16];
@@ -141,32 +141,32 @@ public class ByteEncoder {
         if (TelegramUtil.isPrimitiveType(var4)) {
             var5 = var4.getTypeName();
             if ("int".equals(var5) && TelegramUtil.verifyIntegerNumber(var1, var2, "ByteEncoder")) {
-                var3 = this.convertStringToBytes((new Integer((Integer)var1)).toString(), var2);
+                var3 = this.convertStringToBytes(((Integer)var1).toString(), var2);
             }
 
             if ("short".equals(var5) && TelegramUtil.verifyShortNumber(var1, var2, "ByteEncoder")) {
-                var3 = this.convertStringToBytes((new Short((Short)var1)).toString(), var2);
+                var3 = this.convertStringToBytes(((Short)var1).toString(), var2);
             }
 
             if ("long".equals(var5) && TelegramUtil.verifyLongNumber(var1, var2, "ByteEncoder")) {
-                var3 = this.convertStringToBytes((new Long((Long)var1)).toString(), var2);
+                var3 = this.convertStringToBytes(((Long)var1).toString(), var2);
             }
 
             String var6;
             if ("float".equals(var5)) {
-                var6 = TelegramUtil.getStringFromDecimalNumberRound(new Float((Float)var1), var2);
+                var6 = TelegramUtil.getStringFromDecimalNumberRound((Float)var1, var2);
                 if (TelegramUtil.verifyFloatNumber(Float.parseFloat(var6), var2, "ByteEncoder")) {
                     var3 = this.convertStringToBytes(var6, var2);
                 }
             }
 
             if ("double".equals(var5)) {
-                var6 = TelegramUtil.getStringFromDecimalNumberRound(new Double((Double)var1), var2);
+                var6 = TelegramUtil.getStringFromDecimalNumberRound((Double)var1, var2);
                 if (TelegramUtil.verifyDoubleNumber(Double.parseDouble(var6), var2, "ByteEncoder")) {
                     var3 = this.convertStringToBytes(var6, var2);
                 }
             }
-        } else if (((FIELD)var2.getAnnotation(FIELD.class)).type() == FieldType.VO) {
+        } else if (var2.getAnnotation(FIELD.class).type() == FieldType.VO) {
             var3 = this.convertObject2Bytes(var1, this.limited);
         } else if (var2.getType().isAssignableFrom(Integer.class)) {
             if (TelegramUtil.verifyIntegerNumber(var1, var2, "ByteEncoder")) {
@@ -184,28 +184,28 @@ public class ByteEncoder {
                 var3 = this.convertStringToBytes(var5, var2);
             }
         } else if (var2.getType().isAssignableFrom(Float.class)) {
-            var5 = TelegramUtil.getStringFromDecimalNumberRound((Float)var1, var2);
+            var5 = TelegramUtil.getStringFromDecimalNumberRound(var1, var2);
             if (TelegramUtil.verifyFloatNumber(new Float(var5), var2, "ByteEncoder")) {
                 var3 = this.convertStringToBytes(var5, var2);
             }
         } else if (var2.getType().isAssignableFrom(Double.class)) {
-            var5 = TelegramUtil.getStringFromDecimalNumberRound((Double)var1, var2);
+            var5 = TelegramUtil.getStringFromDecimalNumberRound(var1, var2);
             if (TelegramUtil.verifyDoubleNumber(new Double(var5), var2, "ByteEncoder")) {
                 var3 = this.convertStringToBytes(var5, var2);
             }
         } else if (var2.getType().isAssignableFrom(BigDecimal.class)) {
-            var5 = TelegramUtil.getStringFromDecimalNumberRound((BigDecimal)var1, var2);
+            var5 = TelegramUtil.getStringFromDecimalNumberRound(var1, var2);
             if (TelegramUtil.verifyDoubleNumber(Double.parseDouble(var5), var2, "ByteEncoder")) {
                 var3 = this.convertStringToBytes(var5, var2);
             }
         } else if (var2.getType().isAssignableFrom(String.class)) {
-            var3 = this.convertStringToBytes((String)var1, var2);
+            var3 = this.convertStringToBytes(var1, var2);
         } else if (var2.getType().isAssignableFrom(byte[].class)) {
-            var3 = (byte[])((byte[])var1);
+            var3 = (byte[]) var1;
         } else {
             FIELD var14;
             if (var2.getType().isAssignableFrom(List.class)) {
-                var14 = (FIELD)var2.getAnnotation(FIELD.class);
+                var14 = var2.getAnnotation(FIELD.class);
                 int var13 = TelegramUtil.getPacketSize((List)var1);
                 int var7 = 0;
                 if (var1 != null) {
@@ -220,8 +220,8 @@ public class ByteEncoder {
                     case DATA:
                         byte var9 = 8;
                         var8 = ByteBuffer.allocate(var13 + var9);
-                        var8.put(TelegramUtil.lpadString2Byte((new Integer(var7)).toString(), var9, "0", this.charSet));
-                        if (this.limited && (List)var1 != null) {
+                        var8.put(TelegramUtil.lpadString2Byte((Integer.valueOf(var7)).toString(), var9, "0", this.charSet));
+                        if (this.limited && var1 != null) {
                             var10 = ((List)var1).size();
                             if ((long)var10 > 10000L) {
                                 TelegramNestedRuntimeException var17 = new TelegramNestedRuntimeException("NumberFormat Exception");
@@ -243,7 +243,7 @@ public class ByteEncoder {
                     case MESSAGE:
                         var10 = 2;
                         var8 = ByteBuffer.allocate(var13 + var10);
-                        var8.put(TelegramUtil.lpadString2Byte((new Integer(var7)).toString(), var10, "0", this.charSet));
+                        var8.put(TelegramUtil.lpadString2Byte((Integer.valueOf(var7)).toString(), var10, "0", this.charSet));
                         Iterator var11 = ((List)var1).iterator();
 
                         while(var11.hasNext()) {
@@ -254,7 +254,7 @@ public class ByteEncoder {
 
                 var3 = var8.array();
             } else {
-                var14 = (FIELD)var2.getAnnotation(FIELD.class);
+                var14 = var2.getAnnotation(FIELD.class);
                 switch (var14.type()) {
                     case VO:
                         var3 = this.convertObject2Bytes(var1, this.limited);
@@ -267,7 +267,7 @@ public class ByteEncoder {
 
     private byte[] convertStringToBytes(Object var1, Field var2) throws Exception {
         byte[] var3 = null;
-        FIELD var4 = (FIELD)var2.getAnnotation(FIELD.class);
+        FIELD var4 = var2.getAnnotation(FIELD.class);
         if (var1 == null) {
             return var3;
         } else {
@@ -275,7 +275,7 @@ public class ByteEncoder {
             int var6 = var4.length();
             int var7 = 0;
             if (var4.type() == FieldType.NUMBER) {
-                DATATYPE var8 = (DATATYPE)var2.getAnnotation(DATATYPE.class);
+                DATATYPE var8 = var2.getAnnotation(DATATYPE.class);
                 var6 += var8.sign_length();
                 var6 += var8.point_length();
                 var7 = var8.decimal();

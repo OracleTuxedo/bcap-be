@@ -16,7 +16,7 @@ public class TelegramDateUtil {
 
     public static String getYYYYMMDD() {
         GregorianCalendar var0 = new GregorianCalendar();
-        String var1 = String.valueOf(var0.get(1)) + addLeftZeroFor2Bytes(String.valueOf(var0.get(2) + 1)) +
+        String var1 = var0.get(1) + addLeftZeroFor2Bytes(String.valueOf(var0.get(2) + 1)) +
                 addLeftZeroFor2Bytes(String.valueOf(var0.get(5)));
         return var1;
     }
