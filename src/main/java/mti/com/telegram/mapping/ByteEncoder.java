@@ -154,14 +154,14 @@ public class ByteEncoder {
 
             String var6;
             if ("float".equals(var5)) {
-                var6 = TelegramUtil.getStringFromDecimalNumberRound((Float)var1, var2);
+                var6 = TelegramUtil.getStringFromDecimalNumberRound(var1, var2);
                 if (TelegramUtil.verifyFloatNumber(Float.parseFloat(var6), var2, "ByteEncoder")) {
                     var3 = this.convertStringToBytes(var6, var2);
                 }
             }
 
             if ("double".equals(var5)) {
-                var6 = TelegramUtil.getStringFromDecimalNumberRound((Double)var1, var2);
+                var6 = TelegramUtil.getStringFromDecimalNumberRound(var1, var2);
                 if (TelegramUtil.verifyDoubleNumber(Double.parseDouble(var6), var2, "ByteEncoder")) {
                     var3 = this.convertStringToBytes(var6, var2);
                 }
@@ -185,12 +185,12 @@ public class ByteEncoder {
             }
         } else if (var2.getType().isAssignableFrom(Float.class)) {
             var5 = TelegramUtil.getStringFromDecimalNumberRound(var1, var2);
-            if (TelegramUtil.verifyFloatNumber(new Float(var5), var2, "ByteEncoder")) {
+            if (TelegramUtil.verifyFloatNumber(Float.valueOf(var5), var2, "ByteEncoder")) {
                 var3 = this.convertStringToBytes(var5, var2);
             }
         } else if (var2.getType().isAssignableFrom(Double.class)) {
             var5 = TelegramUtil.getStringFromDecimalNumberRound(var1, var2);
-            if (TelegramUtil.verifyDoubleNumber(new Double(var5), var2, "ByteEncoder")) {
+            if (TelegramUtil.verifyDoubleNumber(Double.valueOf(var5), var2, "ByteEncoder")) {
                 var3 = this.convertStringToBytes(var5, var2);
             }
         } else if (var2.getType().isAssignableFrom(BigDecimal.class)) {
