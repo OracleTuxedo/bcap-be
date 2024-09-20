@@ -5,6 +5,6 @@ public enum TrimType {
     RTRIM,
     NONE;
 
-    private TrimType() {
+    TrimType() {
     }
 }

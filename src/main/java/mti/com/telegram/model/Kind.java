@@ -6,6 +6,6 @@ public enum Kind {
     DATA,
     TAIL;
 
-    private Kind() {
+    Kind() {
     }
 }

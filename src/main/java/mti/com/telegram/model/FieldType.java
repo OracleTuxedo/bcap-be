@@ -10,7 +10,7 @@ public enum FieldType {
 
     String typeName;
 
-    private FieldType(String var3) {
+    FieldType(String var3) {
         this.typeName = var3;
     }
 

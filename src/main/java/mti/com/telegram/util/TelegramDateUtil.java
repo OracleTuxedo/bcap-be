@@ -16,18 +16,16 @@ public class TelegramDateUtil {
 
     public static String getYYYYMMDD() {
         GregorianCalendar var0 = new GregorianCalendar();
-        StringBuffer var1 = new StringBuffer(String.valueOf(((Calendar)var0).get(1)));
-        var1.append(addLeftZeroFor2Bytes(String.valueOf(((Calendar)var0).get(2) + 1)));
-        var1.append(addLeftZeroFor2Bytes(String.valueOf(((Calendar)var0).get(5))));
-        return var1.toString();
+        String var1 = String.valueOf(var0.get(1)) + addLeftZeroFor2Bytes(String.valueOf(var0.get(2) + 1)) +
+                addLeftZeroFor2Bytes(String.valueOf(var0.get(5)));
+        return var1;
     }
 
     public static String getHHMMSS() {
         GregorianCalendar var0 = new GregorianCalendar();
-        StringBuffer var1 = new StringBuffer(addLeftZeroFor2Bytes(String.valueOf(((Calendar)var0).get(11))));
-        var1.append(addLeftZeroFor2Bytes(String.valueOf(((Calendar)var0).get(12))));
-        var1.append(addLeftZeroFor2Bytes(String.valueOf(((Calendar)var0).get(13))));
-        return var1.toString();
+        String var1 = addLeftZeroFor2Bytes(String.valueOf(var0.get(11))) + addLeftZeroFor2Bytes(String.valueOf(var0.get(12))) +
+                addLeftZeroFor2Bytes(String.valueOf(var0.get(13)));
+        return var1;
     }
 
     public static String addLeftZeroFor2Bytes(String var0) {

@@ -10,7 +10,7 @@ public enum NumberType {
 
     String numberType;
 
-    private NumberType(String var3) {
+    NumberType(String var3) {
         this.numberType = var3;
     }
 

@@ -12,6 +12,6 @@ public class GlobalSeq {
         }
 
         ++g_seq;
-        return TelegramDateUtil.addLeftZeroFor3Bytes((new Integer(g_seq)).toString());
+        return TelegramDateUtil.addLeftZeroFor3Bytes((Integer.valueOf(g_seq)).toString());
     }
 }
