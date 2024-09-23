@@ -1,8 +1,6 @@
 package mti.com.telegram.util;
 
-import mti.ac.ac04.vo.SAC04V224UOutVo;
-import mti.ac.ac04.vo.SAC04V224UInSub1Vo;
-import mti.ac.ac04.vo.SAC04V224UInVo;
+import mti.ac.ac04.vo.*;
 import mti.com.telegram.mapping.ByteEncoder;
 import mti.com.telegram.vo.*;
 import mti.ed.ed03.vo.SED03F075ROutVo;
@@ -28,6 +26,7 @@ import java.util.List;
 // ####################################################################################################################################
 
 //RESPONSE = String Panjang Into Object
+
 //## SED03F107R WEB Single ##
 //2024-09-18 13:09:14,521  INFO [mti.com.telegram.util.WtcConnector] Request[588] : [00000580DEVWAS0120240918130914054mti2100SED03F107R              MTI S                        DEVWAS0120240918130914054mti210020240918130914000520WEB       172.16.20.11                                WED030120H N1787130271     020240918130914000520                    A000000      00010                                                                        ID                                                                                                                                             D00000077                     EDC  0013000011976476                                   @@]
 //2024-09-18 13:09:15,706  INFO [mti.com.telegram.util.WtcConnector] Response[1172] : [00001164DEVWAS0120240918130914054mti2100SED03F107R              MTI R                        DEVWAS0120240918130914054mti210020240918130914000520WEB       172.16.20.11                                WED030120H N1787130271     02024091813091400052020240918130915691411A00  00        010                                                                        ID                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000227                              10013000011976476    Z900                                                   040101E0016     33   EDC Android PAX A920                                                                                @@]
@@ -81,10 +80,17 @@ import java.util.List;
 //
 //SED03F129ROutVo(sub1Vo=[SED03F129ROutSub1Vo(tp=MID, mid_tid=71000248975, mb_no=008, mb_nm=MANDIRI, mid_tid_nm=71000248975), SED03F129ROutSub1Vo(tp=TID, mid_tid=73007923, mb_no=008, mb_nm=MANDIRI, mid_tid_nm=73007923), SED03F129ROutSub1Vo(tp=TID, mid_tid=73007924, mb_no=008, mb_nm=MANDIRI, mid_tid_nm=73007924), SED03F129ROutSub1Vo(tp=TID, mid_tid=73007925, mb_no=008, mb_nm=MANDIRI, mid_tid_nm=73007925), SED03F129ROutSub1Vo(tp=TID, mid_tid=73007926, mb_no=008, mb_nm=MANDIRI, mid_tid_nm=73007926), SED03F129ROutSub1Vo(tp=TID, mid_tid=73007927, mb_no=008, mb_nm=MANDIRI, mid_tid_nm=73007927), SED03F129ROutSub1Vo(tp=TID, mid_tid=73007928, mb_no=008, mb_nm=MANDIRI, mid_tid_nm=73007928), SED03F129ROutSub1Vo(tp=TID, mid_tid=73007929, mb_no=008, mb_nm=MANDIRI, mid_tid_nm=73007929), SED03F129ROutSub1Vo(tp=TID, mid_tid=73007930, mb_no=008, mb_nm=MANDIRI, mid_tid_nm=73007930), SED03F129ROutSub1Vo(tp=TID, mid_tid=73007931, mb_no=008, mb_nm=MANDIRI, mid_tid_nm=73007931), SED03F129ROutSub1Vo(tp=TID, mid_tid=73007932, mb_no=008, mb_nm=MANDIRI, mid_tid_nm=73007932)])
 
+//## SAC04V233 Unit Test Single Multi ##
+//00001984devaps01202409231520480222526300SAC04V233R              MTI R                        devaps0120240923152048022252630020240923152048183   UNIT      172.16.20.25                    00090FAA0001                           020240923152048183   20240923152048796191  0  00        000                                                                                                                                                                                                                       N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00001047                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  2       21       1       1       1                    1000000000000000000010000000000000000000100000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000010000000000000000000100000000000000000000         0281       1       201601021       1                    1-0000000000000000001-000000000000000000100000000000000000000-00000000000000000010000000000000000000000000000000000000000-0000000000000000001-000000000000000000100000000000000000000         0281       @@
+//
+//Pengujian:
+//
+//SAC04V233ROutVo(rspv_nm=, npwp=, pmt_acct_bk_cd=, pmt_acct_no=, mid=, mer_nm=, mer_pmt_sttl_day_cd=, mer_pmt_cycl_cd=, mer_dtl_addr=, tot_cnt=2, sub1Vo=[SAC04V233ROutSub1Vo(pmt_date=1, postng_date=1, auth_date=1, auth_batch_no=1, sale_cnt=1, sale_amt=1.0, mer_fee=1.0, dcc_fee=0.0, pmt_amt=1.0, pmt_hold_amt=0.0, per_pmt_ofst_amt=0.0, pwcw_csh_amt=1.0, pwcw_sepa_fee=1.0, mkrt_fee=0.0, pmt_proc_rslt_cd=, re_pmt_date=, acq_mb_no=028, tid=1), SAC04V233ROutSub1Vo(pmt_date=1, postng_date=20160102, auth_date=1, auth_batch_no=1, sale_cnt=1, sale_amt=-1.0, mer_fee=-1.0, dcc_fee=0.0, pmt_amt=-1.0, pmt_hold_amt=0.0, per_pmt_ofst_amt=0.0, pwcw_csh_amt=-1.0, pwcw_sepa_fee=-1.0, mkrt_fee=0.0, pmt_proc_rslt_cd=, re_pmt_date=, acq_mb_no=028, tid=1)])
 
 // ####################################################################################################################################
 
 //REQUEST = Object Into String Panjang
+
 //## SED03F209R WEB Single ##
 //2024-09-18 13:13:08,803  INFO [mti.com.telegram.util.WtcConnector] Request[537] : [00000529DEVWAS0120240918131308065mti2100SED03F209R              MTI S                        DEVWAS0120240918131308065mti210020240918131308000802WEB       172.16.20.11                                WED030120H N1787130271     020240918131308000802                    A000000      00010                                                                        ID                                                                                                                                             D00000026                     Z900 @@]
 //2024-09-18 13:13:08,838  INFO [mti.com.telegram.util.WtcConnector] Response[2284] : [00002276DEVWAS0120240918131308065mti2100SED03F209R              MTI R                        DEVWAS0120240918131308065mti210020240918131308000802WEB       172.16.20.11                                WED030120H N1787130271     02024091813130800080220240918131308823362A00  00        010       NAZAP0005                                                        ID                                                                                                                                             N00000525                     30Transaksi Berhasil Berakhir.                                                                                                                                                                                                                                                                                                                                                                                    01The Transaction Successfully Ended.                                                                 D00001239                           1110001     Building A, 2nd Floor, 201                                                                          10002     Building A, 2nd Floor, 201                                                                          10003     Building A, 2nd Floor, 201                                                                          10005     Building A, 2nd Floor, 201                                                                          10082     Dev by Sung 1                                                                                       10086     Dev by Sung 5                                                                                       10087     Dev by Sung 6                                                                                       10088     Test by Sung 6                                                                                      10089     Sung by Dev 6                                                                                       10090     RACK NO 5                                                                                           10091     SUNG TEST 10                                                                                        @@]
@@ -130,6 +136,10 @@ import java.util.List;
 //00000621                                SED03F129R              MTI S                                                                            UNIT      172.16.20.47                    00090FAA0001                           020240920165307914                         00000      00000                                                                                                                                                                                                                        00000000                     710002489750000001073007923730079247300792573007926730079277300792873007929730079307300793173007932
 //00000623LeRuccoL202409201658530020000000SED03F209R              MTI S                        LeRuccoL20240920165853002000000020240920165853000349WEB       172.16.20.11                                WED030120H N1787130271     020240920165853000351                    A000000      00010                                                                        EN                                                                                                                                             D00000120                     710002489750000001073007923730079247300792573007926730079277300792873007929730079307300793173007932@@
 
+//## SAC04V233R Unit Test Single ##
+//00000566                                SAC04V233R              MTI S                                                                            UNIT      172.16.20.25                    00090FAA0001                           020240923152048183                         00000      00000                                                                                                                                                                                                                        00000000                     0000010000101          11       1        028
+//00000568LeRuccoL202409231521470020000000SED03F209R              MTI S                        LeRuccoL20240923152147002000000020240923152147000112WEB       172.16.20.11                                WED030120H N1787130271     020240923152147000114                    A000000      00010                                                                        EN                                                                                                                                             D00000065                     0000010000101          11       1        028@@
+
 /// Interface Telegram for Tuxedo Connection
 public class InterfaceTelegram {
     private static final Logger logger = LogManager.getLogger(InterfaceTelegram.class);
@@ -148,11 +158,11 @@ public class InterfaceTelegram {
         userData.setTtl_use_flag(0);
         userData.setLang_type("EN");
 
-        /// SED03F209R
+        /// SED03F209R Single
 //        SED03F209RInVo sed03F209RInVo = new SED03F209RInVo();
 //        sed03F209RInVo.setWhous_cd("Z900");
 
-        /// SED03F209R Lombok Edition
+        /// SED03F209R Single
 //        SED03F209RInVo sed03F209RInVo = SED03F209RInVo.builder()
 //                .whous_cd("Z900")
 //                .build();
@@ -165,7 +175,7 @@ public class InterfaceTelegram {
 //        sac02F452RInVo.setAuth_strt_date("20240101");
 //        sac02F452RInVo.setAuth_end_date("20240919");
 
-        /// SAC02F452R Lombok Edition
+        /// SAC02F452R Single
 //        SAC02F452RInVo sac02F452RInVo = SAC02F452RInVo.builder()
 //                .page_size(10)
 //                .page_no(1)
@@ -174,14 +184,14 @@ public class InterfaceTelegram {
 //                .auth_end_date("20240919")
 //                .build();
 
-        /// SED03F075R Lombok Edition
+        /// SED03F075R Single
 //        SED03F075RInVo sed03F075RInVo = SED03F075RInVo.builder()
 //                .page_size(40)
 //                .next_key("10")
 //                .inqr_cond_cd("01")
 //                .build();
 
-        /// SAC04V224U Lombok Edition & List
+        /// SAC04V224U Multi
 //        SAC04V224UInSub1Vo sac04V224UInSub1Vo1 = SAC04V224UInSub1Vo.builder()
 //                .req_date("20171227")
 //                .req_seq_no("37")
@@ -198,21 +208,34 @@ public class InterfaceTelegram {
 //                .sub1Vo(List.of(sac04V224UInSub1Vo1, sac04V224UInSub1Vo2))
 //                .build();
 
-        SED03F129RInSub1Vo sed03F129RInSub1Vo1 = SED03F129RInSub1Vo.builder().tid("73007923").build();
-        SED03F129RInSub1Vo sed03F129RInSub1Vo2 = SED03F129RInSub1Vo.builder().tid("73007924").build();
-        SED03F129RInSub1Vo sed03F129RInSub1Vo3 = SED03F129RInSub1Vo.builder().tid("73007925").build();
-        SED03F129RInSub1Vo sed03F129RInSub1Vo4 = SED03F129RInSub1Vo.builder().tid("73007926").build();
-        SED03F129RInSub1Vo sed03F129RInSub1Vo5 = SED03F129RInSub1Vo.builder().tid("73007927").build();
-        SED03F129RInSub1Vo sed03F129RInSub1Vo6 = SED03F129RInSub1Vo.builder().tid("73007928").build();
-        SED03F129RInSub1Vo sed03F129RInSub1Vo7 = SED03F129RInSub1Vo.builder().tid("73007929").build();
-        SED03F129RInSub1Vo sed03F129RInSub1Vo8 = SED03F129RInSub1Vo.builder().tid("73007930").build();
-        SED03F129RInSub1Vo sed03F129RInSub1Vo9 = SED03F129RInSub1Vo.builder().tid("73007931").build();
-        SED03F129RInSub1Vo sed03F129RInSub1Vo10 = SED03F129RInSub1Vo.builder().tid("73007932").build();
+        /// SED03F129R Multi
+//        SED03F129RInSub1Vo sed03F129RInSub1Vo1 = SED03F129RInSub1Vo.builder().tid("73007923").build();
+//        SED03F129RInSub1Vo sed03F129RInSub1Vo2 = SED03F129RInSub1Vo.builder().tid("73007924").build();
+//        SED03F129RInSub1Vo sed03F129RInSub1Vo3 = SED03F129RInSub1Vo.builder().tid("73007925").build();
+//        SED03F129RInSub1Vo sed03F129RInSub1Vo4 = SED03F129RInSub1Vo.builder().tid("73007926").build();
+//        SED03F129RInSub1Vo sed03F129RInSub1Vo5 = SED03F129RInSub1Vo.builder().tid("73007927").build();
+//        SED03F129RInSub1Vo sed03F129RInSub1Vo6 = SED03F129RInSub1Vo.builder().tid("73007928").build();
+//        SED03F129RInSub1Vo sed03F129RInSub1Vo7 = SED03F129RInSub1Vo.builder().tid("73007929").build();
+//        SED03F129RInSub1Vo sed03F129RInSub1Vo8 = SED03F129RInSub1Vo.builder().tid("73007930").build();
+//        SED03F129RInSub1Vo sed03F129RInSub1Vo9 = SED03F129RInSub1Vo.builder().tid("73007931").build();
+//        SED03F129RInSub1Vo sed03F129RInSub1Vo10 = SED03F129RInSub1Vo.builder().tid("73007932").build();
+//
+//        SED03F129RInVo sed03F129RInVo = SED03F129RInVo.builder()
+//                .mid("71000248975")
+//                .sub1Vo(List.of(sed03F129RInSub1Vo1,sed03F129RInSub1Vo2, sed03F129RInSub1Vo3, sed03F129RInSub1Vo4, sed03F129RInSub1Vo5, sed03F129RInSub1Vo6, sed03F129RInSub1Vo7, sed03F129RInSub1Vo8, sed03F129RInSub1Vo9, sed03F129RInSub1Vo10))
+//                .build();
 
-        SED03F129RInVo sed03F129RInVo = SED03F129RInVo.builder()
-                .mid("71000248975")
-                .sub1Vo(List.of(sed03F129RInSub1Vo1,sed03F129RInSub1Vo2, sed03F129RInSub1Vo3, sed03F129RInSub1Vo4, sed03F129RInSub1Vo5, sed03F129RInSub1Vo6, sed03F129RInSub1Vo7, sed03F129RInSub1Vo8, sed03F129RInSub1Vo9, sed03F129RInSub1Vo10))
+        /// SAC04V233R Single
+        SAC04V233RInVo sac04V233RInVo = SAC04V233RInVo.builder()
+                .page_no(1)
+                .page_size(10)
+                .mid("1")
+                .date_inqr_clcd("1")
+                .strt_date("1")
+                .end_date("1")
+                .acq_mb_no("028")
                 .build();
+
 
 ////////////////////////////////////////////////////////////////////////////
         TelegramBuilder telegramBuilder = new TelegramBuilder();
@@ -223,7 +246,8 @@ public class InterfaceTelegram {
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sac02F452RInVo);
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sed03F075RInVo);
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sac04V224UInVo);
-        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sed03F129RInVo);
+//        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sed03F129RInVo);
+        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sac04V233RInVo);
 
         logger.info(telegramIn.getData().getData().toString());
 
@@ -254,8 +278,10 @@ public class InterfaceTelegram {
 //        String response = "00000968devaps01202409201430240042526200SAC04V224U              MTI R                        devaps0120240920143024004252620020240920143023566   UNIT      172.16.20.47                    00090FAA0001                           020240920143023566   20240920143024453966  0  00        000       NAZAP0001                                                                                                                                                                                                       N00000425                     30inquiry process success.                                                                                                                                                                                                                                                                                                                                                                                        00D00000031                              2@@";
 
         /// SED03F129R
-        String response = "00002374devaps01202409201653080032526300SED03F129R              MTI R                        devaps0120240920165308003252630020240920165307914   UNIT      172.16.20.47                    00090FAA0001                           020240920165307914   20240920165308861249  0  00        000                                                                                                                                                                                                                       N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00001437                           11MID71000248975008MANDIRI                                                                                             71000248975TID73007923   008MANDIRI                                                                                             73007923   TID73007924   008MANDIRI                                                                                             73007924   TID73007925   008MANDIRI                                                                                             73007925   TID73007926   008MANDIRI                                                                                             73007926   TID73007927   008MANDIRI                                                                                             73007927   TID73007928   008MANDIRI                                                                                             73007928   TID73007929   008MANDIRI                                                                                             73007929   TID73007930   008MANDIRI                                                                                             73007930   TID73007931   008MANDIRI                                                                                             73007931   TID73007932   008MANDIRI                                                                                             73007932   @@";
+//        String response = "00002374devaps01202409201653080032526300SED03F129R              MTI R                        devaps0120240920165308003252630020240920165307914   UNIT      172.16.20.47                    00090FAA0001                           020240920165307914   20240920165308861249  0  00        000                                                                                                                                                                                                                       N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00001437                           11MID71000248975008MANDIRI                                                                                             71000248975TID73007923   008MANDIRI                                                                                             73007923   TID73007924   008MANDIRI                                                                                             73007924   TID73007925   008MANDIRI                                                                                             73007925   TID73007926   008MANDIRI                                                                                             73007926   TID73007927   008MANDIRI                                                                                             73007927   TID73007928   008MANDIRI                                                                                             73007928   TID73007929   008MANDIRI                                                                                             73007929   TID73007930   008MANDIRI                                                                                             73007930   TID73007931   008MANDIRI                                                                                             73007931   TID73007932   008MANDIRI                                                                                             73007932   @@";
 
+        /// SAC04V233R
+        String response = "00001984devaps01202409231520480222526300SAC04V233R              MTI R                        devaps0120240923152048022252630020240923152048183   UNIT      172.16.20.25                    00090FAA0001                           020240923152048183   20240923152048796191  0  00        000                                                                                                                                                                                                                       N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00001047                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  2       21       1       1       1                    1000000000000000000010000000000000000000100000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000010000000000000000000100000000000000000000         0281       1       201601021       1                    1-0000000000000000001-000000000000000000100000000000000000000-00000000000000000010000000000000000000000000000000000000000-0000000000000000001-000000000000000000100000000000000000000         0281       @@";
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -267,7 +293,8 @@ public class InterfaceTelegram {
 //        SAC02F452ROutVo output = new SAC02F452ROutVo();
 //        SED03F075ROutVo output = new SED03F075ROutVo();
 //        SAC04V224UOutVo output = new SAC04V224UOutVo();
-        SED03F129ROutVo output = new SED03F129ROutVo();
+//        SED03F129ROutVo output = new SED03F129ROutVo();
+        SAC04V233ROutVo output = new SAC04V233ROutVo();
 
         TelegramOutputUserData telegramOutputUserData = parse(arrayOfByte, output);
 
@@ -275,7 +302,8 @@ public class InterfaceTelegram {
 //        output = (SAC02F452ROutVo) telegramOutputUserData.getOutput();
 //        output = (SED03F075ROutVo) telegramOutputUserData.getOutput();
 //        output = (SAC04V224UOutVo) telegramOutputUserData.getOutput();
-        output = (SED03F129ROutVo) telegramOutputUserData.getOutput();
+//        output = (SED03F129ROutVo) telegramOutputUserData.getOutput();
+        output = (SAC04V233ROutVo) telegramOutputUserData.getOutput();
 
 ////////////////////////////////////////////////////////////////////////////
 
