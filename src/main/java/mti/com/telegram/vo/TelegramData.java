@@ -6,7 +6,13 @@ import mti.com.telegram.model.NumberType;
 import mti.com.telegram.model.TrimType;
 import mti.com.telegram.model.annotation.DATATYPE;
 import mti.com.telegram.model.annotation.FIELD;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TelegramData {
     @FIELD(
             kind = Kind.DATA,
@@ -41,42 +47,4 @@ public class TelegramData {
     )
     public Object data;
 
-    public TelegramData() {
-    }
-
-    public String getDataType() {
-        return this.dataType;
-    }
-
-    public void setDataType(String var1) {
-        this.dataType = var1;
-    }
-
-    public int getLength() {
-        return this.length;
-    }
-
-    public void setLength(int var1) {
-        this.length = var1;
-    }
-
-    public String getReserved() {
-        return this.reserved;
-    }
-
-    public void setReserved(String var1) {
-        this.reserved = var1;
-    }
-
-    public Object getData() {
-        return this.data;
-    }
-
-    public void setData(Object var1) {
-        this.data = var1;
-    }
-
-    public String toString() {
-        return "TelegramData [dataType=" + this.dataType + ", length=" + this.length + ", reserved=" + this.reserved + ", data=" + this.data + "]";
-    }
 }

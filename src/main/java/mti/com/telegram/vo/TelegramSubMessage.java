@@ -4,7 +4,13 @@ import mti.com.telegram.model.FieldType;
 import mti.com.telegram.model.Kind;
 import mti.com.telegram.model.TrimType;
 import mti.com.telegram.model.annotation.FIELD;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TelegramSubMessage {
     @FIELD(
             kind = Kind.MESSAGE,
@@ -14,18 +20,4 @@ public class TelegramSubMessage {
     )
     public String subMsg;
 
-    public TelegramSubMessage() {
-    }
-
-    public String getSubMsg() {
-        return this.subMsg;
-    }
-
-    public void setSubMsg(String var1) {
-        this.subMsg = var1;
-    }
-
-    public String toString() {
-        return "TelegramSubMessage [subMsg=" + this.subMsg + "]";
-    }
 }

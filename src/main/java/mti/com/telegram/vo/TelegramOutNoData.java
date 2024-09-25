@@ -5,6 +5,13 @@ import mti.com.telegram.model.Kind;
 import mti.com.telegram.model.TrimType;
 import mti.com.telegram.model.annotation.FIELD;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TelegramOutNoData {
     @FIELD(
             kind = Kind.DATA,
@@ -28,34 +35,4 @@ public class TelegramOutNoData {
     )
     public TelegramTail tail;
 
-    public TelegramOutNoData() {
-    }
-
-    public TelegramHeader getHeader() {
-        return this.header;
-    }
-
-    public void setHeader(TelegramHeader var1) {
-        this.header = var1;
-    }
-
-    public TelegramMessage getMessage() {
-        return this.message;
-    }
-
-    public void setMessage(TelegramMessage var1) {
-        this.message = var1;
-    }
-
-    public TelegramTail getTail() {
-        return this.tail;
-    }
-
-    public void setTail(TelegramTail var1) {
-        this.tail = var1;
-    }
-
-    public String toString() {
-        return "TelegramOutNoData [header=" + this.header + ", message=" + this.message + ", tail=" + this.tail + "]";
-    }
 }

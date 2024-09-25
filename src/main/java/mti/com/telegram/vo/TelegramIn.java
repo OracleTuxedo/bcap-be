@@ -4,7 +4,13 @@ import mti.com.telegram.model.FieldType;
 import mti.com.telegram.model.Kind;
 import mti.com.telegram.model.TrimType;
 import mti.com.telegram.model.annotation.FIELD;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TelegramIn {
     @FIELD(
             kind = Kind.HEADER,
@@ -28,26 +34,4 @@ public class TelegramIn {
     )
     public String tail = "@@";
 
-    public TelegramIn() {
-    }
-
-    public TelegramHeader getHeader() {
-        return this.header;
-    }
-
-    public void setHeader(TelegramHeader var1) {
-        this.header = var1;
-    }
-
-    public TelegramData getData() {
-        return this.data;
-    }
-
-    public void setData(TelegramData var1) {
-        this.data = var1;
-    }
-
-    public String toString() {
-        return "TelegramIn [header=" + this.header + ", data=" + this.data + "]";
-    }
 }
