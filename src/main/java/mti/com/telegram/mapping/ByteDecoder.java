@@ -91,7 +91,6 @@ public class ByteDecoder {
                             var3 += var8;
                             break;
                         case LIST:
-                            boolean var17 = false;
                             String var18 = TelegramUtil.getSetterMethodName(var9);
                             Method var19 = var4[var6].getDeclaringClass().getDeclaredMethod(var18, List.class);
                             int var37;

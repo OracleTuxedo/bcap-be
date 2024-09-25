@@ -42,7 +42,6 @@ public class ByteEncoder {
                 try {
                     if (var10 == null) {
                         byte[] var17;
-                        boolean var11 = false;
                         var17 = null;
                         int var14;
                         int var16;
