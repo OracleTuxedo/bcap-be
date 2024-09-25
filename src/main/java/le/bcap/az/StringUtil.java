@@ -148,7 +148,7 @@ public class StringUtil {
 		if (isNullOrEmpty(source)) {
 			return source;
 		}
-		StringBuilder buff = null;
+		StringBuilder buff = new StringBuilder();
 		String nextStr = null;
 		int idx;
 		while ((idx = source.indexOf(subject)) >= 0) {
@@ -482,7 +482,7 @@ public class StringUtil {
 	 */
 	public static String removeCommaNotNull(String str) {
 		boolean comma = false;
-		StringBuilder buff = null;
+		StringBuilder buff = new StringBuilder();
 		int strLen = str.length();
 		for (int ii = 0; ii < strLen; ++ii) {
 			char chr = str.charAt(ii);
