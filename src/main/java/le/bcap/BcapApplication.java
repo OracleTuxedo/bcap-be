@@ -18,9 +18,9 @@ public class BcapApplication {
 		try {
 			logger.atLevel(Level.ALL);
 			logger.info("Le Rucco Start Application");
-			System.out.println("Haleluya");
-			InterfaceTelegram.interfaceTuxedoParseResponse();
-			InterfaceTelegram.interfaceTuxedoParseRequest();
+			// System.out.println("Haleluya");
+			// InterfaceTelegram.interfaceTuxedoParseResponse();
+			// InterfaceTelegram.interfaceTuxedoParseRequest();
 		} catch (Exception e) {
 			logger.info("Le Rucco Failed MAYDAY MAYDAY MAYDAY");
 			throw new RuntimeException(e);
