@@ -162,6 +162,61 @@ import java.util.List;
 public class InterfaceTelegram {
     private static final Logger logger = LogManager.getLogger(InterfaceTelegram.class);
 
+	public static TelegramOutputUserData interfaceTuxedo(TelegramInputUserData var0, Object var1, Object var2) throws Exception {
+        boolean var3 = true;
+        Object var4 = null;
+        TelegramBuilder var5 = new TelegramBuilder();
+        ByteEncoder var6 = new ByteEncoder();
+        TelegramIn var7 = var5.getTelegramIn(var0, var1);
+        byte[] var8 = var6.convertObject2Bytes(var7, var3);
+        logger.info(new String(var8, StandardCharsets.UTF_8));
+        return null;
+//        byte[] var9 = WtcConnector.connectTuxedo(var8);
+//        if (var9.length == 0) return null;
+//
+//		TelegramHeader var10 = getHeaderFromBytes(var9);
+//		ByteDecoder var12;
+//		TelegramTail var14;
+//		TelegramMessage var15;
+//		TelegramOutputUserData var16;
+//		TelegramNestedRuntimeException var19;
+//		if (var10.getErr_flag() == 0) {
+//			TelegramOut var17 = var5.getTelegramOutData(var2);
+//			var12 = new ByteDecoder();
+//			TelegramOut var18 = (TelegramOut)var12.convertBytes2Object(var9, var17, var3);
+//			var14 = var18.getTail();
+//			if ("@@".equals(var14.getTail())) {
+//				var4 = var18.getData().getData();
+//				var15 = var18.getMessage();
+//				var16 = new TelegramOutputUserData();
+//				var16.setMessage(var15);
+//				var16.setOutput(var4);
+//				var16.setHeader(var10);
+//				return var16;
+//			} else {
+//				var19 = new TelegramNestedRuntimeException("Response Telegram Length is not Matched !!");
+//				throw var19;
+//			}
+//		} else {
+//			TelegramOutNoData var11 = var5.getTelegramOutDataNoData();
+//			var12 = new ByteDecoder();
+//			TelegramOutNoData var13 = (TelegramOutNoData)var12.convertBytes2Object(var9, var11, var3);
+//			var14 = var13.getTail();
+//			if (!"@@".equals(var14.getTail())) {
+//				var19 = new TelegramNestedRuntimeException("Response Telegram Length is not Matched !!");
+//				throw var19;
+//			} else {
+//				var15 = var13.getMessage();
+//				var16 = new TelegramOutputUserData();
+//				var16.setMessage(var15);
+//				var16.setOutput(var4);
+//				var16.setHeader(var10);
+//				return var16;
+//			}
+//		}
+        
+    }
+
     /// Request
     public static void interfaceTuxedoParseRequest() throws Exception {
         logger.info("################################### Request START LeRucco ###################################");
