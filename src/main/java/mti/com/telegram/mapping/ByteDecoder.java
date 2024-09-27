@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package mti.com.telegram.mapping;
 
 import java.lang.reflect.Field;
@@ -67,7 +62,7 @@ public class ByteDecoder {
             int var5 = var4.length;
 
             for(int var6 = 0; var6 < var5; ++var6) {
-                FIELD var7 = var4[var6].getAnnotation(FIELD.class);
+                FIELD var7 = (FIELD)var4[var6].getAnnotation(FIELD.class);
                 int var8 = var7.length();
                 String var9 = var4[var6].getName();
 
@@ -82,7 +77,7 @@ public class ByteDecoder {
                             var3 += var8;
                             break;
                         case NUMBER:
-                            DATATYPE var14 = var4[var6].getAnnotation(DATATYPE.class);
+                            DATATYPE var14 = (DATATYPE)var4[var6].getAnnotation(DATATYPE.class);
                             var8 += var14.sign_length();
                             var8 += var14.point_length();
                             byte[] var15 = TelegramUtil.cutBytes(var1, var3, var8);
@@ -91,6 +86,7 @@ public class ByteDecoder {
                             var3 += var8;
                             break;
                         case LIST:
+                            boolean var17 = false;
                             String var18 = TelegramUtil.getSetterMethodName(var9);
                             Method var19 = var4[var6].getDeclaringClass().getDeclaredMethod(var18, List.class);
                             int var37;
@@ -108,7 +104,7 @@ public class ByteDecoder {
                                         throw var42;
                                     }
 
-                                    var37 = Integer.valueOf(var39);
+                                    var37 = new Integer(var39);
                                     var3 += 8;
                                     ArrayList var41 = new ArrayList();
 
@@ -134,7 +130,7 @@ public class ByteDecoder {
                                     continue;
                                 case MESSAGE:
                                     byte[] var43 = TelegramUtil.cutBytes(var1, var3, 2);
-                                    var37 = Integer.valueOf(new String(var43));
+                                    var37 = new Integer(new String(var43));
                                     var3 += 2;
                                     ArrayList var46 = new ArrayList();
 
@@ -192,7 +188,7 @@ public class ByteDecoder {
                     var11.setFieldName(var9);
                     var11.setFtype(var7.type().getTypeName());
                     var11.setObjName(var2.getClass().getName());
-                    var11.setPointer(var3);
+                    var11.setPointer((long)var3);
                     var11.setMsg(var34.toString());
                     var11.setParser("ByteDecoder");
                     var11.setStackTrace(var34.getStackTrace());
