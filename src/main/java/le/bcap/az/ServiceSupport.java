@@ -14,22 +14,25 @@ import mti.com.telegram.vo.TelegramOutputUserData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 @Service
 public class ServiceSupport {
 
 	private static final Logger logger = LogManager.getLogger(ServiceSupport.class);
+
+	public final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 	
-	public TelegramInputUserData getTxHeader(HttpServletRequest request, String txCode, String scrnId)
+	public TelegramInputUserData tuxedoHeader(HttpServletRequest request, String tuxedoCode, String screenId)
 			throws Exception {
 
 		SessionVo userVO = SessionManager.getUserData(request);
 
 		TelegramInputUserData userData = new TelegramInputUserData();
-		userData.setTx_code(txCode);
+		userData.setTx_code(tuxedoCode);
 		userData.setClient_ip_no(WebUtil.getClientIp(request));
-		userData.setScrn_id(scrnId);
+		userData.setScrn_id(screenId);
 		userData.setOp_id(userVO == null ? "undefined" : userVO.getSUserId());
 		userData.setSync_type("A");
 		userData.setRspn_svc_code("");
@@ -42,7 +45,7 @@ public class ServiceSupport {
 		return userData;
 	}
 
-	public TelegramOutputUserData txTransaction(TelegramInputUserData userData, Object in, Object out)
+	public TelegramOutputUserData tuxedoTransaction(TelegramInputUserData userData, Object in, Object out)
 			throws Exception {
 		TelegramOutputUserData result = (TelegramOutputUserData) InterfaceTelegram.interfaceTuxedo(userData, in, out);
         if (result != null) {
