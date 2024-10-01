@@ -1,4 +1,4 @@
-package mti.ac.ac07.vo;
+package le.bcap.module.ac.ac02.sac02f452r;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +15,7 @@ import mti.com.telegram.model.annotation.FIELD;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SAC02F452ROutSubVo {
+public class SAC02F452ROutSub1Vo {
     @FIELD(kind=Kind.DATA, length = 8, type = FieldType.STRING, trim = TrimType.RTRIM)
     public String auth_date;
 

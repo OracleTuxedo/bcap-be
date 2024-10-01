@@ -5,12 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ED999OutDto {
 
+    // SED03F107R
     private long count;
 
     private String sno;
@@ -34,4 +37,9 @@ public class ED999OutDto {
     private String prd_cd;
 
     private String prd_nm;
+
+    // SAC02F452R
+    private long tot_cnt;
+
+    private List<ED999OutSub1Vo> sub1Vos;
 }

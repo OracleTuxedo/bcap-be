@@ -1,4 +1,4 @@
-package mti.ac.ac07.vo;
+package le.bcap.module.ac.ac02.sac02f452r;
 
 import lombok.*;
 import mti.com.telegram.model.FieldType;

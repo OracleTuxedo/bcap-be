@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ED999InDto {
 
+    //SED03F107R
     private String prd_tp_cd;
 
     private String sno;
@@ -22,4 +23,15 @@ public class ED999InDto {
     private String prd_cd;
 
     private String icc_id;
+
+    // SAC02F452R
+    private long page_no;
+
+    private long page_size;
+
+    private String mid;
+
+    private String auth_strt_date;
+
+    private String auth_end_date;
 }

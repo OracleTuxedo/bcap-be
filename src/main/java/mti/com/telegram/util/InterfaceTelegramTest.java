@@ -1,11 +1,9 @@
 package mti.com.telegram.util;
 
 import mti.ac.ac04.vo.*;
-import mti.ac.ac07.vo.SAC02F452RInVo;
-import mti.ac.ac07.vo.SAC02F452ROutVo;
+import le.bcap.module.ac.ac02.sac02f452r.SAC02F452RInVo;
 import mti.com.telegram.mapping.ByteEncoder;
 import mti.com.telegram.vo.*;
-import mti.ed.ed03.vo.*;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,7 +13,6 @@ import mti.com.telegram.mapping.ByteDecoder;
 import mti.com.utility.ExceptionUtil;
 
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 //Session User
 //2024-09-19 12:34:51,019 DEBUG [mti.az.az03.controller.AZ0301C] AZ0301 session - Id  :: GYgIxpn5nV4ut75PxwRDdupVD7U1eFaVOmTDke9lOxoDs-SM1AXd!1672226943!1726724086265
