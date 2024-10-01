@@ -1,4 +1,4 @@
-package mti.ed.ed03.vo;
+package le.bcap.module.ed.ed03.sed03f107r;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
