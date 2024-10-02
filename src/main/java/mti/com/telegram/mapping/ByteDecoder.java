@@ -14,7 +14,7 @@ import mti.com.telegram.util.TelegramUtil;
 import mti.com.telegram.vo.TelegramOutData;
 import mti.com.telegram.vo.TelegramOutDataList;
 
-public class ByteDecoder {
+public class ByteDecoder<T> {
     private String charSet = "UTF-8";
     private boolean limited = true;
 
@@ -25,7 +25,7 @@ public class ByteDecoder {
         this.charSet = var1;
     }
 
-    public Object convertBytes2Object(byte[] var1, Object var2, boolean var3) throws Exception {
+    public T convertBytes2Object(byte[] var1, T var2, boolean var3) throws Exception {
         try {
             this.limited = var3;
             this.parseBytes(var1, var2);

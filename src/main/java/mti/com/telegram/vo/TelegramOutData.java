@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TelegramOutData {
+public class TelegramOutData<T> {
     @FIELD(
             kind = Kind.DATA,
             length = 1,
@@ -45,6 +45,6 @@ public class TelegramOutData {
             type = FieldType.VO,
             trim = TrimType.NONE
     )
-    public Object data;
+    public T data;
 
 }

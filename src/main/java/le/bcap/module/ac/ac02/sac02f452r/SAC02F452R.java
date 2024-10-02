@@ -17,8 +17,8 @@ public class SAC02F452R {
     @Autowired
     private ServiceSupport support;
 
-    public TelegramUserDataOutput call(HttpServletRequest request, SAC02F452RInVo inVo, String screenId){
-        TelegramUserDataOutput result = TelegramUserDataOutput.builder().build();
+    public TelegramUserDataOutput<SAC02F452ROutVo> call(HttpServletRequest request, SAC02F452RInVo inVo, String screenId){
+        TelegramUserDataOutput<SAC02F452ROutVo> result = TelegramUserDataOutput.<SAC02F452ROutVo>builder().build();
         SAC02F452ROutVo outVo = SAC02F452ROutVo.builder().build();
 
         try {

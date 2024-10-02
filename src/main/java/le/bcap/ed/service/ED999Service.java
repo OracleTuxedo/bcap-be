@@ -46,8 +46,8 @@ public class ED999Service {
                 .prd_cd(inDto.getPrd_cd())
                 .icc_id(inDto.getIcc_id())
                 .build();
-        TelegramUserDataOutput sed03f107rResult = sed03f107r.call(request,  sed03F107RInVo, "WAC070100H");
-        SED03F107ROutVo sed03F107ROutVo = (SED03F107ROutVo) sed03f107rResult.getOutput();
+        TelegramUserDataOutput<SED03F107ROutVo> sed03f107rResult = sed03f107r.call(request,  sed03F107RInVo, "WAC070100H");
+        SED03F107ROutVo sed03F107ROutVo = sed03f107rResult.getOutput();
 
         /// SAC02F452R
         SAC02F452RInVo sac02F452RInVo = SAC02F452RInVo.builder()
@@ -57,8 +57,8 @@ public class ED999Service {
                 .auth_strt_date(inDto.getAuth_strt_date())
                 .auth_end_date(inDto.getAuth_end_date())
                 .build();
-        TelegramUserDataOutput sac02f452rResult = sac02F452R.call(request, sac02F452RInVo, "WAC070200H");
-        SAC02F452ROutVo sac02F452ROutVo = (SAC02F452ROutVo) sac02f452rResult.getOutput();
+        TelegramUserDataOutput<SAC02F452ROutVo> sac02f452rResult = sac02F452R.call(request, sac02F452RInVo, "WAC070200H");
+        SAC02F452ROutVo sac02F452ROutVo = sac02f452rResult.getOutput();
 
         List<ED999OutSub1Vo> sub1Vos = new ArrayList<>();
 

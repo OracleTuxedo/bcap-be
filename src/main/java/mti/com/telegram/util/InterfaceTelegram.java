@@ -15,13 +15,13 @@ import java.nio.charset.StandardCharsets;
 public class InterfaceTelegram {
     private static final Logger logger = LogManager.getLogger(InterfaceTelegram.class);
 
-	public static TelegramUserDataOutput interfaceTuxedo(TelegramUserDataInput userDataInput, Object inVo, Object outVo) throws Exception {
+	public static <T,V> TelegramUserDataOutput<T> interfaceTuxedo(TelegramUserDataInput userDataInput, V inVo, T outVo) throws Exception {
         logger.info("#################### Interface Tuxedo ####################");
         logger.info(inVo.toString());
         logger.info(outVo.toString());
         boolean limited = true;
         ByteEncoder encoder = new ByteEncoder();
-        TelegramIn in = TelegramBuilder.getTelegramIn(userDataInput, inVo);
+        TelegramIn<V> in = TelegramBuilder.getTelegramIn(userDataInput, inVo);
         byte[] requestToTuxedo = encoder.convertObject2Bytes(in, limited);
 
         logger.info(new String(requestToTuxedo, StandardCharsets.UTF_8));
@@ -39,31 +39,31 @@ public class InterfaceTelegram {
 //        logger.info(le.toString());
 
 		TelegramHeader header = getHeaderFromBytes(responseFromTuxedo);
-		ByteDecoder decoder = new ByteDecoder();
 		TelegramTail tail;
 		TelegramMessage message;
-		TelegramUserDataOutput outputUserData;
+		TelegramUserDataOutput<T> outputUserData;
 
         logger.info(header.toString());
         logger.info(header.getErr_flag());
         // Success With Data
 		if (header.getErr_flag() == 0) {
+            ByteDecoder<TelegramOut<T>> decoder = new ByteDecoder<>();
             logger.info("With Data");
-			TelegramOut out1 = TelegramBuilder.getTelegramOutData(outVo);
+			TelegramOut<T> out1 = TelegramBuilder.getTelegramOutData(outVo);
             logger.info("out 1");
-			TelegramOut out2 = (TelegramOut) decoder.convertBytes2Object(responseFromTuxedo, out1, limited);
+			TelegramOut<T> out2 = decoder.convertBytes2Object(responseFromTuxedo, out1, limited);
             logger.info("out 2");
             tail = out2.getTail();
             logger.info(tail.toString());
             logger.info(tail.getTail());
 			if ("@@".equals(tail.getTail())) {
-                Object outVoTemp = out2.getData().getData();
+                T outVoTemp = out2.getData().getData();
                 message = out2.getMessage();
                 logger.info("###################### TelegramOutputUserData ######################");
                 logger.info(header.toString());
                 logger.info(message.toString());
                 logger.info(outVoTemp.toString());
-                outputUserData = new TelegramUserDataOutput();
+                outputUserData = new TelegramUserDataOutput<T>();
                 outputUserData.setMessage(message);
                 outputUserData.setOutput(outVoTemp);
                 outputUserData.setHeader(header);
@@ -72,15 +72,16 @@ public class InterfaceTelegram {
                 throw new TelegramNestedRuntimeException("Response Telegram Length is not Matched !!");
 			}
 		} else {
+            ByteDecoder<TelegramOutNoData> decoder = new ByteDecoder<>();
             logger.info("No Data");
 			TelegramOutNoData outNoData1 = TelegramBuilder.getTelegramOutDataNoData();
-			TelegramOutNoData outNoData2 = (TelegramOutNoData)decoder.convertBytes2Object(responseFromTuxedo, outNoData1, limited);
+			TelegramOutNoData outNoData2 = decoder.convertBytes2Object(responseFromTuxedo, outNoData1, limited);
             tail = outNoData2.getTail();
 			if (!"@@".equals(tail.getTail())) {
                 throw new TelegramNestedRuntimeException("Response Telegram Length is not Matched !!");
 			} else {
                 message = outNoData2.getMessage();
-                outputUserData = new TelegramUserDataOutput();
+                outputUserData = new TelegramUserDataOutput<T>();
                 outputUserData.setMessage(message);
                 outputUserData.setOutput(null);
                 outputUserData.setHeader(header);
@@ -94,7 +95,7 @@ public class InterfaceTelegram {
         TelegramHeader telegramHeader = new TelegramHeader();
         try {
             byte[] arrayOfByte = TelegramUtil.cutBytes(paramArrayOfbyte, 0, 500);
-            ByteDecoder byteDecoder = new ByteDecoder();
+            ByteDecoder<TelegramHeader> byteDecoder = new ByteDecoder<>();
             telegramHeader = (TelegramHeader) byteDecoder.convertBytes2Object(arrayOfByte, telegramHeader, true);
         } catch (Exception exception) {
             ExceptionUtil.logPrintStackTrace(logger, exception);

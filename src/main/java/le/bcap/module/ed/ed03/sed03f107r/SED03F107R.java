@@ -17,8 +17,8 @@ public class SED03F107R {
     @Autowired
     private ServiceSupport support;
 
-    public TelegramUserDataOutput call(HttpServletRequest request, SED03F107RInVo inVo, String screenId){
-        TelegramUserDataOutput result = TelegramUserDataOutput.builder().build();
+    public TelegramUserDataOutput<SED03F107ROutVo> call(HttpServletRequest request, SED03F107RInVo inVo, String screenId){
+        TelegramUserDataOutput<SED03F107ROutVo> result = TelegramUserDataOutput.<SED03F107ROutVo>builder().build();
         SED03F107ROutVo outVo = SED03F107ROutVo.builder().build();
 
         try {

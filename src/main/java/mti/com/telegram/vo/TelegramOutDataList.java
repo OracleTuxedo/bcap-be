@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TelegramOutDataList {
+public class TelegramOutDataList<T> {
     @FIELD(
             kind = Kind.DATA,
             length = 1,
@@ -47,6 +47,6 @@ public class TelegramOutDataList {
             type = FieldType.LIST,
             trim = TrimType.NONE
     )
-    public List<Object> data = new ArrayList<Object>();
+    public List<T> data = new ArrayList<>();
 
 }
