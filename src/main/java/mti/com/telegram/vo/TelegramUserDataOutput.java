@@ -11,10 +11,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TelegramOutputUserData {
-    Object output;
-    List<Object> outputList;
+public class TelegramUserDataOutput<T> {
     TelegramHeader header;
+
     TelegramMessage message;
+
+    T output;
+
+    List<T> outputList;
 
 }

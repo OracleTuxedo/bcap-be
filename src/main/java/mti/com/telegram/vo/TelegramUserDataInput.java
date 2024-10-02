@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TelegramInputUserData {
+public class TelegramUserDataInput {
     public String tx_code;
     public String client_ip_no;
     public String client_mac;

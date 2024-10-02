@@ -3,8 +3,8 @@ package le.bcap.module.ed.ed03.sed03f107r;
 import jakarta.servlet.http.HttpServletRequest;
 import le.bcap.az.ServiceSupport;
 import mti.com.telegram.exception.TelegramNestedRuntimeException;
-import mti.com.telegram.vo.TelegramInputUserData;
-import mti.com.telegram.vo.TelegramOutputUserData;
+import mti.com.telegram.vo.TelegramUserDataInput;
+import mti.com.telegram.vo.TelegramUserDataOutput;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +17,13 @@ public class SED03F107R {
     @Autowired
     private ServiceSupport support;
 
-    public TelegramOutputUserData call(HttpServletRequest request, SED03F107RInVo inVo, String screenId){
-        TelegramOutputUserData result = TelegramOutputUserData.builder().build();
+    public TelegramUserDataOutput<SED03F107ROutVo> call(HttpServletRequest request, SED03F107RInVo inVo, String screenId){
+        TelegramUserDataOutput<SED03F107ROutVo> result = TelegramUserDataOutput.<SED03F107ROutVo>builder().build();
         SED03F107ROutVo outVo = SED03F107ROutVo.builder().build();
 
         try {
-            TelegramInputUserData inputUserData = support.tuxedoHeader(request, this.getClass().getSimpleName(), screenId);
-            result = support.tuxedoTransaction(inputUserData, inVo, outVo);
+            TelegramUserDataInput userDataInput = support.tuxedoHeader(request, this.getClass().getSimpleName(), screenId);
+            result = support.tuxedoTransaction(userDataInput, inVo, outVo);
 //            String response = "00001164devaps01202410011306560144232400SED03F107R              MTI R                        devaps0120241001130656014423240020241001130654985   UNIT      192.168.0.133                   0CDD2494CF5F                           020241001130654985   20241001130658326335  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000227                              10013000011976476    Z900                                                   040101E0016     33   EDC Android PAX A920                                                                                @@";
 //            result = InterfaceTelegramTest.testCall(inputUserData, inVo, outVo, response);
         } catch (TelegramNestedRuntimeException e){

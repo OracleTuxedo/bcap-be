@@ -11,10 +11,10 @@ import mti.com.telegram.exception.TelegramNestedRuntimeException;
 import mti.com.telegram.model.annotation.DATATYPE;
 import mti.com.telegram.model.annotation.FIELD;
 import mti.com.telegram.util.TelegramUtil;
-import mti.com.telegram.vo.TelegramDataOut;
-import mti.com.telegram.vo.TelegramDataOutList;
+import mti.com.telegram.vo.TelegramOutData;
+import mti.com.telegram.vo.TelegramOutDataList;
 
-public class ByteDecoder {
+public class ByteDecoder<T> {
     private String charSet = "UTF-8";
     private boolean limited = true;
 
@@ -25,7 +25,7 @@ public class ByteDecoder {
         this.charSet = var1;
     }
 
-    public Object convertBytes2Object(byte[] var1, Object var2, boolean var3) throws Exception {
+    public T convertBytes2Object(byte[] var1, T var2, boolean var3) throws Exception {
         try {
             this.limited = var3;
             this.parseBytes(var1, var2);
@@ -163,9 +163,9 @@ public class ByteDecoder {
                             this.parseBytes(var23, var20);
                             String var24 = TelegramUtil.getSetterMethodName(var9);
                             Method var25 = null;
-                            if (var2 instanceof TelegramDataOut) {
+                            if (var2 instanceof TelegramOutData) {
                                 var25 = var4[var6].getDeclaringClass().getDeclaredMethod(var24, Object.class);
-                            } else if (var2 instanceof TelegramDataOutList) {
+                            } else if (var2 instanceof TelegramOutDataList) {
                                 var25 = var4[var6].getDeclaringClass().getDeclaredMethod(var24, List.class);
                             } else {
                                 var25 = var4[var6].getDeclaringClass().getDeclaredMethod(var24, var20.getClass());

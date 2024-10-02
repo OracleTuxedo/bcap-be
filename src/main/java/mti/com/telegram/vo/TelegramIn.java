@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TelegramIn {
+public class TelegramIn<V> {
     @FIELD(
             kind = Kind.HEADER,
             length = 0,
@@ -25,7 +25,7 @@ public class TelegramIn {
             type = FieldType.VO,
             trim = TrimType.NONE
     )
-    public TelegramData data;
+    public TelegramInData<V> data;
     @FIELD(
             kind = Kind.TAIL,
             length = 2,
