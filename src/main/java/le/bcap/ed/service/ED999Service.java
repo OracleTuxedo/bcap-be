@@ -37,6 +37,7 @@ public class ED999Service {
 
     public ED999OutDto getListOfEDC(HttpServletRequest request, ED999InDto inDto) throws Exception {
 
+
         /// SED03F107R
         SED03F107RInVo sed03F107RInVo = SED03F107RInVo.builder()
                 .prd_tp_cd(inDto.getPrd_tp_cd())
@@ -48,6 +49,8 @@ public class ED999Service {
                 .build();
         TelegramOutputUserData sed03f107rResult = sed03F107RModule.call(request,  sed03F107RInVo);
         SED03F107ROutVo sed03F107ROutVo = (SED03F107ROutVo) sed03f107rResult.getOutput();
+        logger.info("###### ED999Service ######");
+        logger.info(sed03F107ROutVo.toString());
 
         /// SAC02F452R
         SAC02F452RInVo sac02F452RInVo = SAC02F452RInVo.builder()
@@ -63,23 +66,23 @@ public class ED999Service {
         List<ED999OutSub1Vo> sub1Vos = new ArrayList<>();
 
         // Cara 1: Enhanced for loops
-        for (SAC02F452ROutSub1Vo le : sac02F452ROutVo.sub1Vos){
-            sub1Vos.add(
-                    ED999OutSub1Vo.builder()
-                            .auth_date(le.auth_date)
-                            .pmt_date(le.pmt_date)
-                            .card_no(le.card_no)
-                            .auth_no(le.auth_no)
-                            .sale_amt(le.sale_amt)
-                            .pwcw_csh_amt(le.pwcw_csh_amt)
-                            .dcctrans_yn(le.dcctrans_yn)
-                            .build()
-            );
-        }
+//        for (SAC02F452ROutSub1Vo le : sac02F452ROutVo.sub1Vos){
+//            sub1Vos.add(
+//                    ED999OutSub1Vo.builder()
+//                            .auth_date(le.auth_date)
+//                            .pmt_date(le.pmt_date)
+//                            .card_no(le.card_no)
+//                            .auth_no(le.auth_no)
+//                            .sale_amt(le.sale_amt)
+//                            .pwcw_csh_amt(le.pwcw_csh_amt)
+//                            .dcctrans_yn(le.dcctrans_yn)
+//                            .build()
+//            );
+//        }
 
         // Cara 2: Stream loop
-        sub1Vos = sac02F452ROutVo.sub1Vos.stream().map(le -> {
-            return ED999OutSub1Vo.builder()
+        if (sac02F452ROutVo.sub1Vos != null)
+            sub1Vos = sac02F452ROutVo.sub1Vos.stream().map(le -> ED999OutSub1Vo.builder()
                     .auth_date(le.auth_date)
                     .pmt_date(le.pmt_date)
                     .card_no(le.card_no)
@@ -87,8 +90,7 @@ public class ED999Service {
                     .sale_amt(le.sale_amt)
                     .pwcw_csh_amt(le.pwcw_csh_amt)
                     .dcctrans_yn(le.dcctrans_yn)
-                    .build();
-        }).toList();
+                    .build()).toList();
 
         return ED999OutDto.builder()
                 .count(sed03F107ROutVo.count)

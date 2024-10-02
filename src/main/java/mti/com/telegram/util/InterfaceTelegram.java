@@ -32,12 +32,12 @@ public class InterfaceTelegram {
 
         if (responseFromTuxedo.length == 0) return null;
 
-        logger.info(new String(responseFromTuxedo, StandardCharsets.UTF_8));
-        StringBuilder le = new StringBuilder();
-        for (byte b : responseFromTuxedo) {
-            le.append(b).append(", ");
-        }
-        logger.info(le.toString());
+//        logger.info(new String(responseFromTuxedo, StandardCharsets.UTF_8));
+//        StringBuilder le = new StringBuilder();
+//        for (byte b : responseFromTuxedo) {
+//            le.append(b).append(", ");
+//        }
+//        logger.info(le.toString());
 
 		TelegramHeader header = getHeaderFromBytes(responseFromTuxedo);
 		ByteDecoder decoder = new ByteDecoder();
@@ -88,6 +88,7 @@ public class InterfaceTelegram {
 				return outputUserData;
 			}
 		}
+
     }
 
     public static TelegramHeader getHeaderFromBytes(byte[] paramArrayOfbyte) throws Exception {
