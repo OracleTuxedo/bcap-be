@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 public class InterfaceTelegram {
     private static final Logger logger = LogManager.getLogger(InterfaceTelegram.class);
 
-	public static TelegramOutputUserData interfaceTuxedo(TelegramInputUserData inputUserData, Object inVo, Object outVo) throws Exception {
+	public static TelegramUserDataOutput interfaceTuxedo(TelegramUserDataInput inputUserData, Object inVo, Object outVo) throws Exception {
         logger.info("#################### Interface Tuxedo ####################");
         logger.info(inVo.toString());
         logger.info(outVo.toString());
@@ -43,7 +43,7 @@ public class InterfaceTelegram {
 		ByteDecoder decoder = new ByteDecoder();
 		TelegramTail tail;
 		TelegramMessage message;
-		TelegramOutputUserData outputUserData;
+		TelegramUserDataOutput outputUserData;
 
         logger.info(header.toString());
         logger.info(header.getErr_flag());
@@ -64,7 +64,7 @@ public class InterfaceTelegram {
                 logger.info(header.toString());
                 logger.info(message.toString());
                 logger.info(outVoTemp.toString());
-                outputUserData = new TelegramOutputUserData();
+                outputUserData = new TelegramUserDataOutput();
                 outputUserData.setMessage(message);
                 outputUserData.setOutput(outVoTemp);
                 outputUserData.setHeader(header);
@@ -81,7 +81,7 @@ public class InterfaceTelegram {
                 throw new TelegramNestedRuntimeException("Response Telegram Length is not Matched !!");
 			} else {
                 message = outNoData2.getMessage();
-                outputUserData = new TelegramOutputUserData();
+                outputUserData = new TelegramUserDataOutput();
                 outputUserData.setMessage(message);
                 outputUserData.setOutput(null);
                 outputUserData.setHeader(header);

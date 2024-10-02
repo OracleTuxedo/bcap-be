@@ -90,6 +90,6 @@ public class TelegramMessage {
             type = FieldType.LIST,
             trim = TrimType.NONE
     )
-    public List<TelegramSubMessage> list = new ArrayList<TelegramSubMessage>();
+    public List<TelegramMessageSub> list = new ArrayList<TelegramMessageSub>();
 
 }

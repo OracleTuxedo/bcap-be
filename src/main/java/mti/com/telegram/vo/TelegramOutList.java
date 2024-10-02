@@ -32,7 +32,7 @@ public class TelegramOutList {
             type = FieldType.VO,
             trim = TrimType.NONE
     )
-    public TelegramDataOutList data;
+    public TelegramOutDataList data;
     @FIELD(
             kind = Kind.TAIL,
             length = 2,

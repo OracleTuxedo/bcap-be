@@ -1,5 +1,7 @@
 package mti.com.telegram.vo;
 
+import java.util.ArrayList;
+import java.util.List;
 import mti.com.telegram.model.FieldType;
 import mti.com.telegram.model.Kind;
 import mti.com.telegram.model.NumberType;
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TelegramData {
+public class TelegramInDataList {
     @FIELD(
             kind = Kind.DATA,
             length = 1,
@@ -42,9 +44,9 @@ public class TelegramData {
     @FIELD(
             kind = Kind.DATA,
             length = 0,
-            type = FieldType.VO,
+            type = FieldType.LIST,
             trim = TrimType.NONE
     )
-    public Object data;
+    public List<?> data = new ArrayList<>();
 
 }

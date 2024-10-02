@@ -5,14 +5,14 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
-import mti.com.telegram.vo.TelegramData;
-import mti.com.telegram.vo.TelegramDataList;
-import mti.com.telegram.vo.TelegramDataOut;
-import mti.com.telegram.vo.TelegramDataOutList;
+import mti.com.telegram.vo.TelegramInData;
+import mti.com.telegram.vo.TelegramInDataList;
+import mti.com.telegram.vo.TelegramOutData;
+import mti.com.telegram.vo.TelegramOutDataList;
 import mti.com.telegram.vo.TelegramHeader;
 import mti.com.telegram.vo.TelegramIn;
 import mti.com.telegram.vo.TelegramInList;
-import mti.com.telegram.vo.TelegramInputUserData;
+import mti.com.telegram.vo.TelegramUserDataInput;
 import mti.com.telegram.vo.TelegramMessage;
 import mti.com.telegram.vo.TelegramOut;
 import mti.com.telegram.vo.TelegramOutList;
@@ -28,14 +28,14 @@ public class TelegramBuilder {
     public TelegramBuilder() {
     }
 
-    public static TelegramIn getTelegramIn(TelegramInputUserData var1, Object var2) {
+    public static TelegramIn getTelegramIn(TelegramUserDataInput var1, Object var2) {
         TelegramHeader var3 = null;
         boolean var4 = false;
         TelegramIn var5 = new TelegramIn();
 
         try {
             var3 = TelegramBuilder.makeTelegramHeader(var1);
-            TelegramData var6 = TelegramBuilder.makeTelegramData(var2);
+            TelegramInData var6 = TelegramBuilder.makeTelegramData(var2);
             var5.setHeader(var3);
             var5.setData(var6);
             int var8 = TelegramUtil.getPacketSize(var5) - 8;
@@ -47,14 +47,14 @@ public class TelegramBuilder {
         return var5;
     }
 
-    public static TelegramInList getTelegramInList(TelegramInputUserData var1, List<?> var2) {
+    public static TelegramInList getTelegramInList(TelegramUserDataInput var1, List<?> var2) {
         TelegramHeader var3 = null;
         boolean var4 = false;
         TelegramInList var5 = new TelegramInList();
 
         try {
             var3 = TelegramBuilder.makeTelegramHeader(var1);
-            TelegramDataList var6 = TelegramBuilder.makeTelegramDataList(var2);
+            TelegramInDataList var6 = TelegramBuilder.makeTelegramDataList(var2);
             var5.setHeader(var3);
             var5.setData(var6);
             int var8 = TelegramUtil.getPacketSize(var5) - 8;
@@ -66,7 +66,7 @@ public class TelegramBuilder {
         return var5;
     }
 
-    public static TelegramHeader makeTelegramHeader(TelegramInputUserData var1) {
+    public static TelegramHeader makeTelegramHeader(TelegramUserDataInput var1) {
         TelegramHeader var2 = new TelegramHeader();
         String var3 = null;
 
@@ -150,8 +150,8 @@ public class TelegramBuilder {
         return var2;
     }
 
-    public static TelegramDataList makeTelegramDataList(List<?> var1) {
-        TelegramDataList var2 = new TelegramDataList();
+    public static TelegramInDataList makeTelegramDataList(List<?> var1) {
+        TelegramInDataList var2 = new TelegramInDataList();
         var2.setDataType("D");
         var2.setData(var1);
         int var3 = 0;
@@ -166,8 +166,8 @@ public class TelegramBuilder {
         return var2;
     }
 
-    public static TelegramData makeTelegramData(Object var1) {
-        TelegramData var2 = new TelegramData();
+    public static TelegramInData makeTelegramData(Object var1) {
+        TelegramInData var2 = new TelegramInData();
         var2.setDataType("D");
         var2.setData(var1);
         int var3 = 0;
@@ -207,7 +207,7 @@ public class TelegramBuilder {
         TelegramOut var2 = new TelegramOut();
         TelegramHeader var3 = new TelegramHeader();
         TelegramMessage var4 = new TelegramMessage();
-        TelegramDataOut var5 = TelegramBuilder.makeTelegramOut(var1);
+        TelegramOutData var5 = TelegramBuilder.makeTelegramOut(var1);
         TelegramTail var6 = new TelegramTail();
         var2.setHeader(var3);
         var2.setMessage(var4);
@@ -218,7 +218,7 @@ public class TelegramBuilder {
 
     public static TelegramOut getTelegramOutData(TelegramHeader var1, TelegramMessage var2, Object var3) {
         TelegramOut var4 = new TelegramOut();
-        TelegramDataOut var5 = TelegramBuilder.makeTelegramOut(var3);
+        TelegramOutData var5 = TelegramBuilder.makeTelegramOut(var3);
         TelegramTail var6 = new TelegramTail();
         var4.setHeader(var1);
         var4.setMessage(var2);
@@ -242,7 +242,7 @@ public class TelegramBuilder {
         TelegramOutList var2 = new TelegramOutList();
         TelegramHeader var3 = new TelegramHeader();
         TelegramMessage var4 = new TelegramMessage();
-        TelegramDataOutList var5 = TelegramBuilder.makeTelegramOutList(var1);
+        TelegramOutDataList var5 = TelegramBuilder.makeTelegramOutList(var1);
         TelegramTail var6 = new TelegramTail();
         var2.setHeader(var3);
         var2.setMessage(var4);
@@ -251,14 +251,14 @@ public class TelegramBuilder {
         return var2;
     }
 
-    public static TelegramDataOut makeTelegramOut(Object var1) {
-        TelegramDataOut var2 = new TelegramDataOut();
+    public static TelegramOutData makeTelegramOut(Object var1) {
+        TelegramOutData var2 = new TelegramOutData();
         var2.setData(var1);
         return var2;
     }
 
-    public static TelegramDataOutList makeTelegramOutList(Object var1) {
-        TelegramDataOutList var2 = new TelegramDataOutList();
+    public static TelegramOutDataList makeTelegramOutList(Object var1) {
+        TelegramOutDataList var2 = new TelegramOutDataList();
         ArrayList var3 = new ArrayList();
         var2.setData(var3);
         return var2;

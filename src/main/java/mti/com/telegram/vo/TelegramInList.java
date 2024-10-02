@@ -25,7 +25,7 @@ public class TelegramInList {
             type = FieldType.VO,
             trim = TrimType.NONE
     )
-    public TelegramDataList data;
+    public TelegramInDataList data;
     @FIELD(
             kind = Kind.TAIL,
             length = 2,

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TelegramOutputUserData {
+public class TelegramUserDataOutput {
     Object output;
     List<Object> outputList;
     TelegramHeader header;

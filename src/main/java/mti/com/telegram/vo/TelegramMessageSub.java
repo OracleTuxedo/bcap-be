@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TelegramSubMessage {
+public class TelegramMessageSub {
     @FIELD(
             kind = Kind.MESSAGE,
             length = 100,

@@ -8,8 +8,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import mti.com.system.SessionManager;
 import mti.com.system.SessionVo;
 import mti.com.telegram.util.InterfaceTelegram;
-import mti.com.telegram.vo.TelegramInputUserData;
-import mti.com.telegram.vo.TelegramOutputUserData;
+import mti.com.telegram.vo.TelegramUserDataInput;
+import mti.com.telegram.vo.TelegramUserDataOutput;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,12 +24,12 @@ public class ServiceSupport {
 
 	public final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 	
-	public TelegramInputUserData tuxedoHeader(HttpServletRequest request, String tuxedoCode, String screenId)
+	public TelegramUserDataInput tuxedoHeader(HttpServletRequest request, String tuxedoCode, String screenId)
 			throws Exception {
 
 		SessionVo userVO = SessionManager.getUserData(request);
 
-		TelegramInputUserData userData = new TelegramInputUserData();
+		TelegramUserDataInput userData = new TelegramUserDataInput();
 		userData.setTx_code(tuxedoCode);
 		userData.setClient_ip_no(WebUtil.getClientIp(request));
 		userData.setScrn_id(screenId);
@@ -45,9 +45,9 @@ public class ServiceSupport {
 		return userData;
 	}
 
-	public TelegramOutputUserData tuxedoTransaction(TelegramInputUserData userData, Object in, Object out)
+	public TelegramUserDataOutput tuxedoTransaction(TelegramUserDataInput userData, Object in, Object out)
 			throws Exception {
-		TelegramOutputUserData result = (TelegramOutputUserData) InterfaceTelegram.interfaceTuxedo(userData, in, out);
+		TelegramUserDataOutput result = (TelegramUserDataOutput) InterfaceTelegram.interfaceTuxedo(userData, in, out);
         if (result != null) {
             logger.info(result.toString());
         }
