@@ -22,8 +22,8 @@ public class SED03F107R {
         SED03F107ROutVo outVo = SED03F107ROutVo.builder().build();
 
         try {
-            TelegramUserDataInput inputUserData = support.tuxedoHeader(request, this.getClass().getSimpleName(), screenId);
-            result = support.tuxedoTransaction(inputUserData, inVo, outVo);
+            TelegramUserDataInput userDataInput = support.tuxedoHeader(request, this.getClass().getSimpleName(), screenId);
+            result = support.tuxedoTransaction(userDataInput, inVo, outVo);
 //            String response = "00001164devaps01202410011306560144232400SED03F107R              MTI R                        devaps0120241001130656014423240020241001130654985   UNIT      192.168.0.133                   0CDD2494CF5F                           020241001130654985   20241001130658326335  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000227                              10013000011976476    Z900                                                   040101E0016     33   EDC Android PAX A920                                                                                @@";
 //            result = InterfaceTelegramTest.testCall(inputUserData, inVo, outVo, response);
         } catch (TelegramNestedRuntimeException e){

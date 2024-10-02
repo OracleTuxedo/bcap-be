@@ -2,7 +2,6 @@ package mti.com.telegram.util;
 
 import le.bcap.module.ed.ed03.sed03f107r.SED03F107RInVo;
 import le.bcap.module.ed.ed03.sed03f107r.SED03F107ROutVo;
-import mti.ac.ac04.vo.*;
 import mti.com.telegram.mapping.ByteEncoder;
 import mti.com.telegram.vo.*;
 import org.apache.logging.log4j.Level;
@@ -169,9 +168,8 @@ public class InterfaceTelegramTest {
 
     public static TelegramUserDataOutput testCall(TelegramUserDataInput inputUserData, Object inVo, Object outVo, String response) throws  Exception {
         logger.atLevel(Level.ALL);
-        TelegramBuilder telegramBuilder = new TelegramBuilder();
         ByteEncoder byteEncoder = new ByteEncoder();
-        TelegramIn telegramIn = telegramBuilder.getTelegramIn(inputUserData, inVo);
+        TelegramIn telegramIn = TelegramBuilder.getTelegramIn(inputUserData, inVo);
 
         logger.info(telegramIn.getData().getData().toString());
 
@@ -304,7 +302,6 @@ public class InterfaceTelegramTest {
                 .build();
 
 ////////////////////////////////////////////////////////////////////////////
-        TelegramBuilder telegramBuilder = new TelegramBuilder();
         ByteEncoder byteEncoder = new ByteEncoder();
 ////////////////////////////////////////////////////////////////////////////
 
@@ -316,7 +313,7 @@ public class InterfaceTelegramTest {
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sac04V233RInVo);
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sac04F231RInVo); // Failed
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sed03F224RInVo);
-        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sed03F107RInVo);
+        TelegramIn telegramIn = TelegramBuilder.getTelegramIn(userData, sed03F107RInVo);
 
         logger.info(telegramIn.getData().getData().toString());
 
@@ -409,13 +406,12 @@ public class InterfaceTelegramTest {
     }
 
     public static TelegramUserDataOutput parse(byte[] arrayOfByte, Object output) throws Exception {
-        TelegramBuilder telegramBuilder = new TelegramBuilder();
         Object object = null;
         TelegramHeader telegramHeader = getHeaderFromBytes(arrayOfByte);
         logger.info(telegramHeader.toString());
 //        return null;
         if (telegramHeader.getErr_flag() == 0) {
-            TelegramOut telegramOut1 = telegramBuilder.getTelegramOutData(output);
+            TelegramOut telegramOut1 = TelegramBuilder.getTelegramOutData(output);
             ByteDecoder byteDecoder1 = new ByteDecoder();
             TelegramOut telegramOut2 = (TelegramOut) byteDecoder1.convertBytes2Object(arrayOfByte, telegramOut1, true);
             TelegramTail telegramTail1 = telegramOut2.getTail();

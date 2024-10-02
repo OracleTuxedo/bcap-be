@@ -15,14 +15,13 @@ import java.nio.charset.StandardCharsets;
 public class InterfaceTelegram {
     private static final Logger logger = LogManager.getLogger(InterfaceTelegram.class);
 
-	public static TelegramUserDataOutput interfaceTuxedo(TelegramUserDataInput inputUserData, Object inVo, Object outVo) throws Exception {
+	public static TelegramUserDataOutput interfaceTuxedo(TelegramUserDataInput userDataInput, Object inVo, Object outVo) throws Exception {
         logger.info("#################### Interface Tuxedo ####################");
         logger.info(inVo.toString());
         logger.info(outVo.toString());
         boolean limited = true;
-        TelegramBuilder builder = new TelegramBuilder();
         ByteEncoder encoder = new ByteEncoder();
-        TelegramIn in = builder.getTelegramIn(inputUserData, inVo);
+        TelegramIn in = TelegramBuilder.getTelegramIn(userDataInput, inVo);
         byte[] requestToTuxedo = encoder.convertObject2Bytes(in, limited);
 
         logger.info(new String(requestToTuxedo, StandardCharsets.UTF_8));
@@ -50,7 +49,7 @@ public class InterfaceTelegram {
         // Success With Data
 		if (header.getErr_flag() == 0) {
             logger.info("With Data");
-			TelegramOut out1 = builder.getTelegramOutData(outVo);
+			TelegramOut out1 = TelegramBuilder.getTelegramOutData(outVo);
             logger.info("out 1");
 			TelegramOut out2 = (TelegramOut) decoder.convertBytes2Object(responseFromTuxedo, out1, limited);
             logger.info("out 2");
@@ -74,7 +73,7 @@ public class InterfaceTelegram {
 			}
 		} else {
             logger.info("No Data");
-			TelegramOutNoData outNoData1 = builder.getTelegramOutDataNoData();
+			TelegramOutNoData outNoData1 = TelegramBuilder.getTelegramOutDataNoData();
 			TelegramOutNoData outNoData2 = (TelegramOutNoData)decoder.convertBytes2Object(responseFromTuxedo, outNoData1, limited);
             tail = outNoData2.getTail();
 			if (!"@@".equals(tail.getTail())) {

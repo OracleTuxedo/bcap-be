@@ -45,9 +45,9 @@ public class ServiceSupport {
 		return userData;
 	}
 
-	public TelegramUserDataOutput tuxedoTransaction(TelegramUserDataInput userData, Object in, Object out)
+	public TelegramUserDataOutput tuxedoTransaction(TelegramUserDataInput userDataInput, Object in, Object out)
 			throws Exception {
-		TelegramUserDataOutput result = (TelegramUserDataOutput) InterfaceTelegram.interfaceTuxedo(userData, in, out);
+		TelegramUserDataOutput result = InterfaceTelegram.interfaceTuxedo(userDataInput, in, out);
         if (result != null) {
             logger.info(result.toString());
         }
