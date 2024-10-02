@@ -6,11 +6,10 @@ import le.bcap.ed.dto.ED999InDto;
 import le.bcap.ed.dto.ED999OutDto;
 import le.bcap.ed.dto.ED999OutSub1Vo;
 import le.bcap.module.ac.ac02.sac02f452r.SAC02F452RInVo;
-import le.bcap.module.ac.ac02.sac02f452r.SAC02F452RModule;
-import le.bcap.module.ac.ac02.sac02f452r.SAC02F452ROutSub1Vo;
+import le.bcap.module.ac.ac02.sac02f452r.SAC02F452R;
 import le.bcap.module.ac.ac02.sac02f452r.SAC02F452ROutVo;
 import le.bcap.module.ed.ed03.sed03f107r.SED03F107RInVo;
-import le.bcap.module.ed.ed03.sed03f107r.SED03F107RModule;
+import le.bcap.module.ed.ed03.sed03f107r.SED03F107R;
 import le.bcap.module.ed.ed03.sed03f107r.SED03F107ROutVo;
 import mti.com.telegram.vo.TelegramOutputUserData;
 import org.apache.logging.log4j.LogManager;
@@ -30,10 +29,10 @@ public class ED999Service {
     private ServiceSupport support;
 
     @Autowired
-    private SED03F107RModule sed03F107RModule;
+    private SED03F107R sed03f107r;
 
     @Autowired
-    private SAC02F452RModule sac02F452RModule;
+    private SAC02F452R sac02F452R;
 
     public ED999OutDto getListOfEDC(HttpServletRequest request, ED999InDto inDto) throws Exception {
 
@@ -47,10 +46,8 @@ public class ED999Service {
                 .prd_cd(inDto.getPrd_cd())
                 .icc_id(inDto.getIcc_id())
                 .build();
-        TelegramOutputUserData sed03f107rResult = sed03F107RModule.call(request,  sed03F107RInVo);
+        TelegramOutputUserData sed03f107rResult = sed03f107r.call(request,  sed03F107RInVo, "WAC070100H");
         SED03F107ROutVo sed03F107ROutVo = (SED03F107ROutVo) sed03f107rResult.getOutput();
-        logger.info("###### ED999Service ######");
-        logger.info(sed03F107ROutVo.toString());
 
         /// SAC02F452R
         SAC02F452RInVo sac02F452RInVo = SAC02F452RInVo.builder()
@@ -60,7 +57,7 @@ public class ED999Service {
                 .auth_strt_date(inDto.getAuth_strt_date())
                 .auth_end_date(inDto.getAuth_end_date())
                 .build();
-        TelegramOutputUserData sac02f452rResult = sac02F452RModule.call(request, sac02F452RInVo, "WAC070200H");
+        TelegramOutputUserData sac02f452rResult = sac02F452R.call(request, sac02F452RInVo, "WAC070200H");
         SAC02F452ROutVo sac02F452ROutVo = (SAC02F452ROutVo) sac02f452rResult.getOutput();
 
         List<ED999OutSub1Vo> sub1Vos = new ArrayList<>();
