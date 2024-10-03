@@ -1,4 +1,4 @@
-package le.bcap.module.ac.sac04v224u;
+package le.bcap.module.ac.ac04.sac04v224u;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
