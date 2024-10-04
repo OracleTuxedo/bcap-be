@@ -1,4 +1,4 @@
-package le.bcap.ed.dto;
+package le.bcap.example.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ED999OutDto {
+public class ExampleOutDto {
 
     // SED03F107R
     private long count;
@@ -41,5 +41,5 @@ public class ED999OutDto {
     // SAC02F452R
     private long tot_cnt;
 
-    private List<ED999OutSub1Vo> sub1Vos;
+    private List<ExampleOutSub1Vo> sub1Vos;
 }

@@ -1,9 +1,9 @@
-package le.bcap.ed.controller;
+package le.bcap.example.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
-import le.bcap.ed.dto.ED999InDto;
-import le.bcap.ed.dto.ED999OutDto;
-import le.bcap.ed.service.ED999Service;
+import le.bcap.example.dto.ExampleInDto;
+import le.bcap.example.dto.ExampleOutDto;
+import le.bcap.example.service.ExampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,14 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/ed")
-public class ED999Controller {
+public class ExampleController {
 
     @Autowired
-    private ED999Service ed999Service;
+    private ExampleService exampleService;
 
     @PostMapping("/list-of-edc")
-    public Object getListOfEDC(HttpServletRequest request, @RequestBody ED999InDto inDto) throws Exception {
-//        return inDto;
-        return ed999Service.getListOfEDC(request, inDto);
+    public ExampleOutDto getListOfEDC(HttpServletRequest request, @RequestBody ExampleInDto inDto) throws Exception {
+        return exampleService.getListOfEDC(request, inDto, "ED999");
     }
 }

@@ -1,4 +1,4 @@
-package le.bcap.ed.dto;
+package le.bcap.example.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ED999OutSub1Vo {
+public class ExampleOutSub1Vo {
     
     private String auth_date;
 
