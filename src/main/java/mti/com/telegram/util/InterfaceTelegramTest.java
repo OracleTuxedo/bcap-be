@@ -1,7 +1,7 @@
 package mti.com.telegram.util;
 
-import le.bcap.module.ed.ed03.sed03f107r.SED03F107RInVo;
-import le.bcap.module.ed.ed03.sed03f107r.SED03F107ROutVo;
+import maas.bcap.module.ed.ed03.sed03f107r.SED03F107RInVo;
+import maas.bcap.module.ed.ed03.sed03f107r.SED03F107ROutVo;
 import mti.com.telegram.mapping.ByteEncoder;
 import mti.com.telegram.vo.*;
 import org.apache.logging.log4j.Level;
