@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 @Data
@@ -16,29 +17,49 @@ public class SessionVo implements Serializable {
     // Never change this value
     public static final String SESSION_DATA_KEY = "mtiWebUserSession";
 
-    /** ID */
+    /**
+     * ID
+     */
     private String sUserId;
-    /** Name */
+    /**
+     * Name
+     */
     private String sUserNm;
-    /** E-Mail */
+    /**
+     * E-Mail
+     */
     private String sEmail;
-    /** User Type */
+    /**
+     * User Type
+     */
     private String sUserTypeCd;
-    /** Organization ID */
+    /**
+     * Organization ID
+     */
     private String orgnztId;
-    /** Unique ID */
+    /**
+     * Unique ID
+     */
     private String uniqId;
-    /** */
+    /**
+     *
+     */
     private String usrIno;
-    /** Admin YN */
+    /**
+     * Admin YN
+     */
     private String adm_usr_yn;
 
-    /** MMP Web user */
+    /**
+     * MMP Web user
+     */
     private String cdhdNo;
     private String hpgeId;
     private String cdhdNm;
 
-    /** MMP Web Merchant Start */
+    /**
+     * MMP Web Merchant Start
+     */
     private String usrId;
     private String usrNm;
     private String usrClcd;// MTI,Super,Middle,Merchant

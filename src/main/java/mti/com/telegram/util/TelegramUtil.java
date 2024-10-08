@@ -1,5 +1,13 @@
 package mti.com.telegram.util;
 
+import mti.com.telegram.exception.TelegramNestedRuntimeException;
+import mti.com.telegram.model.TrimType;
+import mti.com.telegram.model.annotation.DATATYPE;
+import mti.com.telegram.model.annotation.FIELD;
+import mti.com.utility.ExceptionUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -13,13 +21,6 @@ import java.text.NumberFormat;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
-import mti.com.telegram.exception.TelegramNestedRuntimeException;
-import mti.com.telegram.model.TrimType;
-import mti.com.telegram.model.annotation.DATATYPE;
-import mti.com.telegram.model.annotation.FIELD;
-import mti.com.utility.ExceptionUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class TelegramUtil {
     private static final Logger logger = LogManager.getLogger(TelegramUtil.class);
@@ -37,14 +38,14 @@ public class TelegramUtil {
         double var5 = 0.0;
         switch (var2.type()) {
             case DECIMAL:
-                BigDecimal var7 = (BigDecimal)var0;
+                BigDecimal var7 = (BigDecimal) var0;
                 var5 = var7.doubleValue();
                 break;
             case DOUBLE:
-                var5 = (Double)var0;
+                var5 = (Double) var0;
                 break;
             case FLOAT:
-                var5 = ((Float)var0).doubleValue();
+                var5 = ((Float) var0).doubleValue();
         }
 
         return var4.format(var5);
@@ -60,14 +61,14 @@ public class TelegramUtil {
         double var5 = 0.0;
         switch (var2.type()) {
             case DECIMAL:
-                BigDecimal var7 = (BigDecimal)var0;
+                BigDecimal var7 = (BigDecimal) var0;
                 var5 = var7.doubleValue();
                 break;
             case DOUBLE:
-                var5 = (Double)var0;
+                var5 = (Double) var0;
                 break;
             case FLOAT:
-                var5 = ((Float)var0).doubleValue();
+                var5 = ((Float) var0).doubleValue();
         }
 
         return var4.format(var5);
@@ -83,14 +84,14 @@ public class TelegramUtil {
         double var5 = 0.0;
         switch (var2.type()) {
             case DECIMAL:
-                BigDecimal var7 = (BigDecimal)var0;
+                BigDecimal var7 = (BigDecimal) var0;
                 var5 = var7.doubleValue();
                 break;
             case DOUBLE:
-                var5 = (Double)var0;
+                var5 = (Double) var0;
                 break;
             case FLOAT:
-                var5 = ((Float)var0).doubleValue();
+                var5 = ((Float) var0).doubleValue();
         }
 
         return var4.format(var5);
@@ -102,7 +103,7 @@ public class TelegramUtil {
         if (var0 == null) {
             return var3;
         } else {
-            String var5 = var0 != null ? (String)var0 : "";
+            String var5 = var0 != null ? (String) var0 : "";
             int var6 = var4.length();
             int var7 = var5.getBytes(var2).length;
             if (var7 > var6) {
@@ -139,7 +140,7 @@ public class TelegramUtil {
             byte[] var2 = var0;
             int var3 = var0.length;
 
-            for(int var4 = 0; var4 < var3; ++var4) {
+            for (int var4 = 0; var4 < var3; ++var4) {
                 byte var5 = var2[var4];
                 var1.append(Integer.toString((var5 & 240) >> 4, 16));
                 var1.append(Integer.toString(var5 & 15, 16));
@@ -162,7 +163,7 @@ public class TelegramUtil {
             if (var11 <= var1) {
                 var5.append(var0);
 
-                for(var9 = 0; var9 < var6; ++var9) {
+                for (var9 = 0; var9 < var6; ++var9) {
                     var5.append(var2);
                 }
             } else {
@@ -170,7 +171,7 @@ public class TelegramUtil {
                 var5.append(new String(var10, var3));
             }
         } else {
-            for(var9 = 0; var9 < var1; ++var9) {
+            for (var9 = 0; var9 < var1; ++var9) {
                 var5.append(var2);
             }
         }
@@ -193,7 +194,7 @@ public class TelegramUtil {
             int var11 = var12.length;
             int var6 = var1 - var11;
             if (var11 <= var1) {
-                for(var9 = 0; var9 < var6; ++var9) {
+                for (var9 = 0; var9 < var6; ++var9) {
                     var5.append(var2);
                 }
 
@@ -203,7 +204,7 @@ public class TelegramUtil {
                 var5.append(new String(var10, var3));
             }
         } else {
-            for(var9 = 0; var9 < var1; ++var9) {
+            for (var9 = 0; var9 < var1; ++var9) {
                 var5.append(var2);
             }
         }
@@ -241,13 +242,13 @@ public class TelegramUtil {
             var11 = new StringBuffer();
             var11.append("-");
 
-            for(var12 = 0; var12 < var14; ++var12) {
+            for (var12 = 0; var12 < var14; ++var12) {
                 var11.append(var2);
             }
 
             var11.append(var0.substring(1));
 
-            for(var12 = 0; var12 < var13; ++var12) {
+            for (var12 = 0; var12 < var13; ++var12) {
                 if (var12 == 0 && var8) {
                     var11.append(".");
                 }
@@ -261,13 +262,13 @@ public class TelegramUtil {
         } else {
             var11 = new StringBuffer();
 
-            for(var12 = 0; var12 < var14; ++var12) {
+            for (var12 = 0; var12 < var14; ++var12) {
                 var11.append(var2);
             }
 
             var11.append(var0);
 
-            for(var12 = 0; var12 < var13; ++var12) {
+            for (var12 = 0; var12 < var13; ++var12) {
                 if (var12 == 0 && var8) {
                     var11.append(".");
                 }
@@ -300,7 +301,7 @@ public class TelegramUtil {
         StringBuffer var12 = new StringBuffer();
         var12.append(var0);
 
-        for(int var10 = 0; var10 < var11; ++var10) {
+        for (int var10 = 0; var10 < var11; ++var10) {
             if (var10 == 0 && var8) {
                 var12.append(".");
             }
@@ -320,7 +321,7 @@ public class TelegramUtil {
         Field[] var2 = var0.getClass().getDeclaredFields();
         int var3 = var2.length;
 
-        for(int var4 = 0; var4 < var3; ++var4) {
+        for (int var4 = 0; var4 < var3; ++var4) {
             Field var5 = var2[var4];
             Object var6 = var5.get(var0);
             FIELD var7 = var5.getAnnotation(FIELD.class);
@@ -332,7 +333,7 @@ public class TelegramUtil {
                     var1 += var8.sign_length();
                     break;
                 case LIST:
-                    var1 += getPacketSize((List)var6);
+                    var1 += getPacketSize((List) var6);
                     switch (var7.kind()) {
                         case DATA:
                             var1 += 8;
@@ -362,7 +363,7 @@ public class TelegramUtil {
         Field[] var4 = var0.getClass().getDeclaredFields();
         int var5 = var4.length;
 
-        for(int var6 = 0; var6 < var5; ++var6) {
+        for (int var6 = 0; var6 < var5; ++var6) {
             Field var7 = var4[var6];
             Object var8 = var7.get(var0);
             FIELD var9 = var7.getAnnotation(FIELD.class);
@@ -394,7 +395,7 @@ public class TelegramUtil {
                     }
 
                     int var13 = Integer.parseInt(var11);
-                    if (var2 && (long)var13 > 10000L) {
+                    if (var2 && (long) var13 > 10000L) {
                         TelegramNestedRuntimeException var17 = new TelegramNestedRuntimeException("NumberFormat Exception");
                         var17.setMsg("Data Count [" + var11 + "] is over Maximuim [" + 10000L + "]");
                         throw var17;
@@ -422,7 +423,7 @@ public class TelegramUtil {
         int var1 = 0;
         Object var3;
         if (var0 != null) {
-            for(Iterator var2 = var0.iterator(); var2.hasNext(); var1 += getPacketSize(var3)) {
+            for (Iterator var2 = var0.iterator(); var2.hasNext(); var1 += getPacketSize(var3)) {
                 var3 = var2.next();
             }
         }
@@ -436,7 +437,7 @@ public class TelegramUtil {
             Object[] var2 = var0;
             int var3 = var0.length;
 
-            for(int var4 = 0; var4 < var3; ++var4) {
+            for (int var4 = 0; var4 < var3; ++var4) {
                 Object var5 = var2[var4];
                 var1 += getPacketSize(var5);
             }
@@ -447,9 +448,9 @@ public class TelegramUtil {
 
     public static int getListFieldSizeByCount(Field var0, int var1) throws Exception {
         Type var2 = var0.getGenericType();
-        ParameterizedType var3 = (ParameterizedType)var2;
+        ParameterizedType var3 = (ParameterizedType) var2;
         Type[] var4 = var3.getActualTypeArguments();
-        Class var5 = (Class)var4[0];
+        Class var5 = (Class) var4[0];
         Object var6 = var5.newInstance();
         int var7 = getPacketSize(var6);
         return var7 * var1;
@@ -460,7 +461,7 @@ public class TelegramUtil {
         int var4 = var1 + var2;
         int var5 = var1;
 
-        for(int var6 = 0; var5 < var4; ++var6) {
+        for (int var6 = 0; var5 < var4; ++var6) {
             var3[var6] = var0[var5];
             ++var5;
         }
@@ -475,13 +476,13 @@ public class TelegramUtil {
         System.out.println("소스 길이 : " + var0.length);
         int var5 = var1;
 
-        for(int var6 = 0; var5 < var4; ++var6) {
+        for (int var6 = 0; var5 < var4; ++var6) {
             var3[var6] = var0[var5];
             logger.info("bytes[{}] : {}", var5, (Byte.valueOf(var0[var5])).toString());
             ++var5;
         }
 
-        for(var5 = 0; var5 < var0.length; ++var5) {
+        for (var5 = 0; var5 < var0.length; ++var5) {
             System.out.print("bytes[" + var5 + "] : " + (Byte.valueOf(var0[var5])) + ",");
         }
 
@@ -497,7 +498,7 @@ public class TelegramUtil {
     public static String getSetterMethodName(String var0) {
         String var1 = getAccessorName(var0);
         String var2 = "set" +
-                var1;
+            var1;
         return var2;
     }
 
@@ -505,7 +506,7 @@ public class TelegramUtil {
         if (var0 != null && var0.length() > 0) {
             char[] var1 = var0.toCharArray();
             String var2 = Character.toUpperCase(var1[0]) +
-                    var0.substring(1);
+                var0.substring(1);
             return var2;
         } else {
             return "";
@@ -529,7 +530,7 @@ public class TelegramUtil {
         String var3 = var2.getTypeName();
         if (var2 instanceof ParameterizedType var4) {
             Type[] var5 = var4.getActualTypeArguments();
-            Class var6 = (Class)var5[0];
+            Class var6 = (Class) var5[0];
             var1 = var6.newInstance();
         } else {
             var1 = Class.forName(var3).newInstance();
@@ -638,15 +639,15 @@ public class TelegramUtil {
         int var2 = var1.length;
         System.out.println("****************** " + var0.getClass().getName());
 
-        for(int var3 = 0; var3 < var2; ++var3) {
+        for (int var3 = 0; var3 < var2; ++var3) {
             Class var4 = var1[var3].getDeclaringClass();
             Method[] var5 = var4.getMethods();
 
-            for(int var6 = 0; var6 < var5.length; ++var6) {
+            for (int var6 = 0; var6 < var5.length; ++var6) {
                 System.out.println(var4.getName() + "                    " + var5[var6].getName());
                 Type[] var7 = var5[var6].getGenericParameterTypes();
 
-                for(int var8 = 0; var8 < var7.length; ++var8) {
+                for (int var8 = 0; var8 < var7.length; ++var8) {
                     System.out.println(var4.getName() + "                        " + var7[var8].getTypeName());
                 }
             }
@@ -661,7 +662,7 @@ public class TelegramUtil {
         try {
             StringBuffer var2 = new StringBuffer(var0.length * 2);
 
-            for(int var4 = 0; var4 < var0.length; ++var4) {
+            for (int var4 = 0; var4 < var0.length; ++var4) {
                 String var3 = "0" + Integer.toHexString(255 & var0[var4]);
                 var2.append(var3.substring(var3.length() - 2));
             }
@@ -715,7 +716,7 @@ public class TelegramUtil {
         if (isPrimitiveType(var9)) {
             String var10 = var9.getTypeName();
             if ("short".equals(var10)) {
-                short var11 = (Short)var0;
+                short var11 = (Short) var0;
                 String var12 = (Short.valueOf(var11)).toString();
                 int var13 = var12.length();
                 String var14;
@@ -743,7 +744,7 @@ public class TelegramUtil {
                 new Exception("Insert Object is not Short Type");
             }
         } else if (var1.getType().isAssignableFrom(Short.class)) {
-            Short var16 = (Short)var0;
+            Short var16 = (Short) var0;
             String var17 = var16.toString();
             int var18 = var17.length();
             String var19;
@@ -785,7 +786,7 @@ public class TelegramUtil {
         if (isPrimitiveType(var9)) {
             String var10 = var9.getTypeName();
             if ("int".equals(var10)) {
-                int var11 = (Integer)var0;
+                int var11 = (Integer) var0;
                 String var12 = (Integer.valueOf(var11)).toString();
                 int var13 = var12.length();
                 String var14;
@@ -813,7 +814,7 @@ public class TelegramUtil {
                 new Exception("Insert Object is not Integer Type");
             }
         } else if (var1.getType().isAssignableFrom(Integer.class)) {
-            Integer var16 = (Integer)var0;
+            Integer var16 = (Integer) var0;
             String var17 = var16.toString();
             int var18 = var17.length();
             String var19;
@@ -856,7 +857,7 @@ public class TelegramUtil {
         if (isPrimitiveType(var9)) {
             String var10 = var9.getTypeName();
             if ("long".equals(var10)) {
-                long var11 = (Long)var0;
+                long var11 = (Long) var0;
                 var13 = (Long.valueOf(var11)).toString();
                 int var14 = var13.length();
                 String var15;
@@ -884,7 +885,7 @@ public class TelegramUtil {
                 new Exception("Insert Object is not Long Type");
             }
         } else if (var1.getType().isAssignableFrom(Long.class)) {
-            Long var17 = (Long)var0;
+            Long var17 = (Long) var0;
             String var18 = var17.toString();
             int var12 = var18.length();
             TelegramNestedRuntimeException var19;
@@ -933,8 +934,8 @@ public class TelegramUtil {
         if (isPrimitiveType(var12)) {
             String var13 = var12.getTypeName();
             if ("float".equals(var13)) {
-                float var14 = (Float)var0;
-                var15 = var11.format(( Float.valueOf(var14)).doubleValue());
+                float var14 = (Float) var0;
+                var15 = var11.format((Float.valueOf(var14)).doubleValue());
                 var15 = rightNumberPaddingStringWithDecimal(var15, var10, "0", "UTF-8", var7);
                 if (!verifyDecimalStringValue(var15, var7)) {
                     var22 = "Float Value Verify is Failed";
@@ -972,7 +973,7 @@ public class TelegramUtil {
                 new Exception("Insert Object is not Float Type");
             }
         } else if (var1.getType().isAssignableFrom(Float.class)) {
-            Float var19 = (Float)var0;
+            Float var19 = (Float) var0;
             String var20 = var11.format(var19.doubleValue());
             var20 = rightNumberPaddingStringWithDecimal(var20, var10, "0", "UTF-8", var7);
             if (!verifyDecimalStringValue(var20, var7)) {
@@ -1029,7 +1030,7 @@ public class TelegramUtil {
         if (isPrimitiveType(var12)) {
             String var13 = var12.getTypeName();
             if ("double".equals(var13)) {
-                double var14 = (Double)var0;
+                double var14 = (Double) var0;
                 var16 = var10.format(var14);
                 var16 = rightNumberPaddingStringWithDecimal(var16, var11, "0", "UTF-8", var7);
                 if (!verifyDecimalStringValue(var16, var7)) {
@@ -1068,7 +1069,7 @@ public class TelegramUtil {
                 new Exception("Insert Object is not Double Type");
             }
         } else if (var1.getType().isAssignableFrom(Double.class)) {
-            Double var20 = (Double)var0;
+            Double var20 = (Double) var0;
             String var21 = var10.format(var20);
             var21 = rightNumberPaddingStringWithDecimal(var21, var11, "0", "UTF-8", var7);
             if (!verifyDecimalStringValue(var21, var7)) {
@@ -1128,7 +1129,7 @@ public class TelegramUtil {
         if (var0 == null) {
             StringBuffer var3 = new StringBuffer();
 
-            for(int var4 = 0; var4 < var1; ++var4) {
+            for (int var4 = 0; var4 < var1; ++var4) {
                 var3.append("0");
             }
 
@@ -1141,7 +1142,7 @@ public class TelegramUtil {
             int var6 = var1 - var0.length();
             StringBuffer var7 = new StringBuffer();
 
-            for(int var5 = 0; var5 < var6; ++var5) {
+            for (int var5 = 0; var5 < var6; ++var5) {
                 var7.append("0");
             }
 
@@ -1157,7 +1158,7 @@ public class TelegramUtil {
         if (var0 == null) {
             StringBuffer var3 = new StringBuffer();
 
-            for(int var4 = 0; var4 < var1; ++var4) {
+            for (int var4 = 0; var4 < var1; ++var4) {
                 var3.append("0");
             }
 
@@ -1171,7 +1172,7 @@ public class TelegramUtil {
             StringBuffer var7 = new StringBuffer();
             var7.append(var0);
 
-            for(int var5 = 0; var5 < var6; ++var5) {
+            for (int var5 = 0; var5 < var6; ++var5) {
                 var7.append("0");
             }
 

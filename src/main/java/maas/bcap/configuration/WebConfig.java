@@ -16,10 +16,10 @@ public class WebConfig {
             @Override
             public void addCorsMappings(@NonNull CorsRegistry registry) {
                 registry.addMapping("/**")  // Allow CORS on all endpoints
-                        .allowedOrigins("http://localhost:5173", "http://localhost:3000")  // Allow the specific origin
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")  // Allow specific methods
-                        .allowedHeaders("*")  // Allow all headers
-                        .allowCredentials(true);  // Allow credentials (cookies, authorization headers)
+                    .allowedOrigins("http://localhost:5173", "http://localhost:3000")  // Allow the specific origin
+                    .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")  // Allow specific methods
+                    .allowedHeaders("*")  // Allow all headers
+                    .allowCredentials(true);  // Allow credentials (cookies, authorization headers)
             }
         };
     }

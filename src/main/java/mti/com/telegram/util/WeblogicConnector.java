@@ -1,17 +1,18 @@
 package mti.com.telegram.util;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpMethod;
+import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
+
 import java.util.List;
 
-public class WtcConnector {
+/**
+ * Api to Weblogic Connector
+ */
+public class WeblogicConnector {
 
-    public static byte[] connectTuxedo(byte[] request){
+    public static byte[] connectTuxedo(byte[] request) {
 
+        // TODO application.properties
         String url = "http://localhost:7001/test1/connect";
 
         // Set headers to indicate plain text content

@@ -2,15 +2,14 @@ package mti.com.telegram.util;
 
 import maas.bcap.module.ed.ed03.sed03f107r.SED03F107RInVo;
 import maas.bcap.module.ed.ed03.sed03f107r.SED03F107ROutVo;
+import mti.com.telegram.exception.TelegramNestedRuntimeException;
+import mti.com.telegram.mapping.ByteDecoder;
 import mti.com.telegram.mapping.ByteEncoder;
 import mti.com.telegram.vo.*;
+import mti.com.utility.ExceptionUtil;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import mti.com.telegram.exception.TelegramNestedRuntimeException;
-import mti.com.telegram.mapping.ByteDecoder;
-import mti.com.utility.ExceptionUtil;
 
 import java.nio.charset.StandardCharsets;
 
@@ -166,7 +165,7 @@ import java.nio.charset.StandardCharsets;
 public class InterfaceTelegramTest {
     private static final Logger logger = LogManager.getLogger(InterfaceTelegramTest.class);
 
-    public static TelegramUserDataOutput testCall(TelegramUserDataInput inputUserData, Object inVo, Object outVo, String response) throws  Exception {
+    public static TelegramUserDataOutput testCall(TelegramUserDataInput inputUserData, Object inVo, Object outVo, String response) throws Exception {
         logger.atLevel(Level.ALL);
         ByteEncoder byteEncoder = new ByteEncoder();
         TelegramIn telegramIn = TelegramBuilder.getTelegramIn(inputUserData, inVo);
@@ -297,9 +296,9 @@ public class InterfaceTelegramTest {
 
         /// SED03F107R Single
         SED03F107RInVo sed03F107RInVo = SED03F107RInVo.builder()
-                .prd_tp_cd("EDC")
-                .sno("0013000011976476")
-                .build();
+            .prd_tp_cd("EDC")
+            .sno("0013000011976476")
+            .build();
 
 ////////////////////////////////////////////////////////////////////////////
         ByteEncoder byteEncoder = new ByteEncoder();
@@ -372,7 +371,7 @@ public class InterfaceTelegramTest {
 
         /// Imitate Response from Tuxedo
         byte[] arrayOfByte = response
-                .getBytes();
+            .getBytes();
 
 //        SED03F209ROutVo output = new SED03F209ROutVo();
         SED03F107ROutVo output = new SED03F107ROutVo();
@@ -419,7 +418,7 @@ public class InterfaceTelegramTest {
                 object = telegramOut2.getData().getData();
             } else {
                 throw new TelegramNestedRuntimeException(
-                        "Response Telegram Length is not Matched !!");
+                    "Response Telegram Length is not Matched !!");
             }
             TelegramMessage telegramMessage1 = telegramOut2.getMessage();
             TelegramUserDataOutput telegramUserDataOutput = new TelegramUserDataOutput();

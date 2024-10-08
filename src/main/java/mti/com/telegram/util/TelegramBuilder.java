@@ -1,26 +1,15 @@
 package mti.com.telegram.util;
 
+import mti.com.telegram.vo.*;
+import mti.com.utility.ExceptionUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
-import mti.com.telegram.vo.TelegramInData;
-import mti.com.telegram.vo.TelegramInDataList;
-import mti.com.telegram.vo.TelegramOutData;
-import mti.com.telegram.vo.TelegramOutDataList;
-import mti.com.telegram.vo.TelegramHeader;
-import mti.com.telegram.vo.TelegramIn;
-import mti.com.telegram.vo.TelegramInList;
-import mti.com.telegram.vo.TelegramUserDataInput;
-import mti.com.telegram.vo.TelegramMessage;
-import mti.com.telegram.vo.TelegramOut;
-import mti.com.telegram.vo.TelegramOutList;
-import mti.com.telegram.vo.TelegramOutNoData;
-import mti.com.telegram.vo.TelegramTail;
-import mti.com.utility.ExceptionUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class TelegramBuilder {
     private static final Logger logger = LogManager.getLogger(TelegramBuilder.class);
@@ -189,7 +178,7 @@ public class TelegramBuilder {
             Field[] var3 = var1.getClass().getDeclaredFields();
             int var4 = var3.length;
 
-            for(int var5 = 0; var5 < var4; ++var5) {
+            for (int var5 = 0; var5 < var4; ++var5) {
                 Field var6 = var3[var5];
                 if (var6.getName().startsWith("gid_")) {
                     Object var7 = var6.get(var1);
@@ -238,7 +227,7 @@ public class TelegramBuilder {
         return var1;
     }
 
-    public static<T> TelegramOutList<T> getTelegramOutDataList(List<T> var1) {
+    public static <T> TelegramOutList<T> getTelegramOutDataList(List<T> var1) {
         TelegramOutList<T> var2 = new TelegramOutList<>();
         TelegramHeader var3 = new TelegramHeader();
         TelegramMessage var4 = new TelegramMessage();

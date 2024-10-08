@@ -1,5 +1,12 @@
 package mti.com.telegram.mapping;
 
+import mti.com.telegram.exception.TelegramNestedRuntimeException;
+import mti.com.telegram.model.annotation.DATATYPE;
+import mti.com.telegram.model.annotation.FIELD;
+import mti.com.telegram.util.TelegramUtil;
+import mti.com.telegram.vo.TelegramOutData;
+import mti.com.telegram.vo.TelegramOutDataList;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
@@ -7,12 +14,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-import mti.com.telegram.exception.TelegramNestedRuntimeException;
-import mti.com.telegram.model.annotation.DATATYPE;
-import mti.com.telegram.model.annotation.FIELD;
-import mti.com.telegram.util.TelegramUtil;
-import mti.com.telegram.vo.TelegramOutData;
-import mti.com.telegram.vo.TelegramOutDataList;
 
 public class ByteDecoder<T> {
     private String charSet = "UTF-8";
@@ -61,8 +62,8 @@ public class ByteDecoder<T> {
             Field[] var4 = var2.getClass().getDeclaredFields();
             int var5 = var4.length;
 
-            for(int var6 = 0; var6 < var5; ++var6) {
-                FIELD var7 = (FIELD)var4[var6].getAnnotation(FIELD.class);
+            for (int var6 = 0; var6 < var5; ++var6) {
+                FIELD var7 = (FIELD) var4[var6].getAnnotation(FIELD.class);
                 int var8 = var7.length();
                 String var9 = var4[var6].getName();
 
@@ -77,7 +78,7 @@ public class ByteDecoder<T> {
                             var3 += var8;
                             break;
                         case NUMBER:
-                            DATATYPE var14 = (DATATYPE)var4[var6].getAnnotation(DATATYPE.class);
+                            DATATYPE var14 = (DATATYPE) var4[var6].getAnnotation(DATATYPE.class);
                             var8 += var14.sign_length();
                             var8 += var14.point_length();
                             byte[] var15 = TelegramUtil.cutBytes(var1, var3, var8);
@@ -108,11 +109,11 @@ public class ByteDecoder<T> {
                                     var3 += 8;
                                     ArrayList var41 = new ArrayList();
 
-                                    for(int var44 = 0; var44 < var37; ++var44) {
+                                    for (int var44 = 0; var44 < var37; ++var44) {
                                         Type var47 = var4[var6].getGenericType();
-                                        ParameterizedType var48 = (ParameterizedType)var47;
+                                        ParameterizedType var48 = (ParameterizedType) var47;
                                         Type[] var50 = var48.getActualTypeArguments();
-                                        Class var52 = (Class)var50[0];
+                                        Class var52 = (Class) var50[0];
                                         Object var53 = var52.newInstance();
                                         int var54 = TelegramUtil.getPacketSize(var53);
                                         byte[] var55 = TelegramUtil.cutBytes(var1, var3, var54);
@@ -134,11 +135,11 @@ public class ByteDecoder<T> {
                                     var3 += 2;
                                     ArrayList var46 = new ArrayList();
 
-                                    for(int var45 = 0; var45 < var37; ++var45) {
+                                    for (int var45 = 0; var45 < var37; ++var45) {
                                         Type var49 = var4[var6].getGenericType();
-                                        ParameterizedType var51 = (ParameterizedType)var49;
+                                        ParameterizedType var51 = (ParameterizedType) var49;
                                         Type[] var29 = var51.getActualTypeArguments();
-                                        Class var30 = (Class)var29[0];
+                                        Class var30 = (Class) var29[0];
                                         Object var31 = var30.newInstance();
                                         int var32 = TelegramUtil.getPacketSize(var31);
                                         byte[] var33 = TelegramUtil.cutBytes(var1, var3, var32);
@@ -188,7 +189,7 @@ public class ByteDecoder<T> {
                     var11.setFieldName(var9);
                     var11.setFtype(var7.type().getTypeName());
                     var11.setObjName(var2.getClass().getName());
-                    var11.setPointer((long)var3);
+                    var11.setPointer((long) var3);
                     var11.setMsg(var34.toString());
                     var11.setParser("ByteDecoder");
                     var11.setStackTrace(var34.getStackTrace());

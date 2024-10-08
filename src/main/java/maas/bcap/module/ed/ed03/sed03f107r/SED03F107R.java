@@ -19,7 +19,7 @@ public class SED03F107R implements BaseModuleInterface<SED03F107ROutVo, SED03F10
     private ServiceSupport support;
 
     @Override
-    public TelegramUserDataOutput<SED03F107ROutVo> call(HttpServletRequest request, SED03F107RInVo inVo, String screenId){
+    public TelegramUserDataOutput<SED03F107ROutVo> call(HttpServletRequest request, SED03F107RInVo inVo, String screenId) {
         TelegramUserDataOutput<SED03F107ROutVo> result = TelegramUserDataOutput.<SED03F107ROutVo>builder().build();
 
         SED03F107ROutVo outVo = SED03F107ROutVo.builder().build();
@@ -27,12 +27,10 @@ public class SED03F107R implements BaseModuleInterface<SED03F107ROutVo, SED03F10
         try {
             TelegramUserDataInput userDataInput = support.tuxedoHeader(request, this.getClass().getSimpleName(), screenId);
             result = support.tuxedoTransaction(userDataInput, inVo, outVo);
-//            String response = "00001164devaps01202410011306560144232400SED03F107R              MTI R                        devaps0120241001130656014423240020241001130654985   UNIT      192.168.0.133                   0CDD2494CF5F                           020241001130654985   20241001130658326335  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000227                              10013000011976476    Z900                                                   040101E0016     33   EDC Android PAX A920                                                                                @@";
-//            result = InterfaceTelegramTest.testCall(inputUserData, inVo, outVo, response);
-        } catch (TelegramNestedRuntimeException e){
+        } catch (TelegramNestedRuntimeException e) {
             logger.info(e.toString());
             logger.info(e.getMsg());
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.info(e.toString());
             logger.info(e.getClass());
             logger.info(e.getLocalizedMessage());
@@ -42,16 +40,3 @@ public class SED03F107R implements BaseModuleInterface<SED03F107ROutVo, SED03F10
         return result;
     }
 }
-//Example Request
-//SED03F107RInVo sed03F107RInVo = SED03F107RInVo.builder()
-//        .prd_tp_cd("EDC")
-//        .sno("0013000011976476")
-//        .build();
-
-//Request
-//00000578                                SED03F107R              MTI S                                                                            UNIT      192.168.0.133                   0CDD2494CF5F                           020241001130654985                         00000      00000                                                                        EN                                                                                                                                              00000000                     EDC  0013000011976476
-
-//Response
-//00001164devaps01202410011306560144232400SED03F107R              MTI R                        devaps0120241001130656014423240020241001130654985   UNIT      192.168.0.133                   0CDD2494CF5F                           020241001130654985   20241001130658326335  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                 0D00000227                              10013000011976476    Z900                                                   040101E0016     33   EDC Android PAX A920                                                                                @@
-//Response Edited
-//00001164devaps01202410011306560144232400SED03F107R              MTI R                        devaps0120241001130656014423240020241001130654985   UNIT      192.168.0.133                   0CDD2494CF5F                           020241001130654985   20241001130658326335  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000227                              10013000011976476    Z900                                                   040101E0016     33   EDC Android PAX A920                                                                                @@

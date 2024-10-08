@@ -1,13 +1,12 @@
 package mti.com.telegram.util;
 
-import mti.com.telegram.mapping.ByteEncoder;
-import mti.com.telegram.vo.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import mti.com.telegram.exception.TelegramNestedRuntimeException;
 import mti.com.telegram.mapping.ByteDecoder;
+import mti.com.telegram.mapping.ByteEncoder;
+import mti.com.telegram.vo.*;
 import mti.com.utility.ExceptionUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.nio.charset.StandardCharsets;
 
@@ -15,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 public class InterfaceTelegram {
     private static final Logger logger = LogManager.getLogger(InterfaceTelegram.class);
 
-	public static <T,V> TelegramUserDataOutput<T> interfaceTuxedo(TelegramUserDataInput userDataInput, V inVo, T outVo) throws Exception {
+    public static <T, V> TelegramUserDataOutput<T> interfaceTuxedo(TelegramUserDataInput userDataInput, V inVo, T outVo) throws Exception {
         logger.info("#################### Interface Tuxedo ####################");
         logger.info(inVo.toString());
         logger.info(outVo.toString());
@@ -27,7 +26,7 @@ public class InterfaceTelegram {
         logger.info(new String(requestToTuxedo, StandardCharsets.UTF_8));
         logger.info(in.toString());
 
-        byte[] responseFromTuxedo = WtcConnector.connectTuxedo(requestToTuxedo);
+        byte[] responseFromTuxedo = WeblogicConnector.connectTuxedo(requestToTuxedo);
 
         if (responseFromTuxedo.length == 0) return null;
 
@@ -38,25 +37,25 @@ public class InterfaceTelegram {
 //        }
 //        logger.info(le.toString());
 
-		TelegramHeader header = getHeaderFromBytes(responseFromTuxedo);
-		TelegramTail tail;
-		TelegramMessage message;
-		TelegramUserDataOutput<T> outputUserData;
+        TelegramHeader header = getHeaderFromBytes(responseFromTuxedo);
+        TelegramTail tail;
+        TelegramMessage message;
+        TelegramUserDataOutput<T> outputUserData;
 
         logger.info(header.toString());
         logger.info(header.getErr_flag());
         // Success With Data
-		if (header.getErr_flag() == 0) {
+        if (header.getErr_flag() == 0) {
             ByteDecoder<TelegramOut<T>> decoder = new ByteDecoder<>();
             logger.info("With Data");
-			TelegramOut<T> out1 = TelegramBuilder.getTelegramOutData(outVo);
+            TelegramOut<T> out1 = TelegramBuilder.getTelegramOutData(outVo);
             logger.info("out 1");
-			TelegramOut<T> out2 = decoder.convertBytes2Object(responseFromTuxedo, out1, limited);
+            TelegramOut<T> out2 = decoder.convertBytes2Object(responseFromTuxedo, out1, limited);
             logger.info("out 2");
             tail = out2.getTail();
             logger.info(tail.toString());
             logger.info(tail.getTail());
-			if ("@@".equals(tail.getTail())) {
+            if ("@@".equals(tail.getTail())) {
                 T outVoTemp = out2.getData().getData();
                 message = out2.getMessage();
                 logger.info("###################### TelegramOutputUserData ######################");
@@ -67,27 +66,27 @@ public class InterfaceTelegram {
                 outputUserData.setMessage(message);
                 outputUserData.setOutput(outVoTemp);
                 outputUserData.setHeader(header);
-				return outputUserData;
-			} else {
+                return outputUserData;
+            } else {
                 throw new TelegramNestedRuntimeException("Response Telegram Length is not Matched !!");
-			}
-		} else {
+            }
+        } else {
             ByteDecoder<TelegramOutNoData> decoder = new ByteDecoder<>();
             logger.info("No Data");
-			TelegramOutNoData outNoData1 = TelegramBuilder.getTelegramOutDataNoData();
-			TelegramOutNoData outNoData2 = decoder.convertBytes2Object(responseFromTuxedo, outNoData1, limited);
+            TelegramOutNoData outNoData1 = TelegramBuilder.getTelegramOutDataNoData();
+            TelegramOutNoData outNoData2 = decoder.convertBytes2Object(responseFromTuxedo, outNoData1, limited);
             tail = outNoData2.getTail();
-			if (!"@@".equals(tail.getTail())) {
+            if (!"@@".equals(tail.getTail())) {
                 throw new TelegramNestedRuntimeException("Response Telegram Length is not Matched !!");
-			} else {
+            } else {
                 message = outNoData2.getMessage();
                 outputUserData = new TelegramUserDataOutput<T>();
                 outputUserData.setMessage(message);
                 outputUserData.setOutput(null);
                 outputUserData.setHeader(header);
-				return outputUserData;
-			}
-		}
+                return outputUserData;
+            }
+        }
 
     }
 

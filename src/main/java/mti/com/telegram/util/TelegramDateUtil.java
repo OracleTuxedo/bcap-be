@@ -6,7 +6,6 @@
 package mti.com.telegram.util;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -17,14 +16,14 @@ public class TelegramDateUtil {
     public static String getYYYYMMDD() {
         GregorianCalendar var0 = new GregorianCalendar();
         String var1 = var0.get(1) + addLeftZeroFor2Bytes(String.valueOf(var0.get(2) + 1)) +
-                addLeftZeroFor2Bytes(String.valueOf(var0.get(5)));
+            addLeftZeroFor2Bytes(String.valueOf(var0.get(5)));
         return var1;
     }
 
     public static String getHHMMSS() {
         GregorianCalendar var0 = new GregorianCalendar();
         String var1 = addLeftZeroFor2Bytes(String.valueOf(var0.get(11))) + addLeftZeroFor2Bytes(String.valueOf(var0.get(12))) +
-                addLeftZeroFor2Bytes(String.valueOf(var0.get(13)));
+            addLeftZeroFor2Bytes(String.valueOf(var0.get(13)));
         return var1;
     }
 

@@ -23,7 +23,7 @@ public class SED03F075R implements BaseModuleInterface<SED03F075ROutVo, SED03F07
         TelegramUserDataOutput<SED03F075ROutVo> result = TelegramUserDataOutput.<SED03F075ROutVo>builder().build();
         SED03F075ROutVo outVo = SED03F075ROutVo.builder().build();
 
-        try{
+        try {
             TelegramUserDataInput userDataInput = support.tuxedoHeader(request, this.getClass().getSimpleName(), screenId);
             result = support.tuxedoTransaction(userDataInput, inVo, outVo);
         } catch (TelegramNestedRuntimeException e) {

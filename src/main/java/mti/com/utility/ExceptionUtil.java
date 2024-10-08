@@ -14,7 +14,7 @@ public class ExceptionUtil {
                 StackTraceElement[] var3 = var2;
                 int var4 = var2.length;
 
-                for(int var5 = 0; var5 < var4; ++var5) {
+                for (int var5 = 0; var5 < var4; ++var5) {
                     StackTraceElement var6 = var3[var5];
                     var0.error(var6.toString());
                 }

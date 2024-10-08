@@ -1,16 +1,17 @@
 package mti.com.telegram.mapping;
 
+import mti.com.telegram.exception.TelegramNestedRuntimeException;
+import mti.com.telegram.model.FieldType;
+import mti.com.telegram.model.annotation.DATATYPE;
+import mti.com.telegram.model.annotation.FIELD;
+import mti.com.telegram.util.TelegramUtil;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.nio.ByteBuffer;
 import java.util.Iterator;
 import java.util.List;
-import mti.com.telegram.exception.TelegramNestedRuntimeException;
-import mti.com.telegram.model.FieldType;
-import mti.com.telegram.model.annotation.DATATYPE;
-import mti.com.telegram.model.annotation.FIELD;
-import mti.com.telegram.util.TelegramUtil;
 
 public class ByteEncoder {
     private String charSet = "UTF-8";
@@ -34,7 +35,7 @@ public class ByteEncoder {
             Field[] var5 = var1.getClass().getDeclaredFields();
             int var6 = var5.length;
 
-            for(int var7 = 0; var7 < var6; ++var7) {
+            for (int var7 = 0; var7 < var6; ++var7) {
                 Field var8 = var5[var7];
                 FIELD var9 = var8.getAnnotation(FIELD.class);
                 Object var10 = var8.get(var1);
@@ -52,7 +53,7 @@ public class ByteEncoder {
                                 var17 = new byte[var16];
                                 int var19 = 0;
 
-                                while(true) {
+                                while (true) {
                                     if (var19 >= var16) {
                                         break label74;
                                     }
@@ -68,7 +69,7 @@ public class ByteEncoder {
                                 var17 = new byte[var16];
                                 var14 = 0;
 
-                                while(true) {
+                                while (true) {
                                     if (var14 >= var16) {
                                         break label74;
                                     }
@@ -82,7 +83,7 @@ public class ByteEncoder {
                                         var17 = new byte[8];
                                         var14 = 0;
 
-                                        while(true) {
+                                        while (true) {
                                             if (var14 >= 8) {
                                                 break label74;
                                             }
@@ -93,7 +94,7 @@ public class ByteEncoder {
                                     case MESSAGE:
                                         var17 = new byte[2];
 
-                                        for(var14 = 0; var14 < 2; ++var14) {
+                                        for (var14 = 0; var14 < 2; ++var14) {
                                             var17[var14] = 48;
                                         }
                                     default:
@@ -140,15 +141,15 @@ public class ByteEncoder {
         if (TelegramUtil.isPrimitiveType(var4)) {
             var5 = var4.getTypeName();
             if ("int".equals(var5) && TelegramUtil.verifyIntegerNumber(var1, var2, "ByteEncoder")) {
-                var3 = this.convertStringToBytes(((Integer)var1).toString(), var2);
+                var3 = this.convertStringToBytes(((Integer) var1).toString(), var2);
             }
 
             if ("short".equals(var5) && TelegramUtil.verifyShortNumber(var1, var2, "ByteEncoder")) {
-                var3 = this.convertStringToBytes(((Short)var1).toString(), var2);
+                var3 = this.convertStringToBytes(((Short) var1).toString(), var2);
             }
 
             if ("long".equals(var5) && TelegramUtil.verifyLongNumber(var1, var2, "ByteEncoder")) {
-                var3 = this.convertStringToBytes(((Long)var1).toString(), var2);
+                var3 = this.convertStringToBytes(((Long) var1).toString(), var2);
             }
 
             String var6;
@@ -169,17 +170,17 @@ public class ByteEncoder {
             var3 = this.convertObject2Bytes(var1, this.limited);
         } else if (var2.getType().isAssignableFrom(Integer.class)) {
             if (TelegramUtil.verifyIntegerNumber(var1, var2, "ByteEncoder")) {
-                var5 = ((Integer)var1).toString();
+                var5 = ((Integer) var1).toString();
                 var3 = this.convertStringToBytes(var5, var2);
             }
         } else if (var2.getType().isAssignableFrom(Short.class)) {
             if (TelegramUtil.verifyShortNumber(var1, var2, "ByteEncoder")) {
-                var5 = ((Short)var1).toString();
+                var5 = ((Short) var1).toString();
                 var3 = this.convertStringToBytes(var5, var2);
             }
         } else if (var2.getType().isAssignableFrom(Long.class)) {
             if (TelegramUtil.verifyLongNumber(var1, var2, "ByteEncoder")) {
-                var5 = ((Long)var1).toString();
+                var5 = ((Long) var1).toString();
                 var3 = this.convertStringToBytes(var5, var2);
             }
         } else if (var2.getType().isAssignableFrom(Float.class)) {
@@ -205,10 +206,10 @@ public class ByteEncoder {
             FIELD var14;
             if (var2.getType().isAssignableFrom(List.class)) {
                 var14 = var2.getAnnotation(FIELD.class);
-                int var13 = TelegramUtil.getPacketSize((List)var1);
+                int var13 = TelegramUtil.getPacketSize((List) var1);
                 int var7 = 0;
                 if (var1 != null) {
-                    var7 = ((List)var1).size();
+                    var7 = ((List) var1).size();
                 }
 
                 ByteBuffer var8;
@@ -221,17 +222,17 @@ public class ByteEncoder {
                         var8 = ByteBuffer.allocate(var13 + var9);
                         var8.put(TelegramUtil.lpadString2Byte((Integer.valueOf(var7)).toString(), var9, "0", this.charSet));
                         if (this.limited && var1 != null) {
-                            var10 = ((List)var1).size();
-                            if ((long)var10 > 10000L) {
+                            var10 = ((List) var1).size();
+                            if ((long) var10 > 10000L) {
                                 TelegramNestedRuntimeException var17 = new TelegramNestedRuntimeException("NumberFormat Exception");
                                 var17.setMsg("Data Count [" + var10 + "] is over Maximuim [" + 10000L + "]");
                                 throw var17;
                             }
                         }
 
-                        Iterator var15 = ((List)var1).iterator();
+                        Iterator var15 = ((List) var1).iterator();
 
-                        while(true) {
+                        while (true) {
                             if (!var15.hasNext()) {
                                 break label105;
                             }
@@ -243,9 +244,9 @@ public class ByteEncoder {
                         var10 = 2;
                         var8 = ByteBuffer.allocate(var13 + var10);
                         var8.put(TelegramUtil.lpadString2Byte((Integer.valueOf(var7)).toString(), var10, "0", this.charSet));
-                        Iterator var11 = ((List)var1).iterator();
+                        Iterator var11 = ((List) var1).iterator();
 
-                        while(var11.hasNext()) {
+                        while (var11.hasNext()) {
                             Object var12 = var11.next();
                             var8.put(this.convertObject2Bytes(var12, this.limited));
                         }
@@ -270,7 +271,7 @@ public class ByteEncoder {
         if (var1 == null) {
             return var3;
         } else {
-            String var5 = var1 != null ? (String)var1 : "";
+            String var5 = var1 != null ? (String) var1 : "";
             int var6 = var4.length();
             int var7 = 0;
             if (var4.type() == FieldType.NUMBER) {
