@@ -1,5 +1,6 @@
 package maas.bcap;
 
+import maas.bcap.craniumtest.DarrenTest;
 import maas.bcap.craniumtest.LeRuccoTest;
 import maas.bcap.craniumtest.PanpanTest;
 import org.apache.logging.log4j.Level;
@@ -30,6 +31,9 @@ public class BcapApplication {
 
 //            EndgTest.interfaceTuxedoParseRequest();
 //            EndgTest.interfaceTuxedoParseResponse();
+
+            DarrenTest.interfaceTuxedoParseRequest();
+            DarrenTest.interfaceTuxedoParseResponse();
 
 
         } catch (Exception e) {
