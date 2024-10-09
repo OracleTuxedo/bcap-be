@@ -1,6 +1,6 @@
 package maas.bcap;
 
-import mti.com.telegram.util.InterfaceTelegramTest;
+import maas.bcap.craniumtest.LeRuccoTest;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,9 +17,13 @@ public class BcapApplication {
         try {
             logger.atLevel(Level.ALL);
             logger.info("Le Rucco Start Application");
-            // System.out.println("Haleluya");
-            InterfaceTelegramTest.interfaceTuxedoParseRequest();
-            InterfaceTelegramTest.interfaceTuxedoParseResponse();
+
+//            InterfaceTelegramTest.interfaceTuxedoParseRequest();
+//            InterfaceTelegramTest.interfaceTuxedoParseResponse();
+
+            LeRuccoTest.interfaceTuxedoParseRequest();
+            LeRuccoTest.interfaceTuxedoParseResponse();
+
 
         } catch (Exception e) {
             logger.info("Le Rucco Failed MAYDAY MAYDAY MAYDAY");

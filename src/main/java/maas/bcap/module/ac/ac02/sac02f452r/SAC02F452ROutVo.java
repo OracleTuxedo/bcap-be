@@ -20,7 +20,7 @@ import java.util.List;
 public class SAC02F452ROutVo {
 
     @FIELD(kind = Kind.DATA, length = 10, type = FieldType.NUMBER, trim = TrimType.LTRIM)
-    @DATATYPE(type = NumberType.INT, decimal = 0)
+    @DATATYPE(type = NumberType.LONG, decimal = 0)
     public long tot_cnt;
 
     @FIELD(kind = Kind.DATA, length = 0, type = FieldType.LIST, trim = TrimType.LTRIM)

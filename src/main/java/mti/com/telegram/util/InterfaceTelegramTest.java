@@ -1,5 +1,7 @@
 package mti.com.telegram.util;
 
+import maas.bcap.module.ed.ed03.sed03f075r.SED03F075RInVo;
+import maas.bcap.module.ed.ed03.sed03f075r.SED03F075ROutVo;
 import maas.bcap.module.ed.ed03.sed03f107r.SED03F107RInVo;
 import maas.bcap.module.ed.ed03.sed03f107r.SED03F107ROutVo;
 import mti.com.telegram.exception.TelegramNestedRuntimeException;
@@ -12,6 +14,17 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.nio.charset.StandardCharsets;
+
+/**
+ * Algoritma Parsing
+ * Itu apa ?
+ * Ngapain ?
+ *
+ * InVo -> Request String Panjang -> Weblogic -> Tuxedo -> Weblogic -> Response String panjang -> OutVo
+ */
+
+
+
 
 //Session User
 //2024-09-19 12:34:51,019 DEBUG [mti.az.az03.controller.AZ0301C] AZ0301 session - Id  :: GYgIxpn5nV4ut75PxwRDdupVD7U1eFaVOmTDke9lOxoDs-SM1AXd!1672226943!1726724086265
@@ -229,11 +242,11 @@ public class InterfaceTelegramTest {
 //                .build();
 
         /// SED03F075R Single
-//        SED03F075RInVo sed03F075RInVo = SED03F075RInVo.builder()
-//                .page_size(40)
-//                .next_key("10")
-//                .inqr_cond_cd("01")
-//                .build();
+        SED03F075RInVo sed03F075RInVo = SED03F075RInVo.builder()
+                .page_size(40)
+                .next_key("10")
+                .inqr_cond_cd("01")
+                .build();
 
         /// SAC04V224U Multi
 //        SAC04V224UInSub1Vo sac04V224UInSub1Vo1 = SAC04V224UInSub1Vo.builder()
@@ -306,13 +319,13 @@ public class InterfaceTelegramTest {
 
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sed03F209RInVo);
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sac02F452RInVo);
-//        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sed03F075RInVo);
+        TelegramIn telegramIn = TelegramBuilder.getTelegramIn(userData, sed03F075RInVo);
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sac04V224UInVo);
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sed03F129RInVo);
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sac04V233RInVo);
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sac04F231RInVo); // Failed
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sed03F224RInVo);
-        TelegramIn telegramIn = TelegramBuilder.getTelegramIn(userData, sed03F107RInVo);
+//        TelegramIn telegramIn = TelegramBuilder.getTelegramIn(userData, sed03F107RInVo);
 
         logger.info(telegramIn.getData().getData().toString());
 
@@ -322,7 +335,8 @@ public class InterfaceTelegramTest {
         logger.info(request);
         logger.info("################################### Request END LeRucco ###################################");
     }
-
+//00000547LeRuccoL202410091353590020000000SAC02F452R              MTI S                        LeRuccoL20241009135359002000000020241009135359000491WEB       172.16.20.11                                WED030120H N1787130271     020241009135359000493                    A000000      00010                                                                        EN                                                                                                                                             D00000044                     00004010             01@@
+//00000545                                SED03F075R              MTI S                                                                            UNIT      192.168.1.207                   0CDD2494CF5F                           020241009134844374                         00000      00000                                                                        EN                                                                                                                                              00000000                     00004010             01
 
     /// Response
     public static void interfaceTuxedoParseResponse() throws Exception {
@@ -336,7 +350,7 @@ public class InterfaceTelegramTest {
 
         /// SED03F107R
 //        String response = "00001164DEVWAS0120240918130914054mti2100SED03F107R              MTI R                        DEVWAS0120240918130914054mti210020240918130914000520WEB       172.16.20.11                                WED030120H N1787130271     02024091813091400052020240918130915691411A00  00        010                                                                        ID                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000227                              10013000011976476    Z900                                                   040101E0016     33   EDC Android PAX A920                                                                                @@";
-        String response = "00001164devaps01202410021038270032580600SED03F107R              MTI R                        devaps0120241002103827003258060020241002103827372   UNIT      192.168.1.89                    0CDD2494CF5F                           020241002103827372   20241002103829498949  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000227                              10013000011976476    Z900                                                   040101E0016     33   EDC Android PAX A920                                                                                @@";
+//        String response = "00001164devaps01202410021038270032580600SED03F107R              MTI R                        devaps0120241002103827003258060020241002103827372   UNIT      192.168.1.89                    0CDD2494CF5F                           020241002103827372   20241002103829498949  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000227                              10013000011976476    Z900                                                   040101E0016     33   EDC Android PAX A920                                                                                @@";
 
         /// SAC02F452R
 //        String response = "00002606DEVWAS0120240919112225083mti2100SAC02F452R              MTI R                        DEVWAS0120240919112225083mti210020240919112225000768WEB       172.16.20.48                                WAC070100H N1787130271     02024091911222500076820240919112236679272A00  00        010       NAZAP0001                                                        EN                                                                                                                                             N00000425                     30inquiry process success.                                                                                                                                                                                                                                                                                                                                                                                        00D00001669                           1541      1020240101202401054259450300373427   6451380000000000000006589000000000000000000005    00000000000000006589000000000000000000000000000000000000000000000000000000000N20240102202401035379408870000145   1113100000000000000006000000000000000000000015    00000000000000006000000000000000000000000000000000000000000000000000000000000N20240105202401094215708100006338   0000890000000000000115000000000000000000000005    00000000000000105000000000000000000000000000000000000000000000000000000000000 20240108202401094215708100041160   2693760000000000000020000000000000000000000005    00000000000000020000000000000000000000000000000000000000000000000000000000000N20240108202401094215708100041160   2536030000000000000025000000000000000000000005    00000000000000025000000000000000000000000000000000000000000000000000000000000N20240221202402224485580000080033   1129930000000000000006535000000000000000000005    00000000000000006535000000000000000000000000000000000000000000000000000000000N20240221202402224485580000080033   1129920000000000000002305000000000000000000005    00000000000000002305000000000000000000000000000000000000000000000000000000000N20240223202402254485580000080033   1111510000000000000006250000000000000000000005    00000000000000006250000000000000000000000000000000000000000000000000000000000N20240223202402254485580000080033   1111500000000000000003200000000000000000000005    00000000000000003200000000000000000000000000000000000000000000000000000000000N20240227202402294485580000080033   1112060000000000000006589000000000000000000005    00000000000000006589000000000000000000000000000000000000000000000000000000000N@@"; // Response dari MTI WEB Log
@@ -351,6 +365,7 @@ public class InterfaceTelegramTest {
 
         /// SED03F075R
 //        String response = "00003759devaps01202409201207250032526200SED03F075R              MTI R                        devaps0120240920120725003252620020240920120724558   UNIT      172.16.20.38                    00090FAA0001                           020240920120724558   20240920120725164915  0  00        000       NAZAP0005                                                                                                                                                                                                       N00000425                     30The Transaction Successfully Ended.                                                                                                                                                                                                                                                                                                                                                                             00D00002822                         40             31      2210   01IWL 225 G CTLS                                                                                      25   2024111600000012   02VX 520 D NON CTLS                                                                                   26   2024111600000013   02VX 520 G NON CTLS                                                                                   26   2024111600000014   02VX 520 G NON CTLS                                                                                   25   2024111600000015   02VX 520 G CTLS                                                                                       26   2024111600000016   02VX 675 3G CTLS                                                                                      25   2024111600000017   02Verifone VX 675 3G Mobile CTLS                                                                      25   2024111600000018   02VX 675 W CTLS                                                                                       25   2024111600000027   02Verifone Vx520C                                                                                     26   2018082915564628   01INGENICO MOVE 2500 G CTLS                                                                           25   2018053115014529   02PANDU - TEST                                                                                        08   2016121610230930   02VERIFONE C680                                                                                       25   2016121609210531   02Verifone C680 WIFI                                                                                  25   2019022614292932   01Ingenico MOVE2500 WIFI                                                                              25   2019022614313433   01EDC Android PAX A920                                                                                27   2020051413112334   01INGENICO ICT 229 GEM CL                                                                             25   2021080218311436   01Ingenico Desk 2600                                                                                  25   2022091313195837   08CASTLES VEGA3000                                                                                    25   2022102414374538   09NEWLAND SP630 PRO                                                                                   25   2022120617195540   01AXIUM DX 8000                                                                                       27   2023070717422141   09NewLand N910                                                                                        27   2023042808413299   10Sunmi P2                                                                                            27   20230404143135@@";
+        String response = "00003985devaps01202410091348490014239400SED03F075R              MTI R                        devaps0120241009134849001423940020241009134844374   UNIT      192.168.1.207                   0CDD2494CF5F                           020241009134844374   20241009134849624158  0  00        000       NAZAP0005                                                        EN                                                                                                                                             N00000525                     30The Transaction Successfully Ended.                                                                                                                                                                                                                                                                                                                                                                             01The Transaction Successfully Ended.                                                                 D00002948                         40             32      2310   01IWL 225 G CTLS                                                                                      25   2024111600000012   02VX 520 D NON CTLS                                                                                   26   2024111600000013   02VX 520 G NON CTLS                                                                                   26   2024111600000014   02VX 520 G NON CTLS                                                                                   25   2024111600000015   02VX 520 G CTLS                                                                                       26   2024111600000016   02VX 675 3G CTLS                                                                                      25   2024111600000017   02Verifone VX 675 3G Mobile CTLS                                                                      25   2024111600000018   02VX 675 W CTLS                                                                                       25   2024111600000027   02Verifone Vx520C                                                                                     26   2018082915564628   01INGENICO MOVE 2500 G CTLS                                                                           25   2018053115014529   02PANDU - TEST                                                                                        08   2016121610230930   02VERIFONE C680                                                                                       25   2016121609210531   02Verifone C680 WIFI                                                                                  25   2019022614292932   01Ingenico MOVE2500 WIFI                                                                              25   2019022614313433   01EDC Android PAX A920                                                                                27   2020051413112334   01INGENICO ICT 229 GEM CL                                                                             25   2021080218311436   01Ingenico Desk 2600                                                                                  25   2022091313195837   08CASTLES VEGA3000                                                                                    25   2022102414374538   09NEWLAND SP630 PRO                                                                                   25   2022120617195540   01AXIUM DX 8000                                                                                       27   2023070717422141   09NewLand N910                                                                                        27   2023042808413242   09Test Product                                                                                        27   2024070304332599   10Sunmi P2                                                                                            27   20230404143135@@";
 
         /// SAC04V244U
 //        String response = "00000968devaps01202409201430240042526200SAC04V224U              MTI R                        devaps0120240920143024004252620020240920143023566   UNIT      172.16.20.47                    00090FAA0001                           020240920143023566   20240920143024453966  0  00        000       NAZAP0001                                                                                                                                                                                                       N00000425                     30inquiry process success.                                                                                                                                                                                                                                                                                                                                                                                        00D00000031                              2@@";
@@ -374,21 +389,21 @@ public class InterfaceTelegramTest {
             .getBytes();
 
 //        SED03F209ROutVo output = new SED03F209ROutVo();
-        SED03F107ROutVo output = new SED03F107ROutVo();
+//        SED03F107ROutVo output = new SED03F107ROutVo();
 //        SAC02F452ROutVo output = new SAC02F452ROutVo();
-//        SED03F075ROutVo output = new SED03F075ROutVo();
+        SED03F075ROutVo output = new SED03F075ROutVo();
 //        SAC04V224UOutVo output = new SAC04V224UOutVo();
 //        SED03F129ROutVo output = new SED03F129ROutVo();
 //        SAC04V233ROutVo output = new SAC04V233ROutVo();
 //        SAC04F231ROutVo output = new SAC04F231ROutVo(); // Failed
 //        SED03F224ROutVo output = new SED03F224ROutVo();
 
-        TelegramUserDataOutput telegramUserDataOutput = parse(arrayOfByte, output);
+        TelegramUserDataOutput<SED03F075ROutVo> telegramUserDataOutput = parse(arrayOfByte, output);
 
 //        output = (SED03F209ROutVo) telegramOutputUserData.getOutput();
-        output = (SED03F107ROutVo) telegramUserDataOutput.getOutput();
+//        output = (SED03F107ROutVo) telegramUserDataOutput.getOutput();
 //        output = (SAC02F452ROutVo) telegramOutputUserData.getOutput();
-//        output = (SED03F075ROutVo) telegramOutputUserData.getOutput();
+        output = (SED03F075ROutVo) telegramUserDataOutput.getOutput();
 //        output = (SAC04V224UOutVo) telegramOutputUserData.getOutput();
 //        output = (SED03F129ROutVo) telegramOutputUserData.getOutput();
 //        output = (SAC04V233ROutVo) telegramOutputUserData.getOutput();

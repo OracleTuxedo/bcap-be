@@ -21,12 +21,12 @@ public class SAC04F231ROutVo {
     public String next_page_exist_yn;
 
     @FIELD(kind = Kind.DATA, length = 0, type = FieldType.LIST, trim = TrimType.LTRIM)
-    public List<SAC04F231ROutSub1Vo> sub1Vo;
+    public List<SAC04F231ROutSub1Vo> sub1_vo;
 
     @FIELD(kind = Kind.DATA, length = 0, type = FieldType.LIST, trim = TrimType.LTRIM)
-    public List<SAC04F231ROutSub2Vo> sub2Vo;
+    public List<SAC04F231ROutSub2Vo> sub2_vo;
 
     @FIELD(kind = Kind.DATA, length = 0, type = FieldType.LIST, trim = TrimType.LTRIM)
-    public List<SAC04F231ROutSub3Vo> sub3Vo;
+    public List<SAC04F231ROutSub3Vo> sub3_vo;
 
 }
