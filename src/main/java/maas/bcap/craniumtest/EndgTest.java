@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
 import java.nio.charset.StandardCharsets;
 
 /**
- * InVo -> Request String Panjang -> Weblogic -> Tuxedo -> Weblogic -> Response String panjang -> OutVo
+ * InVo -> Request String Panjang -> Weblogic -> Tuxedo -> Weblogic -> Response String panjang -> OutVo.
  */
 
 public class EndgTest {
