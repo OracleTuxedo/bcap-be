@@ -24,6 +24,9 @@ public class BcapApplication {
             LeRuccoTest.interfaceTuxedoParseRequest();
             LeRuccoTest.interfaceTuxedoParseResponse();
 
+//            EndgTest.interfaceTuxedoParseRequest();
+//            EndgTest.interfaceTuxedoParseResponse();
+
 
         } catch (Exception e) {
             logger.info("Le Rucco Failed MAYDAY MAYDAY MAYDAY");
