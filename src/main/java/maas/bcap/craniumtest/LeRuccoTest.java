@@ -17,6 +17,7 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * InVo -> Request String Panjang -> Weblogic -> Tuxedo -> Weblogic -> Response String panjang -> OutVo
+ * Semangat 45 , tutor Github
  */
 
 public class LeRuccoTest {
