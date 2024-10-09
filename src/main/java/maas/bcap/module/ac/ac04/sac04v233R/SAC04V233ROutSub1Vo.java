@@ -1,4 +1,4 @@
-package maas.bcap.module.ac.ac04.sac04v233R;
+package maas.bcap.module.ac.ac04.sac04v233r;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
