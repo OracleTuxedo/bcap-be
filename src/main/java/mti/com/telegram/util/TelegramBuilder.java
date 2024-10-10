@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TelegramBuilder {
@@ -17,126 +16,96 @@ public class TelegramBuilder {
     public TelegramBuilder() {
     }
 
-    public static <V> TelegramIn<V> getTelegramIn(TelegramUserDataInput var1, V var2) {
-        TelegramHeader var3 = null;
-        boolean var4 = false;
-        TelegramIn<V> var5 = new TelegramIn<V>();
+    public static <V> TelegramIn<V> getTelegramIn(TelegramUserDataInput userDataInput, V data) {
+        TelegramHeader header = null;
+        TelegramIn<V> telegramIn = new TelegramIn<>();
 
         try {
-            var3 = TelegramBuilder.makeTelegramHeader(var1);
-            TelegramInData<V> var6 = TelegramBuilder.makeTelegramData(var2);
-            var5.setHeader(var3);
-            var5.setData(var6);
-            int var8 = TelegramUtil.getPacketSize(var5) - 8;
-            var5.getHeader().setMsg_len(var8);
-        } catch (Exception var7) {
-            ExceptionUtil.logPrintStackTrace(logger, var7);
+            header = makeTelegramHeader(userDataInput);
+            TelegramInData<V> telegramData = makeTelegramData(data);
+            telegramIn.setHeader(header);
+            telegramIn.setData(telegramData);
+            int msgLength = TelegramUtil.getPacketSize(telegramIn) - 8;
+            telegramIn.getHeader().setMsg_len(msgLength);
+        } catch (Exception e) {
+            ExceptionUtil.logPrintStackTrace(logger, e);
         }
 
-        return var5;
+        return telegramIn;
     }
 
-    public static TelegramInList getTelegramInList(TelegramUserDataInput var1, List<?> var2) {
-        TelegramHeader var3 = null;
-        boolean var4 = false;
-        TelegramInList var5 = new TelegramInList();
+    public static TelegramInList getTelegramInList(TelegramUserDataInput userDataInput, List<?> dataList) {
+        TelegramHeader header = null;
+        TelegramInList telegramInList = new TelegramInList();
 
         try {
-            var3 = TelegramBuilder.makeTelegramHeader(var1);
-            TelegramInDataList var6 = TelegramBuilder.makeTelegramDataList(var2);
-            var5.setHeader(var3);
-            var5.setData(var6);
-            int var8 = TelegramUtil.getPacketSize(var5) - 8;
-            var5.getHeader().setMsg_len(var8);
-        } catch (Exception var7) {
-            ExceptionUtil.logPrintStackTrace(logger, var7);
+            header = makeTelegramHeader(userDataInput);
+            TelegramInDataList telegramDataList = makeTelegramDataList(dataList);
+            telegramInList.setHeader(header);
+            telegramInList.setData(telegramDataList);
+            int msgLength = TelegramUtil.getPacketSize(telegramInList) - 8;
+            telegramInList.getHeader().setMsg_len(msgLength);
+        } catch (Exception e) {
+            ExceptionUtil.logPrintStackTrace(logger, e);
         }
 
-        return var5;
+        return telegramInList;
     }
 
-    public static TelegramHeader makeTelegramHeader(TelegramUserDataInput var1) {
-        TelegramHeader var2 = new TelegramHeader();
-        String var3 = null;
+    public static TelegramHeader makeTelegramHeader(TelegramUserDataInput userDataInput) {
+        TelegramHeader header = new TelegramHeader();
+        String hostName = null;
 
         try {
-            var3 = InetAddress.getLocalHost().getHostName();
-        } catch (UnknownHostException var6) {
-            ExceptionUtil.logPrintStackTrace(logger, var6);
+            hostName = InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            ExceptionUtil.logPrintStackTrace(logger, e);
         }
 
-        if (var3 == null) {
-            var2.setGid_sysname("MAAS");
-        } else {
-            var2.setGid_sysname(var3);
-        }
+        header.setGid_sysname(hostName != null ? hostName : "MAAS");
+        header.setGid_yyyyymmdd(TelegramDateUtil.getYYYYMMDD());
+        header.setGid_hhmmss(TelegramDateUtil.getHHMMSS());
+        header.setGid_seq(GlobalSeq.getSeq());
+        String wlInstance = System.getProperty("wlinstance");
+        header.setGid_pid(TelegramUtil.addLeftZeroPaddingByLength(wlInstance, 5));
+        header.setGid_stat("00");
+        header.setTx_code(userDataInput.getTx_code());
+        header.setInst_no("MTI");
+        header.setSend_rspn_type("S");
+        header.setRspn_svc_code(userDataInput.getRspn_svc_code());
+        header.setOri_global_id(getMakeOriginalGid(header));
+        header.setOri_send_time(TelegramDateUtil.getMicroTime());
+        String chnlId = System.getProperty("chnl_id");
+        header.setChnl_id(chnlId != null ? chnlId : "WEB");
+        header.setClient_ip_no(userDataInput.getClient_ip_no());
+        header.setClient_mac(userDataInput.getClient_mac());
+        header.setScrn_id(userDataInput.getScrn_id());
+        header.setScrn_lock_yn("N");
+        header.setOp_id(userDataInput.getOp_id());
+        header.setXa_begin_flag(0);
+        header.setSend_time(TelegramDateUtil.getMicroTime());
+        header.setRspn_time("");
+        header.setSync_type(userDataInput.getSync_type());
+        header.setAsync_rspn_yn("A".equals(userDataInput.getSync_type()) ? userDataInput.getAsync_rspn_yn() : "");
+        header.setCall_depth(0);
+        header.setMsg_count_no(0);
+        header.setTtl_use_flag(userDataInput.getTtl_use_flag());
+        header.setTtl_from_time(userDataInput.getTtl() != 0 ? TelegramDateUtil.getHHMMSS() : "");
+        header.setTtl(userDataInput.getTtl());
+        header.setLong_msg_type(userDataInput.getLong_msg_type());
+        header.setErr_flag(0);
+        header.setErr_src("");
+        header.setErr_type("");
+        header.setErr_code("");
+        header.setDst_inst_code(userDataInput.getDst_inst_code() != null ? userDataInput.getDst_inst_code() : "");
+        header.setFail_knd(userDataInput.getFail_knd());
+        header.setAp_host_name(userDataInput.getAp_host_name());
+        header.setAp_caller_id(userDataInput.getAp_caller_id());
+        header.setInf_id("");
+        header.setLang_type(userDataInput.getLang_type());
+        header.setReserved("");
 
-        var2.setGid_yyyyymmdd(TelegramDateUtil.getYYYYMMDD());
-        var2.setGid_hhmmss(TelegramDateUtil.getHHMMSS());
-        var2.setGid_seq(GlobalSeq.getSeq());
-        String var4 = System.getProperty("wlinstance");
-        var2.setGid_pid(TelegramUtil.addLeftZeroPaddingByLength(var4, 5));
-        var2.setGid_stat("00");
-        var2.setTx_code(var1.getTx_code());
-        var2.setInst_no("MTI");
-        var2.setSend_rspn_type("S");
-        var2.setRspn_svc_code(var1.getRspn_svc_code());
-        var2.setOri_global_id(TelegramBuilder.getMakeOriginalGid(var2));
-        var2.setOri_send_time(TelegramDateUtil.getMicroTime());
-        String var5 = System.getProperty("chnl_id");
-        if (var5 == null) {
-            var2.setChnl_id("WEB");
-        } else {
-            var2.setChnl_id(var5);
-        }
-
-        var2.setClient_ip_no(var1.getClient_ip_no());
-        var2.setClient_mac(var1.getClient_mac());
-        var2.setScrn_id(var1.getScrn_id());
-        var2.setScrn_lock_yn("N");
-        var2.setOp_id(var1.getOp_id());
-        var2.setXa_begin_flag(0);
-        var2.setSend_time(TelegramDateUtil.getMicroTime());
-        var2.setRspn_time("");
-        var2.setSync_type(var1.getSync_type());
-        if (var1.getSync_type() != null && "A".equals(var1.getSync_type())) {
-            var2.setAsync_rspn_yn(var1.getAsync_rspn_yn());
-        } else {
-            var2.setAsync_rspn_yn("");
-        }
-
-        var2.setCall_depth(0);
-        var2.setMsg_count_no(0);
-        var2.setTtl_use_flag(var1.getTtl_use_flag());
-        if (var1.getTtl() != 0) {
-            var2.setTtl_from_time(TelegramDateUtil.getHHMMSS());
-            var2.setTtl(var1.getTtl());
-        } else {
-            var2.setTtl_from_time("");
-            var2.setTtl(0);
-        }
-
-        var2.setLong_msg_type(var1.getLong_msg_type());
-        var2.setErr_flag(0);
-        var2.setErr_src("");
-        var2.setErr_type("");
-        var2.setErr_code("");
-        if (var1.getDst_inst_code() == null) {
-            var2.setDst_inst_code("");
-            var2.setFail_knd("");
-            var2.setAp_host_name("");
-            var2.setAp_caller_id("");
-        } else {
-            var2.setDst_inst_code(var1.getDst_inst_code());
-            var2.setFail_knd(var1.getFail_knd());
-            var2.setAp_host_name(var1.getAp_host_name());
-            var2.setAp_caller_id(var1.getAp_caller_id());
-        }
-
-        var2.setInf_id("");
-        var2.setLang_type(var1.getLang_type());
-        var2.setReserved("");
-        return var2;
+        return header;
     }
 
     public static TelegramInDataList makeTelegramDataList(List<?> var1) {
@@ -155,20 +124,23 @@ public class TelegramBuilder {
         return var2;
     }
 
-    public static <V> TelegramInData<V> makeTelegramData(V var1) {
-        TelegramInData<V> var2 = new TelegramInData<>();
-        var2.setDataType("D");
-        var2.setData(var1);
-        int var3 = 0;
-
+    public static <V> TelegramInData<V> makeTelegramData(V data) {
+        TelegramInData<V> telegramData = new TelegramInData<>();
+        telegramData.setDataType("D");
+        telegramData.setData(data);
         try {
-            var3 = TelegramUtil.getPacketSize(var2) - 9;
-        } catch (Exception var5) {
-            ExceptionUtil.logPrintStackTrace(logger, var5);
+            int dataLength = TelegramUtil.getPacketSize(telegramData) - 9;
+            telegramData.setLength(dataLength);
+        } catch (Exception e) {
+            ExceptionUtil.logPrintStackTrace(logger, e);
         }
+        return telegramData;
+    }
 
-        var2.setLength(var3);
-        return var2;
+    public static <T> TelegramOutDataList<T> makeTelegramOutList(List<T> dataList) {
+        TelegramOutDataList<T> outDataList = new TelegramOutDataList<>();
+        outDataList.setData(dataList); // Use the incoming list directly
+        return outDataList;
     }
 
     public static String getMakeOriginalGid(TelegramHeader var1) {
@@ -243,13 +215,6 @@ public class TelegramBuilder {
     public static <T> TelegramOutData<T> makeTelegramOut(T var1) {
         TelegramOutData<T> var2 = new TelegramOutData<>();
         var2.setData(var1);
-        return var2;
-    }
-
-    public static <T> TelegramOutDataList<T> makeTelegramOutList(List<T> var1) {
-        TelegramOutDataList<T> var2 = new TelegramOutDataList<>();
-        ArrayList<T> var3 = new ArrayList<>();
-        var2.setData(var3);
         return var2;
     }
 }

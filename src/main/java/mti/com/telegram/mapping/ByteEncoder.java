@@ -10,7 +10,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.nio.ByteBuffer;
-import java.util.Iterator;
 import java.util.List;
 
 public class ByteEncoder {
@@ -20,282 +19,184 @@ public class ByteEncoder {
     public ByteEncoder() {
     }
 
-    public void setCharSet(String var1) {
-        this.charSet = var1;
+    public void setCharSet(String charSet) {
+        this.charSet = charSet;
     }
 
-    public byte[] convertObject2Bytes(Object var1, boolean var2) throws Exception {
-        this.limited = var2;
-        ByteBuffer var3 = null;
-        if (var1 == null) {
+    public byte[] convertObjectToBytes(Object obj, boolean limitedFlag) throws Exception {
+        this.limited = limitedFlag;
+        if (obj == null) {
             return null;
-        } else {
-            int var4 = TelegramUtil.getPacketSize(var1);
-            var3 = ByteBuffer.allocate(var4);
-            Field[] var5 = var1.getClass().getDeclaredFields();
-            int var6 = var5.length;
+        }
 
-            for (int var7 = 0; var7 < var6; ++var7) {
-                Field var8 = var5[var7];
-                FIELD var9 = var8.getAnnotation(FIELD.class);
-                Object var10 = var8.get(var1);
+        int packetSize = TelegramUtil.getPacketSize(obj);
+        ByteBuffer byteBuffer = ByteBuffer.allocate(packetSize);
+        Field[] fields = obj.getClass().getDeclaredFields();
 
-                try {
-                    if (var10 == null) {
-                        byte[] var17;
-                        var17 = null;
-                        int var14;
-                        int var16;
-                        label74:
-                        switch (var9.type()) {
-                            case STRING:
-                                var16 = var9.length();
-                                var17 = new byte[var16];
-                                int var19 = 0;
+        for (Field field : fields) {
+            FIELD fieldAnnotation = field.getAnnotation(FIELD.class);
+            Object fieldValue = field.get(obj);
 
-                                while (true) {
-                                    if (var19 >= var16) {
-                                        break label74;
-                                    }
-
-                                    var17[var19] = 32;
-                                    ++var19;
-                                }
-                            case NUMBER:
-                                var16 = var9.length();
-                                DATATYPE var13 = var8.getAnnotation(DATATYPE.class);
-                                var16 += var13.sign_length();
-                                var16 += var13.point_length();
-                                var17 = new byte[var16];
-                                var14 = 0;
-
-                                while (true) {
-                                    if (var14 >= var16) {
-                                        break label74;
-                                    }
-
-                                    var17[var14] = 48;
-                                    ++var14;
-                                }
-                            case LIST:
-                                switch (var9.kind()) {
-                                    case DATA:
-                                        var17 = new byte[8];
-                                        var14 = 0;
-
-                                        while (true) {
-                                            if (var14 >= 8) {
-                                                break label74;
-                                            }
-
-                                            var17[var14] = 48;
-                                            ++var14;
-                                        }
-                                    case MESSAGE:
-                                        var17 = new byte[2];
-
-                                        for (var14 = 0; var14 < 2; ++var14) {
-                                            var17[var14] = 48;
-                                        }
-                                    default:
-                                        break label74;
-                                }
-                            case VO:
-                                var10 = TelegramUtil.getObjectFromField(var8);
-                                var16 = TelegramUtil.getPacketSize(var10);
-                                var17 = this.convertObject2Bytes(var10, this.limited);
-                                break;
-                            case BYTES:
-                                var16 = var9.length();
-                                var17 = new byte[var16];
-                        }
-
-                        if (var17 != null) {
-                            var3.put(var17);
-                        }
-                    } else {
-                        byte[] var18 = this.appendSerializedField(var10, var8);
-                        if (var18 != null) {
-                            var3.put(var18);
-                        }
+            try {
+                if (fieldValue == null) {
+                    byte[] placeholderBytes = createPlaceholderBytes(fieldAnnotation, field);
+                    if (placeholderBytes != null) {
+                        byteBuffer.put(placeholderBytes);
                     }
-                } catch (Exception var15) {
-                    TelegramNestedRuntimeException var12 = new TelegramNestedRuntimeException(var15.toString());
-                    var12.setFieldName(var8.getName());
-                    var12.setFtype(var9.type().getTypeName());
-                    var12.setObjName(var1.getClass().getName());
-                    var12.setParser("ByteEncoder");
-                    var12.setStackTrace(var15.getStackTrace());
-                    throw var12;
+                } else {
+                    byte[] serializedField = appendSerializedField(fieldValue, field);
+                    if (serializedField != null) {
+                        byteBuffer.put(serializedField);
+                    }
                 }
+            } catch (Exception e) {
+                TelegramNestedRuntimeException ex = new TelegramNestedRuntimeException(e.getMessage());
+                ex.setFieldName(field.getName());
+                ex.setFtype(fieldAnnotation.type().getTypeName());
+                ex.setObjName(obj.getClass().getName());
+                ex.setParser("ByteEncoder");
+                ex.setStackTrace(e.getStackTrace());
+                throw ex;
             }
-
-            return var3 != null ? var3.array() : null;
         }
+
+        return byteBuffer.array();
     }
 
-    private byte[] appendSerializedField(Object var1, Field var2) throws Exception {
-        byte[] var3 = null;
-        Type var4 = var2.getGenericType();
-        String var5;
-        if (TelegramUtil.isPrimitiveType(var4)) {
-            var5 = var4.getTypeName();
-            if ("int".equals(var5) && TelegramUtil.verifyIntegerNumber(var1, var2, "ByteEncoder")) {
-                var3 = this.convertStringToBytes(((Integer) var1).toString(), var2);
-            }
+    private byte[] createPlaceholderBytes(FIELD fieldAnnotation, Field field) {
+        int length = fieldAnnotation.length();
+        byte[] placeholderBytes = null;
 
-            if ("short".equals(var5) && TelegramUtil.verifyShortNumber(var1, var2, "ByteEncoder")) {
-                var3 = this.convertStringToBytes(((Short) var1).toString(), var2);
-            }
-
-            if ("long".equals(var5) && TelegramUtil.verifyLongNumber(var1, var2, "ByteEncoder")) {
-                var3 = this.convertStringToBytes(((Long) var1).toString(), var2);
-            }
-
-            String var6;
-            if ("float".equals(var5)) {
-                var6 = TelegramUtil.getStringFromDecimalNumberRound(var1, var2);
-                if (TelegramUtil.verifyFloatNumber(Float.parseFloat(var6), var2, "ByteEncoder")) {
-                    var3 = this.convertStringToBytes(var6, var2);
+        switch (fieldAnnotation.type()) {
+            case STRING:
+                placeholderBytes = new byte[length];
+                for (int i = 0; i < length; i++) {
+                    placeholderBytes[i] = ' ';
                 }
-            }
+                break;
 
-            if ("double".equals(var5)) {
-                var6 = TelegramUtil.getStringFromDecimalNumberRound(var1, var2);
-                if (TelegramUtil.verifyDoubleNumber(Double.parseDouble(var6), var2, "ByteEncoder")) {
-                    var3 = this.convertStringToBytes(var6, var2);
+            case NUMBER:
+                DATATYPE dataType = field.getAnnotation(DATATYPE.class);
+                length += dataType.sign_length() + dataType.point_length();
+                placeholderBytes = new byte[length];
+                for (int i = 0; i < length; i++) {
+                    placeholderBytes[i] = '0';
                 }
-            }
-        } else if (var2.getAnnotation(FIELD.class).type() == FieldType.VO) {
-            var3 = this.convertObject2Bytes(var1, this.limited);
-        } else if (var2.getType().isAssignableFrom(Integer.class)) {
-            if (TelegramUtil.verifyIntegerNumber(var1, var2, "ByteEncoder")) {
-                var5 = ((Integer) var1).toString();
-                var3 = this.convertStringToBytes(var5, var2);
-            }
-        } else if (var2.getType().isAssignableFrom(Short.class)) {
-            if (TelegramUtil.verifyShortNumber(var1, var2, "ByteEncoder")) {
-                var5 = ((Short) var1).toString();
-                var3 = this.convertStringToBytes(var5, var2);
-            }
-        } else if (var2.getType().isAssignableFrom(Long.class)) {
-            if (TelegramUtil.verifyLongNumber(var1, var2, "ByteEncoder")) {
-                var5 = ((Long) var1).toString();
-                var3 = this.convertStringToBytes(var5, var2);
-            }
-        } else if (var2.getType().isAssignableFrom(Float.class)) {
-            var5 = TelegramUtil.getStringFromDecimalNumberRound(var1, var2);
-            if (TelegramUtil.verifyFloatNumber(Float.valueOf(var5), var2, "ByteEncoder")) {
-                var3 = this.convertStringToBytes(var5, var2);
-            }
-        } else if (var2.getType().isAssignableFrom(Double.class)) {
-            var5 = TelegramUtil.getStringFromDecimalNumberRound(var1, var2);
-            if (TelegramUtil.verifyDoubleNumber(Double.valueOf(var5), var2, "ByteEncoder")) {
-                var3 = this.convertStringToBytes(var5, var2);
-            }
-        } else if (var2.getType().isAssignableFrom(BigDecimal.class)) {
-            var5 = TelegramUtil.getStringFromDecimalNumberRound(var1, var2);
-            if (TelegramUtil.verifyDoubleNumber(Double.parseDouble(var5), var2, "ByteEncoder")) {
-                var3 = this.convertStringToBytes(var5, var2);
-            }
-        } else if (var2.getType().isAssignableFrom(String.class)) {
-            var3 = this.convertStringToBytes(var1, var2);
-        } else if (var2.getType().isAssignableFrom(byte[].class)) {
-            var3 = (byte[]) var1;
-        } else {
-            FIELD var14;
-            if (var2.getType().isAssignableFrom(List.class)) {
-                var14 = var2.getAnnotation(FIELD.class);
-                int var13 = TelegramUtil.getPacketSize((List) var1);
-                int var7 = 0;
-                if (var1 != null) {
-                    var7 = ((List) var1).size();
-                }
+                break;
 
-                ByteBuffer var8;
-                var8 = null;
-                int var10;
-                label105:
-                switch (var14.kind()) {
+            case LIST:
+                switch (fieldAnnotation.kind()) {
                     case DATA:
-                        byte var9 = 8;
-                        var8 = ByteBuffer.allocate(var13 + var9);
-                        var8.put(TelegramUtil.lpadString2Byte((Integer.valueOf(var7)).toString(), var9, "0", this.charSet));
-                        if (this.limited && var1 != null) {
-                            var10 = ((List) var1).size();
-                            if ((long) var10 > 10000L) {
-                                TelegramNestedRuntimeException var17 = new TelegramNestedRuntimeException("NumberFormat Exception");
-                                var17.setMsg("Data Count [" + var10 + "] is over Maximuim [" + 10000L + "]");
-                                throw var17;
-                            }
+                        placeholderBytes = new byte[8];
+                        for (int i = 0; i < 8; i++) {
+                            placeholderBytes[i] = '0';
                         }
-
-                        Iterator var15 = ((List) var1).iterator();
-
-                        while (true) {
-                            if (!var15.hasNext()) {
-                                break label105;
-                            }
-
-                            Object var16 = var15.next();
-                            var8.put(this.convertObject2Bytes(var16, this.limited));
-                        }
+                        break;
                     case MESSAGE:
-                        var10 = 2;
-                        var8 = ByteBuffer.allocate(var13 + var10);
-                        var8.put(TelegramUtil.lpadString2Byte((Integer.valueOf(var7)).toString(), var10, "0", this.charSet));
-                        Iterator var11 = ((List) var1).iterator();
-
-                        while (var11.hasNext()) {
-                            Object var12 = var11.next();
-                            var8.put(this.convertObject2Bytes(var12, this.limited));
+                        placeholderBytes = new byte[2];
+                        for (int i = 0; i < 2; i++) {
+                            placeholderBytes[i] = '0';
                         }
+                        break;
+                    default:
+                        break;
                 }
+                break;
 
-                var3 = var8.array();
-            } else {
-                var14 = var2.getAnnotation(FIELD.class);
-                switch (var14.type()) {
-                    case VO:
-                        var3 = this.convertObject2Bytes(var1, this.limited);
+            case VO:
+                try {
+                    Object nestedObject = TelegramUtil.getObjectFromField(field);
+                    placeholderBytes = convertObjectToBytes(nestedObject, limited);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            }
+                break;
+
+            case BYTES:
+                placeholderBytes = new byte[length];
+                break;
+
+            default:
+                break;
         }
 
-        return var3;
+        return placeholderBytes;
     }
 
-    private byte[] convertStringToBytes(Object var1, Field var2) throws Exception {
-        byte[] var3 = null;
-        FIELD var4 = var2.getAnnotation(FIELD.class);
-        if (var1 == null) {
-            return var3;
+    private byte[] appendSerializedField(Object fieldValue, Field field) throws Exception {
+        byte[] serializedBytes = null;
+        Type fieldType = field.getGenericType();
+
+        if (TelegramUtil.isPrimitiveType(fieldType)) {
+            serializedBytes = handlePrimitiveField(fieldValue, field);
+        } else if (field.getAnnotation(FIELD.class).type() == FieldType.VO) {
+            serializedBytes = convertObjectToBytes(fieldValue, limited);
+        } else if (List.class.isAssignableFrom(field.getType())) {
+            serializedBytes = handleListField(fieldValue, field);
         } else {
-            String var5 = var1 != null ? (String) var1 : "";
-            int var6 = var4.length();
-            int var7 = 0;
-            if (var4.type() == FieldType.NUMBER) {
-                DATATYPE var8 = var2.getAnnotation(DATATYPE.class);
-                var6 += var8.sign_length();
-                var6 += var8.point_length();
-                var7 = var8.decimal();
-            }
-
-            int var10 = var5.getBytes(this.charSet).length;
-            if (var10 > var6) {
-                byte[] var9 = var5.getBytes(this.charSet);
-                var3 = (new String(var9, 0, var6)).getBytes(this.charSet);
-            } else {
-                switch (var4.type()) {
-                    case STRING:
-                        var3 = TelegramUtil.rpadString2Byte(var5, var6, " ", this.charSet);
-                        break;
-                    case NUMBER:
-                        var3 = TelegramUtil.lpadString2ByteWithDecimal(var5, var6, "0", this.charSet, var7);
-                }
-            }
-
-            return var3;
+            serializedBytes = handleNonPrimitiveField(fieldValue, field);
         }
+
+        return serializedBytes;
+    }
+
+    private byte[] handlePrimitiveField(Object fieldValue, Field field) throws Exception {
+        String typeName = field.getGenericType().getTypeName();
+        switch (typeName) {
+            case "int":
+                return convertStringToBytes(Integer.toString((int) fieldValue), field);
+            case "short":
+                return convertStringToBytes(Short.toString((short) fieldValue), field);
+            case "long":
+                return convertStringToBytes(Long.toString((long) fieldValue), field);
+            case "float":
+            case "double":
+                String decimalValue = TelegramUtil.getStringFromDecimalNumberRound(fieldValue, field);
+                return convertStringToBytes(decimalValue, field);
+            default:
+                return null;
+        }
+    }
+
+    private byte[] handleListField(Object fieldValue, Field field) throws Exception {
+        // FIELD fieldAnnotation = field.getAnnotation(FIELD.class);
+        int packetSize = TelegramUtil.getPacketSize((List<?>) fieldValue);
+        int listSize = ((List<?>) fieldValue).size();
+        ByteBuffer buffer = ByteBuffer.allocate(packetSize + 8);
+
+        buffer.put(TelegramUtil.lpadString2Byte(Integer.toString(listSize), 8, "0", charSet));
+        for (Object item : (List<?>) fieldValue) {
+            buffer.put(convertObjectToBytes(item, limited));
+        }
+
+        return buffer.array();
+    }
+
+    private byte[] handleNonPrimitiveField(Object fieldValue, Field field) throws Exception {
+        if (fieldValue instanceof BigDecimal) {
+            String decimalValue = TelegramUtil.getStringFromDecimalNumberRound(fieldValue, field);
+            return convertStringToBytes(decimalValue, field);
+        } else if (fieldValue instanceof String) {
+            return convertStringToBytes((String) fieldValue, field);
+        } else if (fieldValue instanceof byte[]) {
+            return (byte[]) fieldValue;
+        }
+        return null;
+    }
+
+    private byte[] convertStringToBytes(String value, Field field) throws Exception {
+        FIELD fieldAnnotation = field.getAnnotation(FIELD.class);
+        int length = fieldAnnotation.length();
+        byte[] resultBytes;
+
+        if (fieldAnnotation.type() == FieldType.NUMBER) {
+            DATATYPE dataType = field.getAnnotation(DATATYPE.class);
+            length += dataType.sign_length() + dataType.point_length();
+            resultBytes = TelegramUtil.lpadString2ByteWithDecimal(value, length, "0", charSet, dataType.decimal());
+        } else {
+            resultBytes = TelegramUtil.rpadString2Byte(value, length, " ", charSet);
+        }
+
+        return resultBytes;
     }
 }
