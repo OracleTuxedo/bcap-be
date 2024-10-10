@@ -55,7 +55,7 @@ public class DarrenTest {
             .build();
 
         SAC04V127UInVo sac04v127uInVo = SAC04V127UInVo.builder()
-            .sub1Vo(List.of(sac04v127uInSub1Vo1))
+            .sub1_vo(List.of(sac04v127uInSub1Vo1))
             .build();
 
         ByteEncoder byteEncoder = new ByteEncoder();
@@ -63,7 +63,7 @@ public class DarrenTest {
 
         logger.info(telegramIn.getData().getData().toString());
 
-        byte[] arrayOfByte = byteEncoder.convertObject2Bytes(telegramIn, true);
+        byte[] arrayOfByte = byteEncoder.convertObjectToBytes(telegramIn, true);
         String request = new String(arrayOfByte, StandardCharsets.UTF_8);
 
         logger.info(request);
