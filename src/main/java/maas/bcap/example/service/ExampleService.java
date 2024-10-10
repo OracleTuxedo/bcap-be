@@ -31,6 +31,7 @@ public class ExampleService {
     private SAC02F452R sac02F452R;
 
     public ExampleOutDto getListOfEDC(HttpServletRequest request, ExampleInDto inDto, String screenId) throws Exception {
+        logger.info(inDto.toString());
 
         /// SED03F107R
         SED03F107RInVo sed03F107RInVo = SED03F107RInVo.builder()

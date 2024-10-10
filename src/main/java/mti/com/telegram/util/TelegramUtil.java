@@ -18,7 +18,6 @@ import java.math.RoundingMode;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.text.NumberFormat;
-import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -46,6 +45,9 @@ public class TelegramUtil {
                 break;
             case FLOAT:
                 var5 = ((Float) var0).doubleValue();
+                break;
+            default:
+                break;
         }
 
         return var4.format(var5);
@@ -69,6 +71,9 @@ public class TelegramUtil {
                 break;
             case FLOAT:
                 var5 = ((Float) var0).doubleValue();
+                break;
+            default:
+                break;
         }
 
         return var4.format(var5);
@@ -92,6 +97,9 @@ public class TelegramUtil {
                 break;
             case FLOAT:
                 var5 = ((Float) var0).doubleValue();
+                break;
+            default:
+                break;
         }
 
         return var4.format(var5);
@@ -125,6 +133,9 @@ public class TelegramUtil {
                         } else {
                             var3 = rpadString2Byte(var5, var6, "0", var2);
                         }
+                        break;
+                    default:
+                        break;
                 }
             }
 
@@ -153,8 +164,6 @@ public class TelegramUtil {
     public static byte[] rpadString2Byte(String var0, int var1, String var2, String var3) throws Exception {
         byte[] var4 = null;
         StringBuffer var5 = new StringBuffer();
-        boolean var7 = false;
-        Object var8 = null;
         int var9;
         if (var0 != null && !"".equals(var0)) {
             byte[] var12 = var0.getBytes(var3);
@@ -186,8 +195,6 @@ public class TelegramUtil {
     public static byte[] lpadString2Byte(String var0, int var1, String var2, String var3) throws Exception {
         byte[] var4 = null;
         StringBuffer var5 = new StringBuffer();
-        boolean var7 = false;
-        Object var8 = null;
         int var9;
         if (var0 != null && !"".equals(var0)) {
             byte[] var12 = var0.getBytes(var3);
@@ -216,9 +223,9 @@ public class TelegramUtil {
         return var4;
     }
 
-    public static byte[] lpadString2ByteWithDecimal(String var0, int var1, String var2, String var3, int var4) throws Exception {
+    public static byte[] lpadString2ByteWithDecimal(String var0, int var1, String var2, String var3, int var4)
+            throws Exception {
         byte[] var5 = null;
-        boolean var6 = false;
         int var7 = var0.indexOf(".");
         boolean var8 = false;
         int var13;
@@ -284,9 +291,9 @@ public class TelegramUtil {
         return var5;
     }
 
-    public static String rightNumberPaddingStringWithDecimal(String var0, int var1, String var2, String var3, int var4) throws Exception {
+    public static String rightNumberPaddingStringWithDecimal(String var0, int var1, String var2, String var3, int var4)
+            throws Exception {
         byte[] var5 = null;
-        boolean var6 = false;
         int var7 = var0.indexOf(".");
         boolean var8 = false;
         int var11;
@@ -317,45 +324,52 @@ public class TelegramUtil {
     }
 
     public static int getPacketSize(Object var0) throws Exception {
-        int var1 = 0;
-        Field[] var2 = var0.getClass().getDeclaredFields();
-        int var3 = var2.length;
+        int packetSize = 0;
+        Field[] fields = var0.getClass().getDeclaredFields();
 
-        for (int var4 = 0; var4 < var3; ++var4) {
-            Field var5 = var2[var4];
-            Object var6 = var5.get(var0);
-            FIELD var7 = var5.getAnnotation(FIELD.class);
-            switch (var7.type()) {
-                case NUMBER:
-                    DATATYPE var8 = var5.getAnnotation(DATATYPE.class);
-                    var1 += var7.length();
-                    var1 += var8.point_length();
-                    var1 += var8.sign_length();
-                    break;
-                case LIST:
-                    var1 += getPacketSize((List) var6);
-                    switch (var7.kind()) {
-                        case DATA:
-                            var1 += 8;
-                            continue;
-                        case MESSAGE:
-                            var1 += 2;
-                        default:
-                            continue;
-                    }
-                case VO:
-                    if (var6 == null) {
-                        var6 = getObjectFromField(var5);
-                    }
+        for (Field field : fields) {
+            field.setAccessible(true); // Ensure we can access private fields
 
-                    var1 += getPacketSize(var6);
-                    break;
-                default:
-                    var1 += var7.length();
+            Object fieldValue = field.get(var0);
+            FIELD fieldAnnotation = field.getAnnotation(FIELD.class);
+
+            if (fieldAnnotation == null) {
+                continue; // Skip if the annotation is not present
+            }
+
+            switch (fieldAnnotation.type()) {
+                case NUMBER -> {
+                    DATATYPE dataTypeAnnotation = field.getAnnotation(DATATYPE.class);
+                    if (dataTypeAnnotation != null) {
+                        packetSize += fieldAnnotation.length();
+                        packetSize += dataTypeAnnotation.point_length();
+                        packetSize += dataTypeAnnotation.sign_length();
+                    }
+                }
+                case LIST -> {
+                    if (fieldValue instanceof List<?> list) {
+                        packetSize += getPacketSize(list);
+                        switch (fieldAnnotation.kind()) {
+                            case DATA -> packetSize += 8;
+                            case MESSAGE -> packetSize += 2;
+                            default -> {
+                            }
+                        }
+                    }
+                }
+                case VO -> {
+                    if (fieldValue == null) {
+                        fieldValue = getObjectFromField(field);
+                    }
+                    if (fieldValue != null) {
+                        packetSize += getPacketSize(fieldValue);
+                    }
+                }
+                default -> packetSize += fieldAnnotation.length();
             }
         }
 
-        return var1;
+        return packetSize;
     }
 
     public static int getPacketSize(Object var0, byte[] var1, boolean var2) throws Exception {
@@ -384,19 +398,24 @@ public class TelegramUtil {
                         case MESSAGE:
                             var10 = cutBytes(var1, var3, 2);
                             var3 += 2;
+                            break;
+                        default:
+                            break;
                     }
 
                     String var11 = (new String(var10)).trim();
                     boolean var12 = Pattern.matches("^[0-9]*$", var11);
                     if (!var12) {
-                        TelegramNestedRuntimeException var16 = new TelegramNestedRuntimeException("NumberFormat Exception");
+                        TelegramNestedRuntimeException var16 = new TelegramNestedRuntimeException(
+                                "NumberFormat Exception");
                         var16.setMsg("Data Count String is [" + var11 + "]. is not NumberType");
                         throw var16;
                     }
 
                     int var13 = Integer.parseInt(var11);
                     if (var2 && (long) var13 > 10000L) {
-                        TelegramNestedRuntimeException var17 = new TelegramNestedRuntimeException("NumberFormat Exception");
+                        TelegramNestedRuntimeException var17 = new TelegramNestedRuntimeException(
+                                "NumberFormat Exception");
                         var17.setMsg("Data Count [" + var11 + "] is over Maximuim [" + 10000L + "]");
                         throw var17;
                     }
@@ -419,16 +438,14 @@ public class TelegramUtil {
         return var3;
     }
 
-    public static int getPacketSize(List<Object> var0) throws Exception {
-        int var1 = 0;
-        Object var3;
-        if (var0 != null) {
-            for (Iterator var2 = var0.iterator(); var2.hasNext(); var1 += getPacketSize(var3)) {
-                var3 = var2.next();
+    public static int getPacketSize(List<Object> objectList) throws Exception {
+        int packetSize = 0;
+        if (objectList != null) {
+            for (var obj : objectList) {
+                packetSize += getPacketSize(obj);
             }
         }
-
-        return var1;
+        return packetSize;
     }
 
     public static int getPacketSize(Object[] var0) throws Exception {
@@ -446,14 +463,14 @@ public class TelegramUtil {
         return var1;
     }
 
-    public static int getListFieldSizeByCount(Field var0, int var1) throws Exception {
-        Type var2 = var0.getGenericType();
-        ParameterizedType var3 = (ParameterizedType) var2;
-        Type[] var4 = var3.getActualTypeArguments();
-        Class var5 = (Class) var4[0];
-        Object var6 = var5.newInstance();
-        int var7 = getPacketSize(var6);
-        return var7 * var1;
+    public static int getListFieldSizeByCount(Field field, int count) throws Exception {
+        Type genericType = field.getGenericType();
+        ParameterizedType parameterizedType = (ParameterizedType) genericType;
+        Type[] typeArguments = parameterizedType.getActualTypeArguments();
+        Class<?> clazz = (Class<?>) typeArguments[0];
+        Object instance = clazz.getDeclaredConstructor().newInstance();
+        int packetSize = getPacketSize(instance);
+        return packetSize * count;
     }
 
     public static byte[] cutBytes(byte[] var0, int var1, int var2) throws Exception {
@@ -498,7 +515,7 @@ public class TelegramUtil {
     public static String getSetterMethodName(String var0) {
         String var1 = getAccessorName(var0);
         String var2 = "set" +
-            var1;
+                var1;
         return var2;
     }
 
@@ -506,7 +523,7 @@ public class TelegramUtil {
         if (var0 != null && var0.length() > 0) {
             char[] var1 = var0.toCharArray();
             String var2 = Character.toUpperCase(var1[0]) +
-                var0.substring(1);
+                    var0.substring(1);
             return var2;
         } else {
             return "";
@@ -524,22 +541,24 @@ public class TelegramUtil {
         }
     }
 
-    public static Object getObjectFromField(Field var0) throws Exception {
-        Object var1 = null;
-        Type var2 = var0.getGenericType();
-        String var3 = var2.getTypeName();
-        if (var2 instanceof ParameterizedType var4) {
-            Type[] var5 = var4.getActualTypeArguments();
-            Class var6 = (Class) var5[0];
-            var1 = var6.newInstance();
+    public static Object getObjectFromField(Field field) throws Exception {
+        Object instance = null;
+        Type genericType = field.getGenericType();
+
+        if (genericType instanceof ParameterizedType parameterizedType) {
+            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
+            Class<?> clazz = (Class<?>) actualTypeArguments[0];
+            instance = clazz.getDeclaredConstructor().newInstance();
         } else {
-            var1 = Class.forName(var3).newInstance();
+            String className = genericType.getTypeName();
+            instance = Class.forName(className).getDeclaredConstructor().newInstance();
         }
 
-        return var1;
+        return instance;
     }
 
-    public static void setterMethodForNumberInvoke(Object var0, Field var1, String var2, byte[] var3, String var4, String var5) throws Exception {
+    public static void setterMethodForNumberInvoke(Object var0, Field var1, String var2, byte[] var3, String var4,
+            String var5) throws Exception {
         Method var6 = null;
         Type var7 = var1.getGenericType();
         String var8 = var7.getTypeName();
@@ -627,28 +646,29 @@ public class TelegramUtil {
     public static boolean isPrimitiveType(Type var0) {
         boolean var1 = false;
         String var2 = var0.getTypeName();
-        if ("int".equals(var2) || "short".equals(var2) || "long".equals(var2) || "float".equals(var2) || "double".equals(var2)) {
+        if ("int".equals(var2) || "short".equals(var2) || "long".equals(var2) || "float".equals(var2)
+                || "double".equals(var2)) {
             var1 = true;
         }
 
         return var1;
     }
 
-    public static void viewObjectMethod(Object var0) {
-        Field[] var1 = var0.getClass().getDeclaredFields();
-        int var2 = var1.length;
-        System.out.println("****************** " + var0.getClass().getName());
+    public static void viewObjectMethod(Object object) {
+        Field[] fields = object.getClass().getDeclaredFields();
+        System.out.println("****************** " + object.getClass().getName());
 
-        for (int var3 = 0; var3 < var2; ++var3) {
-            Class var4 = var1[var3].getDeclaringClass();
-            Method[] var5 = var4.getMethods();
+        for (var field : fields) {
+            Class<?> declaringClass = field.getDeclaringClass();
+            Method[] methods = declaringClass.getMethods();
 
-            for (int var6 = 0; var6 < var5.length; ++var6) {
-                System.out.println(var4.getName() + "                    " + var5[var6].getName());
-                Type[] var7 = var5[var6].getGenericParameterTypes();
+            for (var method : methods) {
+                System.out.println(declaringClass.getName() + "                    " + method.getName());
+                Type[] parameterTypes = method.getGenericParameterTypes();
 
-                for (int var8 = 0; var8 < var7.length; ++var8) {
-                    System.out.println(var4.getName() + "                        " + var7[var8].getTypeName());
+                for (var parameterType : parameterTypes) {
+                    System.out.println(
+                            declaringClass.getName() + "                        " + parameterType.getTypeName());
                 }
             }
         }
