@@ -12,7 +12,6 @@ public class WeblogicConnector {
 
     public static byte[] connectTuxedo(byte[] request) {
 
-        // TODO application.properties
         String url = "http://localhost:7001/test1/connect";
 
         // Set headers to indicate plain text content

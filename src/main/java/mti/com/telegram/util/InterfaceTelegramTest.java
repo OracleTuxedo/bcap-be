@@ -2,8 +2,6 @@ package mti.com.telegram.util;
 
 import maas.bcap.module.ed.ed03.sed03f075r.SED03F075RInVo;
 import maas.bcap.module.ed.ed03.sed03f075r.SED03F075ROutVo;
-import maas.bcap.module.ed.ed03.sed03f107r.SED03F107RInVo;
-import maas.bcap.module.ed.ed03.sed03f107r.SED03F107ROutVo;
 import mti.com.telegram.exception.TelegramNestedRuntimeException;
 import mti.com.telegram.mapping.ByteDecoder;
 import mti.com.telegram.mapping.ByteEncoder;
@@ -178,21 +176,21 @@ import java.nio.charset.StandardCharsets;
 public class InterfaceTelegramTest {
     private static final Logger logger = LogManager.getLogger(InterfaceTelegramTest.class);
 
-    public static TelegramUserDataOutput testCall(TelegramUserDataInput inputUserData, Object inVo, Object outVo, String response) throws Exception {
+    public static <T,V> TelegramUserDataOutput<T> testCall(TelegramUserDataInput inputUserData, V inVo, T outVo, String response) throws Exception {
         logger.atLevel(Level.ALL);
         ByteEncoder byteEncoder = new ByteEncoder();
-        TelegramIn telegramIn = TelegramBuilder.getTelegramIn(inputUserData, inVo);
+        TelegramIn<V> telegramIn = TelegramBuilder.getTelegramIn(inputUserData, inVo);
 
         logger.info(telegramIn.getData().getData().toString());
 
-        byte[] requestToTuxedo = byteEncoder.convertObject2Bytes(telegramIn, true);
+        byte[] requestToTuxedo = byteEncoder.convertObjectToBytes(telegramIn, true);
         String request = new String(requestToTuxedo, StandardCharsets.UTF_8);
         logger.info("################################### Request Start LeRucco ###################################");
         logger.info(request);
         logger.info("################################### Request End LeRucco ###################################");
 
         byte[] responseFromTuxedo = response.getBytes();
-        TelegramUserDataOutput telegramUserDataOutput = parse(responseFromTuxedo, outVo);
+        TelegramUserDataOutput<T> telegramUserDataOutput = parse(responseFromTuxedo, outVo);
 
         logger.info("################################### Response Start LeRucco ###################################");
         logger.info(outVo.getClass().getSimpleName());
@@ -308,10 +306,10 @@ public class InterfaceTelegramTest {
 //                .build();
 
         /// SED03F107R Single
-        SED03F107RInVo sed03F107RInVo = SED03F107RInVo.builder()
-            .prd_tp_cd("EDC")
-            .sno("0013000011976476")
-            .build();
+        // SED03F107RInVo sed03F107RInVo = SED03F107RInVo.builder()
+        //     .prd_tp_cd("EDC")
+        //     .sno("0013000011976476")
+        //     .build();
 
 ////////////////////////////////////////////////////////////////////////////
         ByteEncoder byteEncoder = new ByteEncoder();
@@ -319,7 +317,7 @@ public class InterfaceTelegramTest {
 
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sed03F209RInVo);
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sac02F452RInVo);
-        TelegramIn telegramIn = TelegramBuilder.getTelegramIn(userData, sed03F075RInVo);
+        TelegramIn<SED03F075RInVo> telegramIn = TelegramBuilder.getTelegramIn(userData, sed03F075RInVo);
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sac04V224UInVo);
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sed03F129RInVo);
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sac04V233RInVo);
@@ -329,7 +327,7 @@ public class InterfaceTelegramTest {
 
         logger.info(telegramIn.getData().getData().toString());
 
-        byte[] arrayOfByte = byteEncoder.convertObject2Bytes(telegramIn, true);
+        byte[] arrayOfByte = byteEncoder.convertObjectToBytes(telegramIn, true);
         String request = new String(arrayOfByte, StandardCharsets.UTF_8);
 
         logger.info(request);
@@ -419,15 +417,15 @@ public class InterfaceTelegramTest {
 
     }
 
-    public static TelegramUserDataOutput parse(byte[] arrayOfByte, Object output) throws Exception {
-        Object object = null;
+    public static <T> TelegramUserDataOutput<T> parse(byte[] arrayOfByte, T output) throws Exception {
+        T object = null;
         TelegramHeader telegramHeader = getHeaderFromBytes(arrayOfByte);
         logger.info(telegramHeader.toString());
 //        return null;
         if (telegramHeader.getErr_flag() == 0) {
-            TelegramOut telegramOut1 = TelegramBuilder.getTelegramOutData(output);
-            ByteDecoder byteDecoder1 = new ByteDecoder();
-            TelegramOut telegramOut2 = (TelegramOut) byteDecoder1.convertBytes2Object(arrayOfByte, telegramOut1, true);
+            TelegramOut<T> telegramOut1 = TelegramBuilder.getTelegramOutData(output);
+            ByteDecoder<TelegramOut<T>> byteDecoder1 = new ByteDecoder<>();
+            TelegramOut<T> telegramOut2 = byteDecoder1.convertBytes2Object(arrayOfByte, telegramOut1, true);
             TelegramTail telegramTail1 = telegramOut2.getTail();
             if ("@@".equals(telegramTail1.getTail())) {
                 object = telegramOut2.getData().getData();
@@ -436,7 +434,7 @@ public class InterfaceTelegramTest {
                     "Response Telegram Length is not Matched !!");
             }
             TelegramMessage telegramMessage1 = telegramOut2.getMessage();
-            TelegramUserDataOutput telegramUserDataOutput = new TelegramUserDataOutput();
+            TelegramUserDataOutput<T> telegramUserDataOutput = new TelegramUserDataOutput<>();
             telegramUserDataOutput.setMessage(telegramMessage1);
             telegramUserDataOutput.setOutput(object);
             telegramUserDataOutput.setHeader(telegramHeader);
@@ -451,7 +449,7 @@ public class InterfaceTelegramTest {
         TelegramHeader telegramHeader = new TelegramHeader();
         try {
             byte[] arrayOfByte = TelegramUtil.cutBytes(paramArrayOfbyte, 0, 500);
-            ByteDecoder byteDecoder = new ByteDecoder();
+            ByteDecoder<TelegramHeader> byteDecoder = new ByteDecoder<>();
             telegramHeader = (TelegramHeader) byteDecoder.convertBytes2Object(arrayOfByte, telegramHeader, true);
         } catch (Exception exception) {
             ExceptionUtil.logPrintStackTrace(logger, exception);
