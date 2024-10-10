@@ -1,4 +1,4 @@
-package maas.bcap.module.ac.ac04.sac04v228r;
+package maas.bcap.module.az.az01.saz01f112r;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,12 +15,16 @@ import mti.com.telegram.model.annotation.FIELD;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SAC04V228RInVo {
-    @FIELD(kind = Kind.DATA, length = 8, type = FieldType.STRING, trim = TrimType.RTRIM)
-    public String snd_date;
+public class SAZ01F112RInVo {
 
-    @FIELD(kind = Kind.DATA, length = 18, type = FieldType.NUMBER, trim = TrimType.LTRIM)
+    @FIELD(kind = Kind.DATA, length = 24, type = FieldType.STRING, trim = TrimType.RTRIM)
+    public String bat_code;
+
+    @FIELD(kind = Kind.DATA, length = 6 , type = FieldType.NUMBER, trim = TrimType.LTRIM)
     @DATATYPE(type = NumberType.LONG, decimal = 0)
-    public long ems_seq_num;
+    public long page_no;
 
+    @FIELD(kind = Kind.DATA, length = 6, type = FieldType.NUMBER, trim = TrimType.LTRIM)
+    @DATATYPE(type = NumberType.LONG, decimal = 0)
+    public long page_size;
 }

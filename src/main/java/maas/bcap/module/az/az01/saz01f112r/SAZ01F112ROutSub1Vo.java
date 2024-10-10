@@ -1,4 +1,4 @@
-package maas.bcap.module.ac.ac06.sac06f245r;
+package maas.bcap.module.az.az01.saz01f112r;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,12 @@ import mti.com.telegram.model.annotation.FIELD;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SAC06F245RInVo {
-    @FIELD(kind = Kind.DATA, length = 4096, type = FieldType.STRING, trim = TrimType.RTRIM)
-    public String input_from_fep;
+public class SAZ01F112ROutSub1Vo {
+
+    @FIELD(kind = Kind.DATA, length = 24, type = FieldType.STRING, trim = TrimType.RTRIM)
+    public String bat_code;
+
+    @FIELD(kind = Kind.DATA, length = 256, type = FieldType.STRING, trim = TrimType.RTRIM)
+    public String bat_logical_name;
+
 }

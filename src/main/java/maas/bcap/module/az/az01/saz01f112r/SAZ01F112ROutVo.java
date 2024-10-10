@@ -1,4 +1,4 @@
-package maas.bcap.module.ed.ed03.sed03f081r;
+package maas.bcap.module.az.az01.saz01f112r;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,19 +17,16 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SED03F081ROutVo {
+public class SAZ01F112ROutVo {
+
+    @FIELD(kind = Kind.DATA, length = 1, type = FieldType.STRING, trim = TrimType.RTRIM)
+    public String next_page_exist_yn;
 
     @FIELD(kind = Kind.DATA, length = 6, type = FieldType.NUMBER, trim = TrimType.LTRIM)
     @DATATYPE(type = NumberType.LONG, decimal = 0)
-    public long page_size;
-
-    @FIELD(kind = Kind.DATA, length = 256, type = FieldType.STRING, trim = TrimType.RTRIM)
-    public String next_key_val;
-
-    @FIELD(kind = Kind.DATA, length = 10, type = FieldType.NUMBER, trim = TrimType.LTRIM)
-    @DATATYPE(type = NumberType.LONG, decimal = 0)
-    public long all_cnt;
+    public long next_page_no;
 
     @FIELD(kind = Kind.DATA, length = 0, type = FieldType.LIST, trim = TrimType.LTRIM)
-    public List<SED03F081ROutSub1Vo> sub1_vo;
+    public List<SAZ01F112ROutSub1Vo> sub1_vo;
+
 }
