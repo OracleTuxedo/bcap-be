@@ -32,8 +32,8 @@ public class BcapApplication {
 //            EndgTest.interfaceTuxedoParseRequest();
 //            EndgTest.interfaceTuxedoParseResponse();
 
-            DarrenTest.interfaceTuxedoParseRequest();
-            DarrenTest.interfaceTuxedoParseResponse();
+//            DarrenTest.interfaceTuxedoParseRequest();
+//            DarrenTest.interfaceTuxedoParseResponse();
 
 
         } catch (Exception e) {
