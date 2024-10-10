@@ -21,6 +21,6 @@ public class SAC04V127UInVo {
     public String dummy;
 
     @FIELD(kind = Kind.DATA, length = 0, type = FieldType.LIST, trim = TrimType.LTRIM)
-    public List<SAC04V127UInSub1Vo> sub1Vo;
+    public List<SAC04V127UInSub1Vo> sub1_vo;
 
 }

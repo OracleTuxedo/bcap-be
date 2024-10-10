@@ -21,6 +21,6 @@ public class SAC04V127UOutVo {
     public String proc_rslt_cd;
 
     @FIELD(kind = Kind.DATA, length = 0, type = FieldType.LIST, trim = TrimType.LTRIM)
-    public List<SAC04V127UOutSub1Vo> sub1Vo;
+    public List<SAC04V127UOutSub1Vo> sub1_vo;
 
 }
