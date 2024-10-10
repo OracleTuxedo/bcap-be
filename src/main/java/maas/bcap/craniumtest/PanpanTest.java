@@ -54,7 +54,7 @@ public class PanpanTest {
 
         logger.info(telegramIn.getData().getData().toString());
 
-        byte[] arrayOfByte = byteEncoder.convertObject2Bytes(telegramIn, true);
+        byte[] arrayOfByte = byteEncoder.convertObjectToBytes(telegramIn, true);
         String request = new String(arrayOfByte, StandardCharsets.UTF_8);
 
         logger.info(request);
