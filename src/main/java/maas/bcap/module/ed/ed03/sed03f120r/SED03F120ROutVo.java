@@ -54,8 +54,8 @@ public class SED03F120ROutVo {
     public String cmpl_dttm;
 
     @FIELD(kind = Kind.DATA, length = 18, type = FieldType.NUMBER, trim = TrimType.LTRIM)
-    @DATATYPE(type = NumberType.DOUBLE, decimal = 0)
-    public long fee;
+    @DATATYPE(type = NumberType.DECIMAL, decimal = 2, sign_length = 1, point_length = 1)
+    public double fee;
 
     @FIELD(kind = Kind.DATA, length = 1000, type = FieldType.STRING, trim = TrimType.RTRIM)
     public String wk_req_expl;

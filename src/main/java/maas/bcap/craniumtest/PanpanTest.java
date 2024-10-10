@@ -201,7 +201,7 @@ public class PanpanTest {
         if (telegramHeader.getErr_flag() == 0) {
             TelegramOut<T> telegramOut1 = TelegramBuilder.<T>getTelegramOutData(output);
             ByteDecoder<TelegramOut<T>> byteDecoder1 = new ByteDecoder<>();
-            TelegramOut<T> telegramOut2 = byteDecoder1.convertBytes2Object(arrayOfByte, telegramOut1, true);
+            TelegramOut<T> telegramOut2 = byteDecoder1.(arrayOfByte, telegramOut1, true);
             TelegramTail telegramTail1 = telegramOut2.getTail();
             if ("@@".equals(telegramTail1.getTail())) {
                 object = telegramOut2.getData().getData();
