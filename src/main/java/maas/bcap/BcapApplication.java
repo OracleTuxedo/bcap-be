@@ -24,6 +24,7 @@ public class BcapApplication {
 
             FalahTest.interfaceTuxedoParseRequest();
             FalahTest.interfaceTuxedoParseResponse();
+            
 //            LeRuccoTest.interfaceTuxedoParseRequest();
 //            LeRuccoTest.interfaceTuxedoParseResponse();
 

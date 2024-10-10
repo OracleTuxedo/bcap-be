@@ -3,8 +3,6 @@ package maas.bcap.module.ac.ac04.sac04v228r;
 import jakarta.servlet.http.HttpServletRequest;
 import maas.bcap.az.ServiceSupport;
 import maas.bcap.module.ac.ac04.sac04v228r.SAC04V228R;
-import maas.bcap.module.ac.ac04.sac04v228r.SAC04V228RInVo;
-import maas.bcap.module.ac.ac04.sac04v228r.SAC04V228ROutVo;
 import mti.com.telegram.exception.TelegramNestedRuntimeException;
 import mti.com.telegram.vo.TelegramUserDataInput;
 import mti.com.telegram.vo.TelegramUserDataOutput;
@@ -27,8 +25,6 @@ public class SAC04V228R {
         try {
             TelegramUserDataInput userDataInput = support.tuxedoHeader(request, this.getClass().getSimpleName(), screenId);
             result = support.tuxedoTransaction(userDataInput, inVo, outVo);
-//            String response = "00001180devaps01202410101109470014257200SAC04V228R              MTI R                        devaps0120241010110947001425720020241010110947899   UNIT      192.168.1.16                    088FC37E596F                           020241010110947899   20241010110947385306  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000243                            155057     MSR_40001_MID_71000029413_402_20210701_20210701_1561.csv                                                                                                                                                1   @@";
-//            result = InterfaceTelegramTest.testCall(inputUserData, inVo, outVo, response);
         } catch (TelegramNestedRuntimeException e) {
             logger.info(e.toString());
             logger.info(e.getMsg());
