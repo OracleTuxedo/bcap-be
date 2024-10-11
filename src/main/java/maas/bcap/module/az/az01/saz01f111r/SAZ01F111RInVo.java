@@ -20,7 +20,7 @@ public class SAZ01F111RInVo {
     @FIELD(kind = Kind.DATA, length = 24, type = FieldType.STRING, trim = TrimType.RTRIM)
     public String tx_code;
 
-    @FIELD(kind = Kind.DATA, length = 6 , type = FieldType.NUMBER, trim = TrimType.LTRIM)
+    @FIELD(kind = Kind.DATA, length = 6, type = FieldType.NUMBER, trim = TrimType.LTRIM)
     @DATATYPE(type = NumberType.LONG, decimal = 0)
     public long page_no;
 
