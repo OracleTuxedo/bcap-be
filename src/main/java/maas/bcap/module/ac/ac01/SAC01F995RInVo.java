@@ -19,12 +19,12 @@ public class SAC01F995RInVo {
     public String batch_no;
 
     @FIELD(kind = Kind.DATA, length = 8, type = FieldType.STRING, trim = TrimType.RTRIM)
-    public String postng_date  ;
+    public String postng_date;
 
     @FIELD(kind = Kind.DATA, length = 8, type = FieldType.STRING, trim = TrimType.RTRIM)
-    public String mer_ttz_seq_no  ;
+    public String mer_ttz_seq_no;
 
     @FIELD(kind = Kind.DATA, length = 8, type = FieldType.STRING, trim = TrimType.RTRIM)
-    public String sale_sht_seq_no  ;
+    public String sale_sht_seq_no;
 }
 
