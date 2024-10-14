@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import maas.bcap.module.ed.ed03.sed03f081r.SED03F081ROutSub1Vo;
 import mti.com.telegram.model.FieldType;
 import mti.com.telegram.model.Kind;
 import mti.com.telegram.model.NumberType;
@@ -12,7 +11,6 @@ import mti.com.telegram.model.TrimType;
 import mti.com.telegram.model.annotation.DATATYPE;
 import mti.com.telegram.model.annotation.FIELD;
 
-import java.util.List;
 
 @Data
 @Builder
