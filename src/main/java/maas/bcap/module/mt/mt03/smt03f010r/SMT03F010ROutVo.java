@@ -1,4 +1,4 @@
-package maas.bcap.module.mt.mt02.smt02f002c;
+package maas.bcap.module.mt.mt03.smt03f010r;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,18 +17,17 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SMT02F002COutVo {
+public class SMT03F010ROutVo {
+
+
+    @FIELD(kind = Kind.DATA, length = 10, type = FieldType.NUMBER, trim = TrimType.LTRIM)
+    @DATATYPE(type = NumberType.LONG, decimal = 0)
+    public long all_cnt;
+
     @FIELD(kind = Kind.DATA, length = 1, type = FieldType.STRING, trim = TrimType.RTRIM)
-    public String req_clcd;
-
-
-//    @FIELD(kind = Kind.DATA, length = 10, type = FieldType.NUMBER, trim = TrimType.LTRIM)
-//    @DATATYPE(type = NumberType.LONG, decimal = 0)
-//    public long all_cnt;
+    public String next_page_exist_yn;
 
     @FIELD(kind = Kind.DATA, length = 0, type = FieldType.LIST, trim = TrimType.LTRIM)
-    public List<SMT02F002COutSub1Vo> sub1_vo;
-
+    public List<SMT01F009COutSub1Vo> sub1_vo;
 
 }
-
