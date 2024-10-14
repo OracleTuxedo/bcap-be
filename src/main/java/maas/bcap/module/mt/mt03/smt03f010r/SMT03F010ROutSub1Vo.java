@@ -1,4 +1,4 @@
-package maas.bcap.module.mt.mt03.smt03f020r;
+package maas.bcap.module.mt.mt03.smt03f010r;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,5 +12,12 @@ import mti.com.telegram.model.annotation.FIELD;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SMT03F020R {
+public class SMT03F010ROutSub1Vo {
+
+    @FIELD(kind = Kind.DATA, length = 10, type = FieldType.STRING, trim = TrimType.RTRIM)
+    public String unt_itm_no;
+
+    @FIELD(kind = Kind.DATA, length = 100, type = FieldType.STRING, trim = TrimType.RTRIM)
+    public String unt_itm_nm;
+
 }

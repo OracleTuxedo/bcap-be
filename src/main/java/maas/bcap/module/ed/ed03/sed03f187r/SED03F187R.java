@@ -1,29 +1,28 @@
-package maas.bcap.module.mt.mt02.smt02f003u;
+package maas.bcap.module.ed.ed03.sed03f187r;
+
 
 import jakarta.servlet.http.HttpServletRequest;
 import maas.bcap.az.ServiceSupport;
 import maas.bcap.module.BaseModuleInterface;
-import maas.bcap.module.mt.mt02.smt02f002c.SMT02F002CInVo;
-import maas.bcap.module.mt.mt02.smt02f002c.SMT02F002COutVo;
+import maas.bcap.module.ed.ed03.sed03f187r.SED03F187RInVo;
+import maas.bcap.module.ed.ed03.sed03f187r.SED03F187ROutVo;
 import mti.com.telegram.exception.TelegramNestedRuntimeException;
 import mti.com.telegram.vo.TelegramUserDataInput;
 import mti.com.telegram.vo.TelegramUserDataOutput;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class SMT02F003U implements BaseModuleInterface<SMT02F003UOutVo, SMT02F003UInVo> {
-    private static final Logger logger = LogManager.getLogger(SMT02F003U.class);
+public class SED03F187R implements BaseModuleInterface<SED03F187ROutVo, SED03F187RInVo> {
+    private static final Logger logger = LogManager.getLogger(maas.bcap.module.ed.ed03.sed03f187r.SED03F187R.class);
 
     @Autowired
     private ServiceSupport support;
 
     @Override
-    public TelegramUserDataOutput<SMT02F003UOutVo> call(HttpServletRequest request, SMT02F003UInVo inVo, String screenId) {
-        TelegramUserDataOutput<SMT02F003UOutVo> result = TelegramUserDataOutput.<SMT02F003UOutVo>builder().build();
-        SMT02F003UOutVo outVo = SMT02F003UOutVo.builder().build();
+    public TelegramUserDataOutput<SED03F187ROutVo> call(HttpServletRequest request, SED03F187RInVo inVo, String screenId) {
+        TelegramUserDataOutput<SED03F187ROutVo> result = TelegramUserDataOutput.<SED03F187ROutVo>builder().build();
+        SED03F187ROutVo outVo = SED03F187ROutVo.builder().build();
 
         try {
             TelegramUserDataInput userDataInput = support.tuxedoHeader(request, this.getClass().getSimpleName(), screenId);

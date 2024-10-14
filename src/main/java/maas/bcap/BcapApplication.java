@@ -1,8 +1,7 @@
 package maas.bcap;
 
-import maas.bcap.craniumtest.FalahTest;
-import maas.bcap.craniumtest.LeRuccoTest;
-import maas.bcap.craniumtest.PanpanTest;
+import maas.bcap.craniumtest.*;
+import mti.com.telegram.util.InterfaceTelegramTest;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,6 +24,7 @@ public class BcapApplication {
 
 //            FalahTest.interfaceTuxedoParseRequest();
 //            FalahTest.interfaceTuxedoParseResponse();
+
 //            LeRuccoTest.interfaceTuxedoParseRequest();
 //            LeRuccoTest.interfaceTuxedoParseResponse();
 
@@ -36,6 +36,9 @@ public class BcapApplication {
 
 //            DarrenTest.interfaceTuxedoParseRequest();
 //            DarrenTest.interfaceTuxedoParseResponse();
+
+//            NeheTest.interfaceTuxedoParseRequest();
+//            NeheTest.interfaceTuxedoParseResponse();
 
 
         } catch (Exception e) {
