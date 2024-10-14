@@ -47,7 +47,3 @@ public class SAC04F231ROutSub1Vo {
     @DATATYPE(type = NumberType.DECIMAL, decimal = 2, sign_length = 1, point_length = 1)
     public double unmatch_amt;
 }
-
-//@FIELD(kind=Kind.DATA, length = 18, type = FieldType.NUMBER, trim = TrimType.LTRIM)
-//@DATATYPE(type=NumberType.DECIMAL, decimal=2, sign_length=1 ,point_length=1)
-//public double pmt_amt;
