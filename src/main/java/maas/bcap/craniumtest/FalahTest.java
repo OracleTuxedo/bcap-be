@@ -1,5 +1,8 @@
 package maas.bcap.craniumtest;
 
+import maas.bcap.module.ac.ac04.sac04v127u.SAC04V127UInVo;
+import maas.bcap.module.ac.ac04.sac04v227u.SAC04V227UInVo;
+import maas.bcap.module.ac.ac04.sac04v227u.SAC04V227UOutVo;
 import maas.bcap.module.ac.ac04.sac04v228r.SAC04V228RInVo;
 import maas.bcap.module.ac.ac04.sac04v228r.SAC04V228ROutVo;
 import maas.bcap.module.ac.ac06.sac06f244r.SAC06F244RInVo;
@@ -8,6 +11,21 @@ import maas.bcap.module.ac.ac06.sac06f245r.SAC06F245RInVo;
 import maas.bcap.module.ac.ac06.sac06f245r.SAC06F245ROutVo;
 import maas.bcap.module.ac.ac06.sac06v610r.SAC06V610RInVo;
 import maas.bcap.module.ac.ac06.sac06v610r.SAC06V610ROutVo;
+import maas.bcap.module.ac.ac06.sac06v700r.SAC06V700RInVo;
+import maas.bcap.module.ac.ac06.sac06v700r.SAC06V700ROutVo;
+import maas.bcap.module.ac.ac07.sac07f001r.SAC07F001RInVo;
+import maas.bcap.module.ac.ac07.sac07f001r.SAC07F001ROutVo;
+import maas.bcap.module.ac.ac20.sac20f002u.SAC20F002UInVo;
+import maas.bcap.module.ac.ac20.sac20f002u.SAC20F002UOutVo;
+import maas.bcap.module.az.az05.saz05f041u.SAZ05F041UInSub1Vo;
+import maas.bcap.module.az.az05.saz05f041u.SAZ05F041UInVo;
+import maas.bcap.module.az.az05.saz05f041u.SAZ05F041UOutVo;
+import maas.bcap.module.mc.mc02.smc02v051u.SMC02V051UInVo;
+import maas.bcap.module.mc.mc02.smc02v051u.SMC02V051UOutVo;
+import maas.bcap.module.mc.mc15.smc15v016u.SMC15V016UInVo;
+import maas.bcap.module.mc.mc15.smc15v016u.SMC15V016UOutVo;
+import maas.bcap.module.mc.mc15.smc15v018u.SMC15V018UInVo;
+import maas.bcap.module.mc.mc15.smc15v018u.SMC15V018UOutVo;
 import mti.com.telegram.exception.TelegramNestedRuntimeException;
 import mti.com.telegram.mapping.ByteDecoder;
 import mti.com.telegram.mapping.ByteEncoder;
@@ -20,6 +38,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * InVo -> Request String Panjang -> Weblogic -> Tuxedo -> Weblogic -> Response String panjang -> OutVo
@@ -36,7 +55,7 @@ public class FalahTest {
 
         logger.info("################################### Request START  ###################################");
         TelegramUserDataInput userData = new TelegramUserDataInput();
-        userData.setTx_code("SAC06V610R");
+        userData.setTx_code("SMC15V016U");
         userData.setScrn_id("WED030120H");
         userData.setClient_ip_no("172.16.20.11");
         userData.setOp_id("1787130271");
@@ -75,19 +94,117 @@ public class FalahTest {
 //  00004620Falah   202410101326100020000000SAC06F245R              MTI S                        Falah   20241010132610002000000020241010132610000817WEB       172.16.20.11                                WED030120H N1787130271     020241010132610000820                    A000000      00010                                                                        EN                                                                                                                                             D00004117                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @@
 
         /// SAC06V610R Single
-        SAC06V610RInVo sac06V610RInVo = SAC06V610RInVo.builder()
-            .mid("70000254969")
-            .acq_mb_no("002")
-            .acct_mgmt_bk_cd("0080017")
-            .pmt_acct_no("1170005384953")
-            .build();
+//        SAC06V610RInVo sac06V610RInVo = SAC06V610RInVo.builder()
+//            .mid("70000254969")
+//            .acq_mb_no("002")
+//            .acct_mgmt_bk_cd("0080017")
+//            .pmt_acct_no("1170005384953")
+//            .build();
 
 //  00000563                                SAC06V610R              MTI S                                                                            UNIT      192.168.1.16                    088FC37E596F                           020241010133838576                         00000      00000                                                                        EN                                                                                                                                              00000000                     7000025496900200800171170005384953
 //  00000565Falah   202410101340260020000000SAC06V610R              MTI S                        Falah   20241010134026002000000020241010134026000428WEB       172.16.20.11                                WED030120H N1787130271     020241010134026000430                    A000000      00010                                                                        EN                                                                                                                                             D00000062                     7000025496900200800171170005384953       @@
 
+        /// SAC06V700R Single
+//        SAC06V700RInVo sac06V700RInVo = SAC06V700RInVo.builder()
+//            .appl_date("20121002")
+//            .exrt_prv_inst_cd("901")
+//            .exrt_op_no("0")
+//            .std_curcy_cd("840")
+//            .relt_curcy_cd("360")
+//            .mb_no("999")
+//            .build();
+
+//  00000543                                SAC06V700R              MTI S                                                                            UNIT      192.168.1.16                    088FC37E596F                           020241010144100353                         00000      00000                                                                        EN                                                                                                                                              00000000                     201210029010840360999
+//  00000545Falah   202410101457580020000000SAC06V700R              MTI S                        Falah   20241010145758002000000020241010145758000603WEB       172.16.20.11                                WED030120H N1787130271     020241010145758000604                    A000000      00010                                                                        EN                                                                                                                                             D00000042                     201210029010840360999@@
+
+        /// SAC07F001R Single
+//        SAC07F001RInVo sac07F001RInVo = SAC07F001RInVo.builder()
+//            .attach_file_id("232")
+//            .build();
+
+//  00000530                                SAC07F001R              MTI S                                                                            UNIT      192.168.1.16                    088FC37E596F                           020241011135400653                         00000      00000                                                                        EN                                                                                                                                              00000000                     232
+//
+
+        /// SAC20F002U Single
+//        SAC20F002UInVo sac20F002UInVo = SAC20F002UInVo.builder()
+//            .pmt_ref_no("0082023110000000816")
+//            .pmt_proc_rslt_cd("2")
+//            .build();
+
+//  00000542                                SAC20F002U              MTI S                                                                            UNIT      192.168.1.16                    088FC37E596F                           020241011141644949                         00000      00000                                                                        EN                                                                                                                                              00000000                     00820231100000008162
+//  00000544Falah   202410111428370020000000SAC20F002U              MTI S                        Falah   20241011142837002000000020241011142837000776WEB       172.16.20.11                                WED030120H N1787130271     020241011142837000778                    A000000      00010                                                                        EN                                                                                                                                             D00000041                     00820231100000008162@@
+
+        /// SAZ05F041U Multi
+//        SAZ05F041UInSub1Vo saz05F041UInSub1Vo = SAZ05F041UInSub1Vo.builder()
+//            .biz_clcd("U")
+//            .usr_id("9999999991")
+//            .apvl_mgr_usr_id("9999999990")
+//            .apvl_mgr_clcd("A")
+//            .data_stat_cd("U")
+//            .build();
+//
+//        SAZ05F041UInVo saz05F041UInVo = SAZ05F041UInVo.builder()
+//            .sub1_vo(List.of(saz05F041UInSub1Vo))
+//            .build();
+
+//  00000563                                SAZ05F041U              MTI S                                                                            UNIT      192.168.1.16                    088FC37E596F                           020241014125332614                         00000      00000                                                                        EN                                                                                                                                              00000000                     00000001U9999999991     9999999990     AU
+//
+
+        /// SAC04V227U Single
+//        SAC04V227UInVo sac04V227UInVo = SAC04V227UInVo.builder()
+//            .snd_date("20161214")
+//            .ems_seq_num(3764)
+//            .build();
+
+//  00000548                                SAC04V227U              MTI S                                                                            UNIT      192.168.1.16                    088FC37E596F                           020241014134001612                         00000      00000                                                                        EN                                                                                                                                              00000000                     20161214000000000000003764
+//  00000550Falah   202410141342040020000000SAC04V227U              MTI S                        Falah   20241014134204002000000020241014134204000237WEB       172.16.20.11                                WED030120H N1787130271     020241014134204000238                    A000000      00010                                                                        EN                                                                                                                                             D00000047                     20161214000000000000003764@@
+
+        /// SMC02V051U Single
+//        SMC02V051UInVo smc02V051UInVo = SMC02V051UInVo.builder()
+//            .transaction_no("0110")
+//            .npwp("16189433013000")
+//            .ktpno("99M999990022811")
+//            .pmt_acct_no("1170005384953")
+//            .build();
+
+//  00000625                                SMC02V051U              MTI S                                                                            UNIT      192.168.1.16                    088FC37E596F                           020241014141330622                         00000      00000                                                                        EN                                                                                                                                              00000000                     0110                                       16189433013000      99M999990022811     1170005384953
+//  00000627Falah   202410141416070020000000SMC02V051U              MTI S                        Falah   20241014141607002000000020241014141607000428WEB       172.16.20.11                                WED030120H N1787130271     020241014141607000429                    A000000      00010                                                                        EN                                                                                                                                             D00000124                     0110                                       16189433013000      99M999990022811     1170005384953       @@
+
+        /// SMC15V018U Single
+//        SMC15V018UInVo smc15V018UInVo = SMC15V018UInVo.builder()
+//            .transactionNumber("0100")
+//            .processingCode("100014")
+//            .systemTraceAuditNumber("445686")
+//            .authorizationTime("153200")
+//            .authorizationDate("20230327")
+//            .tid("75412631")
+//            .mid("71000612631")
+//            .userAppID("987654324")
+//            .storeCode("LM01001452")
+//            .sn("11272PT62126580")
+//            .build();
+
+//  00000610                                SMC15V018U              MTI S                                                                            UNIT      192.168.1.16                    088FC37E596F                           020241014153151162                         00000      00000                                                                        EN                                                                                                                                              00000000                     0100100014445686153200202303277541263171000612631987654324LM0100145211272PT62126580
+//  00000612Falah   202410141543220020000000SMC15V018U              MTI S                        Falah   20241014154322002000000020241014154322000697WEB       172.16.20.11                                WED030120H N1787130271     020241014154322000699                    A000000      00010                                                                        EN                                                                                                                                             D00000109                     0100100014445686153200202303277541263171000612631987654324LM0100145211272PT62126580     @@
+
+        /// SMC15V016U Single
+        SMC15V016UInVo smc15V016UInVo = SMC15V016UInVo.builder()
+            .transactionNumber("0100")
+            .processingCode("100019")
+            .systemTraceAuditNumber("426856")
+            .authorizationTime("152800")
+            .authorizationDate("20230508")
+            .status("U")
+            .mid("71000260723")
+            .gid("90000009")
+            .storeCode("1234567891")
+            .build();
+
+//  00000732                                SMC15V016U              MTI S                                                                            UNIT      192.168.1.16                    088FC37E596F                           020241014162412181                         00000      00000                                                                        EN                                                                                                                                              00000000                     010010001942685615280020230508U71000260723900000091234567891
+//  00000734Falah   202410141631220020000000SMC15V016U              MTI S                        Falah   20241014163122002000000020241014163122000282WEB       172.16.20.11                                WED030120H N1787130271     020241014163122000283                    A000000      00010                                                                        EN                                                                                                                                             D00000231                     010010001942685615280020230508U71000260723900000091234567891                                                                                                                                                      @@
 
         ByteEncoder byteEncoder = new ByteEncoder();
-        TelegramIn<SAC06V610RInVo> telegramIn = TelegramBuilder.getTelegramIn(userData, sac06V610RInVo);
+        TelegramIn<SMC15V016UInVo> telegramIn = TelegramBuilder.getTelegramIn(userData, smc15V016UInVo);
 
         logger.info(telegramIn.getData().getData().toString());
 
@@ -114,15 +231,39 @@ public class FalahTest {
 //        String response = "00000968devaps01202410101324540034257300SAC06F245R              MTI R                        devaps0120241010132454003425730020241010132454763   UNIT      192.168.1.16                    088FC37E596F                           020241010132454763   20241010132454296852  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000031                     0000000912@@";
 
         /// SAC06V610R
-          String response = "00001163devaps01202410101338380044256900SAC06V610R              MTI R                        devaps0120241010133838004425690020241010133838576   UNIT      192.168.1.16                    088FC37E596F                           020241010133838576   20241010133838297945  0  00        000       NAZAP0005                                                        EN                                                                                                                                             N00000625                     30The Transaction Successfully Ended.                                                                                                                                                                                                                                                                                                                                                                             02inquiry process success.                                                                            The Transaction Successfully Ended.                                                                 D00000026                     00009@@";
+//        String response = "00001163devaps01202410101338380044256900SAC06V610R              MTI R                        devaps0120241010133838004425690020241010133838576   UNIT      192.168.1.16                    088FC37E596F                           020241010133838576   20241010133838297945  0  00        000       NAZAP0005                                                        EN                                                                                                                                             N00000625                     30The Transaction Successfully Ended.                                                                                                                                                                                                                                                                                                                                                                             02inquiry process success.                                                                            The Transaction Successfully Ended.                                                                 D00000026                     00009@@";
+
+        /// SAC06V700R
+//        String response = "00001004devaps01202410101440590044257300SAC06V700R              MTI R                        devaps0120241010144059004425730020241010144100353   UNIT      192.168.1.16                    088FC37E596F                           020241010144100353   20241010144059924742  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000067                     00010101                  0                  0@@";
+
+        /// SAC07F001R
+//          String response = "00001925devaps01202410111354000024260300SAC07F001R              MTI R                        devaps0120241011135400002426030020241011135400653   UNIT      192.168.1.16                    088FC37E596F                           020241011135400653   20241011135400216459  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000988                            1232     1   D:\\MTIDEV\\MaasDev\\workspace\\maas\\src\\main\\resources\\upload\\AZ\\/01/tmp                                                                                                                                                                                                                                                                                                                                                                                                                                               Penguins.jpg                                                                                                                                                                                            Penguins[20160808140401994].jpg                                                                                                                                                                                             000000000000000777835    1U@@";
+
+        /// SAC20F002U
+//           String response = "00000968devaps01202410111416440034260000SAC20F002U              MTI R                        devaps0120241011141644003426000020241011141644949   UNIT      192.168.1.16                    088FC37E596F                           020241011141644949   20241011141644462179  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000031                              1@@";
+
+        /// SAZ05F041U
+//        String response = "00000968devaps01202410141253330024257300SAZ05F041U              MTI R                        devaps0120241014125333002425730020241014125332614   UNIT      192.168.1.16                    088FC37E596F                           020241014125332614   20241014125333186110  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000031                              1@@";
+
+        /// SAC04V227U
+//        String response = "00001962devaps01202410141340020034257100SAC04V227U              MTI R                        devaps0120241014134002003425710020241014134001612   UNIT      192.168.1.16                    088FC37E596F                           020241014134001612   20241014134002165344  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00001025                     0000SUCCESS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @@";
+
+        /// SMC02V051U
+//        String response = "00004965devaps01202410141413310034257500SMC02V051U              MTI R                        devaps0120241014141331003425750020241014141330622   UNIT      192.168.1.16                    088FC37E596F                           020241014141330622   20241014141331646013  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00004028                     0110            1413312024101400800Approved                                                                                           16189433013000      99M999990022811     1170005384953                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @@";
+
+        /// SMC15V018U
+//        String response = "00001127devaps01202410141531510044257400SMC15V018U              MTI R                        devaps0120241014153151004425740020241014153151162   UNIT      192.168.1.16                    088FC37E596F                           020241014153151162   20241014153151645099  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000190                     01101000144456861531512024101407File Not Found                                                                                     7541263171000612631987654324LM01001452@@";
+
+        /// SMC15V016U
+        String response = "00001100devaps01202410141624120044257500SMC15V016U              MTI R                        devaps0120241014162412004425750020241014162412181   UNIT      192.168.1.16                    088FC37E596F                           020241014162412181   20241014162412953620  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000163                     01101000194268561624122024101400SUCCESS                                                                                            71000260723@@";
 
         /// Imitate Response from Tuxedo
         byte[] arrayOfByte = response
             .getBytes();
 
-        SAC06V610ROutVo output = new SAC06V610ROutVo();
+        SMC15V016UOutVo output = new SMC15V016UOutVo();
 
-        TelegramUserDataOutput<SAC06V610ROutVo> telegramUserDataOutput = parse(arrayOfByte, output);
+        TelegramUserDataOutput<SMC15V016UOutVo> telegramUserDataOutput = parse(arrayOfByte, output);
 
         output = telegramUserDataOutput.getOutput();
 
