@@ -8,6 +8,8 @@ import maas.bcap.module.ed.ed03.sed03f186r.SED03F186RInVo;
 import maas.bcap.module.ed.ed03.sed03f186r.SED03F186ROutVo;
 import maas.bcap.module.ed.ed03.sed03f187r.SED03F187RInVo;
 import maas.bcap.module.ed.ed03.sed03f187r.SED03F187ROutVo;
+import maas.bcap.module.ed.ed03.sed03f218r.SED03F218RInVo;
+import maas.bcap.module.ed.ed03.sed03f218r.SED03F218ROutVo;
 import mti.com.telegram.exception.TelegramNestedRuntimeException;
 import mti.com.telegram.mapping.ByteDecoder;
 import mti.com.telegram.mapping.ByteEncoder;
@@ -460,6 +462,114 @@ import java.nio.charset.StandardCharsets;
 
 /************************************************************BATAS SED03F186R****************************************/
 
+//public class PanpanTest {
+//
+//    private static final Logger logger = LogManager.getLogger(PanpanTest.class);
+//
+//    /// Request
+//    public static void interfaceTuxedoParseRequest() throws Exception {
+//        logger.atLevel(Level.ALL);
+//
+//        logger.info("################################### Request START Panpan ###################################");
+//        TelegramUserDataInput userData = new TelegramUserDataInput();
+//        userData.setTx_code("SED03F187R");
+//        userData.setScrn_id("WED030120H");
+//        userData.setClient_ip_no("172.16.20.11");
+//        userData.setOp_id("1787130271");
+//        userData.setSync_type("A");
+//        userData.setRspn_svc_code("");
+//        userData.setAsync_rspn_yn("0");
+//        userData.setTtl_use_flag(0);
+//        userData.setLang_type("EN");
+//
+//        /// SED03F186R Single
+//        SED03F187RInVo sed03f187rInVo = SED03F187RInVo.builder()
+//            .page_size(15)
+//            .req_whous_cd("A020")
+//            .apvl_stat_cd("RC")
+//            .build();
+//
+//        ByteEncoder byteEncoder = new ByteEncoder();
+//        TelegramIn<SED03F187RInVo> telegramIn = TelegramBuilder.getTelegramIn(userData, sed03f187rInVo);
+//
+//        logger.info(telegramIn.getData().getData().toString());
+//
+//        byte[] arrayOfByte = byteEncoder.convertObjectToBytes(telegramIn, true);
+//        String request = new String(arrayOfByte, StandardCharsets.UTF_8);
+//
+//        logger.info(request);
+//        logger.info("################################### Request END Panpan ###################################");
+//    }
+//
+//    /// Response
+//    public static void interfaceTuxedoParseResponse() throws Exception {
+//        logger.atLevel(Level.ALL);
+//
+//        logger.info("################################### Response START Panpan ###################################");
+//
+//        /// SED03F186R
+//        String response = "00001766devaps01202410141337220024257500SED03F187R              MTI R                        devaps0120241014133722002425750020241014133722797   UNIT      192.168.0.147                   04EA563255A5                           020241014133722797   20241014133722801270  0  00        000       NAZAP0005                                                        EN                                                                                                                                             N00000425                     30The Transaction Successfully Ended.                                                                                                                                                                                                                                                                                                                                                                             00D00000829                         15                                                                                                                                                                                                                                                                        11      110000001382A020      01   18   04            1RCY0000001238A020      02   08   19            1RCY0000001213A020      01   22   04            1RCY0000001212A020      01   22   04            1RCY0000001209A020      01   22   04            1RCY0000001208A020      01   22   04            1RCY0000001207A020      01   22   04            1RCY0000001204A020      01   23   06            3RCY0000001202A020      01   22   04            1RCY0000001171A020      01   22   04            1RCY0000001168A020      01   22   04            2RCY@@";
+//
+//        /// Imitate Response from Tuxedo
+//        byte[] arrayOfByte = response
+//            .getBytes();
+//
+//        SED03F187ROutVo output = new SED03F187ROutVo();
+//
+//        TelegramUserDataOutput<SED03F187ROutVo> telegramUserDataOutput = parse(arrayOfByte, output);
+//
+//        output = telegramUserDataOutput.getOutput();
+//
+//        logger.info(output.getClass().getSimpleName());
+//        logger.info(output.toString());
+//
+//        logger.info("################################### Response END Panpan ###################################");
+//
+//    }
+//
+//    public static <T> TelegramUserDataOutput<T> parse(byte[] arrayOfByte, T output) throws Exception {
+//        T object = null;
+//        TelegramHeader telegramHeader = getHeaderFromBytes(arrayOfByte);
+////        logger.info(telegramHeader.toString());
+//        if (telegramHeader.getErr_flag() == 0) {
+//            TelegramOut<T> telegramOut1 = TelegramBuilder.<T>getTelegramOutData(output);
+//            ByteDecoder<TelegramOut<T>> byteDecoder1 = new ByteDecoder<>();
+//            TelegramOut<T> telegramOut2 = byteDecoder1.convertBytes2Object(arrayOfByte, telegramOut1, true);
+//            TelegramTail telegramTail1 = telegramOut2.getTail();
+//            if ("@@".equals(telegramTail1.getTail())) {
+//                object = telegramOut2.getData().getData();
+//            } else {
+//                throw new TelegramNestedRuntimeException(
+//                    "Response Telegram Length is not Matched !!");
+//            }
+//            TelegramMessage telegramMessage1 = telegramOut2.getMessage();
+//            TelegramUserDataOutput<T> telegramUserDataOutput = new TelegramUserDataOutput<T>();
+//            telegramUserDataOutput.setMessage(telegramMessage1);
+//            telegramUserDataOutput.setOutput(object);
+//            telegramUserDataOutput.setHeader(telegramHeader);
+//
+//            return telegramUserDataOutput;
+//        }
+//
+//        throw new TelegramNestedRuntimeException("No Data");
+//    }
+//
+//    public static <T> TelegramHeader getHeaderFromBytes(byte[] paramArrayOfbyte) throws Exception {
+//        TelegramHeader telegramHeader = new TelegramHeader();
+//        try {
+//            byte[] arrayOfByte = TelegramUtil.cutBytes(paramArrayOfbyte, 0, 500);
+//            ByteDecoder<TelegramHeader> byteDecoder = new ByteDecoder<>();
+//            telegramHeader = byteDecoder.convertBytes2Object(arrayOfByte, telegramHeader, true);
+//        } catch (Exception exception) {
+//            ExceptionUtil.logPrintStackTrace(logger, exception);
+//            throw exception;
+//        }
+//        return telegramHeader;
+//    }
+//}
+
+/************************************************************BATAS SED03F187R****************************************/
+
 public class PanpanTest {
 
     private static final Logger logger = LogManager.getLogger(PanpanTest.class);
@@ -470,7 +580,7 @@ public class PanpanTest {
 
         logger.info("################################### Request START Panpan ###################################");
         TelegramUserDataInput userData = new TelegramUserDataInput();
-        userData.setTx_code("SED03F187R");
+        userData.setTx_code("SED03F218R");
         userData.setScrn_id("WED030120H");
         userData.setClient_ip_no("172.16.20.11");
         userData.setOp_id("1787130271");
@@ -480,15 +590,15 @@ public class PanpanTest {
         userData.setTtl_use_flag(0);
         userData.setLang_type("EN");
 
-        /// SED03F186R Single
-        SED03F187RInVo sed03f187rInVo = SED03F187RInVo.builder()
-            .page_size(15)
-            .req_whous_cd("A020")
-            .apvl_stat_cd("RC")
+        /// SED03F218R Single
+        SED03F218RInVo sed03f218rInVo = SED03F218RInVo.builder()
+            .page_size(20)
+            .agnc_cont_no("2016-E0001-02")
+            .odr_no("0000000261")
             .build();
 
         ByteEncoder byteEncoder = new ByteEncoder();
-        TelegramIn<SED03F187RInVo> telegramIn = TelegramBuilder.getTelegramIn(userData, sed03f187rInVo);
+        TelegramIn<SED03F218RInVo> telegramIn = TelegramBuilder.getTelegramIn(userData, sed03f218rInVo);
 
         logger.info(telegramIn.getData().getData().toString());
 
@@ -505,16 +615,16 @@ public class PanpanTest {
 
         logger.info("################################### Response START Panpan ###################################");
 
-        /// SED03F186R
-        String response = "00001766devaps01202410141337220024257500SED03F187R              MTI R                        devaps0120241014133722002425750020241014133722797   UNIT      192.168.0.147                   04EA563255A5                           020241014133722797   20241014133722801270  0  00        000       NAZAP0005                                                        EN                                                                                                                                             N00000425                     30The Transaction Successfully Ended.                                                                                                                                                                                                                                                                                                                                                                             00D00000829                         15                                                                                                                                                                                                                                                                        11      110000001382A020      01   18   04            1RCY0000001238A020      02   08   19            1RCY0000001213A020      01   22   04            1RCY0000001212A020      01   22   04            1RCY0000001209A020      01   22   04            1RCY0000001208A020      01   22   04            1RCY0000001207A020      01   22   04            1RCY0000001204A020      01   23   06            3RCY0000001202A020      01   22   04            1RCY0000001171A020      01   22   04            1RCY0000001168A020      01   22   04            2RCY@@";
+        /// SED03F218R
+        String response = "00009856devaps01202410141653400054257100SED03F218R              MTI R                        devaps0120241014165340005425710020241014165340549   UNIT      192.168.0.147                   04EA563255A5                           020241014165340549   20241014165340506326  0  00        000       NAZAP0006                                                        EN                                                                                                                                             N00000525                     30The Next Data Exists.                                                                                                                                                                                                                                                                                                                                                                                           01The Next Data Exists.                                                                               D00008819                             2520161228134951                                                                                                                                                                                                                                                  20160000102                                                                                                                                                                                                                                                     0000000261                                                                                                                                                                                                                                                      05                                                                                                                                                                                                                                                              01                                                                                                                                                                                                                                                                    20201600001022016-E0001-02                 000000026105   01   20161214134429BEPS                                                                                                                                                                                                                                                                                                        201600001022016-E0001-02                 000000026105   01   20161214140746TYUTIUTUTUI                                                                                                                                                                                                                                                                                                 201600001022016-E0001-02                 000000026105   01   20161214141954rdtx 25                                                                                                                                                                                                                                                                                                     201600001022016-E0001-02                 000000026105   01   20161214155313BC                                                                                                                                                                                                                                                                                                          201600001022016-E0001-02                 000000026105   01   20161222170301This is also for test                                                                                                                                                                                                                                                                                       201600001022016-E0001-02                 000000026105   01   20161226144126Seoul                                                                                                                                                                                                                                                                                                       201600001022016-E0001-02                 000000026105   01   20161226145217BC Card Future Centre                                                                                                                                                                                                                                                                                       201600001022016-E0001-02                 000000026105   01   20161226172326Jakarta                                                                                                                                                                                                                                                                                                     201600001022016-E0001-02                 000000026105   01   20161227094039No One Sleep in Tokyo                                                                                                                                                                                                                                                                                       201600001022016-E0001-02                 000000026105   01   20161227100528You man                                                                                                                                                                                                                                                                                                     201600001022016-E0001-02                 000000026105   01   20161227104600BC                                                                                                                                                                                                                                                                                                          201600001022016-E0001-02                 000000026105   01   20161227105022bc                                                                                                                                                                                                                                                                                                          201600001022016-E0001-02                 000000026105   01   20161227105405kt                                                                                                                                                                                                                                                                                                          201600001022016-E0001-02                 000000026105   01   20161227105625lg                                                                                                                                                                                                                                                                                                          201600001022016-E0001-02                 000000026105   01   20161227105833DC                                                                                                                                                                                                                                                                                                          201600001022016-E0001-02                 000000026105   01   20161227110035Denpasar                                                                                                                                                                                                                                                                                                    201600001022016-E0001-02                 000000026105   01   20161227110814Tangerang                                                                                                                                                                                                                                                                                                   201600001022016-E0001-02                 000000026105   01   20161227111220Cikarang                                                                                                                                                                                                                                                                                                    201600001022016-E0001-02                 000000026105   01   20161227111440Tolong                                                                                                                                                                                                                                                                                                      201600001022016-E0001-02                 000000026105   01   20161228112220Hati Hati                                                                                                                                                                                                                                                                                                   @@";
 
         /// Imitate Response from Tuxedo
         byte[] arrayOfByte = response
             .getBytes();
 
-        SED03F187ROutVo output = new SED03F187ROutVo();
+        SED03F218ROutVo output = new SED03F218ROutVo();
 
-        TelegramUserDataOutput<SED03F187ROutVo> telegramUserDataOutput = parse(arrayOfByte, output);
+        TelegramUserDataOutput<SED03F218ROutVo> telegramUserDataOutput = parse(arrayOfByte, output);
 
         output = telegramUserDataOutput.getOutput();
 
