@@ -14,6 +14,8 @@ package maas.bcap.craniumtest;
 //import maas.bcap.module.ed.ed03.sed03f219r.SED03F219ROutVo;
 import maas.bcap.module.ed.ed03.sed03f220r.SED03F220RInVo;
 import maas.bcap.module.ed.ed03.sed03f220r.SED03F220ROutVo;
+import maas.bcap.module.ed.ed03.sed03f221r.SED03F221RInVo;
+import maas.bcap.module.ed.ed03.sed03f221r.SED03F221ROutVo;
 import mti.com.telegram.exception.TelegramNestedRuntimeException;
 import mti.com.telegram.mapping.ByteDecoder;
 import mti.com.telegram.mapping.ByteEncoder;
@@ -794,6 +796,112 @@ import java.nio.charset.StandardCharsets;
 
 /************************************************************BATAS SED03F219R****************************************/
 
+//public class PanpanTest {
+//
+//    private static final Logger logger = LogManager.getLogger(PanpanTest.class);
+//
+//    /// Request
+//    public static void interfaceTuxedoParseRequest() throws Exception {
+//        logger.atLevel(Level.ALL);
+//
+//        logger.info("################################### Request START Panpan ###################################");
+//        TelegramUserDataInput userData = new TelegramUserDataInput();
+//        userData.setTx_code("SED03F220R");
+//        userData.setScrn_id("WED030120H");
+//        userData.setClient_ip_no("172.16.20.11");
+//        userData.setOp_id("1787130271");
+//        userData.setSync_type("A");
+//        userData.setRspn_svc_code("");
+//        userData.setAsync_rspn_yn("0");
+//        userData.setTtl_use_flag(0);
+//        userData.setLang_type("EN");
+//
+//        /// SED03F220R Single
+//        SED03F220RInVo sed03f220rInVo = SED03F220RInVo.builder()
+//            .prd_ctgo_cd("25")
+//            .build();
+//
+//        ByteEncoder byteEncoder = new ByteEncoder();
+//        TelegramIn<SED03F220RInVo> telegramIn = TelegramBuilder.getTelegramIn(userData, sed03f220rInVo);
+//
+//        logger.info(telegramIn.getData().getData().toString());
+//
+//        byte[] arrayOfByte = byteEncoder.convertObjectToBytes(telegramIn, true);
+//        String request = new String(arrayOfByte, StandardCharsets.UTF_8);
+//
+//        logger.info(request);
+//        logger.info("################################### Request END Panpan ###################################");
+//    }
+//
+//    /// Response
+//    public static void interfaceTuxedoParseResponse() throws Exception {
+//        logger.atLevel(Level.ALL);
+//
+//        logger.info("################################### Response START Panpan ###################################");
+//
+//        /// SED03F219R
+//        String response = "00003466devaps01202410151147230024254700SED03F220R              MTI R                        devaps0120241015114723002425470020241015114723324   UNIT      192.168.0.147                   04EA563255A5                           020241015114723324   20241015114724013209  0  00        000       NAZAP0005                                                        EN                                                                                                                                             N00000525                     30The Transaction Successfully Ended.                                                                                                                                                                                                                                                                                                                                                                             01The Transaction Successfully Ended.                                                                 D00002429                           20Ingenico EFT 930 G                                                                                  01   25   01   0    Ingenico EFT 930                                                                                    02   25   01   1    ICT 250 3G CTLS                                                                                     05   25   01   1    IWL 220  3G MOVE TO IWL 220 G NON CTLS                                                              06   25   01   0    IWL 220 G NON CTLS                                                                                  07   25   01   1    IWL 220 G Mobile MOVE TO IWL 220 G NON CTLS                                                         08   25   01   1    IWL 220 W CTLS                                                                                      09   25   01   1    IWL 225 G CTLS                                                                                      10   25   01   1    VX 520 G NON CTLS                                                                                   14   25   01   1    VX 675 3G CTLS                                                                                      16   25   01   1    Verifone VX 675 3G Mobile CTLS                                                                      17   25   01   1    VX 675 W CTLS                                                                                       18   25   01   1    INGENICO MOVE 2500 G CTLS                                                                           28   25   01   1    VERIFONE C680                                                                                       30   25   01   1    Verifone C680 WIFI                                                                                  31   25   01   1    Ingenico MOVE2500 WIFI                                                                              32   25   01   1    INGENICO ICT 229 GEM CL                                                                             34   25   01   1    Ingenico Desk 2600                                                                                  36   25   01   1    CASTLES VEGA3000                                                                                    37   25   01   1    NEWLAND SP630 PRO                                                                                   38   25   01   1    @@";
+//
+//        /// Imitate Response from Tuxedo
+//        byte[] arrayOfByte = response
+//            .getBytes();
+//
+//        SED03F220ROutVo output = new SED03F220ROutVo();
+//
+//        TelegramUserDataOutput<SED03F220ROutVo> telegramUserDataOutput = parse(arrayOfByte, output);
+//
+//        output = telegramUserDataOutput.getOutput();
+//
+//        logger.info(output.getClass().getSimpleName());
+//        logger.info(output.toString());
+//
+//        logger.info("################################### Response END Panpan ###################################");
+//
+//    }
+//
+//    public static <T> TelegramUserDataOutput<T> parse(byte[] arrayOfByte, T output) throws Exception {
+//        T object = null;
+//        TelegramHeader telegramHeader = getHeaderFromBytes(arrayOfByte);
+////        logger.info(telegramHeader.toString());
+//        if (telegramHeader.getErr_flag() == 0) {
+//            TelegramOut<T> telegramOut1 = TelegramBuilder.<T>getTelegramOutData(output);
+//            ByteDecoder<TelegramOut<T>> byteDecoder1 = new ByteDecoder<>();
+//            TelegramOut<T> telegramOut2 = byteDecoder1.convertBytes2Object(arrayOfByte, telegramOut1, true);
+//            TelegramTail telegramTail1 = telegramOut2.getTail();
+//            if ("@@".equals(telegramTail1.getTail())) {
+//                object = telegramOut2.getData().getData();
+//            } else {
+//                throw new TelegramNestedRuntimeException(
+//                    "Response Telegram Length is not Matched !!");
+//            }
+//            TelegramMessage telegramMessage1 = telegramOut2.getMessage();
+//            TelegramUserDataOutput<T> telegramUserDataOutput = new TelegramUserDataOutput<T>();
+//            telegramUserDataOutput.setMessage(telegramMessage1);
+//            telegramUserDataOutput.setOutput(object);
+//            telegramUserDataOutput.setHeader(telegramHeader);
+//
+//            return telegramUserDataOutput;
+//        }
+//
+//        throw new TelegramNestedRuntimeException("No Data");
+//    }
+//
+//    public static <T> TelegramHeader getHeaderFromBytes(byte[] paramArrayOfbyte) throws Exception {
+//        TelegramHeader telegramHeader = new TelegramHeader();
+//        try {
+//            byte[] arrayOfByte = TelegramUtil.cutBytes(paramArrayOfbyte, 0, 500);
+//            ByteDecoder<TelegramHeader> byteDecoder = new ByteDecoder<>();
+//            telegramHeader = byteDecoder.convertBytes2Object(arrayOfByte, telegramHeader, true);
+//        } catch (Exception exception) {
+//            ExceptionUtil.logPrintStackTrace(logger, exception);
+//            throw exception;
+//        }
+//        return telegramHeader;
+//    }
+//}
+
+/************************************************************BATAS SED03F219R****************************************/
+
 public class PanpanTest {
 
     private static final Logger logger = LogManager.getLogger(PanpanTest.class);
@@ -804,7 +912,7 @@ public class PanpanTest {
 
         logger.info("################################### Request START Panpan ###################################");
         TelegramUserDataInput userData = new TelegramUserDataInput();
-        userData.setTx_code("SED03F220R");
+        userData.setTx_code("SED03F221R");
         userData.setScrn_id("WED030120H");
         userData.setClient_ip_no("172.16.20.11");
         userData.setOp_id("1787130271");
@@ -814,13 +922,16 @@ public class PanpanTest {
         userData.setTtl_use_flag(0);
         userData.setLang_type("EN");
 
-        /// SED03F220R Single
-        SED03F220RInVo sed03f220rInVo = SED03F220RInVo.builder()
-            .prd_ctgo_cd("25")
+        /// SED03F221R Single
+        SED03F221RInVo sed03f221rInVo = SED03F221RInVo.builder()
+            .page_size(15)
+            .next_key_val("1")
+            .next_key_val1("1")
+            .mid("71000464329")
             .build();
 
         ByteEncoder byteEncoder = new ByteEncoder();
-        TelegramIn<SED03F220RInVo> telegramIn = TelegramBuilder.getTelegramIn(userData, sed03f220rInVo);
+        TelegramIn<SED03F221RInVo> telegramIn = TelegramBuilder.getTelegramIn(userData, sed03f221rInVo);
 
         logger.info(telegramIn.getData().getData().toString());
 
@@ -837,16 +948,16 @@ public class PanpanTest {
 
         logger.info("################################### Response START Panpan ###################################");
 
-        /// SED03F219R
-        String response = "00003466devaps01202410151147230024254700SED03F220R              MTI R                        devaps0120241015114723002425470020241015114723324   UNIT      192.168.0.147                   04EA563255A5                           020241015114723324   20241015114724013209  0  00        000       NAZAP0005                                                        EN                                                                                                                                             N00000525                     30The Transaction Successfully Ended.                                                                                                                                                                                                                                                                                                                                                                             01The Transaction Successfully Ended.                                                                 D00002429                           20Ingenico EFT 930 G                                                                                  01   25   01   0    Ingenico EFT 930                                                                                    02   25   01   1    ICT 250 3G CTLS                                                                                     05   25   01   1    IWL 220  3G MOVE TO IWL 220 G NON CTLS                                                              06   25   01   0    IWL 220 G NON CTLS                                                                                  07   25   01   1    IWL 220 G Mobile MOVE TO IWL 220 G NON CTLS                                                         08   25   01   1    IWL 220 W CTLS                                                                                      09   25   01   1    IWL 225 G CTLS                                                                                      10   25   01   1    VX 520 G NON CTLS                                                                                   14   25   01   1    VX 675 3G CTLS                                                                                      16   25   01   1    Verifone VX 675 3G Mobile CTLS                                                                      17   25   01   1    VX 675 W CTLS                                                                                       18   25   01   1    INGENICO MOVE 2500 G CTLS                                                                           28   25   01   1    VERIFONE C680                                                                                       30   25   01   1    Verifone C680 WIFI                                                                                  31   25   01   1    Ingenico MOVE2500 WIFI                                                                              32   25   01   1    INGENICO ICT 229 GEM CL                                                                             34   25   01   1    Ingenico Desk 2600                                                                                  36   25   01   1    CASTLES VEGA3000                                                                                    37   25   01   1    NEWLAND SP630 PRO                                                                                   38   25   01   1    @@";
+        /// SED03F221R
+        String response = "00003564devaps01202410151418460044254800SED03F221R              MTI R                        devaps0120241015141846004425480020241015141846158   UNIT      192.168.0.147                   04EA563255A5                           020241015141846158   20241015141847231429  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00002627                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              2       273337111125224862810        37   06   ,QRIS International                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     73337111235324123           22   06   ,Off-us Debit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @@";
 
         /// Imitate Response from Tuxedo
         byte[] arrayOfByte = response
             .getBytes();
 
-        SED03F220ROutVo output = new SED03F220ROutVo();
+        SED03F221ROutVo output = new SED03F221ROutVo();
 
-        TelegramUserDataOutput<SED03F220ROutVo> telegramUserDataOutput = parse(arrayOfByte, output);
+        TelegramUserDataOutput<SED03F221ROutVo> telegramUserDataOutput = parse(arrayOfByte, output);
 
         output = telegramUserDataOutput.getOutput();
 
@@ -897,4 +1008,3 @@ public class PanpanTest {
         return telegramHeader;
     }
 }
-
