@@ -65,7 +65,7 @@ public class InterfaceTelegramTest {
     }
 
     private static <T> TelegramUserDataOutput<T> parse(byte[] arrayOfByte, T output) throws Exception {
-        T object = null;
+        T object;
         TelegramHeader telegramHeader = getHeaderFromBytes(arrayOfByte);
         logger.info(telegramHeader.toString());
         if (telegramHeader.getErr_flag() == 0) {
@@ -96,7 +96,7 @@ public class InterfaceTelegramTest {
         try {
             byte[] arrayOfByte = TelegramUtil.cutBytes(paramArrayOfbyte, 0, 500);
             ByteDecoder<TelegramHeader> byteDecoder = new ByteDecoder<>();
-            telegramHeader = (TelegramHeader) byteDecoder.convertBytes2Object(arrayOfByte, telegramHeader, true);
+            telegramHeader = byteDecoder.convertBytes2Object(arrayOfByte, telegramHeader, true);
         } catch (Exception exception) {
             ExceptionUtil.logPrintStackTrace(logger, exception);
             throw exception;
