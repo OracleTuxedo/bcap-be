@@ -35,7 +35,6 @@ public class SMC02F042R implements BaseModuleInterface<SMC02F042ROutVo, SMC02F04
             logger.info(e.getLocalizedMessage());
             logger.info(e.getMessage());
         }
-
         return result;
     }
 }
