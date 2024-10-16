@@ -37,7 +37,7 @@ public class TelegramUtil {
         double var5 = 0.0;
         switch (var2.type()) {
             case DECIMAL:
-                BigDecimal var7 = (BigDecimal) var0;
+                BigDecimal var7 = BigDecimal.valueOf((Double) var0);
                 var5 = var7.doubleValue();
                 break;
             case DOUBLE:
