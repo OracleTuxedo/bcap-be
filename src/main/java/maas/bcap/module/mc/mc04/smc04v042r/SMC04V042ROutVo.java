@@ -3,7 +3,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import maas.bcap.module.ac.ac04.sac04v127u.SAC04V127UOutSub1Vo;
 import mti.com.telegram.model.FieldType;
 import mti.com.telegram.model.Kind;
 import mti.com.telegram.model.NumberType;
@@ -26,5 +25,5 @@ public class SMC04V042ROutVo {
     public long grid_cnt;
 
     @FIELD(kind = Kind.DATA, length = 0, type = FieldType.LIST, trim = TrimType.LTRIM)
-    public List<SMC04v042ROutSub1Vo> sub1_vo;
+    public List<SMC04V042ROutSub1Vo> sub1_vo;
 }
