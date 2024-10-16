@@ -15,6 +15,7 @@ import mti.com.telegram.model.annotation.FIELD;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SMC04V042ROutSub1Vo {
+
     @FIELD(kind = Kind.DATA, length = 4, type = FieldType.STRING, trim = TrimType.RTRIM)
     public long supics_trns_tp_seq_no;
 
@@ -60,7 +61,7 @@ public class SMC04V042ROutSub1Vo {
     public double day_max_sale_amt;
 
     @FIELD(kind = Kind.DATA, length = 7, type = FieldType.NUMBER, trim = TrimType.LTRIM)
-    @DATATYPE(type = NumberType.LONG, decimal = 0, sign_length = 1, point_length = 1)
+    @DATATYPE(type = NumberType.LONG, decimal = 0)
     public long day_max_trns_cnt;
 
     @FIELD(kind = Kind.DATA, length = 18, type = FieldType.NUMBER, trim = TrimType.LTRIM)

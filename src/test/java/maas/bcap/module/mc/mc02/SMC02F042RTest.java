@@ -8,6 +8,7 @@ import mti.com.telegram.vo.TelegramUserDataOutput;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -18,8 +19,8 @@ class SMC02F042RTest {
     @Test
     @DisplayName("InVo to Request")
     public void request() throws Exception {
-//00001150                                SMC02F042R              MTI S                                                                            UNIT      192.168.0.141                   0CDD2494CF5F                           020241016112941546                         00000      00000                                                                        EN                                                                                                                                              00000000                     11422                                                                                                 0000101422                                                                                                                                                                                                                                                            C                                                                                                                                                                                                                                                               00000000
-//        List<SMC02F042RInSub1Vo> sub1Vo = List.of();
+
+        List<SMC02F042RInSub1Vo> sub1Vo = new ArrayList<>();
 
         SMC02F042RInVo inVo = SMC02F042RInVo.builder()
             .page_size(10)
@@ -27,7 +28,7 @@ class SMC02F042RTest {
             .inqr_clcd_val("1422")
             .next_key("1422")
             .next_brnd_clcd("C")
-//            .sub1_vo(sub1Vo)
+            .sub1_vo(sub1Vo)
             .build();
         String request = InterfaceTelegramTest.request("SMC02F042R", inVo);
         assertNotNull(request, "The request should not be null");
