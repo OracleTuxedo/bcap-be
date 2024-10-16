@@ -1,5 +1,7 @@
 package maas.bcap.craniumtest;
 
+import maas.bcap.module.ac.ac04.sac04v125r.SAC04V125RInVo;
+import maas.bcap.module.ac.ac04.sac04v125r.SAC04V125ROutVo;
 import maas.bcap.module.ac.ac04.sac04v127u.SAC04V127UInVo;
 import maas.bcap.module.ac.ac04.sac04v127u.SAC04V127UInSub1Vo;
 import maas.bcap.module.ac.ac04.sac04v127u.SAC04V127UOutVo;
@@ -32,7 +34,8 @@ public class DarrenTest {
 
         logger.info("################################### Request START ###################################");
         TelegramUserDataInput userData = new TelegramUserDataInput();
-        userData.setTx_code("SAC04V127U");
+        // userData.setTx_code("SAC04V127U");
+        userData.setTx_code("SAC04V125R");
         userData.setScrn_id("WAC0400400");
         userData.setClient_ip_no("172.16.20.11");
         userData.setOp_id("1787130271");
@@ -43,23 +46,32 @@ public class DarrenTest {
         userData.setLang_type("EN");
 
         /// SAC04V127U Multi
-        SAC04V127UInSub1Vo sac04v127uInSub1Vo1 = SAC04V127UInSub1Vo.builder()
-            .row_no(1)
-            .pmt_date("20230331")
-            .acq_mb_no("008")
-            .mid("71000204442")
-            .auth_batch_no("308800350789")
-            .pmt_seq_no(1)
-            .reg_date("20230331")
-            .reg_seq_no(1)
-            .build();
+        // SAC04V127UInSub1Vo sac04v127uInSub1Vo1 = SAC04V127UInSub1Vo.builder()
+        //     .row_no(1)
+        //     .pmt_date("20230331")
+        //     .acq_mb_no("008")
+        //     .mid("71000204442")
+        //     .auth_batch_no("308800350789")
+        //     .pmt_seq_no(1)
+        //     .reg_date("20230331")
+        //     .reg_seq_no(1)
+        //     .build();
 
-        SAC04V127UInVo sac04v127uInVo = SAC04V127UInVo.builder()
-            .sub1_vo(List.of(sac04v127uInSub1Vo1))
+        // SAC04V127UInVo sac04v127uInVo = SAC04V127UInVo.builder()
+        //     .sub1_vo(List.of(sac04v127uInSub1Vo1))
+        //     .build();
+
+        SAC04V125RInVo sac04v125rInVo = SAC04V125RInVo.builder()
+            .inqr_strt_date("20220901")
+            .inqr_end_date("20221001")
+            .pmt_incap_proc_stat_cd("1")
+            .page_size(20)
+            .trx_type("1")
             .build();
 
         ByteEncoder byteEncoder = new ByteEncoder();
-        TelegramIn<SAC04V127UInVo> telegramIn = TelegramBuilder.getTelegramIn(userData, sac04v127uInVo);
+        // TelegramIn<SAC04V127UInVo> telegramIn = TelegramBuilder.getTelegramIn(userData, sac04v127uInVo);
+        TelegramIn<SAC04V125RInVo> telegramIn = TelegramBuilder.getTelegramIn(userData, sac04v125rInVo);
 
         logger.info(telegramIn.getData().getData().toString());
 
@@ -77,15 +89,22 @@ public class DarrenTest {
         logger.info("################################### Response START ###################################");
 
         /// SAC04V127U
-        String response = "00000987devaps01202410091731150024239400SAC04V127U              MTI R                        devaps0120241009173115002423940020241009173113380   UNIT      192.168.137.1                   8E96E6A577A5                           020241009173113380   20241009173115235592  0  00        000       NAZAP0002                                                        EN                                                                                                                                             N00000425                     30normal process success.                                                                                                                                                                                                                                                                                                                                                                                         00D00000050                     0000       1     140000W00065@@";
+        // String response = "00000987devaps01202410091731150024239400SAC04V127U              MTI R                        devaps0120241009173115002423940020241009173113380   UNIT      192.168.137.1                   8E96E6A577A5                           020241009173113380   20241009173115235592  0  00        000       NAZAP0002                                                        EN                                                                                                                                             N00000425                     30normal process success.                                                                                                                                                                                                                                                                                                                                                                                         00D00000050                     0000       1     140000W00065@@";
+        
+        /// SAC04V125R
+        String response = "00002460devaps01202410111704140034260400SAC04V125R              MTI R                        devaps0120241011170414003426040020241011170413271   UNIT      192.168.137.1                   8E96E6A577A5                           020241011170413271   20241011170414961760  0  00        000       NAZAP0005                                                        EN                                                                                                                                             N00000425                     30The Transaction Successfully Ended.                                                                                                                                                                                                                                                                                                                                                                             00D00001523                         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           27100003073420220911118800342579               70000        TEST ANDROID BY ANDREW   Jakarta BaratID                                                            Success   001Account number not found      200                                                                                                                                                                                                        0         Paid       73001583V  20210712202209111360202107132400000376                  17100003073420220922203300344718                5000        EDC ANDROID                                                                                         Success   001Account number not found      200                                                                                                                                                                                                        0         Paid       73001581V  20220202202209221360202202032400000437                  1@@";
 
         /// Imitate Response from Tuxedo
         byte[] arrayOfByte = response
             .getBytes();
 
-        SAC04V127UOutVo output = new SAC04V127UOutVo();
+        // SAC04V127UOutVo output = new SAC04V127UOutVo();
 
-        TelegramUserDataOutput<SAC04V127UOutVo> telegramUserDataOutput = parse(arrayOfByte, output);
+        // TelegramUserDataOutput<SAC04V127UOutVo> telegramUserDataOutput = parse(arrayOfByte, output);
+
+        SAC04V125ROutVo output = new SAC04V125ROutVo();
+
+        TelegramUserDataOutput<SAC04V125ROutVo> telegramUserDataOutput = parse(arrayOfByte, output);
 
         output = telegramUserDataOutput.getOutput();
 

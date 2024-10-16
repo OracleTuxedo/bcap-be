@@ -34,8 +34,8 @@ public class BcapApplication {
 //            EndgTest.interfaceTuxedoParseRequest();
 //            EndgTest.interfaceTuxedoParseResponse();
 
-//            DarrenTest.interfaceTuxedoParseRequest();
-//            DarrenTest.interfaceTuxedoParseResponse();
+           DarrenTest.interfaceTuxedoParseRequest();
+           DarrenTest.interfaceTuxedoParseResponse();
 
 //            NeheTest.interfaceTuxedoParseRequest();
 //            NeheTest.interfaceTuxedoParseResponse();
