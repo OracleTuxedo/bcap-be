@@ -41,5 +41,5 @@ public class ExampleOutDto {
     // SAC02F452R
     private long tot_cnt;
 
-    private List<ExampleOutSub1Vo> sub1Vos;
+    private List<ExampleOutSub1Dto> sub1Vos;
 }

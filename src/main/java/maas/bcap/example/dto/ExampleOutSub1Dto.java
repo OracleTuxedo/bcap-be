@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExampleOutSub1Vo {
+public class ExampleOutSub1Dto {
 
     private String auth_date;
 

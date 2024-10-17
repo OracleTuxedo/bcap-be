@@ -3,7 +3,7 @@ package maas.bcap.example.service;
 import jakarta.servlet.http.HttpServletRequest;
 import maas.bcap.example.dto.ExampleInDto;
 import maas.bcap.example.dto.ExampleOutDto;
-import maas.bcap.example.dto.ExampleOutSub1Vo;
+import maas.bcap.example.dto.ExampleOutSub1Dto;
 import maas.bcap.module.ac.ac02.sac02f452r.SAC02F452R;
 import maas.bcap.module.ac.ac02.sac02f452r.SAC02F452RInVo;
 import maas.bcap.module.ac.ac02.sac02f452r.SAC02F452ROutVo;
@@ -56,7 +56,7 @@ public class ExampleService {
         TelegramUserDataOutput<SAC02F452ROutVo> sac02f452rResult = sac02F452R.call(request, sac02F452RInVo, screenId);
         SAC02F452ROutVo sac02F452ROutVo = sac02f452rResult.getOutput();
 
-        List<ExampleOutSub1Vo> sub1Vos = new ArrayList<>();
+        List<ExampleOutSub1Dto> sub1Vos = new ArrayList<>();
 
         // Cara 1: Enhanced for loops
 //        for (SAC02F452ROutSub1Vo le : sac02F452ROutVo.sub1Vos){
@@ -75,7 +75,7 @@ public class ExampleService {
 
         // Cara 2: Stream loop
         if (sac02F452ROutVo.sub1Vos != null)
-            sub1Vos = sac02F452ROutVo.sub1Vos.stream().map(le -> ExampleOutSub1Vo.builder()
+            sub1Vos = sac02F452ROutVo.sub1Vos.stream().map(le -> ExampleOutSub1Dto.builder()
                 .auth_date(le.auth_date)
                 .pmt_date(le.pmt_date)
                 .card_no(le.card_no)
