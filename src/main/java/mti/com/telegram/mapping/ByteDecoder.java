@@ -59,6 +59,7 @@ public class ByteDecoder<T> {
             throw exception;
         } else {
             Field[] fields = obj.getClass().getDeclaredFields();
+            String setterMethodName = "";
 
             for (Field field : fields) {
                 FIELD fieldAnnotation = field.getAnnotation(FIELD.class);
@@ -70,10 +71,14 @@ public class ByteDecoder<T> {
                         case STRING:
                             byte[] stringBytes = TelegramUtil.cutBytes(byteArray, pointer, length);
                             String stringValue = TelegramUtil.byte2StringTrimmed(stringBytes, this.charSet);
-                            String setterMethodName = TelegramUtil.getSetterMethodName(fieldName);
+                            setterMethodName = TelegramUtil.getSetterMethodName(fieldName);
                             Method setterMethod = field.getDeclaringClass().getDeclaredMethod(setterMethodName, String.class);
                             TelegramUtil.invokeMethod(setterMethod, obj, stringValue);
                             pointer += length;
+
+                            System.out.println(setterMethodName);
+                            System.out.println(setterMethod.getDeclaringClass().toString() + '\n');
+
                             break;
                         case NUMBER:
                             DATATYPE datatypeAnnotation = field.getAnnotation(DATATYPE.class);
@@ -83,6 +88,9 @@ public class ByteDecoder<T> {
                             setterMethodName = TelegramUtil.getSetterMethodName(fieldName);
                             TelegramUtil.setterMethodForNumberInvoke(obj, field, setterMethodName, numberBytes, this.charSet, "ByteDecoder");
                             pointer += length;
+
+                            System.out.println(setterMethodName + '\n');
+
                             break;
                         case LIST:
                             processListType(byteArray, obj, field, fieldAnnotation, pointer);
@@ -123,7 +131,7 @@ public class ByteDecoder<T> {
                     }
                 } catch (Exception e) {
                     exception = new TelegramNestedRuntimeException(e.toString());
-                    
+
                     exception.setFieldName(fieldName);
                     exception.setFtype(fieldAnnotation.type().getTypeName());
                     exception.setObjName(obj.getClass().getName());
@@ -141,14 +149,14 @@ public class ByteDecoder<T> {
         String setterMethodName = TelegramUtil.getSetterMethodName(field.getName());
         Method listSetterMethod = field.getDeclaringClass().getDeclaredMethod(setterMethodName, List.class);
         int itemCount;
-        
+
         switch (fieldAnnotation.kind()) {
             case DATA:
                 byte[] countBytes = TelegramUtil.cutBytes(byteArray, pointer, 8);
                 String countString = (new String(countBytes)).trim();
                 if (!Pattern.matches("^[0-9]*$", countString)) {
                     TelegramNestedRuntimeException exception = new TelegramNestedRuntimeException("Data Count String is [" + countString + "]. is not NumberType");
-                    
+
                     exception.setFieldName(field.getName());
                     exception.setFtype(fieldAnnotation.type().getTypeName());
                     exception.setObjName(obj.getClass().getName());

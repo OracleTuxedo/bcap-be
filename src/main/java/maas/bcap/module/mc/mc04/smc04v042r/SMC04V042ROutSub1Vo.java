@@ -15,9 +15,9 @@ import mti.com.telegram.model.annotation.FIELD;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SMC04V042ROutSub1Vo {
-    @FIELD(kind = Kind.DATA, length = 4, type = FieldType.NUMBER, trim = TrimType.LTRIM)
-    @DATATYPE(type = NumberType.LONG, decimal = 0)
-    public long supics_trns_tp_seq_no;
+
+    @FIELD(kind = Kind.DATA, length = 4, type = FieldType.STRING, trim = TrimType.RTRIM)
+    public String supics_trns_tp_seq_no;
 
     @FIELD(kind = Kind.DATA, length = 2, type = FieldType.STRING, trim = TrimType.RTRIM)
     public String supics_trns_tp_cd;
@@ -31,7 +31,7 @@ public class SMC04V042ROutSub1Vo {
     @FIELD(kind = Kind.DATA, length = 200, type = FieldType.STRING, trim = TrimType.RTRIM)
     public String trns_cond_expl;
 
-    @FIELD(kind = Kind.DATA, length = 7, type = FieldType.NUMBER, trim = TrimType.LTRIM)
+    @FIELD(kind = Kind.DATA, length = 8, type = FieldType.NUMBER, trim = TrimType.LTRIM)
     @DATATYPE(type = NumberType.DOUBLE, decimal = 4, sign_length = 1, point_length = 1)
     public double min_day_avg_sale_icr_rt;
 
@@ -45,27 +45,27 @@ public class SMC04V042ROutSub1Vo {
     public String trns_chck_end_time;
 
     @FIELD(kind = Kind.DATA, length = 7, type = FieldType.NUMBER, trim = TrimType.LTRIM)
-    @DATATYPE(type = NumberType.LONG, decimal = 0, sign_length = 1, point_length = 1)
+    @DATATYPE(type = NumberType.LONG, decimal = 0)
     public long max_trns_cnt;
 
-    @FIELD(kind = Kind.DATA, length = 7, type = FieldType.NUMBER, trim = TrimType.LTRIM)
+    @FIELD(kind = Kind.DATA, length = 8, type = FieldType.NUMBER, trim = TrimType.LTRIM)
     @DATATYPE(type = NumberType.DOUBLE, decimal = 4, sign_length = 1, point_length = 1)
     public double day_max_trns_keyin_rt;
 
     @FIELD(kind = Kind.DATA, length = 3, type = FieldType.NUMBER, trim = TrimType.LTRIM)
-    @DATATYPE(type = NumberType.LONG, decimal = 0, sign_length = 1, point_length = 1)
+    @DATATYPE(type = NumberType.LONG, decimal = 0)
     public long non_act_mcnt;
 
-    @FIELD(kind = Kind.DATA, length = 18, type = FieldType.NUMBER, trim = TrimType.LTRIM)
-    @DATATYPE(type = NumberType.DOUBLE, decimal = 2, sign_length = 1, point_length = 1)
+    @FIELD(kind = Kind.DATA, length = 19, type = FieldType.NUMBER, trim = TrimType.LTRIM)
+    @DATATYPE(type = NumberType.DECIMAL, decimal = 2, sign_length = 1, point_length = 1)
     public double day_max_sale_amt;
 
     @FIELD(kind = Kind.DATA, length = 7, type = FieldType.NUMBER, trim = TrimType.LTRIM)
-    @DATATYPE(type = NumberType.LONG, decimal = 0, sign_length = 1, point_length = 1)
+    @DATATYPE(type = NumberType.LONG, decimal = 0)
     public long day_max_trns_cnt;
 
-    @FIELD(kind = Kind.DATA, length = 18, type = FieldType.NUMBER, trim = TrimType.LTRIM)
-    @DATATYPE(type = NumberType.DOUBLE, decimal = 2, sign_length = 1, point_length = 1)
+    @FIELD(kind = Kind.DATA, length = 19, type = FieldType.NUMBER, trim = TrimType.LTRIM)
+    @DATATYPE(type = NumberType.DECIMAL, decimal = 2, sign_length = 1, point_length = 1)
     public double day_max_trns_amt;
 
     @FIELD(kind = Kind.DATA, length = 18, type = FieldType.STRING, trim = TrimType.RTRIM)
@@ -104,12 +104,12 @@ public class SMC04V042ROutSub1Vo {
     @FIELD(kind = Kind.DATA, length = 100 , type = FieldType.STRING, trim = TrimType.RTRIM)
     public String apvl_mgr_usr_id;
 
-    @FIELD(kind = Kind.DATA, length = 18, type = FieldType.NUMBER, trim = TrimType.LTRIM)
+    @FIELD(kind = Kind.DATA, length = 19, type = FieldType.NUMBER, trim = TrimType.LTRIM)
     @DATATYPE(type = NumberType.DECIMAL, decimal = 2, sign_length = 1, point_length = 1)
     public double min_sv_amt;
 
     @FIELD(kind = Kind.DATA, length = 3, type = FieldType.NUMBER, trim = TrimType.LTRIM)
-    @DATATYPE(type = NumberType.LONG, decimal = 0, sign_length = 1, point_length = 1)
+    @DATATYPE(type = NumberType.LONG, decimal = 0)
     public long time_frame;
 
 }
