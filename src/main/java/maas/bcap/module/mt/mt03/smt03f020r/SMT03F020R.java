@@ -2,14 +2,13 @@ package maas.bcap.module.mt.mt03.smt03f020r;
 
 
 import jakarta.servlet.http.HttpServletRequest;
-import maas.bcap.az.ServiceSupport;
+import maas.bcap.common.ServiceSupport;
 import mti.com.telegram.exception.TelegramNestedRuntimeException;
 import mti.com.telegram.vo.TelegramUserDataInput;
 import mti.com.telegram.vo.TelegramUserDataOutput;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 
 public class SMT03F020R {

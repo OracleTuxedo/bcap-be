@@ -1,10 +1,8 @@
 package maas.bcap.module.az.az03.saz03f340u;
 
 import jakarta.servlet.http.HttpServletRequest;
-import maas.bcap.az.ServiceSupport;
+import maas.bcap.common.ServiceSupport;
 import maas.bcap.module.BaseModuleInterface;
-import maas.bcap.module.az.az03.saz03f340u.SAZ03F340UInVo;
-import maas.bcap.module.az.az03.saz03f340u.SAZ03F340UOutVo;
 import mti.com.telegram.exception.TelegramNestedRuntimeException;
 import mti.com.telegram.vo.TelegramUserDataInput;
 import mti.com.telegram.vo.TelegramUserDataOutput;

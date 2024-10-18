@@ -1,7 +1,5 @@
 package maas.bcap;
 
-import maas.bcap.craniumtest.*;
-import mti.com.telegram.util.InterfaceTelegramTest;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,32 +15,10 @@ public class BcapApplication {
         SpringApplication.run(BcapApplication.class, args);
         try {
             logger.atLevel(Level.ALL);
-            logger.info("Le Rucco Start Application");
-
-//            InterfaceTelegramTest.interfaceTuxedoParseRequest();
-//            InterfaceTelegramTest.interfaceTuxedoParseResponse();
-
-//            FalahTest.interfaceTuxedoParseRequest();
-//            FalahTest.interfaceTuxedoParseResponse();
-
-//            LeRuccoTest.interfaceTuxedoParseRequest();
-//            LeRuccoTest.interfaceTuxedoParseResponse();
-
-//            PanpanTest.interfaceTuxedoParseRequest();
-//            PanpanTest.interfaceTuxedoParseResponse();
-
-//            EndgTest.interfaceTuxedoParseRequest();
-//            EndgTest.interfaceTuxedoParseResponse();
-
-//           DarrenTest.interfaceTuxedoParseRequest();
-//           DarrenTest.interfaceTuxedoParseResponse();
-
-//            NeheTest.interfaceTuxedoParseRequest();
-//            NeheTest.interfaceTuxedoParseResponse();
-
+            logger.info("Start Application");
 
         } catch (Exception e) {
-            logger.info("Le Rucco Failed MAYDAY MAYDAY MAYDAY");
+            logger.info("Application Failed Mayday Mayday Mayday");
             throw new RuntimeException(e);
         }
 
