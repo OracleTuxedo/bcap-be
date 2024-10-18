@@ -9,12 +9,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import mti.com.telegram.model.FieldType;
-import mti.com.telegram.model.Kind;
-import mti.com.telegram.model.TrimType;
-import mti.com.telegram.model.annotation.FIELD;
-
-import java.util.List;
 
 @Data
 @Builder

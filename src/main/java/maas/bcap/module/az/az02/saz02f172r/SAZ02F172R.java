@@ -1,7 +1,7 @@
 package maas.bcap.module.az.az02.saz02f172r;
 
 import jakarta.servlet.http.HttpServletRequest;
-import maas.bcap.az.ServiceSupport;
+import maas.bcap.common.ServiceSupport;
 import maas.bcap.module.BaseModuleInterface;
 import maas.bcap.module.az.az02.saz02f132r.SAZ02F132RInVo;
 import maas.bcap.module.az.az02.saz02f132r.SAZ02F132ROutVo;

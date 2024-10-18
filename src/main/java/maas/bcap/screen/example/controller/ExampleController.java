@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @RestController
 @RequestMapping("/example")
@@ -21,4 +23,10 @@ public class ExampleController {
     public ExampleOutDto getListOfEDC(HttpServletRequest request, @RequestBody ExampleInDto inDto) throws Exception {
         return exampleService.getListOfEDC(request, inDto, "ED999");
     }
+    
+    @GetMapping("/test")
+    public String getMethodName(HttpServletRequest request) {
+        return new String("Hello World");
+    }
+    
 }

@@ -11,8 +11,6 @@ import mti.com.telegram.model.TrimType;
 import mti.com.telegram.model.annotation.DATATYPE;
 import mti.com.telegram.model.annotation.FIELD;
 
-import java.util.List;
-
 @Data
 @Builder
 @NoArgsConstructor

@@ -12,11 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 
 public class SMC04V041UTest {
 

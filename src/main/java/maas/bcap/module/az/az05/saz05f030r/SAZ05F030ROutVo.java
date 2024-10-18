@@ -3,7 +3,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import maas.bcap.module.az.az05.saz05f030r.SAZ05F030ROutSub1Vo;
 import mti.com.telegram.model.FieldType;
 import mti.com.telegram.model.Kind;
 import mti.com.telegram.model.NumberType;
