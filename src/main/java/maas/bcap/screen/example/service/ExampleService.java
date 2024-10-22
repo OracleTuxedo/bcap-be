@@ -1,15 +1,20 @@
 package maas.bcap.screen.example.service;
 
 import jakarta.servlet.http.HttpServletRequest;
-import maas.bcap.screen.example.dto.ExampleInDto;
-import maas.bcap.screen.example.dto.ExampleOutDto;
-import maas.bcap.screen.example.dto.ExampleOutSub1Dto;
+import maas.bcap.module.az.az03.saz03v701u.SAZ03V701U;
+import maas.bcap.module.az.az03.saz03v701u.SAZ03V701UInVo;
+import maas.bcap.module.az.az03.saz03v701u.SAZ03V701UOutVo;
+import maas.bcap.screen.example.dto.*;
 import maas.bcap.module.ac.ac02.sac02f452r.SAC02F452R;
 import maas.bcap.module.ac.ac02.sac02f452r.SAC02F452RInVo;
 import maas.bcap.module.ac.ac02.sac02f452r.SAC02F452ROutVo;
 import maas.bcap.module.ed.ed03.sed03f107r.SED03F107R;
 import maas.bcap.module.ed.ed03.sed03f107r.SED03F107RInVo;
 import maas.bcap.module.ed.ed03.sed03f107r.SED03F107ROutVo;
+import mti.com.cipher.SHAEncryption;
+import mti.com.system.SessionManager;
+import mti.com.system.SessionVo;
+import mti.com.telegram.util.InterfaceTelegramTest;
 import mti.com.telegram.vo.TelegramUserDataOutput;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,16 +27,68 @@ import java.util.List;
 @Service
 public class ExampleService {
 
-    private static final Logger logger = LogManager.getLogger(ExampleService.class);
+    private static final Logger log = LogManager.getLogger(ExampleService.class);
 
     @Autowired
     private SED03F107R sed03f107r;
 
     @Autowired
-    private SAC02F452R sac02F452R;
+    private SAC02F452R sac02f452r;
+
+    @Autowired
+    private SAZ03V701U saz03v701u;
+
+    public LoginOutDto login(HttpServletRequest request, LoginInDto inDto, String screenId) throws  Exception {
+
+        SessionVo userVo = SessionManager.getUserData(request);
+
+        if (userVo != null){
+            System.out.println("LeRucco");
+            System.out.println(userVo.toString());
+        }
+
+        String encryptedPassword = SHAEncryption.encrypt(inDto.getUser_id() + inDto.getPassword());
+
+//        SAZ03V701UInVo saz03v701uInVo = SAZ03V701UInVo.builder()
+//            .usr_id(inDto.getUser_id())
+//            .usr_paswd(encryptedPassword)
+//            .admin_yn("N")
+//            .chnl_clcd("1")
+//            .req_tp("I")
+//            .build();
+//        TelegramUserDataOutput<SAZ03V701UOutVo> saz03v701uResult = saz03v701u.call(request, saz03v701uInVo, screenId);
+//        SAZ03V701UOutVo saz03v701uOutVo = saz03v701uResult.getOutput();
+
+        String response = "00001070devaps01202410221334230014256400SAZ03V701U              MTI R                        devaps0120241022133423001425640020241022133423036   UNIT      192.168.1.3                     581CF8933F96            1787130271     020241022133423036   20241022133423725174  0  00        000       IAZAP0000                                                        EN                                                                                                                                             N00000425                     30Login success.                                                                                                                                                                                                                                                                                                                                                                                                  00D00000133                     1787130271     Yosua Sutandar                                    N1787130271                                 10Y@@";
+        SAZ03V701UOutVo saz03v701uOutVo = SAZ03V701UOutVo.builder().build();
+        TelegramUserDataOutput<SAZ03V701UOutVo> saz03v701uResult = InterfaceTelegramTest.response(response, saz03v701uOutVo);
+        saz03v701uOutVo = saz03v701uResult.getOutput();
+        System.out.println(saz03v701uOutVo.toString());
+
+        request.getSession().invalidate();
+
+        userVo = SessionVo.builder()
+            .sUserId(inDto.getUser_id())
+            .usrIno(saz03v701uOutVo.usr_ino)
+            .sUserNm(saz03v701uOutVo.usr_nm)
+            .usrCtgoCd(saz03v701uOutVo.usr_ctgo_cd)
+            .adm_usr_yn(saz03v701uOutVo.adm_usr_yn)
+            .build();
+
+        SessionManager.setUserData(request, userVo);
+
+        System.out.println("After Invalidate");
+        System.out.println(userVo.toString());
+        System.out.println(SessionManager.getUserData(request).toString());
+
+        return LoginOutDto.builder()
+            .usr_ctgo_cd(userVo.getUsrCtgoCd())
+            .adm_usr_yn(userVo.getAdm_usr_yn())
+            .build();
+    }
 
     public ExampleOutDto getListOfEDC(HttpServletRequest request, ExampleInDto inDto, String screenId) throws Exception {
-        logger.info(inDto.toString());
+        System.out.println(inDto.toString());
 
         /// SED03F107R
         SED03F107RInVo sed03F107RInVo = SED03F107RInVo.builder()
@@ -53,7 +110,7 @@ public class ExampleService {
             .auth_strt_date(inDto.getAuth_strt_date())
             .auth_end_date(inDto.getAuth_end_date())
             .build();
-        TelegramUserDataOutput<SAC02F452ROutVo> sac02f452rResult = sac02F452R.call(request, sac02F452RInVo, screenId);
+        TelegramUserDataOutput<SAC02F452ROutVo> sac02f452rResult = sac02f452r.call(request, sac02F452RInVo, screenId);
         SAC02F452ROutVo sac02F452ROutVo = sac02f452rResult.getOutput();
 
         List<ExampleOutSub1Dto> sub1Vos = new ArrayList<>();
