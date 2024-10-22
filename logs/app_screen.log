@@ -1,0 +1,5 @@
+2024-10-22 09:31:16 [http-nio-8080-exec-2] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-22 09:31:16 [http-nio-8080-exec-2] INFO  ExampleController:38 - info
+2024-10-22 09:31:16 [http-nio-8080-exec-2] WARN  ExampleController:39 - warn
+2024-10-22 09:31:16 [http-nio-8080-exec-2] ERROR ExampleController:40 - error
+2024-10-22 09:31:16 [http-nio-8080-exec-2] FATAL ExampleController:41 - fatal
