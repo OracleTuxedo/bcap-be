@@ -46,7 +46,11 @@
                             <SizeBasedTriggeringPolicy size="1MB"/>
                         </Policies>
                         <!-- Strategy to retain up to 30 rolled-over log files -->
-                        <DefaultRolloverStrategy max="30"/>
+                        <DefaultRolloverStrategy max="10">
+                        <Delete basePath="logs" maxDepth="1">
+                            <IfLastModified age="1m"/>
+                        </Delete>
+                        </DefaultRolloverStrategy>
                     </RollingFile>
                 </Route>
             </Routes>
