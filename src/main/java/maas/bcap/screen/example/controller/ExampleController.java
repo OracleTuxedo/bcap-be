@@ -7,6 +7,7 @@ import maas.bcap.screen.example.service.ExampleService;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.ThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,8 +44,14 @@ public class ExampleController {
         return new String("Hello World");
     }
 
+    public void callRemoteAPI() {
+        ThreadContext.put("className", "ExampleController"); // Sets the className dynamically
+        log.info("Calling remote API from ExampleController");
+        ThreadContext.clearMap(); // Clear context after logging
+    }
+
 //    public static void main(String[] args) {
-//        test();
+//        callRemoteAPI();
 //    }
 //
 //    public static String test() {

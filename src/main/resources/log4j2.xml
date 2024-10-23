@@ -5,35 +5,47 @@
         <Console name="LogToConsole" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1}:%L - %msg%n"/>
         </Console>
+        <Routing name="RoutingAppender1">
+            <Routes pattern="$${ctx:className}">
+                <RollingFile
+                    name="DailyFile"
+                    fileName="logs/app.log"
+                    filePattern="logs/$${ctx:className}-%d{yyyy-MM-dd}.log"
+                >
+                    <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1}:%L - %msg%n"/>
+                    <Policies>
+                        <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                    </Policies>
+                    <DefaultRolloverStrategy max="10">
+                        <Delete basePath="logs" maxDepth="1">
+                            <IfLastModified age="10m"/>
+                        </Delete>
+                    </DefaultRolloverStrategy>
+                </RollingFile>
 
-        <RollingFile
-            name="DailyFile"
-            fileName="logs/app.log"
-            filePattern="logs/app-%d{yyyy-MM-dd}.log"
-        >
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1}:%L - %msg%n"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
-            </Policies>
-            <DefaultRolloverStrategy max="30"/>
-        </RollingFile>
-
-        <RollingFile
-            name="DailyScreenFile"
-            fileName="logs/app_screen.log"
-            filePattern="logs/app_screen_%d{yyyy-MM-dd}.log"
-        >
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1}:%L - %msg%n"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
-            </Policies>
-            <DefaultRolloverStrategy max="30"/>
-        </RollingFile>
+                <RollingFile
+                    name="DailyScreenFile"
+                    fileName="logs/app_screen.log"
+                    filePattern="logs/$${ctx:className}_%d{yyyy-MM-dd}.log"
+                >
+                    <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1}:%L - %msg%n"/>
+                    <Policies>
+                        <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                    </Policies>
+                    <DefaultRolloverStrategy max="10">
+                        <Delete basePath="logs" maxDepth="1">
+                            <IfLastModified age="10m"/>
+                        </Delete>
+                    </DefaultRolloverStrategy>
+                </RollingFile>
+            </Routes>
+        </Routing>
     </Appenders>
 
     <Loggers>
         <Logger name="maas.bcap.screen" level="info">
             <AppenderRef ref="DailyScreenFile"/>
+            <AppenderRef ref="RoutingAppender1"/>
         </Logger>
 
         <Root level="warn">
