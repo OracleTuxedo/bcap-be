@@ -3,3 +3,5 @@
 2024-10-22 09:31:16 [http-nio-8080-exec-2] WARN  ExampleController:39 - warn
 2024-10-22 09:31:16 [http-nio-8080-exec-2] ERROR ExampleController:40 - error
 2024-10-22 09:31:16 [http-nio-8080-exec-2] FATAL ExampleController:41 - fatal
+2024-10-23 09:39:27 [http-nio-8080-exec-2] INFO  ExampleController:50 - Calling remote API from ExampleController
+2024-10-23 09:43:48 [http-nio-8080-exec-1] INFO  ExampleController:50 - Calling remote API from ExampleController

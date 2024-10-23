@@ -41,13 +41,15 @@ public class ExampleController {
         log.error("error");
         log.fatal("fatal");
 
-        return new String("Hello World");
+        return "Hello World";
     }
 
-    public void callRemoteAPI() {
-        ThreadContext.put("className", "ExampleController"); // Sets the className dynamically
+    @GetMapping("call-logging")
+    public String callRemoteAPI() {
+        ThreadContext.put("className", "ExampleController");
         log.info("Calling remote API from ExampleController");
-        ThreadContext.clearMap(); // Clear context after logging
+        ThreadContext.clearMap();
+        return "111";
     }
 
 //    public static void main(String[] args) {
