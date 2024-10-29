@@ -1,4 +1,4 @@
-package maas.bcap.screen.example.fileupload;
+package maas.bcap.screen.fileupload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
@@ -50,19 +50,19 @@ public class FileManagerController {
         }
     }
 
-    @GetMapping("/download-faster")
-    public ResponseEntity<Resource> downloadFileFaster(@RequestParam("fileName") String filename) {
-        log.log(Level.INFO, "[FASTER] Download with /download-faster");
-        try {
-            var fileToDownload = fileStorageService.getDownloadFile(filename);
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"")
-                    .contentLength(fileToDownload.length())
-                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .body(new FileSystemResource(fileToDownload));
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    @GetMapping("/download-faster")
+//    public ResponseEntity<Resource> downloadFileFaster(@RequestParam("fileName") String filename) {
+//        log.log(Level.INFO, "[FASTER] Download with /download-faster");
+//        try {
+//            var fileToDownload = fileStorageService.getDownloadFile(filename);
+//            return ResponseEntity.ok()
+//                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"")
+//                    .contentLength(fileToDownload.length())
+//                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+//                    .body(new FileSystemResource(fileToDownload));
+//        } catch (Exception e) {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
 }

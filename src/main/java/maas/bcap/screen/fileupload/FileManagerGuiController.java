@@ -1,4 +1,4 @@
-package maas.bcap.screen.example.fileupload;
+package maas.bcap.screen.fileupload;
 
 
 import org.springframework.stereotype.Controller;

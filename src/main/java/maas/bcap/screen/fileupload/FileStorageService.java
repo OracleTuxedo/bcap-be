@@ -1,4 +1,4 @@
-package maas.bcap.screen.example.fileupload;
+package maas.bcap.screen.fileupload;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,4 +39,6 @@ public class FileStorageService {
         }
         return fileToDownload;
     }
+
+
 }
