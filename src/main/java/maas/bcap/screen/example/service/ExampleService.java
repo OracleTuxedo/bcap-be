@@ -1,5 +1,6 @@
 package maas.bcap.screen.example.service;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import maas.bcap.module.az.az03.saz03v701u.SAZ03V701U;
 import maas.bcap.module.az.az03.saz03v701u.SAZ03V701UInVo;
@@ -19,10 +20,22 @@ import mti.com.telegram.vo.TelegramUserDataOutput;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+
 
 @Service
 public class ExampleService {
@@ -43,8 +56,8 @@ public class ExampleService {
         SessionVo userVo = SessionManager.getUserData(request);
 
         if (userVo != null){
-            System.out.println("LeRucco");
-            System.out.println(userVo.toString());
+            log.info("LeRucco");
+            log.info(userVo.toString());
         }
 
         String encryptedPassword = SHAEncryption.encrypt(inDto.getUser_id() + inDto.getPassword());
@@ -63,7 +76,7 @@ public class ExampleService {
         SAZ03V701UOutVo saz03v701uOutVo = SAZ03V701UOutVo.builder().build();
         TelegramUserDataOutput<SAZ03V701UOutVo> saz03v701uResult = InterfaceTelegramTest.response(response, saz03v701uOutVo);
         saz03v701uOutVo = saz03v701uResult.getOutput();
-        System.out.println(saz03v701uOutVo.toString());
+        log.info(saz03v701uOutVo.toString());
 
         request.getSession().invalidate();
 
@@ -77,9 +90,9 @@ public class ExampleService {
 
         SessionManager.setUserData(request, userVo);
 
-        System.out.println("After Invalidate");
-        System.out.println(userVo.toString());
-        System.out.println(SessionManager.getUserData(request).toString());
+        log.info("After Invalidate");
+        log.info(userVo.toString());
+        log.info(SessionManager.getUserData(request).toString());
 
         return LoginOutDto.builder()
             .usr_ctgo_cd(userVo.getUsrCtgoCd())
@@ -87,8 +100,10 @@ public class ExampleService {
             .build();
     }
 
+
+
     public ExampleOutDto getListOfEDC(HttpServletRequest request, ExampleInDto inDto, String screenId) throws Exception {
-        System.out.println(inDto.toString());
+        log.info(inDto.toString());
 
         /// SED03F107R
         SED03F107RInVo sed03F107RInVo = SED03F107RInVo.builder()
@@ -159,5 +174,82 @@ public class ExampleService {
             .tot_cnt(sac02F452ROutVo.tot_cnt)
             .sub1Vos(sub1Vos)
             .build();
+    }
+
+//    @Value("${aes.secret_key}")
+//    private String SECRET_KEY;
+//    private Key secretKey;
+//
+//    private static final String AES_ALGORITHM = "AES/CBC/PKCS5Padding"; // Use CBC mode with PKCS5Padding
+//    private static final byte[] IV = new byte[16]; // Initialization vector (IV) for CBC mode
+//
+//    // @PostConstruct
+//    // public void init() {
+//    //   // Decode the Base64 encoded key and initialize the SecretKeySpec
+//    //   byte[] decodedKey = Base64.getDecoder().decode(base64Key);
+//    //   this.secretKeySpec = new SecretKeySpec(decodedKey, AES_ALGORITHM);
+//    // }
+//
+//    @PostConstruct
+//    public void init() {
+//        byte[] decodedSecretKey = Base64.getDecoder().decode(SECRET_KEY);
+//
+//        this.secretKey = new SecretKeySpec(decodedSecretKey, "AES");
+//    }
+//
+//    // Encrypt data with AES and encode with Base64
+//    public String encrypt(String data) throws Exception {
+//        Cipher cipher = Cipher.getInstance(AES_ALGORITHM);
+//        cipher.init(Cipher.ENCRYPT_MODE, secretKey, new IvParameterSpec(IV));
+//        byte[] encryptedBytes = cipher.doFinal(data.getBytes());
+//        return Base64.getEncoder().encodeToString(encryptedBytes);
+//    }
+//
+//    // Decode from Base64 and decrypt with AES
+//    public String decrypt(String encodedData) throws Exception {
+//        byte[] encryptedBytes = Base64.getDecoder().decode(encodedData);
+//        Cipher cipher = Cipher.getInstance(AES_ALGORITHM);
+//        cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(IV));
+//        byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
+//        return new String(decryptedBytes);
+//    }
+//
+//    public String hello() {
+//        try {
+//            KeyGenerator keyGen = KeyGenerator.getInstance(AES_ALGORITHM);
+//            keyGen.init(128); // AES-128
+//            SecretKey secretKey = keyGen.generateKey();
+//            return Base64.getEncoder().encodeToString(secretKey.getEncoded()); // Return encoded key as Base64
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//            return "Error generating AES key: " + e.getMessage();
+//        }
+//    }
+
+
+    @Value("${aes.secret_key}")
+    private String secretKey;
+
+    public String decryptAES(String encryptedData, String iv) {
+        try {
+            // Decode Base64 for IV and encrypted data
+            byte[] ivBytes = Base64.getDecoder().decode(iv);
+            byte[] encryptedBytes = Base64.getDecoder().decode(encryptedData);
+
+            // Setup secret key and IV
+            SecretKey key = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "AES");
+            IvParameterSpec ivParameterSpec = new IvParameterSpec(ivBytes);
+
+            // Initialize cipher for decryption
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
+            cipher.init(Cipher.DECRYPT_MODE, key, ivParameterSpec);
+
+            // Perform decryption
+            byte[] original = cipher.doFinal(encryptedBytes);
+            return new String(original, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Decryption failed: " + e.getMessage();
+        }
     }
 }
