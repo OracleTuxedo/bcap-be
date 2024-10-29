@@ -27,7 +27,7 @@ public class FileManagerOutVo {
     public String req_clcd;
 
     @FIELD(kind=Kind.DATA, length = 0, type = FieldType.LIST, trim = TrimType.LTRIM)
-    public List<FileInfoOutSubVO> list;
+    public List<FileManagerOutSubVo> list;
 
 
     public String getRson_cd() {
@@ -80,7 +80,7 @@ public class FileManagerOutVo {
     }
 
 
-    public List<FileInfoOutSubVO> getList() {
+    public List<FileManagerOutSubVo> getList() {
         return list;
     }
 
@@ -93,7 +93,7 @@ public class FileManagerOutVo {
             + upd_yn + ", req_clcd=" + req_clcd + ", list=" + list + "]";
     }
 
-    public void setList(List<FileInfoOutSubVO> list) {
+    public void setList(List<FileManagerOutSubVo> list) {
         this.list = list;
     }
 
