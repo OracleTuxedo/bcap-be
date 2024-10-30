@@ -3,11 +3,18 @@ package maas.bcap.screen.fileupload.vo;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import mti.com.telegram.model.FieldType;
 import mti.com.telegram.model.Kind;
 import mti.com.telegram.model.TrimType;
 import mti.com.telegram.model.annotation.FIELD;
-
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class FileManagerInVo {
 
     @FIELD(kind=Kind.DATA, length = 8, type = FieldType.STRING, trim = TrimType.RTRIM)
@@ -29,63 +36,5 @@ public class FileManagerInVo {
     public List<FileManagerInSubVo> list;
 
 
-    @Override
-    public String toString() {
-        return "FileInfoInVO [attach_file_id=" + attach_file_id
-            + ", attach_file_clcd=" + attach_file_clcd
-            + ", attach_file_expl=" + attach_file_expl + ", upd_yn="
-            + upd_yn + ", req_clcd=" + req_clcd + ", list=" + list + "]";
-    }
-
-    public String getAttach_file_expl() {
-        return attach_file_expl;
-    }
-
-    public void setAttach_file_expl(String attach_file_expl) {
-        this.attach_file_expl = attach_file_expl;
-    }
-
-    public String getAttach_file_id() {
-        return attach_file_id;
-    }
-
-    public void setAttach_file_id(String attach_file_id) {
-        this.attach_file_id = attach_file_id;
-    }
-
-    public String getAttach_file_clcd() {
-        return attach_file_clcd;
-    }
-
-    public void setAttach_file_clcd(String attach_file_clcd) {
-        this.attach_file_clcd = attach_file_clcd;
-    }
-
-    public String getUpd_yn() {
-        return upd_yn;
-    }
-
-    public void setUpd_yn(String upd_yn) {
-        this.upd_yn = upd_yn;
-    }
-
-    public String getReq_clcd() {
-        return req_clcd;
-    }
-
-
-    public void setReq_clcd(String req_clcd) {
-        this.req_clcd = req_clcd;
-    }
-
-
-    public List<FileManagerInSubVo> getList() {
-        return list;
-    }
-
-
-    public void setList(List<FileManagerInSubVo> list) {
-        this.list = list;
-    }
 
 }
