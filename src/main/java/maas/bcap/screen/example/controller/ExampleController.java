@@ -193,6 +193,32 @@ public class ExampleController {
         }
     }
 
+    @PostMapping("/process")
+    public ResponseEntity<Map<String, String>> decryptAndEncrypt(@RequestBody DecryptionRequest request) {
+        try {
+            // Dekripsi data menggunakan IV dari request
+            String decryptedData = exampleService.decryptAES(request.getEncryptedData(), request.getIv());
+
+            // Generate IV baru untuk enkripsi ulang
+            String newIv = exampleService.generateRandomIv();
+
+            // Enkripsi kembali hasil dekripsi dengan IV baru
+            String reEncryptedData = exampleService.encryptAES(decryptedData, newIv);
+
+            // Buat respons JSON
+            Map<String, String> response = new HashMap<>();
+            //response.put("decryptedData", decryptedData);
+
+            response.put("encryptedData", reEncryptedData);
+            response.put("iv", newIv);
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(Map.of("error", "Process failed: " + e.getMessage()));
+        }
+    }
+
 }
 
 

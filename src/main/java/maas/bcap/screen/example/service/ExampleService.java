@@ -32,6 +32,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -251,5 +252,35 @@ public class ExampleService {
             e.printStackTrace();
             return "Decryption failed: " + e.getMessage();
         }
+    }
+
+    public String encryptAES(String plainText, String iv) {
+        try {
+            // Decode Base64 untuk IV
+            byte[] ivBytes = Base64.getDecoder().decode(iv);
+
+            // Setup secret key dan IV
+            SecretKey key = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "AES");
+            IvParameterSpec ivParameterSpec = new IvParameterSpec(ivBytes);
+
+            // Inisialisasi cipher untuk enkripsi
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
+            cipher.init(Cipher.ENCRYPT_MODE, key, ivParameterSpec);
+
+            // Enkripsi data
+            byte[] encryptedBytes = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
+
+            // Encode hasil enkripsi ke Base64
+            return Base64.getEncoder().encodeToString(encryptedBytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Encryption failed: " + e.getMessage();
+        }
+    }
+
+    public String generateRandomIv() {
+        byte[] iv = new byte[16];
+        new SecureRandom().nextBytes(iv);
+        return Base64.getEncoder().encodeToString(iv);
     }
 }
