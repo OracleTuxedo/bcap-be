@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SAZ02F112R implements BaseModuleInterface<SAZ02F112ROutVo, SAZ02F112RInVo> {
-    private static final Logger logger = LogManager.getLogger(SAZ02F112R.class);
+    private static final Logger log = LogManager.getLogger(SAZ02F112R.class);
 
     @Autowired
     private ServiceSupport support;
@@ -27,13 +27,13 @@ public class SAZ02F112R implements BaseModuleInterface<SAZ02F112ROutVo, SAZ02F11
             TelegramUserDataInput userDataInput = support.tuxedoHeader(request, this.getClass().getSimpleName(), screenId);
             result = support.tuxedoTransaction(userDataInput, inVo, outVo);
         } catch (TelegramNestedRuntimeException e) {
-            logger.info(e.toString());
-            logger.info(e.getMsg());
+            log.info(e.toString());
+            log.info(e.getMsg());
         } catch (Exception e) {
-            logger.info(e.toString());
-            logger.info(e.getClass());
-            logger.info(e.getLocalizedMessage());
-            logger.info(e.getMessage());
+            log.info(e.toString());
+            log.info(e.getClass());
+            log.info(e.getLocalizedMessage());
+            log.info(e.getMessage());
         }
 
         return result;

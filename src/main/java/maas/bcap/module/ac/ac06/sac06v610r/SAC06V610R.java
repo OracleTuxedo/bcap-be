@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SAC06V610R {
-    private static final Logger logger = LogManager.getLogger(SAC06V610R.class);
+    private static final Logger log = LogManager.getLogger(SAC06V610R.class);
 
     @Autowired
     private ServiceSupport support;
@@ -27,13 +27,13 @@ public class SAC06V610R {
 //            String response = "00001163devaps01202410101338380044256900SAC06V610R              MTI R                        devaps0120241010133838004425690020241010133838576   UNIT      192.168.1.16                    088FC37E596F                           020241010133838576   20241010133838297945  0  00        000       NAZAP0005                                                        EN                                                                                                                                             N00000625                     30The Transaction Successfully Ended.                                                                                                                                                                                                                                                                                                                                                                             02inquiry process success.                                                                            The Transaction Successfully Ended.                                                                 D00000026                     00009@@";
 //            result = InterfaceTelegramTest.testCall(inputUserData, inVo, outVo, response);
         } catch (TelegramNestedRuntimeException e) {
-            logger.info(e.toString());
-            logger.info(e.getMsg());
+            log.info(e.toString());
+            log.info(e.getMsg());
         } catch (Exception e) {
-            logger.info(e.toString());
-            logger.info(e.getClass());
-            logger.info(e.getLocalizedMessage());
-            logger.info(e.getMessage());
+            log.info(e.toString());
+            log.info(e.getClass());
+            log.info(e.getLocalizedMessage());
+            log.info(e.getMessage());
         }
 
         return result;

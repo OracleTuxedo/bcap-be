@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class TelegramUtil {
-    private static final Logger logger = LogManager.getLogger(TelegramUtil.class);
+    private static final Logger log = LogManager.getLogger(TelegramUtil.class);
 
     public TelegramUtil() {
     }
@@ -495,7 +495,7 @@ public class TelegramUtil {
 
         for (int var6 = 0; var5 < var4; ++var6) {
             var3[var6] = var0[var5];
-            logger.info("bytes[{}] : {}", var5, (Byte.valueOf(var0[var5])).toString());
+            log.info("bytes[{}] : {}", var5, (Byte.valueOf(var0[var5])).toString());
             ++var5;
         }
 
@@ -689,7 +689,7 @@ public class TelegramUtil {
 
             var1 = var2.toString();
         } catch (Exception var5) {
-            ExceptionUtil.logPrintStackTrace(logger, var5);
+            ExceptionUtil.logPrintStackTrace(log, var5);
         }
 
         return var1;
@@ -706,7 +706,7 @@ public class TelegramUtil {
                 var0 = getHexaString(var3);
             }
         } catch (IOException var4) {
-            ExceptionUtil.logPrintStackTrace(logger, var4);
+            ExceptionUtil.logPrintStackTrace(log, var4);
         }
 
         return var0;
@@ -719,7 +719,7 @@ public class TelegramUtil {
             InetAddress var1 = InetAddress.getLocalHost();
             var0 = var1.getHostAddress();
         } catch (IOException var2) {
-            ExceptionUtil.logPrintStackTrace(logger, var2);
+            ExceptionUtil.logPrintStackTrace(log, var2);
         }
 
         return var0;

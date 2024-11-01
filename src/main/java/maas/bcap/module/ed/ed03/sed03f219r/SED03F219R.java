@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class SED03F219R implements BaseModuleInterface<SED03F219ROutVo, SED03F219RInVo> {
-    private static final Logger logger = LogManager.getLogger(maas.bcap.module.ed.ed03.sed03f219r.SED03F219R.class);
+    private static final Logger log = LogManager.getLogger(maas.bcap.module.ed.ed03.sed03f219r.SED03F219R.class);
 
     @Autowired
     private ServiceSupport support;
@@ -25,13 +25,13 @@ public class SED03F219R implements BaseModuleInterface<SED03F219ROutVo, SED03F21
             TelegramUserDataInput userDataInput = support.tuxedoHeader(request, this.getClass().getSimpleName(), screenId);
             result = support.tuxedoTransaction(userDataInput, inVo, outVo);
         } catch (TelegramNestedRuntimeException e) {
-            logger.info(e.toString());
-            logger.info(e.getMsg());
+            log.info(e.toString());
+            log.info(e.getMsg());
         } catch (Exception e) {
-            logger.info(e.toString());
-            logger.info(e.getClass());
-            logger.info(e.getLocalizedMessage());
-            logger.info(e.getMessage());
+            log.info(e.toString());
+            log.info(e.getClass());
+            log.info(e.getLocalizedMessage());
+            log.info(e.getMessage());
         }
 
         return result;

@@ -14,11 +14,11 @@ import java.nio.charset.StandardCharsets;
 /// Interface Telegram for Tuxedo Connection
 public class InterfaceTelegramTest {
 
-    private static final Logger logger = LogManager.getLogger(InterfaceTelegramTest.class);
+    private static final Logger log = LogManager.getLogger(InterfaceTelegramTest.class);
 
     /// Request
     public static <V> String request(String tuxedoCode, V inVo) throws Exception {
-        logger.info("################################### Request START ###################################");
+        log.info("################################### Request START ###################################");
         TelegramUserDataInput userData = new TelegramUserDataInput();
         userData.setTx_code(tuxedoCode);
         userData.setScrn_id("WED030120H");
@@ -34,21 +34,21 @@ public class InterfaceTelegramTest {
 
         TelegramIn<V> telegramIn = TelegramBuilder.getTelegramIn(userData, inVo);
 
-        logger.info(telegramIn.getData().getData().toString());
+        log.info(telegramIn.getData().getData().toString());
 
         byte[] arrayOfByte = byteEncoder.convertObjectToBytes(telegramIn, true);
         String request = new String(arrayOfByte, StandardCharsets.UTF_8);
 
-        logger.info(request);
-        logger.info("################################### Request END ###################################");
+        log.info(request);
+        log.info("################################### Request END ###################################");
         return request;
     }
 
     /// Response
     public static <T> TelegramUserDataOutput<T> response(String response, T outVo) throws Exception {
-        logger.atLevel(Level.ALL);
+        log.atLevel(Level.ALL);
 
-        logger.info("################################### Response START ###################################");
+        log.info("################################### Response START ###################################");
 
         byte[] arrayOfByte = response
             .getBytes();
@@ -57,17 +57,17 @@ public class InterfaceTelegramTest {
 
         outVo = telegramUserDataOutput.getOutput();
 
-        logger.info(outVo.getClass().getSimpleName());
-        logger.info(outVo.toString());
+        log.info(outVo.getClass().getSimpleName());
+        log.info(outVo.toString());
 
-        logger.info("################################### Response END ###################################");
+        log.info("################################### Response END ###################################");
         return telegramUserDataOutput;
     }
 
     private static <T> TelegramUserDataOutput<T> parse(byte[] arrayOfByte, T output) throws Exception {
         T object;
         TelegramHeader telegramHeader = getHeaderFromBytes(arrayOfByte);
-        logger.info(telegramHeader.toString());
+        log.info(telegramHeader.toString());
         if (telegramHeader.getErr_flag() == 0) {
             TelegramOut<T> telegramOut1 = TelegramBuilder.getTelegramOutData(output);
             ByteDecoder<TelegramOut<T>> byteDecoder1 = new ByteDecoder<>();
@@ -98,7 +98,7 @@ public class InterfaceTelegramTest {
             ByteDecoder<TelegramHeader> byteDecoder = new ByteDecoder<>();
             telegramHeader = byteDecoder.convertBytes2Object(arrayOfByte, telegramHeader, true);
         } catch (Exception exception) {
-            ExceptionUtil.logPrintStackTrace(logger, exception);
+            ExceptionUtil.logPrintStackTrace(log, exception);
             throw exception;
         }
         return telegramHeader;

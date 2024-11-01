@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class SAU01F740R {
-    private static final Logger logger = LogManager.getLogger(maas.bcap.module.au.au01.sau01f740r.SAU01F740R.class);
+    private static final Logger log = LogManager.getLogger(maas.bcap.module.au.au01.sau01f740r.SAU01F740R.class);
 
     @Autowired
     private ServiceSupport support;
@@ -24,13 +24,13 @@ public class SAU01F740R {
             TelegramUserDataInput userDataInput = support.tuxedoHeader(request, this.getClass().getSimpleName(), screenId);
             result = support.tuxedoTransaction(userDataInput, inVo, outVo);
         } catch (TelegramNestedRuntimeException e) {
-            logger.info(e.toString());
-            logger.info(e.getMsg());
+            log.info(e.toString());
+            log.info(e.getMsg());
         } catch (Exception e) {
-            logger.info(e.toString());
-            logger.info(e.getClass());
-            logger.info(e.getLocalizedMessage());
-            logger.info(e.getMessage());
+            log.info(e.toString());
+            log.info(e.getClass());
+            log.info(e.getLocalizedMessage());
+            log.info(e.getMessage());
         }
 
         return result;

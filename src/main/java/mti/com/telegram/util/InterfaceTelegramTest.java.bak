@@ -174,34 +174,34 @@ import java.nio.charset.StandardCharsets;
 
 /// Interface Telegram for Tuxedo Connection
 public class InterfaceTelegramTest {
-    private static final Logger logger = LogManager.getLogger(InterfaceTelegramTest.class);
+    private static final Logger log = LogManager.getLogger(InterfaceTelegramTest.class);
 
     public static <T,V> TelegramUserDataOutput<T> testCall(TelegramUserDataInput inputUserData, V inVo, T outVo, String response) throws Exception {
-        logger.atLevel(Level.ALL);
+        log.atLevel(Level.ALL);
         ByteEncoder byteEncoder = new ByteEncoder();
         TelegramIn<V> telegramIn = TelegramBuilder.getTelegramIn(inputUserData, inVo);
 
-        logger.info(telegramIn.getData().getData().toString());
+        log.info(telegramIn.getData().getData().toString());
 
         byte[] requestToTuxedo = byteEncoder.convertObjectToBytes(telegramIn, true);
         String request = new String(requestToTuxedo, StandardCharsets.UTF_8);
-        logger.info("################################### Request Start LeRucco ###################################");
-        logger.info(request);
-        logger.info("################################### Request End LeRucco ###################################");
+        log.info("################################### Request Start LeRucco ###################################");
+        log.info(request);
+        log.info("################################### Request End LeRucco ###################################");
 
         byte[] responseFromTuxedo = response.getBytes();
         TelegramUserDataOutput<T> telegramUserDataOutput = parse(responseFromTuxedo, outVo);
 
-        logger.info("################################### Response Start LeRucco ###################################");
-        logger.info(outVo.getClass().getSimpleName());
-        logger.info(outVo.toString());
-        logger.info("################################### Response End LeRucco ###################################");
+        log.info("################################### Response Start LeRucco ###################################");
+        log.info(outVo.getClass().getSimpleName());
+        log.info(outVo.toString());
+        log.info("################################### Response End LeRucco ###################################");
         return telegramUserDataOutput;
     }
 
     /// Request
     public static void interfaceTuxedoParseRequest() throws Exception {
-        logger.info("################################### Request START LeRucco ###################################");
+        log.info("################################### Request START LeRucco ###################################");
         TelegramUserDataInput userData = new TelegramUserDataInput();
         userData.setTx_code("SAC02F452R");
         userData.setScrn_id("WED030120H");
@@ -325,22 +325,22 @@ public class InterfaceTelegramTest {
 //        TelegramIn telegramIn = telegramBuilder.getTelegramIn(userData, sed03F224RInVo);
 //        TelegramIn telegramIn = TelegramBuilder.getTelegramIn(userData, sed03F107RInVo);
 
-        logger.info(telegramIn.getData().getData().toString());
+        log.info(telegramIn.getData().getData().toString());
 
         byte[] arrayOfByte = byteEncoder.convertObjectToBytes(telegramIn, true);
         String request = new String(arrayOfByte, StandardCharsets.UTF_8);
 
-        logger.info(request);
-        logger.info("################################### Request END LeRucco ###################################");
+        log.info(request);
+        log.info("################################### Request END LeRucco ###################################");
     }
 //00000547LeRuccoL202410091353590020000000SAC02F452R              MTI S                        LeRuccoL20241009135359002000000020241009135359000491WEB       172.16.20.11                                WED030120H N1787130271     020241009135359000493                    A000000      00010                                                                        EN                                                                                                                                             D00000044                     00004010             01@@
 //00000545                                SED03F075R              MTI S                                                                            UNIT      192.168.1.207                   0CDD2494CF5F                           020241009134844374                         00000      00000                                                                        EN                                                                                                                                              00000000                     00004010             01
 
     /// Response
     public static void interfaceTuxedoParseResponse() throws Exception {
-        logger.atLevel(Level.ALL);
+        log.atLevel(Level.ALL);
 
-        logger.info("################################### Response START LeRucco ###################################");
+        log.info("################################### Response START LeRucco ###################################");
 
         /// SED03F209R
 //        String response = "00002276LeRuccoL202409261631070020000000SED03F209R              MTI R                        LeRuccoL20240926163107002000000020240926163107000989WEB       172.16.20.11                                WED030120H N1787130271     02024092616310700099020240926163712101027A00  00        010       NAZAP0005                                                        EN                                                                                                                                             N00000525                     30The Transaction Successfully Ended.                                                                                                                                                                                                                                                                                                                                                                              1The Transaction Successfully Ended.                                                                 D00001239                           1110001     Building A, 2nd Floor, 201                                                                          10002     Building A, 2nd Floor, 201                                                                          10003     Building A, 2nd Floor, 201                                                                          10005     Building A, 2nd Floor, 201                                                                          10082     Dev by Sung 1                                                                                       10086     Dev by Sung 5                                                                                       10087     Dev by Sung 6                                                                                       10088     Test by Sung 6                                                                                      10089     Sung by Dev 6                                                                                       10090     RACK NO 5                                                                                           10091     SUNG TEST 10                                                                                        @@";
@@ -410,17 +410,17 @@ public class InterfaceTelegramTest {
 
 ////////////////////////////////////////////////////////////////////////////
 
-        logger.info(output.getClass().getSimpleName());
-        logger.info(output.toString());
+        log.info(output.getClass().getSimpleName());
+        log.info(output.toString());
 
-        logger.info("################################### Response END LeRucco ###################################");
+        log.info("################################### Response END LeRucco ###################################");
 
     }
 
     public static <T> TelegramUserDataOutput<T> parse(byte[] arrayOfByte, T output) throws Exception {
         T object = null;
         TelegramHeader telegramHeader = getHeaderFromBytes(arrayOfByte);
-        logger.info(telegramHeader.toString());
+        log.info(telegramHeader.toString());
 //        return null;
         if (telegramHeader.getErr_flag() == 0) {
             TelegramOut<T> telegramOut1 = TelegramBuilder.getTelegramOutData(output);
@@ -452,7 +452,7 @@ public class InterfaceTelegramTest {
             ByteDecoder<TelegramHeader> byteDecoder = new ByteDecoder<>();
             telegramHeader = (TelegramHeader) byteDecoder.convertBytes2Object(arrayOfByte, telegramHeader, true);
         } catch (Exception exception) {
-            ExceptionUtil.logPrintStackTrace(logger, exception);
+            ExceptionUtil.logPrintStackTrace(log, exception);
             throw exception;
         }
         return telegramHeader;

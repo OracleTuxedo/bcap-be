@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SAC06F244R {
-    private static final Logger logger = LogManager.getLogger(SAC06F244R.class);
+    private static final Logger log = LogManager.getLogger(SAC06F244R.class);
 
     @Autowired
     private ServiceSupport support;
@@ -27,13 +27,13 @@ public class SAC06F244R {
 //            String response = "00001489devaps01202410101150150024257200SAC06F244R              MTI R                        devaps0120241010115015002425720020241010115016306   UNIT      192.168.1.16                    088FC37E596F                           020241010115016306   20241010115015853959  0  00        000       NMCAP0001                                                        EN                                                                                                                                             N00000525                     30Inquiry has been completed.                                                                                                                                                                                                                                                                                                                                                                                     01Inquiry has been completed.                                                                         D00000452                                                                                                                                                                                                                                                                                          2       1000000001220170113coba                                                                                                1674110016   5                     20170113@@";
 //            result = InterfaceTelegramTest.testCall(inputUserData, inVo, outVo, response);
         } catch (TelegramNestedRuntimeException e) {
-            logger.info(e.toString());
-            logger.info(e.getMsg());
+            log.info(e.toString());
+            log.info(e.getMsg());
         } catch (Exception e) {
-            logger.info(e.toString());
-            logger.info(e.getClass());
-            logger.info(e.getLocalizedMessage());
-            logger.info(e.getMessage());
+            log.info(e.toString());
+            log.info(e.getClass());
+            log.info(e.getLocalizedMessage());
+            log.info(e.getMessage());
         }
 
         return result;

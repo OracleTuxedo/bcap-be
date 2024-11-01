@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SAC06F245R {
-    private static final Logger logger = LogManager.getLogger(SAC06F245R.class);
+    private static final Logger log = LogManager.getLogger(SAC06F245R.class);
 
     @Autowired
     private ServiceSupport support;
@@ -27,13 +27,13 @@ public class SAC06F245R {
 //            String response = "00000968devaps01202410101324540034257300SAC06F245R              MTI R                        devaps0120241010132454003425730020241010132454763   UNIT      192.168.1.16                    088FC37E596F                           020241010132454763   20241010132454296852  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000031                     0000000912@@";
 //            result = InterfaceTelegramTest.testCall(inputUserData, inVo, outVo, response);
         } catch (TelegramNestedRuntimeException e) {
-            logger.info(e.toString());
-            logger.info(e.getMsg());
+            log.info(e.toString());
+            log.info(e.getMsg());
         } catch (Exception e) {
-            logger.info(e.toString());
-            logger.info(e.getClass());
-            logger.info(e.getLocalizedMessage());
-            logger.info(e.getMessage());
+            log.info(e.toString());
+            log.info(e.getClass());
+            log.info(e.getLocalizedMessage());
+            log.info(e.getMessage());
         }
 
         return result;

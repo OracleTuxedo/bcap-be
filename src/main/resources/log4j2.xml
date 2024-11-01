@@ -127,7 +127,7 @@
 <!--            <AppenderRef ref="FileSAC02F452R"/>-->
 <!--        </Logger>-->
 
-<!--        &lt;!&ndash; Root logger for other logs &ndash;&gt;-->
+<!--        &lt;!&ndash; Root log for other logs &ndash;&gt;-->
 <!--        <Root level="info">-->
 <!--            <AppenderRef ref="Console"/>-->
 <!--        </Root>-->
@@ -155,7 +155,7 @@
 <!--</Appenders>-->
 
 <!--<Loggers>-->
-<!--    &lt;!&ndash; Dynamic logger for all classes &ndash;&gt;-->
+<!--    &lt;!&ndash; Dynamic log for all classes &ndash;&gt;-->
 <!--    <Root level="info">-->
 <!--        <AppenderRef ref="Console"/>-->
 <!--        <AppenderRef ref="RoutingAppender"/>-->

@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class SAZ05F041U {
-    private static final Logger logger = LogManager.getLogger(SAZ05F041U.class);
+    private static final Logger log = LogManager.getLogger(SAZ05F041U.class);
 
     @Autowired
     private ServiceSupport support;
@@ -25,13 +25,13 @@ public class SAZ05F041U {
 //            String response = "00000968devaps01202410141253330024257300SAZ05F041U              MTI R                        devaps0120241014125333002425730020241014125332614   UNIT      192.168.1.16                    088FC37E596F                           020241014125332614   20241014125333186110  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000031                              1@@";
 //            result = InterfaceTelegramTest.testCall(inputUserData, inVo, outVo, response);
         } catch (TelegramNestedRuntimeException e) {
-            logger.info(e.toString());
-            logger.info(e.getMsg());
+            log.info(e.toString());
+            log.info(e.getMsg());
         } catch (Exception e) {
-            logger.info(e.toString());
-            logger.info(e.getClass());
-            logger.info(e.getLocalizedMessage());
-            logger.info(e.getMessage());
+            log.info(e.toString());
+            log.info(e.getClass());
+            log.info(e.getLocalizedMessage());
+            log.info(e.getMessage());
         }
 
         return result;

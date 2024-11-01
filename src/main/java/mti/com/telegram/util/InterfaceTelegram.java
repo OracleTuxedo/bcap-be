@@ -12,56 +12,56 @@ import java.nio.charset.StandardCharsets;
 
 /// Interface Telegram for Tuxedo Connection
 public class InterfaceTelegram {
-    private static final Logger logger = LogManager.getLogger(InterfaceTelegram.class);
+    private static final Logger log = LogManager.getLogger(InterfaceTelegram.class);
 
     public static <T, V> TelegramUserDataOutput<T> interfaceTuxedo(TelegramUserDataInput userDataInput, V inVo, T outVo) throws Exception {
-        logger.info("#################### Interface Tuxedo ####################");
-        logger.info(inVo.toString());
-        logger.info(outVo.toString());
+        log.info("#################### Interface Tuxedo ####################");
+        log.info(inVo.toString());
+        log.info(outVo.toString());
         boolean limited = true;
         ByteEncoder encoder = new ByteEncoder();
         TelegramIn<V> in = TelegramBuilder.getTelegramIn(userDataInput, inVo);
         byte[] requestToTuxedo = encoder.convertObjectToBytes(in, limited);
 
-        logger.info(new String(requestToTuxedo, StandardCharsets.UTF_8));
-        logger.info(in.toString());
+        log.info(new String(requestToTuxedo, StandardCharsets.UTF_8));
+        log.info(in.toString());
 
         byte[] responseFromTuxedo = WeblogicConnector.connectTuxedo(requestToTuxedo);
 
         if (responseFromTuxedo.length == 0) return null;
 
-//        logger.info(new String(responseFromTuxedo, StandardCharsets.UTF_8));
+//        log.info(new String(responseFromTuxedo, StandardCharsets.UTF_8));
 //        StringBuilder le = new StringBuilder();
 //        for (byte b : responseFromTuxedo) {
 //            le.append(b).append(", ");
 //        }
-//        logger.info(le.toString());
+//        log.info(le.toString());
 
         TelegramHeader header = getHeaderFromBytes(responseFromTuxedo);
         TelegramTail tail;
         TelegramMessage message;
         TelegramUserDataOutput<T> outputUserData;
 
-        logger.info(header.toString());
-        logger.info(header.getErr_flag());
+        log.info(header.toString());
+        log.info(header.getErr_flag());
         // Success With Data
         if (header.getErr_flag() == 0) {
             ByteDecoder<TelegramOut<T>> decoder = new ByteDecoder<>();
-            logger.info("With Data");
+            log.info("With Data");
             TelegramOut<T> out1 = TelegramBuilder.getTelegramOutData(outVo);
-            logger.info("out 1");
+            log.info("out 1");
             TelegramOut<T> out2 = decoder.convertBytes2Object(responseFromTuxedo, out1, limited);
-            logger.info("out 2");
+            log.info("out 2");
             tail = out2.getTail();
-            logger.info(tail.toString());
-            logger.info(tail.getTail());
+            log.info(tail.toString());
+            log.info(tail.getTail());
             if ("@@".equals(tail.getTail())) {
                 T outVoTemp = out2.getData().getData();
                 message = out2.getMessage();
-                logger.info("###################### TelegramOutputUserData ######################");
-                logger.info(header.toString());
-                logger.info(message.toString());
-                logger.info(outVoTemp.toString());
+                log.info("###################### TelegramOutputUserData ######################");
+                log.info(header.toString());
+                log.info(message.toString());
+                log.info(outVoTemp.toString());
                 outputUserData = new TelegramUserDataOutput<T>();
                 outputUserData.setMessage(message);
                 outputUserData.setOutput(outVoTemp);
@@ -72,7 +72,7 @@ public class InterfaceTelegram {
             }
         } else {
             ByteDecoder<TelegramOutNoData> decoder = new ByteDecoder<>();
-            logger.info("No Data");
+            log.info("No Data");
             TelegramOutNoData outNoData1 = TelegramBuilder.getTelegramOutDataNoData();
             TelegramOutNoData outNoData2 = decoder.convertBytes2Object(responseFromTuxedo, outNoData1, limited);
             tail = outNoData2.getTail();
@@ -97,7 +97,7 @@ public class InterfaceTelegram {
             ByteDecoder<TelegramHeader> byteDecoder = new ByteDecoder<>();
             telegramHeader = (TelegramHeader) byteDecoder.convertBytes2Object(arrayOfByte, telegramHeader, true);
         } catch (Exception exception) {
-            ExceptionUtil.logPrintStackTrace(logger, exception);
+            ExceptionUtil.logPrintStackTrace(log, exception);
             throw exception;
         }
         return telegramHeader;
