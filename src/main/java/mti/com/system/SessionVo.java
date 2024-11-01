@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 @Data
@@ -12,10 +13,13 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SessionVo implements Serializable {
+    @Serial
     private static final long serialVersionUID = -9186253543640336258L;
 
+    /// TODO Refactor all properties with snake_case
+
     // Never change this value
-    public static final String SESSION_DATA_KEY = "mtiWebUserSession";
+    public static final String SESSION_DATA_KEY = "MaasWebUserSession";
 
     /**
      * ID
