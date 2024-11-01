@@ -6,6 +6,10 @@ import maas.bcap.screen.example.dto.ExampleOutDto;
 import maas.bcap.screen.example.dto.LoginInDto;
 import maas.bcap.screen.example.dto.LoginOutDto;
 import maas.bcap.screen.example.service.ExampleService;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.ThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +23,11 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
-
 @RestController
 @RequestMapping("/example")
 public class ExampleController {
+
+    private static final Logger log = LogManager.getLogger(ExampleController.class);
 
     @Autowired
     private ExampleService exampleService;
@@ -34,134 +39,38 @@ public class ExampleController {
 
     @GetMapping("/test")
     public String getMethodName(HttpServletRequest request) {
-        return new String("Hello World");
+        /// Example of Log Level
+        log.info("Hello World from Example Controller");
+
+        log.trace("trace");
+        log.debug("debug");
+        log.info("info");
+        log.warn("warn");
+        log.error("error");
+        log.fatal("fatal");
+
+        return "Hello World";
     }
 
-    @GetMapping("/login")
-    public LoginOutDto loginGet(HttpServletRequest request) throws Exception {
-        LoginInDto inDto = LoginInDto.builder()
-            .build();
-        return exampleService.login(request, inDto, "WAZ030102H");
+    @GetMapping("call-logging")
+    public String callRemoteAPI() {
+        /// Example of Routing Appender based specific class and Rolling File and Routing Appender under maas.bcap.screen package
+        ThreadContext.put("className", "ExampleController");
+        log.info("Calling remote API from ExampleController");
+        ThreadContext.clearMap();
+        return "111";
     }
 
     @PostMapping("/login")
     public LoginOutDto login(HttpServletRequest request, @RequestBody LoginInDto inDto) throws Exception {
-
         return exampleService.login(request, inDto, "WAZ030102H");
     }
-
-//    @GetMapping("/enc")
-//    public String getMethodName() {
-//        return exampleService.hello();
-//        // return new String("Hi ho! You're using a GET Method for the request.");
-//    }
-//
-//    @PostMapping("/dcenc")
-//    public ResponseEntity<Map<String, String>> DecryptEncrypt(@RequestBody Map<String, String> requestData) {
-//        String decryptedData;
-//        String encryptedData;
-//        String encodedData = requestData.get("data");
-//        Map<String, String> responseData = new HashMap<>();
-//
-//
-//        try {
-//            decryptedData = exampleService.decrypt(encodedData);
-//            responseData.put("decryptedData", decryptedData);
-//        } catch (Exception e) {
-//            responseData.put("error", "Decryption failed: " + e.getMessage());
-//            return ResponseEntity.status(500).body(responseData);
-//        }
-//
-//        try {
-//            encryptedData = exampleService.encrypt(decryptedData);
-//            responseData.put("encryptedData", encryptedData);
-//        } catch (Exception e) {
-//            responseData.put("error", "Encryption failed: " + e.getMessage());
-//            return ResponseEntity.status(500).body(responseData);
-//        }
-//
-//        return ResponseEntity.ok(responseData);
-//    }
-//
-//    @PostMapping("/encdc")
-//    public ResponseEntity<Map<String, String>> EncryptDecrypt(@RequestBody Map<String, String> requestData) {
-//        String decryptedData;
-//        String encryptedData;
-//        String encodedData = requestData.get("data");
-//        Map<String, String> responseData = new HashMap<>();
-//
-//        try {
-//            encryptedData = exampleService.encrypt(encodedData);
-//            responseData.put("encryptedData", encryptedData);
-//        } catch (Exception e) {
-//            responseData.put("error", "Encryption failed: " + e.getMessage());
-//            return ResponseEntity.status(500).body(responseData);
-//        }
-//
-//        try {
-//            decryptedData = exampleService.decrypt(encryptedData);
-//            responseData.put("decryptedData", decryptedData);
-//        } catch (Exception e) {
-//            responseData.put("error", "Decryption failed: " + e.getMessage());
-//            return ResponseEntity.status(500).body(responseData);
-//        }
-//
-//
-//
-//        return ResponseEntity.ok(responseData);
-//    }
-//
-//    @GetMapping("/{encodedData}")
-//    public ResponseEntity<String> getPostSimul(@PathVariable("encodedData") String encodedData) {
-//        String first;
-//        try {
-//            first = exampleService.encrypt(encodedData);
-//        } catch (Exception e) {
-//            return ResponseEntity.status(500).body("Encryption failed: " + e.getMessage());
-//        }
-//
-//        String decryptedData, encryptedData;
-//        try {
-//            decryptedData = exampleService.decrypt(first);
-//        } catch (Exception e) {
-//            return ResponseEntity.status(500).body("Decryption failed: " + e.getMessage());
-//        }
-//
-//        try {
-//            encryptedData = exampleService.encrypt(decryptedData);
-//            return ResponseEntity.ok(encryptedData);
-//        } catch (Exception e) {
-//            return ResponseEntity.status(500).body("Encryption failed: " + e.getMessage());
-//        }
-//    }
-//
-//    @PostMapping
-//    public ResponseEntity<Map<String, String>> Decrypt(@RequestBody Map<String, String> requestData) {
-//        String decryptedData;
-//        String encryptedData;
-//        String encodedData = requestData.get("data");
-//        Map<String, String> responseData = new HashMap<>();
-//
-//        try {
-//            encryptedData = exampleService.encrypt(encodedData);
-//            responseData.put("encryptedData", encryptedData);
-//        } catch (Exception e) {
-//            responseData.put("error", "Encryption failed: " + e.getMessage());
-//            return ResponseEntity.status(500).body(responseData);
-//        }
-//
-//        try {
-//            decryptedData = exampleService.decrypt(encryptedData);
-//            responseData.put("decryptedData", decryptedData);
-//        } catch (Exception e) {
-//            responseData.put("error", "Decryption failed: " + e.getMessage());
-//            return ResponseEntity.status(500).body(responseData);
-//        }
-//
-//
-//
-//        return ResponseEntity.ok(responseData);
-//    }
+  
+    @PostMapping("/logout")
+    public void logout(HttpServletRequest request) throws Exception {
+        exampleService.logout(request, "WAZ030100H");
+        return;
+    }
 
     @PostMapping("/decrypt")
     public ResponseEntity<String> decryptData(@RequestBody DecryptionRequest request) {
@@ -217,7 +126,8 @@ public class ExampleController {
             e.printStackTrace();
             return ResponseEntity.status(500).body(Map.of("error", "Process failed: " + e.getMessage()));
         }
-    }
+
+    
 
 }
 

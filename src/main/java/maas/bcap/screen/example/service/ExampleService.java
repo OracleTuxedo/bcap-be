@@ -52,8 +52,9 @@ public class ExampleService {
     @Autowired
     private SAZ03V701U saz03v701u;
 
-    public LoginOutDto login(HttpServletRequest request, LoginInDto inDto, String screenId) throws  Exception {
+    public LoginOutDto login(HttpServletRequest request, LoginInDto inDto, String screenId) throws Exception {
 
+        /// Get Current Session
         SessionVo userVo = SessionManager.getUserData(request);
 
         if (userVo != null){
@@ -82,12 +83,12 @@ public class ExampleService {
         request.getSession().invalidate();
 
         userVo = SessionVo.builder()
-            .sUserId(inDto.getUser_id())
-            .usrIno(saz03v701uOutVo.usr_ino)
-            .sUserNm(saz03v701uOutVo.usr_nm)
-            .usrCtgoCd(saz03v701uOutVo.usr_ctgo_cd)
-            .adm_usr_yn(saz03v701uOutVo.adm_usr_yn)
-            .build();
+                .sUserId(inDto.getUser_id())
+                .usrIno(saz03v701uOutVo.usr_ino)
+                .sUserNm(saz03v701uOutVo.usr_nm)
+                .usrCtgoCd(saz03v701uOutVo.usr_ctgo_cd)
+                .adm_usr_yn(saz03v701uOutVo.adm_usr_yn)
+                .build();
 
         SessionManager.setUserData(request, userVo);
 
@@ -96,137 +97,105 @@ public class ExampleService {
         log.info(SessionManager.getUserData(request).toString());
 
         return LoginOutDto.builder()
-            .usr_ctgo_cd(userVo.getUsrCtgoCd())
-            .adm_usr_yn(userVo.getAdm_usr_yn())
-            .build();
+                .usr_ctgo_cd(userVo.getUsrCtgoCd())
+                .adm_usr_yn(userVo.getAdm_usr_yn())
+                .build();
     }
 
+    public void logout(HttpServletRequest request, String screenId) throws Exception {
+        
+        /// Get Current Session
+        SessionVo userVo = SessionManager.getUserData(request);
 
+        if (userVo == null) return;
+
+        SAZ03V701UInVo saz03v701uInVo = SAZ03V701UInVo.builder()
+                .usr_id(userVo.getSUserId())
+                .admin_yn("N")
+                .chnl_clcd("1") // 1:web 2:mobile
+                .req_tp("O") // I:login O:logout
+                .build();
+                
+        saz03v701u.call(request, saz03v701uInVo, screenId);
+        
+        SessionManager.destroyUserData(request);
+
+        return;
+    }
 
     public ExampleOutDto getListOfEDC(HttpServletRequest request, ExampleInDto inDto, String screenId) throws Exception {
         log.info(inDto.toString());
 
         /// SED03F107R
         SED03F107RInVo sed03F107RInVo = SED03F107RInVo.builder()
-            .prd_tp_cd(inDto.getPrd_tp_cd())
-            .sno(inDto.getSno())
-            .srl_stat_cd(inDto.getSrl_stat_cd())
-            .srl_st_cd(inDto.getSrl_st_cd())
-            .prd_cd(inDto.getPrd_cd())
-            .icc_id(inDto.getIcc_id())
-            .build();
+                .prd_tp_cd(inDto.getPrd_tp_cd())
+                .sno(inDto.getSno())
+                .srl_stat_cd(inDto.getSrl_stat_cd())
+                .srl_st_cd(inDto.getSrl_st_cd())
+                .prd_cd(inDto.getPrd_cd())
+                .icc_id(inDto.getIcc_id())
+                .build();
         TelegramUserDataOutput<SED03F107ROutVo> sed03f107rResult = sed03f107r.call(request, sed03F107RInVo, screenId);
         SED03F107ROutVo sed03F107ROutVo = sed03f107rResult.getOutput();
 
         /// SAC02F452R
         SAC02F452RInVo sac02F452RInVo = SAC02F452RInVo.builder()
-            .page_no(inDto.getPage_no())
-            .page_size(inDto.getPage_size())
-            .mid(inDto.getMid())
-            .auth_strt_date(inDto.getAuth_strt_date())
-            .auth_end_date(inDto.getAuth_end_date())
-            .build();
+                .page_no(inDto.getPage_no())
+                .page_size(inDto.getPage_size())
+                .mid(inDto.getMid())
+                .auth_strt_date(inDto.getAuth_strt_date())
+                .auth_end_date(inDto.getAuth_end_date())
+                .build();
         TelegramUserDataOutput<SAC02F452ROutVo> sac02f452rResult = sac02f452r.call(request, sac02F452RInVo, screenId);
         SAC02F452ROutVo sac02F452ROutVo = sac02f452rResult.getOutput();
 
         List<ExampleOutSub1Dto> sub1Vos = new ArrayList<>();
 
         // Cara 1: Enhanced for loops
-//        for (SAC02F452ROutSub1Vo le : sac02F452ROutVo.sub1Vos){
-//            sub1Vos.add(
-//                    ED999OutSub1Vo.builder()
-//                            .auth_date(le.auth_date)
-//                            .pmt_date(le.pmt_date)
-//                            .card_no(le.card_no)
-//                            .auth_no(le.auth_no)
-//                            .sale_amt(le.sale_amt)
-//                            .pwcw_csh_amt(le.pwcw_csh_amt)
-//                            .dcctrans_yn(le.dcctrans_yn)
-//                            .build()
-//            );
-//        }
+        // for (SAC02F452ROutSub1Vo le : sac02F452ROutVo.sub1Vos){
+        // sub1Vos.add(
+        // ED999OutSub1Vo.builder()
+        // .auth_date(le.auth_date)
+        // .pmt_date(le.pmt_date)
+        // .card_no(le.card_no)
+        // .auth_no(le.auth_no)
+        // .sale_amt(le.sale_amt)
+        // .pwcw_csh_amt(le.pwcw_csh_amt)
+        // .dcctrans_yn(le.dcctrans_yn)
+        // .build()
+        // );
+        // }
 
         // Cara 2: Stream loop
         if (sac02F452ROutVo.sub1Vos != null)
             sub1Vos = sac02F452ROutVo.sub1Vos.stream().map(le -> ExampleOutSub1Dto.builder()
-                .auth_date(le.auth_date)
-                .pmt_date(le.pmt_date)
-                .card_no(le.card_no)
-                .auth_no(le.auth_no)
-                .sale_amt(le.sale_amt)
-                .pwcw_csh_amt(le.pwcw_csh_amt)
-                .dcctrans_yn(le.dcctrans_yn)
-                .build()).toList();
+                    .auth_date(le.auth_date)
+                    .pmt_date(le.pmt_date)
+                    .card_no(le.card_no)
+                    .auth_no(le.auth_no)
+                    .sale_amt(le.sale_amt)
+                    .pwcw_csh_amt(le.pwcw_csh_amt)
+                    .dcctrans_yn(le.dcctrans_yn)
+                    .build()).toList();
 
         return ExampleOutDto.builder()
-            .count(sed03F107ROutVo.count)
-            .sno(sed03F107ROutVo.sno)
-            .whous_cd(sed03F107ROutVo.whous_cd)
-            .rack_no(sed03F107ROutVo.rack_no)
-            .icc_id(sed03F107ROutVo.icc_id)
-            .sim_no(sed03F107ROutVo.sim_no)
-            .srl_stat_cd(sed03F107ROutVo.srl_stat_cd)
-            .srl_st_cd(sed03F107ROutVo.srl_st_cd)
-            .srl_loca_cd(sed03F107ROutVo.srl_loca_cd)
-            .vend_no(sed03F107ROutVo.vend_no)
-            .prd_cd(sed03F107ROutVo.prd_cd)
-            .prd_nm(sed03F107ROutVo.prd_nm)
+                .count(sed03F107ROutVo.count)
+                .sno(sed03F107ROutVo.sno)
+                .whous_cd(sed03F107ROutVo.whous_cd)
+                .rack_no(sed03F107ROutVo.rack_no)
+                .icc_id(sed03F107ROutVo.icc_id)
+                .sim_no(sed03F107ROutVo.sim_no)
+                .srl_stat_cd(sed03F107ROutVo.srl_stat_cd)
+                .srl_st_cd(sed03F107ROutVo.srl_st_cd)
+                .srl_loca_cd(sed03F107ROutVo.srl_loca_cd)
+                .vend_no(sed03F107ROutVo.vend_no)
+                .prd_cd(sed03F107ROutVo.prd_cd)
+                .prd_nm(sed03F107ROutVo.prd_nm)
 
-            .tot_cnt(sac02F452ROutVo.tot_cnt)
-            .sub1Vos(sub1Vos)
-            .build();
+                .tot_cnt(sac02F452ROutVo.tot_cnt)
+                .sub1Vos(sub1Vos)
+                .build();
     }
-
-//    @Value("${aes.secret_key}")
-//    private String SECRET_KEY;
-//    private Key secretKey;
-//
-//    private static final String AES_ALGORITHM = "AES/CBC/PKCS5Padding"; // Use CBC mode with PKCS5Padding
-//    private static final byte[] IV = new byte[16]; // Initialization vector (IV) for CBC mode
-//
-//    // @PostConstruct
-//    // public void init() {
-//    //   // Decode the Base64 encoded key and initialize the SecretKeySpec
-//    //   byte[] decodedKey = Base64.getDecoder().decode(base64Key);
-//    //   this.secretKeySpec = new SecretKeySpec(decodedKey, AES_ALGORITHM);
-//    // }
-//
-//    @PostConstruct
-//    public void init() {
-//        byte[] decodedSecretKey = Base64.getDecoder().decode(SECRET_KEY);
-//
-//        this.secretKey = new SecretKeySpec(decodedSecretKey, "AES");
-//    }
-//
-//    // Encrypt data with AES and encode with Base64
-//    public String encrypt(String data) throws Exception {
-//        Cipher cipher = Cipher.getInstance(AES_ALGORITHM);
-//        cipher.init(Cipher.ENCRYPT_MODE, secretKey, new IvParameterSpec(IV));
-//        byte[] encryptedBytes = cipher.doFinal(data.getBytes());
-//        return Base64.getEncoder().encodeToString(encryptedBytes);
-//    }
-//
-//    // Decode from Base64 and decrypt with AES
-//    public String decrypt(String encodedData) throws Exception {
-//        byte[] encryptedBytes = Base64.getDecoder().decode(encodedData);
-//        Cipher cipher = Cipher.getInstance(AES_ALGORITHM);
-//        cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(IV));
-//        byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
-//        return new String(decryptedBytes);
-//    }
-//
-//    public String hello() {
-//        try {
-//            KeyGenerator keyGen = KeyGenerator.getInstance(AES_ALGORITHM);
-//            keyGen.init(128); // AES-128
-//            SecretKey secretKey = keyGen.generateKey();
-//            return Base64.getEncoder().encodeToString(secretKey.getEncoded()); // Return encoded key as Base64
-//        } catch (NoSuchAlgorithmException e) {
-//            e.printStackTrace();
-//            return "Error generating AES key: " + e.getMessage();
-//        }
-//    }
-
 
     @Value("${aes.secret_key}")
     private String secretKey;

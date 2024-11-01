@@ -1,0 +1,95 @@
+2024-10-21 15:11:38 [http-nio-8080-exec-4] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:11:38 [http-nio-8080-exec-4] INFO  ExampleController:38 - info
+2024-10-21 15:11:38 [http-nio-8080-exec-4] WARN  ExampleController:39 - warn
+2024-10-21 15:11:38 [http-nio-8080-exec-4] ERROR ExampleController:40 - error
+2024-10-21 15:11:38 [http-nio-8080-exec-4] FATAL ExampleController:41 - fatal
+2024-10-21 15:12:06 [http-nio-8080-exec-5] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:12:06 [http-nio-8080-exec-5] INFO  ExampleController:38 - info
+2024-10-21 15:12:06 [http-nio-8080-exec-5] WARN  ExampleController:39 - warn
+2024-10-21 15:12:06 [http-nio-8080-exec-5] ERROR ExampleController:40 - error
+2024-10-21 15:12:06 [http-nio-8080-exec-5] FATAL ExampleController:41 - fatal
+2024-10-21 15:12:13 [http-nio-8080-exec-2] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:12:13 [http-nio-8080-exec-2] INFO  ExampleController:38 - info
+2024-10-21 15:12:13 [http-nio-8080-exec-2] WARN  ExampleController:39 - warn
+2024-10-21 15:12:13 [http-nio-8080-exec-2] ERROR ExampleController:40 - error
+2024-10-21 15:12:13 [http-nio-8080-exec-2] FATAL ExampleController:41 - fatal
+2024-10-21 15:12:15 [http-nio-8080-exec-3] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:12:15 [http-nio-8080-exec-3] INFO  ExampleController:38 - info
+2024-10-21 15:12:15 [http-nio-8080-exec-3] WARN  ExampleController:39 - warn
+2024-10-21 15:12:15 [http-nio-8080-exec-3] ERROR ExampleController:40 - error
+2024-10-21 15:12:15 [http-nio-8080-exec-3] FATAL ExampleController:41 - fatal
+2024-10-21 15:12:16 [http-nio-8080-exec-9] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:12:16 [http-nio-8080-exec-9] INFO  ExampleController:38 - info
+2024-10-21 15:12:16 [http-nio-8080-exec-9] WARN  ExampleController:39 - warn
+2024-10-21 15:12:16 [http-nio-8080-exec-9] ERROR ExampleController:40 - error
+2024-10-21 15:12:16 [http-nio-8080-exec-9] FATAL ExampleController:41 - fatal
+2024-10-21 15:12:17 [http-nio-8080-exec-7] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:12:17 [http-nio-8080-exec-7] INFO  ExampleController:38 - info
+2024-10-21 15:12:17 [http-nio-8080-exec-7] WARN  ExampleController:39 - warn
+2024-10-21 15:12:17 [http-nio-8080-exec-7] ERROR ExampleController:40 - error
+2024-10-21 15:12:17 [http-nio-8080-exec-7] FATAL ExampleController:41 - fatal
+2024-10-21 15:12:18 [http-nio-8080-exec-8] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:12:18 [http-nio-8080-exec-8] INFO  ExampleController:38 - info
+2024-10-21 15:12:18 [http-nio-8080-exec-8] WARN  ExampleController:39 - warn
+2024-10-21 15:12:18 [http-nio-8080-exec-8] ERROR ExampleController:40 - error
+2024-10-21 15:12:18 [http-nio-8080-exec-8] FATAL ExampleController:41 - fatal
+2024-10-21 15:16:50 [http-nio-8080-exec-2] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:16:50 [http-nio-8080-exec-2] INFO  ExampleController:38 - info
+2024-10-21 15:16:50 [http-nio-8080-exec-2] WARN  ExampleController:39 - warn
+2024-10-21 15:16:50 [http-nio-8080-exec-2] ERROR ExampleController:40 - error
+2024-10-21 15:16:50 [http-nio-8080-exec-2] FATAL ExampleController:41 - fatal
+2024-10-21 15:17:00 [http-nio-8080-exec-3] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:17:00 [http-nio-8080-exec-3] INFO  ExampleController:38 - info
+2024-10-21 15:17:00 [http-nio-8080-exec-3] WARN  ExampleController:39 - warn
+2024-10-21 15:17:00 [http-nio-8080-exec-3] ERROR ExampleController:40 - error
+2024-10-21 15:17:00 [http-nio-8080-exec-3] FATAL ExampleController:41 - fatal
+2024-10-21 15:17:09 [http-nio-8080-exec-4] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:17:09 [http-nio-8080-exec-4] INFO  ExampleController:38 - info
+2024-10-21 15:17:09 [http-nio-8080-exec-4] WARN  ExampleController:39 - warn
+2024-10-21 15:17:09 [http-nio-8080-exec-4] ERROR ExampleController:40 - error
+2024-10-21 15:17:09 [http-nio-8080-exec-4] FATAL ExampleController:41 - fatal
+2024-10-21 15:17:11 [http-nio-8080-exec-5] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:17:11 [http-nio-8080-exec-5] INFO  ExampleController:38 - info
+2024-10-21 15:17:11 [http-nio-8080-exec-5] WARN  ExampleController:39 - warn
+2024-10-21 15:17:11 [http-nio-8080-exec-5] ERROR ExampleController:40 - error
+2024-10-21 15:17:11 [http-nio-8080-exec-5] FATAL ExampleController:41 - fatal
+2024-10-21 15:21:48 [http-nio-8080-exec-1] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:21:48 [http-nio-8080-exec-1] INFO  ExampleController:38 - info
+2024-10-21 15:21:48 [http-nio-8080-exec-1] WARN  ExampleController:39 - warn
+2024-10-21 15:21:48 [http-nio-8080-exec-1] ERROR ExampleController:40 - error
+2024-10-21 15:21:48 [http-nio-8080-exec-1] FATAL ExampleController:41 - fatal
+2024-10-21 15:21:52 [http-nio-8080-exec-3] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:21:52 [http-nio-8080-exec-3] INFO  ExampleController:38 - info
+2024-10-21 15:21:52 [http-nio-8080-exec-3] WARN  ExampleController:39 - warn
+2024-10-21 15:21:52 [http-nio-8080-exec-3] ERROR ExampleController:40 - error
+2024-10-21 15:21:52 [http-nio-8080-exec-3] FATAL ExampleController:41 - fatal
+2024-10-21 15:21:54 [http-nio-8080-exec-4] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:21:54 [http-nio-8080-exec-4] INFO  ExampleController:38 - info
+2024-10-21 15:21:54 [http-nio-8080-exec-4] WARN  ExampleController:39 - warn
+2024-10-21 15:21:54 [http-nio-8080-exec-4] ERROR ExampleController:40 - error
+2024-10-21 15:21:54 [http-nio-8080-exec-4] FATAL ExampleController:41 - fatal
+2024-10-21 15:21:55 [http-nio-8080-exec-5] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:21:55 [http-nio-8080-exec-5] INFO  ExampleController:38 - info
+2024-10-21 15:21:55 [http-nio-8080-exec-5] WARN  ExampleController:39 - warn
+2024-10-21 15:21:55 [http-nio-8080-exec-5] ERROR ExampleController:40 - error
+2024-10-21 15:21:55 [http-nio-8080-exec-5] FATAL ExampleController:41 - fatal
+2024-10-21 15:22:35 [http-nio-8080-exec-1] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:22:35 [http-nio-8080-exec-1] INFO  ExampleController:38 - info
+2024-10-21 15:22:35 [http-nio-8080-exec-1] WARN  ExampleController:39 - warn
+2024-10-21 15:22:35 [http-nio-8080-exec-1] ERROR ExampleController:40 - error
+2024-10-21 15:22:35 [http-nio-8080-exec-1] FATAL ExampleController:41 - fatal
+2024-10-21 15:23:56 [http-nio-8080-exec-1] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:23:56 [http-nio-8080-exec-1] INFO  ExampleController:38 - info
+2024-10-21 15:23:56 [http-nio-8080-exec-1] WARN  ExampleController:39 - warn
+2024-10-21 15:23:56 [http-nio-8080-exec-1] ERROR ExampleController:40 - error
+2024-10-21 15:23:56 [http-nio-8080-exec-1] FATAL ExampleController:41 - fatal
+2024-10-21 15:24:00 [http-nio-8080-exec-5] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:24:00 [http-nio-8080-exec-5] INFO  ExampleController:38 - info
+2024-10-21 15:24:00 [http-nio-8080-exec-5] WARN  ExampleController:39 - warn
+2024-10-21 15:24:00 [http-nio-8080-exec-5] ERROR ExampleController:40 - error
+2024-10-21 15:24:00 [http-nio-8080-exec-5] FATAL ExampleController:41 - fatal
+2024-10-21 15:27:27 [http-nio-8080-exec-2] INFO  ExampleController:34 - Hello World from Example Controller
+2024-10-21 15:27:27 [http-nio-8080-exec-2] INFO  ExampleController:38 - info
+2024-10-21 15:27:27 [http-nio-8080-exec-2] WARN  ExampleController:39 - warn
+2024-10-21 15:27:27 [http-nio-8080-exec-2] ERROR ExampleController:40 - error
+2024-10-21 15:27:27 [http-nio-8080-exec-2] FATAL ExampleController:41 - fatal
