@@ -20,7 +20,7 @@ import java.util.Locale;
 @Service
 public class ServiceSupport {
 
-    private static final Logger logger = LogManager.getLogger(ServiceSupport.class);
+    private static final Logger log = LogManager.getLogger(ServiceSupport.class);
 
     /**
      * Create TelegramUserDataInput
@@ -52,7 +52,7 @@ public class ServiceSupport {
         userData.setTtl_use_flag(0);
         userData.setLang_type(getLocaleCd(request));
 
-        logger.info(userData.toString());
+        log.info(userData.toString());
 
         return userData;
     }
@@ -62,7 +62,7 @@ public class ServiceSupport {
         throws Exception {
         TelegramUserDataOutput<T> result = InterfaceTelegram.interfaceTuxedo(userDataInput, in, out);
         if (result != null) {
-            logger.info(result.toString());
+            log.info(result.toString());
         }
         return result;
     }
@@ -76,7 +76,7 @@ public class ServiceSupport {
             lang = (locale.toString()).equalsIgnoreCase("EN") ? "EN" : "ID";
         }
 
-        logger.info(lang);
+        log.info(lang);
 
         return lang;
     }

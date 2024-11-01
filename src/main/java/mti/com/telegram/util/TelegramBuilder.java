@@ -11,7 +11,7 @@ import java.net.UnknownHostException;
 import java.util.List;
 
 public class TelegramBuilder {
-    private static final Logger logger = LogManager.getLogger(TelegramBuilder.class);
+    private static final Logger log = LogManager.getLogger(TelegramBuilder.class);
 
     public TelegramBuilder() {
     }
@@ -28,7 +28,7 @@ public class TelegramBuilder {
             int msgLength = TelegramUtil.getPacketSize(telegramIn) - 8;
             telegramIn.getHeader().setMsg_len(msgLength);
         } catch (Exception e) {
-            ExceptionUtil.logPrintStackTrace(logger, e);
+            ExceptionUtil.logPrintStackTrace(log, e);
         }
 
         return telegramIn;
@@ -46,7 +46,7 @@ public class TelegramBuilder {
             int msgLength = TelegramUtil.getPacketSize(telegramInList) - 8;
             telegramInList.getHeader().setMsg_len(msgLength);
         } catch (Exception e) {
-            ExceptionUtil.logPrintStackTrace(logger, e);
+            ExceptionUtil.logPrintStackTrace(log, e);
         }
 
         return telegramInList;
@@ -59,7 +59,7 @@ public class TelegramBuilder {
         try {
             hostName = InetAddress.getLocalHost().getHostName();
         } catch (UnknownHostException e) {
-            ExceptionUtil.logPrintStackTrace(logger, e);
+            ExceptionUtil.logPrintStackTrace(log, e);
         }
 
         header.setGid_sysname(hostName != null ? hostName : "MAAS");
@@ -117,7 +117,7 @@ public class TelegramBuilder {
         try {
             var3 = TelegramUtil.getPacketSize(var2) - 9;
         } catch (Exception var5) {
-            ExceptionUtil.logPrintStackTrace(logger, var5);
+            ExceptionUtil.logPrintStackTrace(log, var5);
         }
 
         var2.setLength(var3);
@@ -132,7 +132,7 @@ public class TelegramBuilder {
             int dataLength = TelegramUtil.getPacketSize(telegramData) - 9;
             telegramData.setLength(dataLength);
         } catch (Exception e) {
-            ExceptionUtil.logPrintStackTrace(logger, e);
+            ExceptionUtil.logPrintStackTrace(log, e);
         }
         return telegramData;
     }
@@ -158,7 +158,7 @@ public class TelegramBuilder {
                 }
             }
         } catch (Exception var8) {
-            ExceptionUtil.logPrintStackTrace(logger, var8);
+            ExceptionUtil.logPrintStackTrace(log, var8);
         }
 
         return var2;

@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class SAC20F002U {
-    private static final Logger logger = LogManager.getLogger(SAC20F002U.class);
+    private static final Logger log = LogManager.getLogger(SAC20F002U.class);
 
     @Autowired
     private ServiceSupport support;
@@ -25,13 +25,13 @@ public class SAC20F002U {
 //            String response = "";
 //            result = InterfaceTelegramTest.testCall(inputUserData, inVo, outVo, response);
         } catch (TelegramNestedRuntimeException e) {
-            logger.info(e.toString());
-            logger.info(e.getMsg());
+            log.info(e.toString());
+            log.info(e.getMsg());
         } catch (Exception e) {
-            logger.info(e.toString());
-            logger.info(e.getClass());
-            logger.info(e.getLocalizedMessage());
-            logger.info(e.getMessage());
+            log.info(e.toString());
+            log.info(e.getClass());
+            log.info(e.getLocalizedMessage());
+            log.info(e.getMessage());
         }
 
         return result;
