@@ -6,6 +6,10 @@ import maas.bcap.screen.example.dto.ExampleOutDto;
 import maas.bcap.screen.example.dto.LoginInDto;
 import maas.bcap.screen.example.dto.LoginOutDto;
 import maas.bcap.screen.example.service.ExampleService;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.ThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +21,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequestMapping("/example")
 public class ExampleController {
 
+    private static final Logger log = LogManager.getLogger(ExampleController.class);
+
     @Autowired
     private ExampleService exampleService;
 
@@ -27,15 +33,27 @@ public class ExampleController {
 
     @GetMapping("/test")
     public String getMethodName(HttpServletRequest request) {
-        return new String("Hello World");
+        /// Example of Log Level
+        log.info("Hello World from Example Controller");
+
+        log.trace("trace");
+        log.debug("debug");
+        log.info("info");
+        log.warn("warn");
+        log.error("error");
+        log.fatal("fatal");
+
+        return "Hello World";
     }
 
-    // @GetMapping("/login")
-    // public LoginOutDto loginGet(HttpServletRequest request) throws Exception {
-    // LoginInDto inDto = LoginInDto.builder()
-    // .build();
-    // return exampleService.login(request, inDto, "WAZ030102H");
-    // }
+    @GetMapping("call-logging")
+    public String callRemoteAPI() {
+        /// Example of Routing Appender based specific class and Rolling File and Routing Appender under maas.bcap.screen package
+        ThreadContext.put("className", "ExampleController");
+        log.info("Calling remote API from ExampleController");
+        ThreadContext.clearMap();
+        return "111";
+    }
 
     @PostMapping("/login")
     public LoginOutDto login(HttpServletRequest request, @RequestBody LoginInDto inDto) throws Exception {
