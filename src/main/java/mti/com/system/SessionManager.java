@@ -22,7 +22,6 @@ public class SessionManager {
     }
 
     public static void setUserData(HttpServletRequest req, SessionVo sessionData) {
-        destroyUserData(req);
         HttpSession session = req.getSession();
         session.setAttribute(SessionVo.SESSION_DATA_KEY, sessionData);
     }

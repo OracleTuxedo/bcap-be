@@ -1,6 +1,5 @@
 package maas.bcap.screen.example.service;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import maas.bcap.module.az.az03.saz03v701u.SAZ03V701U;
 import maas.bcap.module.az.az03.saz03v701u.SAZ03V701UInVo;
@@ -12,7 +11,6 @@ import maas.bcap.module.ac.ac02.sac02f452r.SAC02F452ROutVo;
 import maas.bcap.module.ed.ed03.sed03f107r.SED03F107R;
 import maas.bcap.module.ed.ed03.sed03f107r.SED03F107RInVo;
 import maas.bcap.module.ed.ed03.sed03f107r.SED03F107ROutVo;
-import mti.com.cipher.SHAEncryption;
 import mti.com.system.SessionManager;
 import mti.com.system.SessionVo;
 import mti.com.telegram.util.InterfaceTelegramTest;
@@ -21,21 +19,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import java.security.Key;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
 
 
 @Service
@@ -62,8 +57,8 @@ public class ExampleService {
             log.info(userVo.toString());
         }
 
-        String encryptedPassword = SHAEncryption.encrypt(inDto.getUser_id() + inDto.getPassword());
-
+        /// Call SAZ03V701U for notify DevonC about Login Activity
+//        String encryptedPassword = SHAEncryption.encrypt(inDto.getUser_id() + inDto.getPassword());
 //        SAZ03V701UInVo saz03v701uInVo = SAZ03V701UInVo.builder()
 //            .usr_id(inDto.getUser_id())
 //            .usr_paswd(encryptedPassword)
@@ -74,13 +69,14 @@ public class ExampleService {
 //        TelegramUserDataOutput<SAZ03V701UOutVo> saz03v701uResult = saz03v701u.call(request, saz03v701uInVo, screenId);
 //        SAZ03V701UOutVo saz03v701uOutVo = saz03v701uResult.getOutput();
 
+        /// Mock response from SAZ03V701U
         String response = "00001070devaps01202410221334230014256400SAZ03V701U              MTI R                        devaps0120241022133423001425640020241022133423036   UNIT      192.168.1.3                     581CF8933F96            1787130271     020241022133423036   20241022133423725174  0  00        000       IAZAP0000                                                        EN                                                                                                                                             N00000425                     30Login success.                                                                                                                                                                                                                                                                                                                                                                                                  00D00000133                     1787130271     Yosua Sutandar                                    N1787130271                                 10Y@@";
         SAZ03V701UOutVo saz03v701uOutVo = SAZ03V701UOutVo.builder().build();
         TelegramUserDataOutput<SAZ03V701UOutVo> saz03v701uResult = InterfaceTelegramTest.response(response, saz03v701uOutVo);
         saz03v701uOutVo = saz03v701uResult.getOutput();
         log.info(saz03v701uOutVo.toString());
 
-        request.getSession().invalidate();
+        SessionManager.destroyUserData(request);
 
         userVo = SessionVo.builder()
                 .sUserId(inDto.getUser_id())
@@ -94,7 +90,7 @@ public class ExampleService {
 
         log.info("After Invalidate");
         log.info(userVo.toString());
-        log.info(SessionManager.getUserData(request).toString());
+        log.info(Objects.requireNonNull(SessionManager.getUserData(request)).toString());
 
         return LoginOutDto.builder()
                 .usr_ctgo_cd(userVo.getUsrCtgoCd())
@@ -103,7 +99,7 @@ public class ExampleService {
     }
 
     public void logout(HttpServletRequest request, String screenId) throws Exception {
-        
+
         /// Get Current Session
         SessionVo userVo = SessionManager.getUserData(request);
 
@@ -115,12 +111,11 @@ public class ExampleService {
                 .chnl_clcd("1") // 1:web 2:mobile
                 .req_tp("O") // I:login O:logout
                 .build();
-                
+
         saz03v701u.call(request, saz03v701uInVo, screenId);
-        
+
         SessionManager.destroyUserData(request);
 
-        return;
     }
 
     public ExampleOutDto getListOfEDC(HttpServletRequest request, ExampleInDto inDto, String screenId) throws Exception {

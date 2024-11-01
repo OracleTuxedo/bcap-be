@@ -13,13 +13,8 @@ import org.apache.logging.log4j.ThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import maas.bcap.screen.example.dto.DecryptionInDto;
 
-import javax.crypto.Cipher;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,7 +60,7 @@ public class ExampleController {
     public LoginOutDto login(HttpServletRequest request, @RequestBody LoginInDto inDto) throws Exception {
         return exampleService.login(request, inDto, "WAZ030102H");
     }
-  
+
     @PostMapping("/logout")
     public void logout(HttpServletRequest request) throws Exception {
         exampleService.logout(request, "WAZ030100H");
@@ -73,37 +68,13 @@ public class ExampleController {
     }
 
     @PostMapping("/decrypt")
-    public ResponseEntity<String> decryptData(@RequestBody DecryptionRequest request) {
+    public ResponseEntity<String> decryptData(@RequestBody DecryptionInDto request) {
         String decryptedData = exampleService.decryptAES(request.getEncryptedData(), request.getIv());
         return ResponseEntity.ok(decryptedData);
     }
 
-    // Inner class for request model
-    public static class DecryptionRequest {
-        private String encryptedData;
-        private String iv;
-
-        // Getter and Setter for encryptedData
-        public String getEncryptedData() {
-            return encryptedData;
-        }
-
-        public void setEncryptedData(String encryptedData) {
-            this.encryptedData = encryptedData;
-        }
-
-        // Getter and Setter for iv
-        public String getIv() {
-            return iv;
-        }
-
-        public void setIv(String iv) {
-            this.iv = iv;
-        }
-    }
-
     @PostMapping("/process")
-    public ResponseEntity<Map<String, String>> decryptAndEncrypt(@RequestBody DecryptionRequest request) {
+    public ResponseEntity<Map<String, String>> decryptAndEncrypt(@RequestBody DecryptionInDto request) {
         try {
             // Dekripsi data menggunakan IV dari request
             String decryptedData = exampleService.decryptAES(request.getEncryptedData(), request.getIv());
@@ -127,8 +98,8 @@ public class ExampleController {
             return ResponseEntity.status(500).body(Map.of("error", "Process failed: " + e.getMessage()));
         }
 
-    
 
+    }
 }
 
 
