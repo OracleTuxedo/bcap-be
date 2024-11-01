@@ -29,5 +29,5 @@ public class SAZ03V701UInVo {
     public String req_tp;		//  I:Login O:Logout
 
     @FIELD(kind=Kind.DATA, length = 1, type = FieldType.STRING, trim = TrimType.RTRIM)
-    public String admin_yn;		//  Admin Login YN
+    public String admin_yn;		//  Admin Login Y: yes N: no
 }

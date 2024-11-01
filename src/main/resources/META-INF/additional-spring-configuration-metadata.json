@@ -1,0 +1,9 @@
+{
+    "properties": [
+        {
+            "name": "aes.secret.key",
+            "type": "java.lang.String",
+            "description": "Secret Key for Encrypted Password Matching DevonC Algoryhtm"
+        }
+    ]
+}

@@ -192,7 +192,7 @@ public class ExampleService {
                 .build();
     }
 
-    @Value("${aes.secret_key}")
+    @Value("${aes.secret.key}")
     private String secretKey;
 
     public String decryptAES(String encryptedData, String iv) {
