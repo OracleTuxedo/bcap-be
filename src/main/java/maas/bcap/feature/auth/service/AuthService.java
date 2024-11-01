@@ -22,9 +22,6 @@ public class AuthService {
 
     private static final Logger log = LogManager.getLogger(AuthService.class);
 
-    @Value("${aes.secret.key}")
-    private String secretKey;
-
     @Autowired
     private SAZ03V701U saz03v701u;
 

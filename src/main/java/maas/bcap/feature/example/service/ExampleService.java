@@ -37,6 +37,9 @@ import java.util.Objects;
 public class ExampleService {
 
     private static final Logger log = LogManager.getLogger(ExampleService.class);
+    
+    @Value("${aes.secret.key}")
+    private String secretKey;
 
     @Autowired
     private SED03F107R sed03f107r;
@@ -191,9 +194,6 @@ public class ExampleService {
                 .sub1Vos(sub1Vos)
                 .build();
     }
-
-    @Value("${aes.secret.key}")
-    private String secretKey;
 
     public String decryptAES(String encryptedData, String iv) {
         try {
