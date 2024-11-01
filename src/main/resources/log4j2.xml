@@ -67,7 +67,6 @@
         <Root level="warn">
             <AppenderRef ref="LogToConsole"/>
             <AppenderRef ref="DailyFile"/>
-
         </Root>
     </Loggers>
 </Configuration>

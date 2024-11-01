@@ -32,6 +32,7 @@ public class ExampleController {
 
     @GetMapping("/test")
     public String getMethodName(HttpServletRequest request) {
+        /// Example of Log Level
         log.info("Hello World from Example Controller");
 
         log.trace("trace");
@@ -46,26 +47,11 @@ public class ExampleController {
 
     @GetMapping("call-logging")
     public String callRemoteAPI() {
+        /// Example of Routing Appender based specific class and Rolling File and Routing Appender under maas.bcap.screen package
         ThreadContext.put("className", "ExampleController");
         log.info("Calling remote API from ExampleController");
         ThreadContext.clearMap();
         return "111";
     }
-
-//    public static void main(String[] args) {
-//        callRemoteAPI();
-//    }
-//
-//    public static String test() {
-//        log.info("Hello World from Example Controller");
-//
-//        log.trace("trace");
-//        log.debug("debug");
-//        log.info("info");
-//        log.warn("warn");
-//        log.error("error");
-//        log.fatal("fatal");
-//        return new String("Hello World");
-//    }
 
 }
