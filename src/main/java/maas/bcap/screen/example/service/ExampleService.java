@@ -1,5 +1,6 @@
 package maas.bcap.screen.example.service;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import maas.bcap.module.az.az03.saz03v701u.SAZ03V701U;
 import maas.bcap.module.az.az03.saz03v701u.SAZ03V701UInVo;
@@ -19,10 +20,23 @@ import mti.com.telegram.vo.TelegramUserDataOutput;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+
 
 @Service
 public class ExampleService {
@@ -43,30 +57,30 @@ public class ExampleService {
         /// Get Current Session
         SessionVo userVo = SessionManager.getUserData(request);
 
-        /// If current session already exist, throw exception
-        if (userVo != null) {
-            System.out.println("LeRucco");
-            System.out.println(userVo.toString());
+        if (userVo != null){
+            log.info("LeRucco");
+            log.info(userVo.toString());
         }
 
         String encryptedPassword = SHAEncryption.encrypt(inDto.getUser_id() + inDto.getPassword());
-        SAZ03V701UInVo saz03v701uInVo = SAZ03V701UInVo.builder()
-                .usr_id(inDto.getUser_id())
-                .usr_paswd(encryptedPassword)
-                .admin_yn("N")
-                .chnl_clcd("1") // 1:web 2:mobile
-                .req_tp("I") // I:login O:logout
-                .build();
-        TelegramUserDataOutput<SAZ03V701UOutVo> saz03v701uResult = saz03v701u.call(request, saz03v701uInVo, screenId);
-        SAZ03V701UOutVo saz03v701uOutVo = saz03v701uResult.getOutput();
 
-        /// Mock Response VO from SAZ03V701U
-        // String response = "00001070devaps01202410221334230014256400SAZ03V701U              MTI R                        devaps0120241022133423001425640020241022133423036   UNIT      192.168.1.3                     581CF8933F96            1787130271     020241022133423036   20241022133423725174  0  00        000       IAZAP0000                                                        EN                                                                                                                                             N00000425                     30Login success.                                                                                                                                                                                                                                                                                                                                                                                                  00D00000133                     1787130271     Yosua Sutandar                                    N1787130271                                 10Y@@";
-        // SAZ03V701UOutVo saz03v701uOutVo = SAZ03V701UOutVo.builder().build();
-        // TelegramUserDataOutput<SAZ03V701UOutVo> saz03v701uResult = InterfaceTelegramTest.response(response,
-        //         saz03v701uOutVo);
-        // saz03v701uOutVo = saz03v701uResult.getOutput();
-        // System.out.println(saz03v701uOutVo.toString());
+//        SAZ03V701UInVo saz03v701uInVo = SAZ03V701UInVo.builder()
+//            .usr_id(inDto.getUser_id())
+//            .usr_paswd(encryptedPassword)
+//            .admin_yn("N")
+//            .chnl_clcd("1")
+//            .req_tp("I")
+//            .build();
+//        TelegramUserDataOutput<SAZ03V701UOutVo> saz03v701uResult = saz03v701u.call(request, saz03v701uInVo, screenId);
+//        SAZ03V701UOutVo saz03v701uOutVo = saz03v701uResult.getOutput();
+
+        String response = "00001070devaps01202410221334230014256400SAZ03V701U              MTI R                        devaps0120241022133423001425640020241022133423036   UNIT      192.168.1.3                     581CF8933F96            1787130271     020241022133423036   20241022133423725174  0  00        000       IAZAP0000                                                        EN                                                                                                                                             N00000425                     30Login success.                                                                                                                                                                                                                                                                                                                                                                                                  00D00000133                     1787130271     Yosua Sutandar                                    N1787130271                                 10Y@@";
+        SAZ03V701UOutVo saz03v701uOutVo = SAZ03V701UOutVo.builder().build();
+        TelegramUserDataOutput<SAZ03V701UOutVo> saz03v701uResult = InterfaceTelegramTest.response(response, saz03v701uOutVo);
+        saz03v701uOutVo = saz03v701uResult.getOutput();
+        log.info(saz03v701uOutVo.toString());
+
+        request.getSession().invalidate();
 
         userVo = SessionVo.builder()
                 .sUserId(inDto.getUser_id())
@@ -78,9 +92,9 @@ public class ExampleService {
 
         SessionManager.setUserData(request, userVo);
 
-        System.out.println("After Invalidate");
-        System.out.println(userVo.toString());
-        System.out.println(SessionManager.getUserData(request).toString());
+        log.info("After Invalidate");
+        log.info(userVo.toString());
+        log.info(SessionManager.getUserData(request).toString());
 
         return LoginOutDto.builder()
                 .usr_ctgo_cd(userVo.getUsrCtgoCd())
@@ -109,9 +123,8 @@ public class ExampleService {
         return;
     }
 
-    public ExampleOutDto getListOfEDC(HttpServletRequest request, ExampleInDto inDto, String screenId)
-            throws Exception {
-        System.out.println(inDto.toString());
+    public ExampleOutDto getListOfEDC(HttpServletRequest request, ExampleInDto inDto, String screenId) throws Exception {
+        log.info(inDto.toString());
 
         /// SED03F107R
         SED03F107RInVo sed03F107RInVo = SED03F107RInVo.builder()
@@ -182,5 +195,61 @@ public class ExampleService {
                 .tot_cnt(sac02F452ROutVo.tot_cnt)
                 .sub1Vos(sub1Vos)
                 .build();
+    }
+
+    @Value("${aes.secret_key}")
+    private String secretKey;
+
+    public String decryptAES(String encryptedData, String iv) {
+        try {
+            // Decode Base64 for IV and encrypted data
+            byte[] ivBytes = Base64.getDecoder().decode(iv);
+            byte[] encryptedBytes = Base64.getDecoder().decode(encryptedData);
+
+            // Setup secret key and IV
+            SecretKey key = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "AES");
+            IvParameterSpec ivParameterSpec = new IvParameterSpec(ivBytes);
+
+            // Initialize cipher for decryption
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
+            cipher.init(Cipher.DECRYPT_MODE, key, ivParameterSpec);
+
+            // Perform decryption
+            byte[] original = cipher.doFinal(encryptedBytes);
+            return new String(original, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Decryption failed: " + e.getMessage();
+        }
+    }
+
+    public String encryptAES(String plainText, String iv) {
+        try {
+            // Decode Base64 untuk IV
+            byte[] ivBytes = Base64.getDecoder().decode(iv);
+
+            // Setup secret key dan IV
+            SecretKey key = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "AES");
+            IvParameterSpec ivParameterSpec = new IvParameterSpec(ivBytes);
+
+            // Inisialisasi cipher untuk enkripsi
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
+            cipher.init(Cipher.ENCRYPT_MODE, key, ivParameterSpec);
+
+            // Enkripsi data
+            byte[] encryptedBytes = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
+
+            // Encode hasil enkripsi ke Base64
+            return Base64.getEncoder().encodeToString(encryptedBytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Encryption failed: " + e.getMessage();
+        }
+    }
+
+    public String generateRandomIv() {
+        byte[] iv = new byte[16];
+        new SecureRandom().nextBytes(iv);
+        return Base64.getEncoder().encodeToString(iv);
     }
 }

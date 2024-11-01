@@ -11,11 +11,17 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.ThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/example")
@@ -59,11 +65,71 @@ public class ExampleController {
     public LoginOutDto login(HttpServletRequest request, @RequestBody LoginInDto inDto) throws Exception {
         return exampleService.login(request, inDto, "WAZ030102H");
     }
-
+  
     @PostMapping("/logout")
     public void logout(HttpServletRequest request) throws Exception {
         exampleService.logout(request, "WAZ030100H");
         return;
     }
 
+    @PostMapping("/decrypt")
+    public ResponseEntity<String> decryptData(@RequestBody DecryptionRequest request) {
+        String decryptedData = exampleService.decryptAES(request.getEncryptedData(), request.getIv());
+        return ResponseEntity.ok(decryptedData);
+    }
+
+    // Inner class for request model
+    public static class DecryptionRequest {
+        private String encryptedData;
+        private String iv;
+
+        // Getter and Setter for encryptedData
+        public String getEncryptedData() {
+            return encryptedData;
+        }
+
+        public void setEncryptedData(String encryptedData) {
+            this.encryptedData = encryptedData;
+        }
+
+        // Getter and Setter for iv
+        public String getIv() {
+            return iv;
+        }
+
+        public void setIv(String iv) {
+            this.iv = iv;
+        }
+    }
+
+    @PostMapping("/process")
+    public ResponseEntity<Map<String, String>> decryptAndEncrypt(@RequestBody DecryptionRequest request) {
+        try {
+            // Dekripsi data menggunakan IV dari request
+            String decryptedData = exampleService.decryptAES(request.getEncryptedData(), request.getIv());
+
+            // Generate IV baru untuk enkripsi ulang
+            String newIv = exampleService.generateRandomIv();
+
+            // Enkripsi kembali hasil dekripsi dengan IV baru
+            String reEncryptedData = exampleService.encryptAES(decryptedData, newIv);
+
+            // Buat respons JSON
+            Map<String, String> response = new HashMap<>();
+            //response.put("decryptedData", decryptedData);
+
+            response.put("encryptedData", reEncryptedData);
+            response.put("iv", newIv);
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(Map.of("error", "Process failed: " + e.getMessage()));
+        }
+
+    
+
 }
+
+
+
