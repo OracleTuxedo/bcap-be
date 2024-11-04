@@ -24,8 +24,8 @@ import java.nio.charset.StandardCharsets;
 
 
 
-//Session User
-//2024-09-19 12:34:51,019 DEBUG [mti.az.az03.controller.AZ0301C] AZ0301 session - Id  :: GYgIxpn5nV4ut75PxwRDdupVD7U1eFaVOmTDke9lOxoDs-SM1AXd!1672226943!1726724086265
+//Cookie User
+//2024-09-19 12:34:51,019 DEBUG [mti.az.az03.controller.AZ0301C] AZ0301 Cookie - Id  :: GYgIxpn5nV4ut75PxwRDdupVD7U1eFaVOmTDke9lOxoDs-SM1AXd!1672226943!1726724086265
 //2024-09-19 12:34:51,019 DEBUG [mti.az.az03.controller.AZ0301C] AZ0301 getUserData : SessionVO [sUserId=1787130271, sUserNm=Yosua Sutandar, sEmail=null, sUserTypeCd=null, orgnztId=null, uniqId=null, usrIno=, adm_usr_yn=Y, cdhdNo=null, hpgeId=null, cdhdNm=null, usrId=null, usrNm=null, usrClcd=null, mmpPrivCd=null, telNo=null, hpTelNo=null, lgrupId=null, lgrupNm=null, mgrupId=null, mgrupNm=null, mid=null, merNm=null, langClcd=null, usrCtgoCd=10, emailAddr=null, mmpsvcApplGrupCd=null]
 //
 

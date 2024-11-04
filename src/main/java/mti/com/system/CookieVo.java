@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SessionVo implements Serializable {
+public class CookieVo implements Serializable {
     @Serial
     private static final long serialVersionUID = -9186253543640336258L;
 

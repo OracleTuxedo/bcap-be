@@ -1,8 +1,8 @@
 package maas.bcap.common;
 
 import jakarta.servlet.http.HttpServletRequest;
-import mti.com.system.SessionManager;
-import mti.com.system.SessionVo;
+import mti.com.system.CookieManager;
+import mti.com.system.CookieVo;
 import mti.com.telegram.util.InterfaceTelegram;
 import mti.com.telegram.vo.TelegramUserDataInput;
 import mti.com.telegram.vo.TelegramUserDataOutput;
@@ -39,7 +39,7 @@ public class ServiceSupport {
     public TelegramUserDataInput tuxedoHeader(HttpServletRequest request, String tuxedoCode, String screenId)
         throws Exception {
 
-        SessionVo userVO = SessionManager.getUserData(request);
+        CookieVo userVO = CookieManager.getUserData(request);
 
         TelegramUserDataInput userData = new TelegramUserDataInput();
         userData.setTx_code(tuxedoCode);

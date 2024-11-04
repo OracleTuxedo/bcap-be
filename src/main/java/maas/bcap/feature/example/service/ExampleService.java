@@ -11,8 +11,8 @@ import maas.bcap.module.ac.ac02.sac02f452r.SAC02F452ROutVo;
 import maas.bcap.module.ed.ed03.sed03f107r.SED03F107R;
 import maas.bcap.module.ed.ed03.sed03f107r.SED03F107RInVo;
 import maas.bcap.module.ed.ed03.sed03f107r.SED03F107ROutVo;
-import mti.com.system.SessionManager;
-import mti.com.system.SessionVo;
+import mti.com.system.CookieManager;
+import mti.com.system.CookieVo;
 import mti.com.telegram.util.InterfaceTelegramTest;
 import mti.com.telegram.vo.TelegramUserDataOutput;
 import org.apache.logging.log4j.LogManager;
@@ -52,8 +52,8 @@ public class ExampleService {
 
     public LoginOutDto login(HttpServletRequest request, LoginInDto inDto, String screenId) throws Exception {
 
-        /// Get Current Session
-        SessionVo userVo = SessionManager.getUserData(request);
+        /// Get Current Cookie
+        CookieVo userVo = CookieManager.getUserData(request);
 
         if (userVo != null){
             log.info("LeRucco");
@@ -79,9 +79,9 @@ public class ExampleService {
         saz03v701uOutVo = saz03v701uResult.getOutput();
         log.info(saz03v701uOutVo.toString());
 
-        SessionManager.destroyUserData(request);
+        CookieManager.destroyUserData(request);
 
-        userVo = SessionVo.builder()
+        userVo = CookieVo.builder()
                 .sUserId(inDto.getUser_id())
                 .usrIno(saz03v701uOutVo.usr_ino)
                 .sUserNm(saz03v701uOutVo.usr_nm)
@@ -89,11 +89,11 @@ public class ExampleService {
                 .adm_usr_yn(saz03v701uOutVo.adm_usr_yn)
                 .build();
 
-        SessionManager.setUserData(request, userVo);
+        CookieManager.setUserData(request, userVo);
 
         log.info("After Invalidate");
         log.info(userVo.toString());
-        log.info(Objects.requireNonNull(SessionManager.getUserData(request)).toString());
+        log.info(Objects.requireNonNull(CookieManager.getUserData(request)).toString());
 
         return LoginOutDto.builder()
                 .usr_ctgo_cd(userVo.getUsrCtgoCd())
@@ -103,8 +103,8 @@ public class ExampleService {
 
     public void logout(HttpServletRequest request, String screenId) throws Exception {
 
-        /// Get Current Session
-        SessionVo userVo = SessionManager.getUserData(request);
+        /// Get Current Cookie
+        CookieVo userVo = CookieManager.getUserData(request);
 
         if (userVo == null) return;
 
@@ -117,7 +117,7 @@ public class ExampleService {
 
         saz03v701u.call(request, saz03v701uInVo, screenId);
 
-        SessionManager.destroyUserData(request);
+        CookieManager.destroyUserData(request);
 
     }
 
