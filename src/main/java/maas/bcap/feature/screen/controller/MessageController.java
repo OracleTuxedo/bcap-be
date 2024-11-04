@@ -21,6 +21,7 @@ public class MessageController {
     private MessageService messageService;
 
     public MessageTransferOutDto messageTransfer(HttpServletRequest request, @RequestBody MessageTransferInDto inDto) throws Exception {
+        log.info(inDto.toString());
         return messageService.messageTransfer(request, inDto);
     }
 }

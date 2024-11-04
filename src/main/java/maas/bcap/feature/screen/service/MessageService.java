@@ -38,18 +38,21 @@ public class MessageService {
 
         /// Get original message after decryption
         String originalMessage = decrypt(inDto.getEncryptedMessage(), inDto.getIv());
+        log.info("original message [" + originalMessage + "]");
 
         /// Connect to Telegram Layer
         byte[] requestToTuxedo = originalMessage.getBytes();
         byte[] responseFromTuxedo = WeblogicConnector.connectTuxedo(requestToTuxedo);
-
         String responseMessage = new String(responseFromTuxedo, StandardCharsets.UTF_8);
+        log.info("request to tuxedo [" + new String(requestToTuxedo, StandardCharsets.UTF_8) + "]");
+        log.info("response from tuxedo [" + responseMessage + "]");
 
         /// Generate new IV for another encryption
         String iv = generateRandomIv();
 
         /// Do Encryption response messages from Tuxedo
         String encryptedMessage = encrypt(responseMessage, iv);
+        log.debug("encrypted message [" + encryptedMessage + "]");
 
         MessageTransferOutDto messageTransferOutDto = MessageTransferOutDto.builder()
                 .encryptedMessages(encryptedMessage)
@@ -64,6 +67,7 @@ public class MessageService {
             InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
         // Decode Base64 untuk IV
         byte[] ivBytes = Base64.getDecoder().decode(iv);
+        log.debug("encrypted message [" + new String(ivBytes, StandardCharsets.UTF_8) + "]");
 
         // Setup secret key dan IV
         SecretKey key = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "AES");
@@ -75,6 +79,7 @@ public class MessageService {
 
         // Enkripsi data
         byte[] encryptedBytes = cipher.doFinal(message.getBytes(StandardCharsets.UTF_8));
+        log.debug("encrypted bytes [" + new String(encryptedBytes, StandardCharsets.UTF_8) + "]");
 
         // Encode hasil enkripsi ke Base64
         return Base64.getEncoder().encodeToString(encryptedBytes);
@@ -87,6 +92,8 @@ public class MessageService {
         /// Decode Base64 for IV and encrypted message
         byte[] ivBytes = Base64.getDecoder().decode(iv);
         byte[] encryptedMessageBytes = Base64.getDecoder().decode(encryptedMessage);
+        log.debug("iv bytes [" + new String(ivBytes, StandardCharsets.UTF_8) + "]");
+        log.debug("encrypted messages bytes [" + new String(encryptedMessageBytes, StandardCharsets.UTF_8) + "]");
 
         /// Setup secret key and IV
         SecretKey key = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "AES");
@@ -96,14 +103,17 @@ public class MessageService {
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
         cipher.init(Cipher.DECRYPT_MODE, key, ivParameterSpec);
 
-        /// Perdorm decryption
+        /// Perform decryption
         byte[] originalMessage = cipher.doFinal(encryptedMessageBytes);
+        log.debug("original message [" + new String(originalMessage, StandardCharsets.UTF_8) + "]");
+        
         return new String(originalMessage, StandardCharsets.UTF_8);
     }
 
     private String generateRandomIv() {
         byte[] iv = new byte[16];
         new SecureRandom().nextBytes(iv);
+        log.debug("iv [" + iv + "]");
         return Base64.getEncoder().encodeToString(iv);
     }
 }

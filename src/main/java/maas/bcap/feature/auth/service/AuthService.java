@@ -30,7 +30,7 @@ public class AuthService {
         /// Get Current Session Cookies HttpOnly
         SessionVo userSessionVo = SessionManager.getUserData(request);
 
-        /// TODO Throw exception
+        /// TODO Throw exceptionI
         if (userSessionVo != null) {
             log.info(userSessionVo.toString());
         }
