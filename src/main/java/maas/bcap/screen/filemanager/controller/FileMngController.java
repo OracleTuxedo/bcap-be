@@ -1,26 +1,29 @@
 package maas.bcap.screen.filemanager.controller;
 
 
+import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import maas.bcap.screen.filemanager.vo.FileInfoInSubVO;
 import maas.bcap.screen.filemanager.vo.FileInfoInVO;
 import maas.bcap.screen.filemanager.vo.FileInfoOutSubVO;
 import maas.bcap.screen.filemanager.vo.FileInfoOutVO;
+import maas.bcap.screen.fileupload.FileManagerController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*    ;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
 
 @RestController
 @RequestMapping("/file-manager")
@@ -28,7 +31,6 @@ public class FileMngController {
 
     @Value("${fileProp.File.Path}")
     private String fileUploadPath;
-
 
     @Value("${fileProp.File.Ext.FilterList}")
     private String fileExtChkList;
@@ -282,20 +284,20 @@ public class FileMngController {
                 FileInfoOutSubVO fOutSubVO1 = FileInfoOutSubVO.builder()
                     .attach_file_id("awts")
                     .del_yn("Y")
-                    .upl_file_nm("76c4f4206bfc27714022e67a1fa6c5b5.png")
+                    .upl_file_nm("Screenshot_2.png")
                     .attach_file_seq_no("1")
-                    .file_path("E:/Work/SampleDoc/TestGambar/extraPath")
+                    .file_path("C:/Work/SampleDoc/TestGambar/extraPath")
                     .build();
                 fOutSubVOList.add(fOutSubVO1);
 
-                FileInfoOutSubVO fOutSubVO2 = FileInfoOutSubVO.builder()
-                    .attach_file_id("awts")
-                    .del_yn("Y")
-                    .upl_file_nm("s670_2k.png")
-                    .attach_file_seq_no("1")
-                    .file_path("E:/Work/SampleDoc/TestGambar/extraPath")
-                    .build();
-                fOutSubVOList.add(fOutSubVO2);
+//                FileInfoOutSubVO fOutSubVO2 = FileInfoOutSubVO.builder()
+//                    .attach_file_id("awts")
+//                    .del_yn("Y")
+//                    .upl_file_nm("sScreenshot_2.png")
+//                    .attach_file_seq_no("1")
+//                    .file_path("C:/Work/SampleDoc/TestGambar/extraPath")
+//                    .build();
+//                fOutSubVOList.add(fOutSubVO2);
 
                 logger.info("FileInfoOutSubVO Created: {}", fOutSubVOList);
 
@@ -409,6 +411,7 @@ public class FileMngController {
                             FileInfoOutSubVO fOutSubVO = FileInfoOutSubVO.builder()
                                 .del_yn("N")
                                 .file_nm(orginFileName)
+                                .upl_file_nm(orginFileName)
                                 .upl_file_size(_size)
                                 .file_path(filePath)
                                 .inp_pgm_id(scrId)
@@ -442,7 +445,7 @@ public class FileMngController {
                     .build();
 
                 //File transfer to disk
-               // realFileUpload(fOutVO, multipartList, filePath);
+                realFileUpload(fOutVO, multipartList, filePath);
 
 
                 deleteFile(fOutVO, filePath);
@@ -471,6 +474,48 @@ public class FileMngController {
         }
 
         return ResponseEntity.ok(resData);
+    }
+
+    @GetMapping(value = "/download")
+    public void downLoadFile(
+        @RequestParam HashMap<String, Object> param,
+        HttpServletRequest request,
+        HttpServletResponse response) throws Exception {
+
+        logger.info("[NORMAL] Download with /download");
+        String fileDiv = validateFilePath(request.getParameter("fileDiv"));
+        String attachFileId = request.getParameter("attachFileId");
+        String attachFileSeqNo = request.getParameter("attachFileSeqNo");
+
+        // Dummy file for testing
+        String filePath = "C:/Work/SampleDoc/TestGambar/extraPath/Screenshot_1.png";
+        File file = new File(filePath);
+
+        if (!file.exists()) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "File not found");
+            return;
+        }
+
+        // Set response headers
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
+        response.setContentLengthLong(file.length());
+
+        // Stream file contents to response
+        try (BufferedInputStream inStream = new BufferedInputStream(new FileInputStream(file));
+             ServletOutputStream outStream = response.getOutputStream()) {
+
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+
+            while ((bytesRead = inStream.read(buffer)) != -1) {
+                outStream.write(buffer, 0, bytesRead);
+            }
+            outStream.flush();
+        } catch (IOException e) {
+            logger.error("Error during file download", e);
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error downloading file");
+        }
     }
 
     private void realFileUpload(FileInfoOutVO fOutVO, List<MultipartFile> multipartFiles, String filePath) throws Exception {

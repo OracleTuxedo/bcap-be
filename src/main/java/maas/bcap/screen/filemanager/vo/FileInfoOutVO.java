@@ -37,5 +37,5 @@ public class FileInfoOutVO {
     public String req_clcd;
 
     @FIELD(kind=Kind.DATA, length = 0, type = FieldType.LIST, trim = TrimType.LTRIM)
-    public List<FileInfoInSubVO> list;
+    public List<FileInfoOutSubVO> list;
 }
