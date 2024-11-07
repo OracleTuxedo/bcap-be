@@ -8,6 +8,7 @@ import maas.bcap.screen.filemanager.vo.FileInfoInSubVO;
 import maas.bcap.screen.filemanager.vo.FileInfoInVO;
 import maas.bcap.screen.filemanager.vo.FileInfoOutSubVO;
 import maas.bcap.screen.filemanager.vo.FileInfoOutVO;
+import maas.bcap.screen.filemanager.service.FileUplService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,6 +34,8 @@ public class FileMngController {
 
     @Value("${fileProp.File.Ext.FilterList}")
     private String fileExtChkList;
+
+    FileUplService fileUplService;
 
 //    @GetMapping("/test")
 //    public String getMethodName(HttpServletRequest request) {
@@ -97,68 +100,11 @@ public class FileMngController {
         Map<String, Object> resData = new HashMap<>();
         List<Map<String, Object>> ds = new ArrayList<>();
         Map<String, Object> row = new HashMap<>();
-//        row.put("ds_fileResult", "SUCCESS");
-//        ds.add(row);
+
 
         FileInfoOutVO fOutVO = new FileInfoOutVO();
         List<FileInfoInSubVO> fInSubVOList = new ArrayList<FileInfoInSubVO>();
         List<FileInfoOutSubVO> fOutSubVOList = new ArrayList<FileInfoOutSubVO>();
-
-
-        /*if(multipartList!= null) {
-            if (multipartList.size() > 0) {
-                for (MultipartFile file : multipartList) {
-
-                    String orginFileName = file.getOriginalFilename();
-                    if ("".equals(orginFileName)) {
-                        continue;
-                    }
-                    //extension check
-                    fileChk = checkFileExt(file);
-                    if (!fileChk) {
-                        eMsgDtl = "File Extention Error.";
-                        throw new Exception(eMsgDtl);
-                    }
-                    //file info set
-                    long _size = file.getSize();
-                    //file path
-                    if("".equals(extraPath) || extraPath==null){
-                        filePath = fileUploadPath + File.separator + fileDiv;
-                    }else{
-                        filePath = fileUploadPath + File.separator + fileDiv + extraPath;
-                    }
-
-//                    FileInfoInSubVO fInSubVO = new FileInfoInSubVO();
-//                    fInSubVO.setFile_nm(orginFileName);
-//                    fInSubVO.setUpl_file_size(_size);
-//                    fInSubVO.setFile_path(filePath);
-//                    fInSubVO.setInp_pgm_id(scrId);
-//                    fInSubVO.setInp_usr_id(usrId);
-//
-//
-//
-//                    fileList.add(fInSubVO);
-
-                    FileInfoInSubVO fInSubVO1 = FileInfoInSubVO.builder()
-                        .file_nm(orginFileName)
-                        .upl_file_size(_size)
-                        .file_path(filePath)
-                        .build();
-                    fInSubVOList.add(fInSubVO1);
-
-                }
-            }
-        }*/
-
-
-
-       /* FileInfoInVO fInVo = FileInfoInVO.builder()
-            .list(fInSubVOList)
-            .build();
-        realFileUpload(fInVo, multipartList, filePath);
-
-        ds.addAll(makeOutDataSet(fInVo, false, true));
-        resData.put("response", ds);*/
 
         try
         {
@@ -202,14 +148,6 @@ public class FileMngController {
                                 filePath = fileUploadPath + File.separator + fileDiv + extraPath;
                             }
 
-//                            FileInfoInSubVO fInSubVO = new FileInfoInSubVO();
-//                            fInSubVO.setFile_nm(orginFileName);
-//                            fInSubVO.setUpl_file_size(_size);
-//                            fInSubVO.setFile_path(filePath);
-//                            fInSubVO.setInp_pgm_id(scrId);
-//                            fInSubVO.setInp_usr_id(usrId);
-//                            fileList.add(fInSubVO);
-
                             FileInfoInSubVO fInSubVO = FileInfoInSubVO.builder()
                                 .file_nm(orginFileName)
                                 .upl_file_size(_size)
@@ -234,11 +172,6 @@ public class FileMngController {
                     }
                 }
 
-//                fInVO.setAttach_file_clcd(fileDiv);
-//                fInVO.setAttach_file_expl(fileDesc);
-//                fInVO.setUpd_yn("N");
-//                fInVO.setList(fileList);
-
                 FileInfoInVO fInVO = FileInfoInVO.builder()
                     .attach_file_clcd(fileDiv)
                     .attach_file_expl(fileDesc)
@@ -250,7 +183,8 @@ public class FileMngController {
 
                 debugIO(fInVO);
                 //File info data save to db
-                //fOutVO = fileUplService.saveFileData(fInVO, usrInfo);
+
+                fOutVO = fileUplService.saveFileData(fInVO, usrInfo);
 
                 //dummy test
                 fOutVO = FileInfoOutVO.builder()
@@ -264,7 +198,6 @@ public class FileMngController {
 
                 //File save to disk
                 realFileUpload(fOutVO, multipartList, filePath);
-                //realFileUpload(fInVO, multipartList, filePath);
             }
 
             // CASE : Update FileList   ------------------------------------------------------------
@@ -280,6 +213,7 @@ public class FileMngController {
 
                 //Retrieve File list
                 //FileInfoOutVO fInfoOutVO  = fileUplService.selectFileList(input, usrInfo); // panggil service
+
                 FileInfoOutSubVO fOutSubVO1 = FileInfoOutSubVO.builder()
                     .attach_file_id("awts")
                     .del_yn("Y")
@@ -326,18 +260,6 @@ public class FileMngController {
 
                         for(String tmpDelSeq : delTargetSeqInfo){
                             if(Integer.parseInt(tmpDelSeq) == fileSeqNo){
-                                //del target save to fileList
-//                                FileInfoInSubVO delFInSubVO = new FileInfoInSubVO();
-//                                delFInSubVO.setAttach_file_id(fileOutSubVO.getAttach_file_id());
-//                                delFInSubVO.setAttach_file_seq_no(fileOutSubVO.getAttach_file_seq_no());
-//                                delFInSubVO.setDel_yn("Y");
-//
-//                                delFInSubVO.setChng_usr_id(usrId);
-//                                delFInSubVO.setChng_pgm_id(scrId);
-//
-//                                fileList.add(delFInSubVO);
-
-                                System.out.println(fileOutSubVO.getAttach_file_id());
 
                                 FileInfoInSubVO delFInSubVO = FileInfoInSubVO.builder()
                                     .attach_file_id(fileOutSubVO.getAttach_file_id())
@@ -348,19 +270,6 @@ public class FileMngController {
                                     .build();
                                 fInSubVOList.add(delFInSubVO);
 
-                                //for test dummy
-//                                FileInfoOutSubVO fOutSubVO = FileInfoOutSubVO.builder()
-//                                    .attach_file_id(fileOutSubVO.getAttach_file_id())
-//                                    .attach_file_seq_no(fileOutSubVO.getAttach_file_seq_no())
-//                                    .del_yn("Y")
-//                                    .inp_pgm_id(scrId)
-//                                    .inp_usr_id(usrId)
-//                                    .build();
-//
-//                                logger.info("FileInfoOutSubVO Created: {}", fOutSubVO);
-//                                fOutSubVOList.add(fOutSubVO);
-//
-//                                logger.info("FileInfoOutSubVO Created: {}", fOutSubVOList);
                                 break;
                             }
                         }
@@ -386,16 +295,6 @@ public class FileMngController {
                             //file info set
                             long _size = file.getSize();
 
-//                            FileInfoInSubVO fInSubVO = new FileInfoInSubVO();
-//                            fInSubVO.setDel_yn("N");
-//                            fInSubVO.setFile_nm(orginFileName);
-//                            fInSubVO.setUpl_file_size(_size);
-//                            fInSubVO.setFile_path(filePath);
-//                            fInSubVO.setInp_pgm_id(scrId);
-//                            fInSubVO.setInp_usr_id(usrId);
-//
-//                            fileList.add(fInSubVO);
-
                             FileInfoInSubVO fInSubVO1 = FileInfoInSubVO.builder()
                                 .del_yn("N")
                                 .file_nm(orginFileName)
@@ -420,9 +319,6 @@ public class FileMngController {
                         }
                     }
                 }
-//                fInVO.setAttach_file_id(attachFileId);
-//                fInVO.setUpd_yn("Y");
-//                fInVO.setList(fileList);
 
                 FileInfoInVO fInVO = FileInfoInVO.builder()
                     .attach_file_id(attachFileId)
@@ -446,7 +342,6 @@ public class FileMngController {
                 //File transfer to disk
                 realFileUpload(fOutVO, multipartList, filePath);
 
-
                 deleteFile(fOutVO, filePath);
             }
             //Make return xplatform dataset
@@ -455,11 +350,6 @@ public class FileMngController {
 
         }catch (Exception e){
             logger.error(e.getMessage(), e);
-//            ds.addColumn(new ColumnHeader("ErrorCode", DataTypes.STRING));
-//            ds.addColumn(new ColumnHeader("ErrorMsg", DataTypes.STRING));
-
-//            int row= ds.newRow();
-//            ds.set(row, "ErrorCode", 500);
 
             row.put("ErrorCode", "500");
 
@@ -557,11 +447,33 @@ public class FileMngController {
             if (showAll) {
                 row.put("file_name", fOut.getFile_nm());
                 row.put("file_size", fOut.getUpl_file_size());
-                row.put("file_path", fOut.getFile_path());
+                row.put("file_sort_no", fOut.getPfr_rank());
+                row.put("attach_file_seq_no", fOut.getAttach_file_seq_no());
+                row.put("file_div", fOut.getAttach_file_id());
+                row.put("attach_file_id", fOut.getAttach_file_id());
+                row.put("del_flag", fOut.getDel_yn());
+                if(multiFlag){
+                    row.put("ErrorCode", 200);
+                    row.put("ErrorMsg", "");
+                }
+            }
+            else{
+                if(!"Y".equals(fOut.getDel_yn())){
+                    row.put("file_name", fOut.getFile_nm());
+                    row.put("file_size", fOut.getUpl_file_size());
+                    row.put("file_sort_no", fOut.getPfr_rank());
+                    row.put("attach_file_seq_no", fOut.getAttach_file_seq_no());
+                    row.put("file_div", fOut.getAttach_file_id());
+                    row.put("attach_file_id", fOut.getAttach_file_id());
+                    row.put("del_flag", fOut.getDel_yn());
+                    if(multiFlag){
+                        row.put("ErrorCode", 200);
+                        row.put("ErrorMsg", "");
+                    }
+                }
             }
             dataset.add(row);
         }
-
         return dataset;
     }
 
