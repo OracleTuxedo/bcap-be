@@ -184,7 +184,7 @@ public class FileMngController {
                 debugIO(fInVO);
                 //File info data save to db
 
-                fOutVO = fileUplService.saveFileData(fInVO, usrInfo);
+                //fOutVO = fileUplService.saveFileData(fInVO, usrInfo);
 
                 //dummy test
                 fOutVO = FileInfoOutVO.builder()
@@ -217,7 +217,7 @@ public class FileMngController {
                 FileInfoOutSubVO fOutSubVO1 = FileInfoOutSubVO.builder()
                     .attach_file_id("awts")
                     .del_yn("Y")
-                    .upl_file_nm("Screenshot_2.png")
+                    .upl_file_nm("Screenshot_3.png")
                     .attach_file_seq_no("1")
                     .file_path("C:/Work/SampleDoc/TestGambar/extraPath")
                     .build();
@@ -377,7 +377,7 @@ public class FileMngController {
         String attachFileSeqNo = request.getParameter("attachFileSeqNo");
 
         // Dummy file for testing
-        String filePath = "C:/Work/SampleDoc/TestGambar/extraPath/Screenshot_1.png";
+        String filePath = "C:/Work/SampleDoc/TestGambar/extraP  ath/Screenshot_3.png";
         File file = new File(filePath);
 
         if (!file.exists()) {
