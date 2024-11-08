@@ -377,7 +377,7 @@ public class FileMngController {
         String attachFileSeqNo = request.getParameter("attachFileSeqNo");
 
         // Dummy file for testing
-        String filePath = "C:/Work/SampleDoc/TestGambar/extraP  ath/Screenshot_3.png";
+        String filePath = "C:/Work/SampleDoc/TestGambar/extraPath/Screenshot_3.png";
         File file = new File(filePath);
 
         if (!file.exists()) {
