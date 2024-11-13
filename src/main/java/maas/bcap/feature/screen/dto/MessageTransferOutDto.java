@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MessageTransferOutDto {
-    private String encryptedMessages;
+    private String encryptedMessages; // String Panjang
 
     private String iv;
 }

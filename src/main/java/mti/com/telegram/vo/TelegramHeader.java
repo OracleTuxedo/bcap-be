@@ -25,6 +25,7 @@ public class TelegramHeader {
         decimal = 0
     )
     public int msg_len;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 8,
@@ -32,6 +33,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String gid_sysname;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 8,
@@ -39,6 +41,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String gid_yyyyymmdd;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 6,
@@ -46,6 +49,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String gid_hhmmss;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 3,
@@ -53,6 +57,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String gid_seq;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 5,
@@ -60,6 +65,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String gid_pid;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 2,
@@ -67,6 +73,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String gid_stat;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 24,
@@ -74,6 +81,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String tx_code;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 4,
@@ -81,6 +89,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String inst_no;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 1,
@@ -88,6 +97,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String send_rspn_type;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 24,
@@ -95,6 +105,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String rspn_svc_code;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 32,
@@ -102,6 +113,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String ori_global_id;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 20,
@@ -109,6 +121,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String ori_send_time;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 10,
@@ -116,6 +129,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String chnl_id;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 32,
@@ -123,6 +137,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String client_ip_no;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 12,
@@ -130,6 +145,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String client_mac;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 11,
@@ -137,6 +153,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String scrn_id;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 1,
@@ -144,6 +161,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String scrn_lock_yn;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 15,
@@ -151,6 +169,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String op_id;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 1,
@@ -162,6 +181,7 @@ public class TelegramHeader {
         decimal = 0
     )
     public int xa_begin_flag;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 20,
@@ -169,6 +189,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String send_time;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 20,
@@ -176,6 +197,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String rspn_time;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 1,
@@ -183,6 +205,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String sync_type;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 1,
@@ -190,6 +213,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String async_rspn_yn;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 1,
@@ -201,6 +225,7 @@ public class TelegramHeader {
         decimal = 0
     )
     public int call_depth;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 3,
@@ -212,6 +237,7 @@ public class TelegramHeader {
         decimal = 0
     )
     public int msg_count_no;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 1,
@@ -223,6 +249,7 @@ public class TelegramHeader {
         decimal = 0
     )
     public int ttl_use_flag;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 6,
@@ -230,6 +257,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String ttl_from_time;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 3,
@@ -241,6 +269,7 @@ public class TelegramHeader {
         decimal = 0
     )
     public int ttl;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 1,
@@ -252,6 +281,7 @@ public class TelegramHeader {
         decimal = 0
     )
     public int long_msg_type;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 1,
@@ -263,6 +293,7 @@ public class TelegramHeader {
         decimal = 0
     )
     public int err_flag;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 4,
@@ -270,6 +301,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String err_src;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 3,
@@ -277,6 +309,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String err_type;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 9,
@@ -284,6 +317,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String err_code;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 4,
@@ -291,6 +325,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String dst_inst_code;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 2,
@@ -298,6 +333,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String fail_knd;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 16,
@@ -305,6 +341,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String ap_host_name;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 10,
@@ -312,6 +349,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String ap_caller_id;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 24,
@@ -319,6 +357,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String inf_id;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 2,
@@ -326,6 +365,7 @@ public class TelegramHeader {
         trim = TrimType.RTRIM
     )
     public String lang_type;
+
     @FIELD(
         kind = Kind.HEADER,
         length = 141,

@@ -21,6 +21,7 @@ public class TelegramInData<V> {
         trim = TrimType.RTRIM
     )
     public String dataType;
+
     @FIELD(
         kind = Kind.DATA,
         length = 8,
@@ -32,6 +33,7 @@ public class TelegramInData<V> {
         decimal = 0
     )
     public int length;
+
     @FIELD(
         kind = Kind.DATA,
         length = 21,
@@ -39,6 +41,7 @@ public class TelegramInData<V> {
         trim = TrimType.RTRIM
     )
     public String reserved;
+
     @FIELD(
         kind = Kind.DATA,
         length = 0,
@@ -46,5 +49,5 @@ public class TelegramInData<V> {
         trim = TrimType.NONE
     )
     public V data;
-
+    
 }
