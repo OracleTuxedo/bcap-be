@@ -1,12 +1,12 @@
-package maas.bcap.feature.example.controller;
+package maas.bcap.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
-import maas.bcap.feature.example.dto.DecryptionInDto;
-import maas.bcap.feature.example.dto.ExampleInDto;
-import maas.bcap.feature.example.dto.ExampleOutDto;
-import maas.bcap.feature.example.dto.LoginInDto;
-import maas.bcap.feature.example.dto.LoginOutDto;
-import maas.bcap.feature.example.service.ExampleService;
+import maas.bcap.dto.DecryptionInDto;
+import maas.bcap.dto.ExampleInDto;
+import maas.bcap.dto.ExampleOutDto;
+import maas.bcap.dto.LoginInDto;
+import maas.bcap.dto.LoginOutDto;
+import maas.bcap.service.ExampleService;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -1,4 +1,4 @@
-package maas.bcap.feature.screen.service;
+package maas.bcap.service;
 
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
@@ -21,8 +21,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpServletRequest;
-import maas.bcap.feature.screen.dto.MessageTransferInDto;
-import maas.bcap.feature.screen.dto.MessageTransferOutDto;
+import maas.bcap.dto.MessageTransferInDto;
+import maas.bcap.dto.MessageTransferOutDto;
 import mti.com.telegram.util.WeblogicConnector;
 
 @Service
@@ -106,7 +106,7 @@ public class MessageService {
         /// Perform decryption
         byte[] originalMessage = cipher.doFinal(encryptedMessageBytes);
         log.debug("original message [" + new String(originalMessage, StandardCharsets.UTF_8) + "]");
-        
+
         return new String(originalMessage, StandardCharsets.UTF_8);
     }
 

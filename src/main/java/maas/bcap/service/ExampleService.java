@@ -1,10 +1,10 @@
-package maas.bcap.feature.example.service;
+package maas.bcap.service;
 
 import jakarta.servlet.http.HttpServletRequest;
+import maas.bcap.dto.*;
 import maas.bcap.module.az.az03.saz03v701u.SAZ03V701U;
 import maas.bcap.module.az.az03.saz03v701u.SAZ03V701UInVo;
 import maas.bcap.module.az.az03.saz03v701u.SAZ03V701UOutVo;
-import maas.bcap.feature.example.dto.*;
 import maas.bcap.module.ac.ac02.sac02f452r.SAC02F452R;
 import maas.bcap.module.ac.ac02.sac02f452r.SAC02F452RInVo;
 import maas.bcap.module.ac.ac02.sac02f452r.SAC02F452ROutVo;
@@ -37,7 +37,7 @@ import java.util.Objects;
 public class ExampleService {
 
     private static final Logger log = LogManager.getLogger(ExampleService.class);
-    
+
     @Value("${aes.secret.key}")
     private String secretKey;
 

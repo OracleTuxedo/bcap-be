@@ -1,4 +1,4 @@
-package maas.bcap.feature.screen.dto;
+package maas.bcap.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MessageTransferInDto {
-    private String encryptedMessage;
+public class MessageTransferOutDto {
+    private String encryptedMessages; // String Panjang
 
     private String iv;
-
 }

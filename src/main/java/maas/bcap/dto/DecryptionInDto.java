@@ -1,4 +1,4 @@
-package maas.bcap.feature.example.dto;
+package maas.bcap.dto;
 
 import lombok.*;
 

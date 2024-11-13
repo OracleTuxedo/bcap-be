@@ -1,4 +1,4 @@
-package maas.bcap.feature.screen.controller;
+package maas.bcap.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
-import maas.bcap.feature.screen.dto.MessageTransferInDto;
-import maas.bcap.feature.screen.dto.MessageTransferOutDto;
-import maas.bcap.feature.screen.service.MessageService;
+import maas.bcap.dto.MessageTransferInDto;
+import maas.bcap.dto.MessageTransferOutDto;
+import maas.bcap.service.MessageService;
 
 @RestController
 @RequestMapping("/message")

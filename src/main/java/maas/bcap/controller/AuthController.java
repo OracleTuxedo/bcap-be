@@ -1,4 +1,4 @@
-package maas.bcap.feature.auth.controller;
+package maas.bcap.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
-import maas.bcap.feature.auth.dto.LoginInDto;
-import maas.bcap.feature.auth.service.AuthService;
+import maas.bcap.dto.LoginInDto;
+import maas.bcap.service.AuthService;
 import org.springframework.web.bind.annotation.PostMapping;
 
 

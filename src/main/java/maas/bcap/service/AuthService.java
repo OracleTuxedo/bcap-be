@@ -1,20 +1,18 @@
-package maas.bcap.feature.auth.service;
+package maas.bcap.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpServletRequest;
-import maas.bcap.feature.auth.dto.LoginInDto;
+import maas.bcap.dto.LoginInDto;
 import maas.bcap.module.az.az03.saz03v701u.SAZ03V701U;
 import maas.bcap.module.az.az03.saz03v701u.SAZ03V701UInVo;
 import maas.bcap.module.az.az03.saz03v701u.SAZ03V701UOutVo;
 import mti.com.cipher.SHAEncryption;
 import mti.com.system.CookieManager;
 import mti.com.system.CookieVo;
-import mti.com.telegram.util.InterfaceTelegramTest;
 import mti.com.telegram.vo.TelegramUserDataOutput;
 
 @Service

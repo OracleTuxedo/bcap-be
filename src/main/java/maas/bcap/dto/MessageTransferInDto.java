@@ -1,4 +1,4 @@
-package maas.bcap.feature.auth.dto;
+package maas.bcap.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginInDto {
-    private String user_id;
+public class MessageTransferInDto {
+    private String encryptedMessage;
 
-    private String password;
+    private String iv;
+
 }
