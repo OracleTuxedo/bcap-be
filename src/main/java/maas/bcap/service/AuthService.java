@@ -15,6 +15,8 @@ import mti.com.system.CookieManager;
 import mti.com.system.CookieVo;
 import mti.com.telegram.vo.TelegramUserDataOutput;
 
+import java.util.Objects;
+
 @Service
 public class AuthService {
 
@@ -67,7 +69,7 @@ public class AuthService {
         /// Create Cookie Cookies HttpOnly to Client Browser
         CookieManager.setUserData(request, userSessionVo);
 
-        log.info(CookieManager.getUserData(request).toString());
+        log.info(Objects.requireNonNull(CookieManager.getUserData(request)).toString());
 
         return;
     }
