@@ -55,7 +55,7 @@ public class MessageService {
         log.debug("encrypted message [" + encryptedMessage + "]");
 
         return MessageTransferOutDto.builder()
-                .encryptedMessages(encryptedMessage)
+                .encryptedMessage(encryptedMessage)
                 .iv(iv)
                 .build();
 

@@ -27,6 +27,11 @@ public class ExampleController {
     @Autowired
     private ExampleService exampleService;
 
+    @PostMapping("/message")
+    public String messageTransferWithoutEncryption(HttpServletRequest request, @RequestBody String message) throws Exception {
+        return exampleService.messageTransferWithoutEncryption(request, message);
+    }
+
     @PostMapping("/list-of-edc")
     public ExampleOutDto getListOfEDC(HttpServletRequest request, @RequestBody ExampleInDto inDto) throws Exception {
         return exampleService.getListOfEDC(request, inDto, "ED999");

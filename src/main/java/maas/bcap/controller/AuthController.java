@@ -22,7 +22,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public void login(HttpServletRequest request, LoginInDto inDto) throws Exception {
-        log.debug("LoginInDto [" + inDto.toString() + "]");
+        log.debug("LoginInDto [{}]", inDto.toString());
         authService.login(request, inDto, "TODO");
         return;
     }

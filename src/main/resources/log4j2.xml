@@ -19,11 +19,11 @@
         </RollingFile>
 
         <RollingFile
-            name="DailyScreenFile"
-            fileName="logs/app_screen.log"
-            filePattern="logs/app_screen_%d{yyyy-MM-dd}.log"
+            name="DailyServiceFile"
+            fileName="logs/service.log"
+            filePattern="logs/service_%d{yyyy-MM-dd}.log"
         >
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1}:%L - %msg%n"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1}:%-3L - %msg%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
             </Policies>
@@ -58,13 +58,12 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="maas.bcap.screen" level="info" additivity="false">
-            <AppenderRef ref="RoutingAppender"/>
-<!--            <AppenderRef ref="RoutingPerClass"/>-->
-<!--            <AppenderRef ref="DailyScreenFile"/>-->
+        <Logger name="maas.bcap.service" level="debug" additivity="true">
+<!--            <AppenderRef ref="RoutingAppender"/>-->
+            <AppenderRef ref="DailyServiceFile"/>
         </Logger>
 
-        <Root level="warn">
+        <Root level="info">
             <AppenderRef ref="LogToConsole"/>
             <AppenderRef ref="DailyFile"/>
         </Root>

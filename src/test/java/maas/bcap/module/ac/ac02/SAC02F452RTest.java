@@ -25,7 +25,7 @@ public class SAC02F452RTest {
             .auth_end_date("20240919")
             .build();
         String request = InterfaceTelegramTest.request("SAC02F452R", sac02f452rInVo);
-
+        System.out.println(request);
         assertNotNull(request, "The request should not be null");
         assertFalse(request.isEmpty(), "The request should not be empty");
     }

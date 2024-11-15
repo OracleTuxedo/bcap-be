@@ -14,6 +14,7 @@ import maas.bcap.module.ed.ed03.sed03f107r.SED03F107ROutVo;
 import mti.com.system.CookieManager;
 import mti.com.system.CookieVo;
 import mti.com.telegram.util.InterfaceTelegramTest;
+import mti.com.telegram.util.WeblogicConnector;
 import mti.com.telegram.vo.TelegramUserDataOutput;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -49,6 +50,21 @@ public class ExampleService {
 
     @Autowired
     private SAZ03V701U saz03v701u;
+
+    public String messageTransferWithoutEncryption(HttpServletRequest request, String message){
+//        log.info("original message");
+        log.info("[{}]", message);
+        /// Connect to Telegram Layer
+        byte[] requestToTuxedo = message.getBytes();
+        byte[] responseFromTuxedo = WeblogicConnector.connectTuxedo(requestToTuxedo);
+        String responseMessage = new String(responseFromTuxedo, StandardCharsets.UTF_8);
+//        log.info("request to tuxedo");
+        log.info("[{}]", new String(requestToTuxedo, StandardCharsets.UTF_8));
+//        log.info("response from tuxedo");
+        log.info("[{}]", responseMessage);
+
+        return responseMessage;
+    }
 
     public LoginOutDto login(HttpServletRequest request, LoginInDto inDto, String screenId) throws Exception {
 
