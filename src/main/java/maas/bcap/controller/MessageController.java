@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import maas.bcap.dto.MessageTransferInDto;
 import maas.bcap.dto.MessageTransferOutDto;
 import maas.bcap.service.MessageService;

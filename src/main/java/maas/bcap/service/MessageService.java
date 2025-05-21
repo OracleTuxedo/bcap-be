@@ -20,7 +20,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import maas.bcap.dto.MessageTransferInDto;
 import maas.bcap.dto.MessageTransferOutDto;
 import mti.com.telegram.util.WeblogicConnector;
