@@ -27,7 +27,7 @@ public class CookieManager {
     }
 
     public static void destroyUserData(HttpServletRequest req) {
-        HttpSession Cookie = req.getSession();
-        Cookie.invalidate();
+        HttpSession cookie = req.getSession();
+        cookie.invalidate();
     }
 }

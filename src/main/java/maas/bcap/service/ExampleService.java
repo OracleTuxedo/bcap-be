@@ -1,5 +1,6 @@
 package maas.bcap.service;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import maas.bcap.dto.*;
 import maas.bcap.module.az.az03.saz03v701u.SAZ03V701U;
@@ -26,6 +27,8 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -51,7 +54,7 @@ public class ExampleService {
     @Autowired
     private SAZ03V701U saz03v701u;
 
-    public String messageTransferWithoutEncryption(HttpServletRequest request, String message){
+    public String messageTransferWithoutEncryption(HttpServletRequest request, String message) throws ServletException, IOException, Exception{
 //        log.info("original message");
         log.info("[{}]", message);
         /// Connect to Telegram Layer

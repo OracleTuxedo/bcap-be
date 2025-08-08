@@ -49,7 +49,7 @@ public class ExampleController {
         log.error("error");
         log.fatal("fatal");
 
-        return "Hello World";
+        return "Hello World Me and Billy";
     }
 
     @GetMapping("call-logging")

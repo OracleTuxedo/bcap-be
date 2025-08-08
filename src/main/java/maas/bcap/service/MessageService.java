@@ -1,5 +1,6 @@
 package maas.bcap.service;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -20,6 +21,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import maas.bcap.dto.MessageTransferInDto;
 import maas.bcap.dto.MessageTransferOutDto;
@@ -34,7 +36,7 @@ public class MessageService {
 
     public MessageTransferOutDto messageTransfer(HttpServletRequest request, MessageTransferInDto inDto)
             throws InvalidKeyException, InvalidAlgorithmParameterException, NoSuchAlgorithmException,
-            NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
+            NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, ServletException, IOException, Exception {
 
         /// Get original message after decryption
         String originalMessage = decrypt(inDto.getEncryptedMessage(), inDto.getIv());
