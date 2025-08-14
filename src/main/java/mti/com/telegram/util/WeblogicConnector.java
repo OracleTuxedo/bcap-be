@@ -47,10 +47,11 @@ public class WeblogicConnector {
     }
 
     private static byte[] throughWeblogic(byte[] request) throws ServletException, IOException, Exception {
-
+        log.info("WeblogicConnector.throughWeblogic");
+        log.info("request [{}]", new String(request, StandardCharsets.UTF_8));
         // TODO: Configuration to application.properties
         String baseUrlWeblogic = "http://localhost:7011/bcap";
-        String url = baseUrlWeblogic + "/forward/weblogic";
+        String url = baseUrlWeblogic + "/message/forward/weblogic";
 
         // Set headers to indicate plain text content
         HttpHeaders headers = new HttpHeaders();
@@ -73,6 +74,7 @@ public class WeblogicConnector {
     }
 
     private static byte[] directConnectTuxedo(byte[] var0) throws ServletException, IOException, Exception {
+        log.info("WeblogicConnector.directConnectTuxedo");
         TuxedoConnection var3 = null;
 
         byte[] var20 = new byte[0];
