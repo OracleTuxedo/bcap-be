@@ -2,7 +2,11 @@ package mti.com.telegram.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.http.*;
+import org.springframework.http.MediaType;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
 import weblogic.wtc.gwt.TuxedoConnection;
@@ -35,14 +39,18 @@ public class WeblogicConnector {
     public static byte[] connectTuxedo(byte[] request) throws ServletException, IOException, Exception {
 
         byte[] output = directConnectTuxedo(request);
+
+        /// For Development only
         // byte[] output = throughWeblogic(request);
 
         return (output != null) ? output : new byte[0];
     }
 
     private static byte[] throughWeblogic(byte[] request) throws ServletException, IOException, Exception {
+
         // TODO: Configuration to application.properties
-        String url = "http://localhost:7001/test1/connect";
+        String baseUrlWeblogic = "http://localhost:7011/bcap";
+        String url = baseUrlWeblogic + "/forward/weblogic";
 
         // Set headers to indicate plain text content
         HttpHeaders headers = new HttpHeaders();
@@ -56,7 +64,7 @@ public class WeblogicConnector {
         // Send the request and receive a response
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<byte[]> response = restTemplate.exchange(url, HttpMethod.POST,
-        requestEntity, byte[].class);
+                requestEntity, byte[].class);
 
         // Return the response body
         byte[] output = response.getBody();

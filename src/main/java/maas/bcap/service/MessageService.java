@@ -37,7 +37,7 @@ public class MessageService {
     public MessageTransferOutDto messageTransfer(HttpServletRequest request, MessageTransferInDto inDto)
             throws InvalidKeyException, InvalidAlgorithmParameterException, NoSuchAlgorithmException,
             NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, ServletException, IOException, Exception {
-
+        log.info("MessageService.messageTransfer");
         /// Get original message after decryption
         String originalMessage = decrypt(inDto.getEncryptedMessage(), inDto.getIv());
         log.info("original message [{}]", originalMessage);
@@ -60,7 +60,15 @@ public class MessageService {
                 .encryptedMessage(encryptedMessage)
                 .iv(iv)
                 .build();
+    }
 
+    public byte[] forwardWeblogic(HttpServletRequest request, byte[] requestToTuxedo) throws ServletException, IOException, Exception{
+        log.info("MessageService.forwardWeblogic");
+        byte[] responseFromTuxedo = WeblogicConnector.connectTuxedo(requestToTuxedo);
+        String responseMessage = new String(responseFromTuxedo, StandardCharsets.UTF_8);
+        log.info("request to tuxedo [{}]", new String(requestToTuxedo, StandardCharsets.UTF_8));
+        log.info("response from tuxedo [{}]", responseMessage);
+        return responseFromTuxedo;
     }
 
     private String encrypt(String message, String iv) throws NoSuchAlgorithmException, NoSuchPaddingException,
