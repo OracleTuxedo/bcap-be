@@ -1,2 +1,15 @@
 ###
-GET http://localhost:8080/example/test
+GET http://localhost:8080/
+
+### Login
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "user_id": "333333",
+  "password": "2222222"
+}
+
+### Me (Authorized)
+GET http://localhost:8080/auth/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJpZCI6MSwidXNlcklkIjoiMzMzMzMzIiwicGFzc3dvcmQiOiIyMjIyMjIyIiwibmFtZSI6IkxlIFJ1Y2NvIn0sInN1YiI6IjMzMzMzMyIsImV4cCI6MTc1NTY5MDQ1OX0.n0JAWVnJylR_4_a-gyH0nEIDveLUdEkFRqD4DW5PJvc
