@@ -1,6 +1,6 @@
 package maas.bcap.common;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class WebUtil {
 

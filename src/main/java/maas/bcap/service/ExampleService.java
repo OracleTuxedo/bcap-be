@@ -1,7 +1,7 @@
 package maas.bcap.service;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import maas.bcap.dto.*;
 import maas.bcap.module.az.az03.saz03v701u.SAZ03V701U;
 import maas.bcap.module.az.az03.saz03v701u.SAZ03V701UInVo;
@@ -12,6 +12,7 @@ import maas.bcap.module.ac.ac02.sac02f452r.SAC02F452ROutVo;
 import maas.bcap.module.ed.ed03.sed03f107r.SED03F107R;
 import maas.bcap.module.ed.ed03.sed03f107r.SED03F107RInVo;
 import maas.bcap.module.ed.ed03.sed03f107r.SED03F107ROutVo;
+import mti.com.cipher.SHAEncryption;
 import mti.com.system.CookieManager;
 import mti.com.system.CookieVo;
 import mti.com.telegram.util.InterfaceTelegramTest;
@@ -80,7 +81,7 @@ public class ExampleService {
         }
 
         /// Call SAZ03V701U for notify DevonC about Login Activity
-//        String encryptedPassword = SHAEncryption.encrypt(inDto.getUser_id() + inDto.getPassword());
+       String encryptedPassword = SHAEncryption.encrypt(inDto.getUser_id() + inDto.getPassword());
 //        SAZ03V701UInVo saz03v701uInVo = SAZ03V701UInVo.builder()
 //            .usr_id(inDto.getUser_id())
 //            .usr_paswd(encryptedPassword)

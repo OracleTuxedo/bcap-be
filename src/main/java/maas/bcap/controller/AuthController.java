@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import maas.bcap.dto.LoginInDto;
 import maas.bcap.service.AuthService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +21,7 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public void login(HttpServletRequest request, LoginInDto inDto) throws Exception {
+    public void login(jakarta.servlet.http.HttpServletRequest request, LoginInDto inDto) throws Exception {
         log.debug("LoginInDto [{}]", inDto.toString());
         authService.login(request, inDto, "TODO");
         return;

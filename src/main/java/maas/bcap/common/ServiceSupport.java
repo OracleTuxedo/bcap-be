@@ -1,6 +1,6 @@
 package maas.bcap.common;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import mti.com.system.CookieManager;
 import mti.com.system.CookieVo;
 import mti.com.telegram.util.InterfaceTelegram;

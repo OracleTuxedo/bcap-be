@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import maas.bcap.dto.MessageTransferInDto;
 import maas.bcap.dto.MessageTransferOutDto;
 import maas.bcap.service.MessageService;

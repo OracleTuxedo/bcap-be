@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import maas.bcap.dto.LoginInDto;
 import maas.bcap.module.az.az03.saz03v701u.SAZ03V701U;
 import maas.bcap.module.az.az03.saz03v701u.SAZ03V701UInVo;
