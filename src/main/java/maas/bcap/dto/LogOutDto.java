@@ -1,5 +1,6 @@
 package maas.bcap.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthInfoDto {
+public class LogOutDto {
+
     private String userId;
-    private String password;
+
+    private String screenId;
 }

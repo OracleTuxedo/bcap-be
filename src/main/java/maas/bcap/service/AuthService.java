@@ -1,99 +1,81 @@
 package maas.bcap.service;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpServletRequest;
+import maas.bcap.dto.AuthInfoDto;
+import maas.bcap.dto.LogOutDto;
 import maas.bcap.dto.LoginInDto;
-import maas.bcap.module.az.az03.saz03v701u.SAZ03V701U;
-import maas.bcap.module.az.az03.saz03v701u.SAZ03V701UInVo;
-import maas.bcap.module.az.az03.saz03v701u.SAZ03V701UOutVo;
+import maas.bcap.module.az.az03.saz03f000u.SAZ03F000U;
+import maas.bcap.module.az.az03.saz03f000u.SAZ03F000UInVo;
+import maas.bcap.module.az.az03.saz03f000u.SAZ03F000UOutVo;
+import maas.bcap.security.JwtUtil;
 import mti.com.cipher.SHAEncryption;
-import mti.com.system.CookieManager;
-import mti.com.system.CookieVo;
 import mti.com.telegram.vo.TelegramUserDataOutput;
 
-import java.util.Objects;
+import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Service
 public class AuthService {
-
     private static final Logger log = LogManager.getLogger(AuthService.class);
 
     @Autowired
-    private SAZ03V701U saz03v701u;
+    private SAZ03F000U saz03f000u;
 
-    public void login(HttpServletRequest request, LoginInDto inDto, String screenId) throws Exception {
+    @Autowired
+    JwtUtil jwtUtil;
 
-        /// Get Current Cookie Cookies HttpOnly
-        CookieVo userSessionVo = CookieManager.getUserData(request);
+    public String login(HttpServletRequest request, LoginInDto inDto) throws NoSuchAlgorithmException {
+        final String encryptedPassword = SHAEncryption.encrypt(inDto.getUserId() + inDto.getPassword());
 
-        /// TODO Throw exceptionI
-        if (userSessionVo != null) {
-            log.info(userSessionVo.toString());
-        }
+        /// TODO Only Development Local
+        /// Call SAZ03F000U for notify DevonC about Login Activity
+        // final SAZ03F000UInVo saz03f000uInVo = SAZ03F000UInVo.builder()
+        //         .usr_conn_clcd("I")
+        //         .usr_id(inDto.getUserId())
+        //         .usr_paswd(encryptedPassword)
+        //         .build();
+        // log.info("SAZ03F000UInVo [{}]", saz03f000uInVo.toString());
+        // final TelegramUserDataOutput<SAZ03F000UOutVo> saz03v701uResult = saz03f000u.call(
+        //         request,
+        //         saz03f000uInVo,
+        //         inDto.getScreenId());
+        // final SAZ03F000UOutVo saz03f000uOutVo = saz03v701uResult.getOutput();
+        // log.info("SAZ03F000UOutVo [{}]", saz03f000uOutVo.toString());
 
-        /// Call SAZ03V701U for notify DevonC about Login Activity
-        String encryptedPassword = SHAEncryption.encrypt(inDto.getUser_id() + inDto.getPassword());
-        SAZ03V701UInVo saz03v701uInVo = SAZ03V701UInVo.builder()
-                .usr_id(inDto.getUser_id())
-                .usr_paswd(encryptedPassword)
-                .admin_yn("N")
-                .chnl_clcd("1") // 1:web 2:mobile
-                .req_tp("I") // I:login O:logout
+        /// Generate JWT Token with AuthInfoDto as Payload
+        final AuthInfoDto authInfoDto = AuthInfoDto.builder()
+                .userId(inDto.getUserId())
+                .password(inDto.getPassword())
                 .build();
-        TelegramUserDataOutput<SAZ03V701UOutVo> saz03v701uResult = saz03v701u.call(request, saz03v701uInVo, screenId);
-        SAZ03V701UOutVo saz03v701uOutVo = saz03v701uResult.getOutput();
+        log.info("AuthInfoDto [{}]", authInfoDto.toString());
 
-        /// Mock response from SAZ03V701U
-        // String response = "00001070devaps01202410221334230014256400SAZ03V701U              MTI R                        devaps0120241022133423001425640020241022133423036   UNIT      192.168.1.3                     581CF8933F96            1787130271     020241022133423036   20241022133423725174  0  00        000       IAZAP0000                                                        EN                                                                                                                                             N00000425                     30Login success.                                                                                                                                                                                                                                                                                                                                                                                                  00D00000133                     1787130271     Yosua Sutandar                                    N1787130271                                 10Y@@";
-        // SAZ03V701UOutVo saz03v701uOutVo = SAZ03V701UOutVo.builder().build();
-        // TelegramUserDataOutput<SAZ03V701UOutVo> saz03v701uResult = InterfaceTelegramTest.response(response, saz03v701uOutVo);
-        // saz03v701uOutVo = saz03v701uResult.getOutput();
+        final String token = jwtUtil.generateToken(authInfoDto);
+        log.info("token [{}]", token);
 
-        log.info(saz03v701uOutVo.toString());
-
-        userSessionVo = CookieVo.builder()
-                .sUserId(inDto.getUser_id())
-                .usrIno(saz03v701uOutVo.usr_ino)
-                .sUserNm(saz03v701uOutVo.usr_nm)
-                .usrCtgoCd(saz03v701uOutVo.usr_ctgo_cd)
-                .adm_usr_yn(saz03v701uOutVo.adm_usr_yn)
-                .build();
-
-        /// Destroy Current Cookie Cookies HttpOnly
-        CookieManager.destroyUserData(request);
-
-        /// Create Cookie Cookies HttpOnly to Client Browser
-        CookieManager.setUserData(request, userSessionVo);
-
-        log.info(Objects.requireNonNull(CookieManager.getUserData(request)).toString());
-
-        return;
+        return token;
     }
 
-    public void logout(HttpServletRequest request, String screenId) throws Exception {
-
-        /// Get Current Cookie Cookies HttpOnly
-        CookieVo userSessionVo = CookieManager.getUserData(request);
-
-        /// TODO Throw exception
-        if (userSessionVo == null) return;
-
-        SAZ03V701UInVo saz03v701uInVo = SAZ03V701UInVo.builder()
-                .usr_id(userSessionVo.getSUserId())
-                .admin_yn("N")
-                .chnl_clcd("1") // 1:web 2:mobile
-                .req_tp("O") // I:login O:logout
-                .build();
-
-        saz03v701u.call(request, saz03v701uInVo, screenId);
-
-        CookieManager.destroyUserData(request);
-
+    public void logout(HttpServletRequest request, LogOutDto outDto) {
+        /// TODO Only Development Local
+        /// Call SAZ03F000U for notify DevonC about Logout Activity
+        // final SAZ03F000UInVo saz03f000uInVo = SAZ03F000UInVo.builder()
+        //         .usr_conn_clcd("O")
+        //         .usr_id(outDto.getUserId())
+        //         .build();
+        // log.info("SAZ03F000UInVo [{}]", saz03f000uInVo.toString());
+        // final TelegramUserDataOutput<SAZ03F000UOutVo> saz03v701uResult = saz03f000u.call(
+        //         request,
+        //         saz03f000uInVo,
+        //         outDto.getScreenId());
+        // final Optional<SAZ03F000UOutVo> saz03f000uOutVoOptional = Optional.of(saz03v701uResult.getOutput());
+        // if (saz03f000uOutVoOptional.isPresent())
+        //     log.info("SAZ03F000UOutVo [{}]", saz03f000uOutVoOptional.get().toString());
         return;
     }
-
 }

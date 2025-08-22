@@ -15,6 +15,12 @@ import mti.com.telegram.model.annotation.FIELD;
 @AllArgsConstructor
 public class SAZ03F000UInVo {
 
+    /*
+     * I = MAAS Login
+     * M = MMP User Login
+     * B = Member Bank User Login
+     * O = MAAS Logout
+     */
     @FIELD(kind = Kind.DATA, length = 1, type = FieldType.STRING, trim = TrimType.RTRIM)
     public String usr_conn_clcd;
 

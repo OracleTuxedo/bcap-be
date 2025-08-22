@@ -81,7 +81,7 @@ public class ExampleService {
         }
 
         /// Call SAZ03V701U for notify DevonC about Login Activity
-       String encryptedPassword = SHAEncryption.encrypt(inDto.getUser_id() + inDto.getPassword());
+    //    String encryptedPassword = SHAEncryption.encrypt(inDto.getUser_id() + inDto.getPassword());
 //        SAZ03V701UInVo saz03v701uInVo = SAZ03V701UInVo.builder()
 //            .usr_id(inDto.getUser_id())
 //            .usr_paswd(encryptedPassword)
@@ -101,13 +101,13 @@ public class ExampleService {
 
         CookieManager.destroyUserData(request);
 
-        userVo = CookieVo.builder()
-                .sUserId(inDto.getUser_id())
-                .usrIno(saz03v701uOutVo.usr_ino)
-                .sUserNm(saz03v701uOutVo.usr_nm)
-                .usrCtgoCd(saz03v701uOutVo.usr_ctgo_cd)
-                .adm_usr_yn(saz03v701uOutVo.adm_usr_yn)
-                .build();
+        // userVo = CookieVo.builder()
+        //         .sUserId(inDto.getUser_id())
+        //         .usrIno(saz03v701uOutVo.usr_ino)
+        //         .sUserNm(saz03v701uOutVo.usr_nm)
+        //         .usrCtgoCd(saz03v701uOutVo.usr_ctgo_cd)
+        //         .adm_usr_yn(saz03v701uOutVo.adm_usr_yn)
+        //         .build();
 
         CookieManager.setUserData(request, userVo);
 

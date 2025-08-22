@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
 import maas.bcap.dto.AuthInfoDto;
+import maas.bcap.dto.LogOutDto;
 import maas.bcap.dto.LoginInDto;
 import maas.bcap.security.JwtUtil;
 import maas.bcap.service.AuthService;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/auth")
@@ -29,21 +29,12 @@ public class AuthController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/login")
-    public void login(
+    public String login(
             jakarta.servlet.http.HttpServletRequest request,
             @RequestBody LoginInDto inDto) throws Exception {
         log.info("LoginInDto [{}]", inDto.toString());
-        final AuthInfoDto authInfoDto = AuthInfoDto.builder()
-                .id(1L)
-                .userId(inDto.getUser_id())
-                .password(inDto.getPassword())
-                .name("Le Rucco")
-                .build();
 
-        String token = jwtUtil.generateToken(authInfoDto);
-        log.info("Token [{}]", token);
-        // authService.login(request, inDto, "TODO");
-        return;
+        return authService.login(request, inDto);
     }
 
     @GetMapping("/me")
@@ -55,9 +46,10 @@ public class AuthController {
         return authInfoDto;
     }
 
-    @PostMapping("logout")
-    public void logout(HttpServletRequest request) throws Exception {
-        authService.logout(request, "TODO");
-        return;
+    @PostMapping("/logout")
+    public void logout(
+            HttpServletRequest request,
+            @RequestBody LogOutDto outDto) throws Exception {
+        authService.logout(request, outDto);
     }
 }

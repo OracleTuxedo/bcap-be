@@ -9,7 +9,9 @@ import mti.com.telegram.vo.TelegramUserDataOutput;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class SAZ03F000U implements BaseModuleInterface<SAZ03F000UOutVo, SAZ03F000UInVo> {
     private static final Logger log = LogManager.getLogger(SAZ03F000U.class);
 

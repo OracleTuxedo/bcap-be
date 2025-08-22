@@ -6,10 +6,22 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "user_id": "333333",
-  "password": "2222222"
+    "userId": "1787130271",
+    "password": "@Yokkemti",
+    "screenId": "LOGIN"
+}
+
+### Logout
+POST http://localhost:8080/auth/logout
+Content-Type: application/json
+
+{
+    "userId": "1787130271",
+    "screenId": "LOGOUT"
 }
 
 ### Me (Authorized)
 GET http://localhost:8080/auth/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJpZCI6MSwidXNlcklkIjoiMzMzMzMzIiwicGFzc3dvcmQiOiIyMjIyMjIyIiwibmFtZSI6IkxlIFJ1Y2NvIn0sInN1YiI6IjMzMzMzMyIsImV4cCI6MTc1NTY5MDQ1OX0.n0JAWVnJylR_4_a-gyH0nEIDveLUdEkFRqD4DW5PJvc
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwicGFzc3dvcmQiOiJAWW9ra2VtdGkifSwic3ViIjoiMTc4NzEzMDI3MSIsImV4cCI6MTc1NTg0NTk5Mn0.nNHjSoMWm7jn_dm0YgoKv_vhWz8tD36tOv_XzzX-Q1o
+
+
