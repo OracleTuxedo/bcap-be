@@ -38,10 +38,10 @@ public class WeblogicConnector {
     /// TODO Add exception related to WebClient connection
     public static byte[] connectTuxedo(byte[] request) throws ServletException, IOException, Exception {
 
-        // byte[] output = directConnectTuxedo(request);
+        byte[] output = directConnectTuxedo(request);
 
         /// For Development only
-        byte[] output = throughWeblogic(request);
+        // byte[] output = throughWeblogic(request);
 
         return (output != null) ? output : new byte[0];
     }
