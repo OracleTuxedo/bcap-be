@@ -1,5 +1,5 @@
 package maas.bcap.module.au.au01.sau01f730r;
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import maas.bcap.common.ServiceSupport;
 
 import mti.com.telegram.exception.TelegramNestedRuntimeException;

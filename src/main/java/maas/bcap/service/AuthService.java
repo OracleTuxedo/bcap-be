@@ -3,7 +3,7 @@ package maas.bcap.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import maas.bcap.dto.AuthInfoDto;
 import maas.bcap.dto.LogOutDto;
 import maas.bcap.dto.LoginInDto;

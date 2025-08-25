@@ -24,7 +24,7 @@ import java.util.List;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import jakarta.servlet.ServletException;
+import javax.servlet.ServletException;
 import javax.transaction.TransactionManager;
 import javax.transaction.RollbackException;
 

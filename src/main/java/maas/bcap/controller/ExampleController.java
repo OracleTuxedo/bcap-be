@@ -1,6 +1,6 @@
 package maas.bcap.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import maas.bcap.dto.DecryptionInDto;
 import maas.bcap.dto.ExampleInDto;
 import maas.bcap.dto.ExampleOutDto;

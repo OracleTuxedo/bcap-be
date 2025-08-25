@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import maas.bcap.dto.AuthInfoDto;
 import maas.bcap.dto.LogOutDto;
 import maas.bcap.dto.LoginInDto;
@@ -30,7 +30,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public String login(
-            jakarta.servlet.http.HttpServletRequest request,
+            javax.servlet.http.HttpServletRequest request,
             @RequestBody LoginInDto inDto) throws Exception {
         log.info("LoginInDto [{}]", inDto.toString());
 

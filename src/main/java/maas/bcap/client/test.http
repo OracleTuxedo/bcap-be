@@ -22,6 +22,6 @@ Content-Type: application/json
 
 ### Me (Authorized)
 GET http://localhost:8080/auth/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwicGFzc3dvcmQiOiJAWW9ra2VtdGkifSwic3ViIjoiMTc4NzEzMDI3MSIsImV4cCI6MTc1NTg0NTk5Mn0.nNHjSoMWm7jn_dm0YgoKv_vhWz8tD36tOv_XzzX-Q1o
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwicGFzc3dvcmQiOiJAWW9ra2VtdGkifSwic3ViIjoiMTc4NzEzMDI3MSIsImV4cCI6MTc1NjE4NTAxNn0.nuXEOCsrIsceRbigj491L4rjHYwDBAkgUDwABjff0Ig
 
 
