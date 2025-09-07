@@ -1,13 +1,23 @@
 ###
 GET http://localhost:8080/
 
-### Login
+### Login v1
 POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
     "userId": "1787130271",
     "password": "@Yokkemti",
+    "screenId": "LOGIN"
+}
+
+### Login v2
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+    "userId": "1787130271",
+    "encryptionPassword": "7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A",
     "screenId": "LOGIN"
 }
 
@@ -22,6 +32,13 @@ Content-Type: application/json
 
 ### Me (Authorized)
 GET http://localhost:8080/auth/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwicGFzc3dvcmQiOiJAWW9ra2VtdGkifSwic3ViIjoiMTc4NzEzMDI3MSIsImV4cCI6MTc1NjE4NTAxNn0.nuXEOCsrIsceRbigj491L4rjHYwDBAkgUDwABjff0Ig
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwicGFzc3dvcmQiOiJAWW9ra2VtdGkifSwic3ViIjoiMTc4NzEzMDI3MSIsImV4cCI6MTc1NjgwMzAyMX0.3ELpFekGM93uLOXIqaVgDOzPTddRAnYcAqRCLQn9ybw
 
+### Message (call DeonC)
+POST http://localhost:8080/message
+Authorization: Bearer aaa
 
+{
+    "encryptedMessage": "aaa",
+    "iv": "bbbb"
+}

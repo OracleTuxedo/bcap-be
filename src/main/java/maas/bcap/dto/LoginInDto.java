@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class LoginInDto {
     private String userId;
 
-    private String password;
+    private String encryptionPassword;
 
     private String screenId;
 }

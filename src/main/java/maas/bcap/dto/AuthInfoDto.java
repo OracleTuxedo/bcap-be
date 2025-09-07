@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AuthInfoDto {
     private String userId;
-    private String password;
+
+    private String encryptionPassword;
 }

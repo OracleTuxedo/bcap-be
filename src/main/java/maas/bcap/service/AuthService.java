@@ -31,14 +31,15 @@ public class AuthService {
     JwtUtil jwtUtil;
 
     public String login(HttpServletRequest request, LoginInDto inDto) throws NoSuchAlgorithmException {
-        final String encryptedPassword = SHAEncryption.encrypt(inDto.getUserId() + inDto.getPassword());
+        /// Password encryption is FE Responsbility
+        // final String encryptedPassword = SHAEncryption.encrypt(inDto.getUserId() + inDto.getPassword());
 
         /// TODO Only Development Local
         /// Call SAZ03F000U for notify DevonC about Login Activity
         // final SAZ03F000UInVo saz03f000uInVo = SAZ03F000UInVo.builder()
         //         .usr_conn_clcd("I")
         //         .usr_id(inDto.getUserId())
-        //         .usr_paswd(encryptedPassword)
+        //         .usr_paswd(inDto.getEncryptionPassword())
         //         .build();
         // log.info("SAZ03F000UInVo [{}]", saz03f000uInVo.toString());
         // final TelegramUserDataOutput<SAZ03F000UOutVo> saz03v701uResult = saz03f000u.call(
@@ -51,7 +52,7 @@ public class AuthService {
         /// Generate JWT Token with AuthInfoDto as Payload
         final AuthInfoDto authInfoDto = AuthInfoDto.builder()
                 .userId(inDto.getUserId())
-                .password(inDto.getPassword())
+                .encryptionPassword(inDto.getEncryptionPassword())
                 .build();
         log.info("AuthInfoDto [{}]", authInfoDto.toString());
 
