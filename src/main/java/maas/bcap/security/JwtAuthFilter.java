@@ -30,43 +30,43 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain)
             throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
 
-        String token = null;
-        AuthInfoDto authInfoDto = null;
-        try {
-            if (authHeader != null && authHeader.startsWith("Bearer ")) {
-                token = authHeader.substring(7);
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            String token = authHeader.substring(7);
+
+            try {
                 if (jwtUtil.validateToken(token)) {
+                    // ✅ Extract DTO first
+                    AuthInfoDto authInfoDto = jwtUtil.extractAuthInfo(token);
+
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                            authInfoDto,
+                            authInfoDto, // now not null
                             null,
                             null);
-                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+                    authentication.setDetails(
+                            new WebAuthenticationDetailsSource().buildDetails(request));
+
                     SecurityContextHolder.getContext().setAuthentication(authentication);
-                    authInfoDto = jwtUtil.extractAuthInfo(token);
                 }
+            } catch (ExpiredJwtException e) {
+                throw new JwtAuthenticationException("JWT token expired", e);
+            } catch (UnsupportedJwtException e) {
+                throw new JwtAuthenticationException("Unsupported JWT token", e);
+            } catch (MalformedJwtException e) {
+                throw new JwtAuthenticationException("Malformed JWT token", e);
+            } catch (JwtException e) {
+                throw new JwtAuthenticationException("Invalid JWT token", e);
             }
-        } catch (ExpiredJwtException e) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("JWT token expired");
-            return;
-        } catch (UnsupportedJwtException e) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Unsupported JWT token");
-            return;
-        } catch (MalformedJwtException e) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Malformed JWT token");
-            return;
-        } catch (JwtException e) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Invalid JWT token");
-            return;
         }
 
+        // only reach here if no exception was thrown
         filterChain.doFilter(request, response);
     }
 }
