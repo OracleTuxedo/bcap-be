@@ -31,6 +31,7 @@ class SMC02F042RTest {
             .sub1_vo(sub1Vo)
             .build();
         String request = InterfaceTelegramTest.request("SMC02F042R", inVo);
+        System.out.println(request);
         assertNotNull(request, "The request should not be null");
         assertFalse(request.isEmpty(), "The request should not be empty");
     }

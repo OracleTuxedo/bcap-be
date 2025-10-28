@@ -99,7 +99,7 @@ public class SHAEncryption {
 //public class SHAEncryption {
 //    public static String encrypt(String param) throws EgovBizException{
 //        if ( StringUtils.isEmpty(param)) {
-//            /// TODO add exception
+//            /// add exception
 //        }
 //        String rtnVal ;
 //        ShaPasswordEncoder encoder = new ShaPasswordEncoder(256);

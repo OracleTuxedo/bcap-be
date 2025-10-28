@@ -1,17 +1,7 @@
 ###
 GET http://localhost:8080/
 
-### Login v1
-POST http://localhost:8080/auth/login
-Content-Type: application/json
-
-{
-    "userId": "1787130271",
-    "password": "@Yokkemti",
-    "screenId": "LOGIN"
-}
-
-### Login v2
+### Login
 POST http://localhost:8080/auth/login
 Content-Type: application/json
 
@@ -31,8 +21,8 @@ Content-Type: application/json
 }
 
 ### Me (Authorized)
-GET http://localhost:8080/auth/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwicGFzc3dvcmQiOiJAWW9ra2VtdGkifSwic3ViIjoiMTc4NzEzMDI3MSIsImV4cCI6MTc1NjgwMzAyMX0.3ELpFekGM93uLOXIqaVgDOzPTddRAnYcAqRCLQn9ybw
+GET http://localhost:8080/auth/me4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwiZW5jcnlwdGlvblBhc3N3b3JkIjoiN0RCM0M4QUU1MDE1NzI2RkIxQjAxMjBEQ0E5QzZDNzQ1MjI3OTIxOTU1M0RDRjQ4MThDNERGODg1MTY0NDYzQSJ9LCJzdWIiOiIxNzg3MTMwMjcxIiwiZXhwIjoxNzYxNzIzNjQ0fQ.r0XWs2s8Gox1jviTNLYIsK_7UgEFvL7iO7RragGSQc0
 
 ### Message (call DeonC)
 POST http://localhost:8080/message

@@ -38,10 +38,10 @@ public class WeblogicConnector {
     /// TODO Add exception related to WebClient connection
     public static byte[] connectTuxedo(byte[] request) throws ServletException, IOException, Exception {
 
-        byte[] output = directConnectTuxedo(request);
+        // byte[] output = directConnectTuxedo(request);
 
         /// For Development only
-        // byte[] output = throughWeblogic(request);
+        byte[] output = throughWeblogic(request);
 
         return (output != null) ? output : new byte[0];
     }
@@ -50,7 +50,8 @@ public class WeblogicConnector {
         log.info("WeblogicConnector.throughWeblogic");
         log.info("request [{}]", new String(request, StandardCharsets.UTF_8));
         // TODO: Configuration to application.properties
-        String baseUrlWeblogic = "http://localhost:7011/bcap";
+        // String baseUrlWeblogic = "http://localhost:7011/bcap";
+        String baseUrlWeblogic = "https://0967c38ee258.ngrok-free.app/bcap";
         String url = baseUrlWeblogic + "/message/forward/weblogic";
 
         // Set headers to indicate plain text content

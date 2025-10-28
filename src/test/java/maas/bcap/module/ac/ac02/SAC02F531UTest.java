@@ -29,7 +29,7 @@ public class SAC02F531UTest {
             .data_stat_cd("I")
             .build();
         String request = InterfaceTelegramTest.request("SAC02F531U", sac02f531uInVo);
-
+        System.out.println(request);
         assertNotNull(request, "The request should not be null");
         assertFalse(request.isEmpty(), "The request should not be empty");
     }
@@ -40,7 +40,7 @@ public class SAC02F531UTest {
         String response = "00000959devaps01202410181645490014242700SAC02F531U              MTI R                        devaps0120241018164549001424270020241018164547187   UNIT      192.168.137.1                   8E96E6A577A5                           020241018164547187   20241018164549163762  0  00        000                                                                        EN                                                                                                                                             N00000425                     30                                                                                                                                                                                                                                                                                                                                                                                                                00D00000022                      @@";
         SAC02F531UOutVo outVo = SAC02F531UOutVo.builder().build();
         TelegramUserDataOutput<SAC02F531UOutVo> output = InterfaceTelegramTest.response(response, outVo);
-
+        System.out.println(output);
         assertNotNull(output, "The request should not be null");
         assertInstanceOf(SAC02F531UOutVo.class, output.getOutput(), "Expected an instance of SAC02F531UOutVo");
     }

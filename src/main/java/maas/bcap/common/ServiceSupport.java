@@ -69,6 +69,7 @@ public class ServiceSupport {
 
     public String getLocaleCd(HttpServletRequest request) {
         String lang = "EN";
+        /// TODO Cari informasi ttg WebUtils ini. Apakah languange ini diambil secara otomatis dari Header HTTP ?
         Locale locale = (Locale) WebUtils.getSessionAttribute(request,
             SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME);
         if (locale != null) {

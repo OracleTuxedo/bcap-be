@@ -12,14 +12,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import maas.bcap.dto.AuthInfoDto;
+import maas.bcap.dto.FileUploadInDto;
+import maas.bcap.security.CurrentAuthInfoDto;
 import maas.bcap.service.FileManagerService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @RestController
 @RequestMapping("file-manager")
@@ -31,16 +35,24 @@ public class FileManagerController {
     private FileManagerService fileManagerService;
 
     @PostMapping("/upload")
-    public String upload(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void upload(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            @CurrentAuthInfoDto AuthInfoDto authInfoDto,
+            @ModelAttribute FileUploadInDto inDto,
+            @RequestPart("files") List<MultipartFile> files) throws Exception {
 
-        fileManagerService.upload(request, response);
-        return "entity";
+        log.info("authInfoDto : {}", authInfoDto);
+        log.info("inDto : {}", inDto);
+        log.info("Files : {}", files);
+        // AuthInfoDto authInfoDto =
+        // AuthInfoDto.builder().userId("1787130271").encryptionPassword("aaaaa").build();
+        fileManagerService.upload(request, authInfoDto, inDto, files);
     }
 
     @GetMapping("/download")
     public void download(HttpServletRequest request, HttpServletResponse response) {
         return;
     }
-
 
 }

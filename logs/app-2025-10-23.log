@@ -1,0 +1,741 @@
+2025-10-23 20:45:43 [main] INFO  BcapApplication:55 - Starting BcapApplication using Java 21.0.6 on LeRuccoLOQ with PID 16276 (C:\bcap\bcap-be\target\classes started by drucc in C:\bcap\bcap-be)
+2025-10-23 20:45:43 [main] INFO  BcapApplication:632 - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 20:45:45 [main] INFO  TomcatWebServer:108 - Tomcat initialized with port(s): 8080 (http)
+2025-10-23 20:45:45 [main] INFO  Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-10-23 20:45:45 [main] INFO  StandardService:173 - Starting service [Tomcat]
+2025-10-23 20:45:45 [main] INFO  StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-10-23 20:45:45 [main] INFO  [/]:173 - Initializing Spring embedded WebApplicationContext
+2025-10-23 20:45:45 [main] INFO  ServletWebServerApplicationContext:292 - Root WebApplicationContext: initialization completed in 1721 ms
+2025-10-23 20:45:46 [main] WARN  UserDetailsServiceAutoConfiguration:89 - 
+
+Using generated security password: f245a619-eb02-47f1-8e88-2362232b9734
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-23 20:45:46 [main] INFO  DefaultSecurityFilterChain:55 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@260e3837, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@88b76f2, org.springframework.security.web.context.SecurityContextPersistenceFilter@7459a21e, org.springframework.security.web.header.HeaderWriterFilter@50b46e24, org.springframework.web.filter.CorsFilter@1b4872bc, org.springframework.security.web.authentication.logout.LogoutFilter@66ec4409, maas.bcap.security.JwtAuthFilter@252744a1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@d54d0f5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@58eac00e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@498a612d, org.springframework.security.web.session.SessionManagementFilter@4d98e41b, org.springframework.security.web.access.ExceptionTranslationFilter@4e80a001, org.springframework.security.web.access.intercept.AuthorizationFilter@2c604965]
+2025-10-23 20:45:46 [main] INFO  EndpointLinksResolver:58 - Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-10-23 20:45:46 [main] INFO  Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2025-10-23 20:45:46 [main] INFO  TomcatWebServer:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2025-10-23 20:45:46 [main] INFO  BcapApplication:61 - Started BcapApplication in 3.342 seconds (JVM running for 4.154)
+2025-10-23 20:45:46 [main] INFO  BcapApplication:18 - Start Application
+2025-10-23 20:45:49 [http-nio-8080-exec-2] INFO  [/]:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-23 20:45:49 [http-nio-8080-exec-2] INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcherServlet'
+2025-10-23 20:45:49 [http-nio-8080-exec-2] INFO  DispatcherServlet:547 - Completed initialization in 1 ms
+2025-10-23 20:45:49 [http-nio-8080-exec-2] INFO  BcapController:19 - info
+2025-10-23 20:45:49 [http-nio-8080-exec-2] WARN  BcapController:20 - warn
+2025-10-23 20:45:49 [http-nio-8080-exec-2] ERROR BcapController:21 - error
+2025-10-23 20:45:49 [http-nio-8080-exec-2] FATAL BcapController:22 - fatal
+2025-10-23 20:52:18 [http-nio-8080-exec-6] INFO  FileManagerController:45 - inDto : FileUploadInDto(fileDiv=div1, fileDesc=desc1, extraPath=null, attachFileId=1111, attachFileSeqNo=null, screenId=FileUpload)
+2025-10-23 20:52:18 [http-nio-8080-exec-6] INFO  FileManagerController:46 - Files : [org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@54be9953]
+2025-10-23 20:52:18 [http-nio-8080-exec-6] INFO  FileUploadService:48 - FileUploadService.upload
+2025-10-23 20:52:18 [http-nio-8080-exec-6] INFO  FileUploadService:52 - Content-Type multipart/form-data; boundary=----WebKitFormBoundaryV4ikKASOE8KJ16hA
+2025-10-23 20:52:18 [http-nio-8080-exec-6] INFO  FileUploadService:69 - UserInfoFileManagerDto(screenId=FileUpload, userIp=0:0:0:0:0:0:0:1)
+2025-10-23 20:52:18 [http-nio-8080-exec-6] INFO  FileUploadService:87 - FileManagerService.registerNewFiles
+2025-10-23 20:52:18 [http-nio-8080-exec-6] INFO  FileUploadService:211 - FileUploadService.checkFileExtension
+2025-10-23 20:52:18 [http-nio-8080-exec-6] INFO  FileUploadService:213 - originFileName : [fluuter.jpeg.jpg]
+2025-10-23 20:52:18 [http-nio-8080-exec-6] INFO  FileUploadService:215 - jpg
+2025-10-23 20:52:18 [http-nio-8080-exec-6] ERROR [dispatcherServlet]:175 - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException: Cannot invoke "maas.bcap.dto.AuthInfoDto.getUserId()" because "authInfoDto" is null] with root cause
+java.lang.NullPointerException: Cannot invoke "maas.bcap.dto.AuthInfoDto.getUserId()" because "authInfoDto" is null
+	at maas.bcap.service.FileUploadService.registerNewFiles(FileUploadService.java:122) ~[classes/:?]
+	at maas.bcap.service.FileUploadService.upload(FileUploadService.java:77) ~[classes/:?]
+	at maas.bcap.controller.FileManagerController.upload(FileManagerController.java:47) ~[classes/:?]
+	at jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555) ~[tomcat-embed-core-9.0.83.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623) ~[tomcat-embed-core-9.0.83.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:111) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:337) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:96) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at maas.bcap.security.JwtAuthFilter.doFilterInternal(JwtAuthFilter.java:70) ~[classes/:?]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96) ~[spring-boot-actuator-2.7.18.jar:2.7.18]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1794) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at java.lang.Thread.run(Thread.java:1583) ~[?:?]
+2025-10-23 20:56:53 [main] INFO  BcapApplication:55 - Starting BcapApplication using Java 21.0.6 on LeRuccoLOQ with PID 28448 (C:\bcap\bcap-be\target\classes started by drucc in C:\bcap\bcap-be)
+2025-10-23 20:56:53 [main] INFO  BcapApplication:632 - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 20:56:54 [main] INFO  TomcatWebServer:108 - Tomcat initialized with port(s): 8080 (http)
+2025-10-23 20:56:54 [main] INFO  Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-10-23 20:56:54 [main] INFO  StandardService:173 - Starting service [Tomcat]
+2025-10-23 20:56:54 [main] INFO  StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-10-23 20:56:54 [main] INFO  [/]:173 - Initializing Spring embedded WebApplicationContext
+2025-10-23 20:56:54 [main] INFO  ServletWebServerApplicationContext:292 - Root WebApplicationContext: initialization completed in 1015 ms
+2025-10-23 20:56:54 [main] WARN  UserDetailsServiceAutoConfiguration:89 - 
+
+Using generated security password: 12ea41b7-06c7-4751-8eae-28496b0b73ff
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-23 20:56:54 [main] INFO  DefaultSecurityFilterChain:55 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@88b76f2, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1b4872bc, org.springframework.security.web.context.SecurityContextPersistenceFilter@7eeb38b2, org.springframework.security.web.header.HeaderWriterFilter@1c30cb85, org.springframework.web.filter.CorsFilter@498a612d, org.springframework.security.web.authentication.logout.LogoutFilter@2506e949, maas.bcap.security.JwtAuthFilter@252744a1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6d6bff89, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6acffb2d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1e1237ab, org.springframework.security.web.session.SessionManagementFilter@5ed5b321, org.springframework.security.web.access.ExceptionTranslationFilter@624b523, org.springframework.security.web.access.intercept.AuthorizationFilter@57f8951a]
+2025-10-23 20:56:54 [main] INFO  EndpointLinksResolver:58 - Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-10-23 20:56:54 [main] INFO  Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2025-10-23 20:56:54 [main] INFO  TomcatWebServer:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2025-10-23 20:56:54 [main] INFO  BcapApplication:61 - Started BcapApplication in 2.036 seconds (JVM running for 2.485)
+2025-10-23 20:56:54 [main] INFO  BcapApplication:18 - Start Application
+2025-10-23 20:57:09 [http-nio-8080-exec-1] INFO  [/]:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-23 20:57:09 [http-nio-8080-exec-1] INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcherServlet'
+2025-10-23 20:57:09 [http-nio-8080-exec-1] INFO  DispatcherServlet:547 - Completed initialization in 1 ms
+2025-10-23 20:57:09 [http-nio-8080-exec-3] INFO  FileManagerController:45 - inDto : FileUploadInDto(fileDiv=div1, fileDesc=desc1, extraPath=null, attachFileId=1111, attachFileSeqNo=null, screenId=FileUpload)
+2025-10-23 20:57:09 [http-nio-8080-exec-3] INFO  FileManagerController:46 - Files : [org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@1bff46bf]
+2025-10-23 20:57:09 [http-nio-8080-exec-3] INFO  FileUploadService:48 - FileUploadService.upload
+2025-10-23 20:57:09 [http-nio-8080-exec-3] INFO  FileUploadService:52 - Content-Type multipart/form-data; boundary=----WebKitFormBoundarytsAE52Kp4DowsXSL
+2025-10-23 20:57:09 [http-nio-8080-exec-3] INFO  FileUploadService:69 - UserInfoFileManagerDto(screenId=FileUpload, userIp=0:0:0:0:0:0:0:1)
+2025-10-23 20:57:09 [http-nio-8080-exec-3] INFO  FileUploadService:87 - FileManagerService.registerNewFiles
+2025-10-23 20:57:09 [http-nio-8080-exec-3] INFO  FileUploadService:211 - FileUploadService.checkFileExtension
+2025-10-23 20:57:09 [http-nio-8080-exec-3] INFO  FileUploadService:213 - originFileName : [fluuter.jpeg.jpg]
+2025-10-23 20:57:09 [http-nio-8080-exec-3] INFO  FileUploadService:215 - jpg
+2025-10-23 20:57:09 [http-nio-8080-exec-3] INFO  FileUploadService:145 - FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=null, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=fluuter.jpeg.jpg, upl_file_size=170146, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-23 20:59:44 [main] INFO  BcapApplication:55 - Starting BcapApplication using Java 21.0.6 on LeRuccoLOQ with PID 4092 (C:\bcap\bcap-be\target\classes started by drucc in C:\bcap\bcap-be)
+2025-10-23 20:59:44 [main] INFO  BcapApplication:632 - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 20:59:45 [main] INFO  TomcatWebServer:108 - Tomcat initialized with port(s): 8080 (http)
+2025-10-23 20:59:45 [main] INFO  Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-10-23 20:59:45 [main] INFO  StandardService:173 - Starting service [Tomcat]
+2025-10-23 20:59:45 [main] INFO  StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-10-23 20:59:45 [main] INFO  [/]:173 - Initializing Spring embedded WebApplicationContext
+2025-10-23 20:59:45 [main] INFO  ServletWebServerApplicationContext:292 - Root WebApplicationContext: initialization completed in 1006 ms
+2025-10-23 20:59:45 [main] WARN  UserDetailsServiceAutoConfiguration:89 - 
+
+Using generated security password: d1ec6249-9dae-4bd5-8d86-e79dca0c7fe7
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-23 20:59:45 [main] INFO  DefaultSecurityFilterChain:55 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1d3c112a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2a140ce5, org.springframework.security.web.context.SecurityContextPersistenceFilter@1d15c0a1, org.springframework.security.web.header.HeaderWriterFilter@14d25b6e, org.springframework.web.filter.CorsFilter@1f71194d, org.springframework.security.web.authentication.logout.LogoutFilter@415d88de, maas.bcap.security.JwtAuthFilter@5489b1f7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4fba8eec, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@73ca34e7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@db99785, org.springframework.security.web.session.SessionManagementFilter@577bf0aa, org.springframework.security.web.access.ExceptionTranslationFilter@49cd946c, org.springframework.security.web.access.intercept.AuthorizationFilter@11d4d979]
+2025-10-23 20:59:46 [main] INFO  EndpointLinksResolver:58 - Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-10-23 20:59:46 [main] INFO  Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2025-10-23 20:59:46 [main] INFO  TomcatWebServer:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2025-10-23 20:59:46 [main] INFO  BcapApplication:61 - Started BcapApplication in 1.947 seconds (JVM running for 2.388)
+2025-10-23 20:59:46 [main] INFO  BcapApplication:18 - Start Application
+2025-10-23 21:00:07 [http-nio-8080-exec-1] INFO  [/]:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-23 21:00:07 [http-nio-8080-exec-1] INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcherServlet'
+2025-10-23 21:00:07 [http-nio-8080-exec-1] INFO  DispatcherServlet:547 - Completed initialization in 1 ms
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  FileManagerController:45 - inDto : FileUploadInDto(fileDiv=div1, fileDesc=desc1, extraPath=null, attachFileId=1111, attachFileSeqNo=null, screenId=FileUpload)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  FileManagerController:46 - Files : [org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@578f389e]
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  FileUploadService:48 - FileUploadService.upload
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  FileUploadService:52 - Content-Type multipart/form-data; boundary=----WebKitFormBoundaryuUjmHxFN9Bpqd9B5
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  FileUploadService:69 - UserInfoFileManagerDto(screenId=FileUpload, userIp=0:0:0:0:0:0:0:1)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  FileUploadService:87 - FileManagerService.registerNewFiles
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  FileUploadService:210 - FileUploadService.checkFileExtension
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  FileUploadService:212 - originFileName : [fluuter.jpeg.jpg]
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  FileUploadService:214 - jpg
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  FileUploadService:145 - FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=null, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=fluuter.jpeg.jpg, upl_file_size=170146, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  FileManagerService:28 - FileManagerService.saveFilesToDevonC
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  FileManagerService:32 - FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=U1, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=fluuter.jpeg.jpg, upl_file_size=170146, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  FileManagerService:60 - FileManagerService.interfaceTuxedo
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  FileManagerService:75 - TelegramUserDataInput(tx_code=SAZ06F010U, client_ip_no=0:0:0:0:0:0:0:1, client_mac=, scrn_id=FileUpload, op_id=1787130271, sync_type=A, async_rspn_yn=0, rspn_svc_code=, ttl_use_flag=0, ttl=0, long_msg_type=1, dst_inst_code=null, fail_knd=null, ap_host_name=null, ap_caller_id=null, lang_type=EN)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  InterfaceTelegram:18 - #################### Interface Tuxedo ####################
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  InterfaceTelegram:19 - FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=U1, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=fluuter.jpeg.jpg, upl_file_size=170146, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  InterfaceTelegram:20 - FileOutVo(rson_cd=null, attach_file_id=null, attach_file_clcd=null, attach_file_expl=null, upd_yn=null, req_clcd=null, sub1Vos=null)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  InterfaceTelegram:23 - ByteEncoder
+2025-10-23 21:00:23 [http-nio-8080-exec-4] INFO  InterfaceTelegram:25 - TelegramIn(header=TelegramHeader(msg_len=803, gid_sysname=LeRuccoLOQ, gid_yyyyymmdd=20251023, gid_hhmmss=210023, gid_seq=002, gid_pid=00000, gid_stat=00, tx_code=SAZ06F010U, inst_no=MTI, send_rspn_type=S, rspn_svc_code=, ori_global_id=LeRuccoL202510232100230020000000, ori_send_time=20251023210023000837, chnl_id=WEB, client_ip_no=0:0:0:0:0:0:0:1, client_mac=, scrn_id=FileUpload, scrn_lock_yn=N, op_id=1787130271, xa_begin_flag=0, send_time=20251023210023000837, rspn_time=, sync_type=A, async_rspn_yn=0, call_depth=0, msg_count_no=0, ttl_use_flag=0, ttl_from_time=, ttl=0, long_msg_type=1, err_flag=0, err_src=, err_type=, err_code=, dst_inst_code=, fail_knd=null, ap_host_name=null, ap_caller_id=null, inf_id=, lang_type=EN, reserved=), data=TelegramInData(dataType=D, length=300, reserved=null, data=FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=U1, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=fluuter.jpeg.jpg, upl_file_size=170146, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])), tail=@@)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:85 - TelegramNestedRuntimeException [fieldName=data, msg=null, ftype=VO, method=null, pointer=0, objName=mti.com.telegram.vo.TelegramIn, parser=ByteEncoder]
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:11 - TelegramNestedRuntimeException [fieldName=data, msg=null, ftype=VO, method=null, pointer=0, objName=mti.com.telegram.vo.TelegramIn, parser=ByteEncoder]
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - java.base/java.nio.HeapByteBuffer.put(HeapByteBuffer.java:238)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - java.base/java.nio.ByteBuffer.put(ByteBuffer.java:1242)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - mti.com.telegram.mapping.ByteEncoder.handleListField(ByteEncoder.java:169)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - mti.com.telegram.mapping.ByteEncoder.appendSerializedField(ByteEncoder.java:135)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - mti.com.telegram.mapping.ByteEncoder.convertObjectToBytes(ByteEncoder.java:47)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - mti.com.telegram.mapping.ByteEncoder.appendSerializedField(ByteEncoder.java:133)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - mti.com.telegram.mapping.ByteEncoder.convertObjectToBytes(ByteEncoder.java:47)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - mti.com.telegram.mapping.ByteEncoder.appendSerializedField(ByteEncoder.java:133)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - mti.com.telegram.mapping.ByteEncoder.convertObjectToBytes(ByteEncoder.java:47)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - mti.com.telegram.util.InterfaceTelegram.interfaceTuxedo(InterfaceTelegram.java:26)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - maas.bcap.common.ServiceSupport.tuxedoTransaction(ServiceSupport.java:63)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - maas.bcap.service.FileManagerService.interfaceTuxedo(FileManagerService.java:81)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - maas.bcap.service.FileManagerService.saveFilesToDevonC(FileManagerService.java:34)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - maas.bcap.service.FileUploadService.registerNewFiles(FileUploadService.java:148)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - maas.bcap.service.FileUploadService.upload(FileUploadService.java:77)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - maas.bcap.controller.FileManagerController.upload(FileManagerController.java:48)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - java.base/java.lang.reflect.Method.invoke(Method.java:580)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:111)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:337)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:96)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - maas.bcap.security.JwtAuthFilter.doFilterInternal(JwtAuthFilter.java:70)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1794)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR FileManagerService:19 - java.base/java.lang.Thread.run(Thread.java:1583)
+2025-10-23 21:00:23 [http-nio-8080-exec-4] ERROR [dispatcherServlet]:175 - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is TelegramNestedRuntimeException [fieldName=data, msg=null, ftype=VO, method=null, pointer=0, objName=mti.com.telegram.vo.TelegramIn, parser=ByteEncoder]] with root cause
+mti.com.telegram.exception.TelegramNestedRuntimeException: null
+	at java.nio.HeapByteBuffer.put(HeapByteBuffer.java:238) ~[?:?]
+	at java.nio.ByteBuffer.put(ByteBuffer.java:1242) ~[?:?]
+	at mti.com.telegram.mapping.ByteEncoder.handleListField(ByteEncoder.java:169) ~[classes/:?]
+	at mti.com.telegram.mapping.ByteEncoder.appendSerializedField(ByteEncoder.java:135) ~[classes/:?]
+	at mti.com.telegram.mapping.ByteEncoder.convertObjectToBytes(ByteEncoder.java:47) ~[classes/:?]
+	at mti.com.telegram.mapping.ByteEncoder.appendSerializedField(ByteEncoder.java:133) ~[classes/:?]
+	at mti.com.telegram.mapping.ByteEncoder.convertObjectToBytes(ByteEncoder.java:47) ~[classes/:?]
+	at mti.com.telegram.mapping.ByteEncoder.appendSerializedField(ByteEncoder.java:133) ~[classes/:?]
+	at mti.com.telegram.mapping.ByteEncoder.convertObjectToBytes(ByteEncoder.java:47) ~[classes/:?]
+	at mti.com.telegram.util.InterfaceTelegram.interfaceTuxedo(InterfaceTelegram.java:26) ~[classes/:?]
+	at maas.bcap.common.ServiceSupport.tuxedoTransaction(ServiceSupport.java:63) ~[classes/:?]
+	at maas.bcap.service.FileManagerService.interfaceTuxedo(FileManagerService.java:81) ~[classes/:?]
+	at maas.bcap.service.FileManagerService.saveFilesToDevonC(FileManagerService.java:34) ~[classes/:?]
+	at maas.bcap.service.FileUploadService.registerNewFiles(FileUploadService.java:148) ~[classes/:?]
+	at maas.bcap.service.FileUploadService.upload(FileUploadService.java:77) ~[classes/:?]
+	at maas.bcap.controller.FileManagerController.upload(FileManagerController.java:48) ~[classes/:?]
+	at jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555) ~[tomcat-embed-core-9.0.83.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623) ~[tomcat-embed-core-9.0.83.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:111) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:337) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:96) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at maas.bcap.security.JwtAuthFilter.doFilterInternal(JwtAuthFilter.java:70) ~[classes/:?]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96) ~[spring-boot-actuator-2.7.18.jar:2.7.18]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1794) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at java.lang.Thread.run(Thread.java:1583) ~[?:?]
+2025-10-23 21:10:09 [main] INFO  BcapApplication:55 - Starting BcapApplication using Java 21.0.6 on LeRuccoLOQ with PID 15212 (C:\bcap\bcap-be\target\classes started by drucc in C:\bcap\bcap-be)
+2025-10-23 21:10:09 [main] INFO  BcapApplication:632 - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 21:10:10 [main] INFO  TomcatWebServer:108 - Tomcat initialized with port(s): 8080 (http)
+2025-10-23 21:10:10 [main] INFO  Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-10-23 21:10:10 [main] INFO  StandardService:173 - Starting service [Tomcat]
+2025-10-23 21:10:10 [main] INFO  StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-10-23 21:10:10 [main] INFO  [/]:173 - Initializing Spring embedded WebApplicationContext
+2025-10-23 21:10:10 [main] INFO  ServletWebServerApplicationContext:292 - Root WebApplicationContext: initialization completed in 985 ms
+2025-10-23 21:10:10 [main] WARN  UserDetailsServiceAutoConfiguration:89 - 
+
+Using generated security password: 02167316-64e3-4c53-9999-87688c799af0
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-23 21:10:10 [main] INFO  DefaultSecurityFilterChain:55 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@88b76f2, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1b4872bc, org.springframework.security.web.context.SecurityContextPersistenceFilter@7eeb38b2, org.springframework.security.web.header.HeaderWriterFilter@1c30cb85, org.springframework.web.filter.CorsFilter@498a612d, org.springframework.security.web.authentication.logout.LogoutFilter@2506e949, maas.bcap.security.JwtAuthFilter@252744a1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6d6bff89, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6acffb2d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1e1237ab, org.springframework.security.web.session.SessionManagementFilter@5ed5b321, org.springframework.security.web.access.ExceptionTranslationFilter@624b523, org.springframework.security.web.access.intercept.AuthorizationFilter@57f8951a]
+2025-10-23 21:10:11 [main] INFO  EndpointLinksResolver:58 - Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-10-23 21:10:11 [main] INFO  Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2025-10-23 21:10:11 [main] INFO  TomcatWebServer:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2025-10-23 21:10:11 [main] INFO  BcapApplication:61 - Started BcapApplication in 2.007 seconds (JVM running for 2.553)
+2025-10-23 21:10:11 [main] INFO  BcapApplication:18 - Start Application
+2025-10-23 21:10:24 [http-nio-8080-exec-1] INFO  [/]:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-23 21:10:24 [http-nio-8080-exec-1] INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcherServlet'
+2025-10-23 21:10:24 [http-nio-8080-exec-1] INFO  DispatcherServlet:547 - Completed initialization in 2 ms
+2025-10-23 21:10:24 [http-nio-8080-exec-6] INFO  FileManagerController:45 - inDto : FileUploadInDto(fileDiv=div1, fileDesc=desc1, extraPath=null, attachFileId=1111, attachFileSeqNo=null, screenId=FileUpload)
+2025-10-23 21:10:24 [http-nio-8080-exec-6] INFO  FileManagerController:46 - Files : [org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@2a95945a]
+2025-10-23 21:10:24 [http-nio-8080-exec-6] INFO  FileUploadService:48 - FileUploadService.upload
+2025-10-23 21:10:24 [http-nio-8080-exec-6] INFO  FileUploadService:52 - Content-Type multipart/form-data; boundary=----WebKitFormBoundaryWN3PmzJKs5ARnnFU
+2025-10-23 21:10:24 [http-nio-8080-exec-6] INFO  FileUploadService:69 - UserInfoFileManagerDto(screenId=FileUpload, userIp=0:0:0:0:0:0:0:1)
+2025-10-23 21:10:24 [http-nio-8080-exec-6] INFO  FileUploadService:87 - FileManagerService.registerNewFiles
+2025-10-23 21:10:24 [http-nio-8080-exec-6] INFO  FileUploadService:210 - FileUploadService.checkFileExtension
+2025-10-23 21:10:24 [http-nio-8080-exec-6] INFO  FileUploadService:212 - originFileName : [fluuter.jpeg.jpg]
+2025-10-23 21:10:24 [http-nio-8080-exec-6] INFO  FileUploadService:214 - jpg
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  FileUploadService:145 - FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=null, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=fluuter.jpeg.jpg, upl_file_size=170146, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  FileManagerService:28 - FileManagerService.saveFilesToDevonC
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  FileManagerService:32 - FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=U1, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=fluuter.jpeg.jpg, upl_file_size=170146, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  FileManagerService:60 - FileManagerService.interfaceTuxedo
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  FileManagerService:75 - TelegramUserDataInput(tx_code=SAZ06F010U, client_ip_no=0:0:0:0:0:0:0:1, client_mac=, scrn_id=FileUpload, op_id=1787130271, sync_type=A, async_rspn_yn=0, rspn_svc_code=, ttl_use_flag=0, ttl=0, long_msg_type=1, dst_inst_code=null, fail_knd=null, ap_host_name=null, ap_caller_id=null, lang_type=EN)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  InterfaceTelegram:18 - #################### Interface Tuxedo ####################
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  InterfaceTelegram:19 - FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=U1, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=fluuter.jpeg.jpg, upl_file_size=170146, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  InterfaceTelegram:20 - FileOutVo(rson_cd=null, attach_file_id=null, attach_file_clcd=null, attach_file_expl=null, upd_yn=null, req_clcd=null, sub1Vos=null)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  InterfaceTelegram:23 - ByteEncoder
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  InterfaceTelegram:25 - TelegramIn(header=TelegramHeader(msg_len=803, gid_sysname=LeRuccoLOQ, gid_yyyyymmdd=20251023, gid_hhmmss=211025, gid_seq=002, gid_pid=00000, gid_stat=00, tx_code=SAZ06F010U, inst_no=MTI, send_rspn_type=S, rspn_svc_code=, ori_global_id=LeRuccoL202510232110250020000000, ori_send_time=20251023211025000042, chnl_id=WEB, client_ip_no=0:0:0:0:0:0:0:1, client_mac=, scrn_id=FileUpload, scrn_lock_yn=N, op_id=1787130271, xa_begin_flag=0, send_time=20251023211025000043, rspn_time=, sync_type=A, async_rspn_yn=0, call_depth=0, msg_count_no=0, ttl_use_flag=0, ttl_from_time=, ttl=0, long_msg_type=1, err_flag=0, err_src=, err_type=, err_code=, dst_inst_code=, fail_knd=null, ap_host_name=null, ap_caller_id=null, inf_id=, lang_type=EN, reserved=), data=TelegramInData(dataType=D, length=300, reserved=null, data=FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=U1, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=fluuter.jpeg.jpg, upl_file_size=170146, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])), tail=@@)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] INFO  TelegramUtil:331 - TelegramUtil.getPacketSize
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:85 - TelegramNestedRuntimeException [fieldName=data, msg=null, ftype=VO, method=null, pointer=0, objName=mti.com.telegram.vo.TelegramIn, parser=ByteEncoder]
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:11 - TelegramNestedRuntimeException [fieldName=data, msg=null, ftype=VO, method=null, pointer=0, objName=mti.com.telegram.vo.TelegramIn, parser=ByteEncoder]
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - java.base/java.nio.HeapByteBuffer.put(HeapByteBuffer.java:238)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - java.base/java.nio.ByteBuffer.put(ByteBuffer.java:1242)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - mti.com.telegram.mapping.ByteEncoder.handleListField(ByteEncoder.java:169)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - mti.com.telegram.mapping.ByteEncoder.appendSerializedField(ByteEncoder.java:135)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - mti.com.telegram.mapping.ByteEncoder.convertObjectToBytes(ByteEncoder.java:47)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - mti.com.telegram.mapping.ByteEncoder.appendSerializedField(ByteEncoder.java:133)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - mti.com.telegram.mapping.ByteEncoder.convertObjectToBytes(ByteEncoder.java:47)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - mti.com.telegram.mapping.ByteEncoder.appendSerializedField(ByteEncoder.java:133)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - mti.com.telegram.mapping.ByteEncoder.convertObjectToBytes(ByteEncoder.java:47)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - mti.com.telegram.util.InterfaceTelegram.interfaceTuxedo(InterfaceTelegram.java:26)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - maas.bcap.common.ServiceSupport.tuxedoTransaction(ServiceSupport.java:63)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - maas.bcap.service.FileManagerService.interfaceTuxedo(FileManagerService.java:81)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - maas.bcap.service.FileManagerService.saveFilesToDevonC(FileManagerService.java:34)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - maas.bcap.service.FileUploadService.registerNewFiles(FileUploadService.java:148)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - maas.bcap.service.FileUploadService.upload(FileUploadService.java:77)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - maas.bcap.controller.FileManagerController.upload(FileManagerController.java:48)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - java.base/java.lang.reflect.Method.invoke(Method.java:580)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:111)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:337)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:96)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - maas.bcap.security.JwtAuthFilter.doFilterInternal(JwtAuthFilter.java:70)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1794)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR FileManagerService:19 - java.base/java.lang.Thread.run(Thread.java:1583)
+2025-10-23 21:10:25 [http-nio-8080-exec-6] ERROR [dispatcherServlet]:175 - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is TelegramNestedRuntimeException [fieldName=data, msg=null, ftype=VO, method=null, pointer=0, objName=mti.com.telegram.vo.TelegramIn, parser=ByteEncoder]] with root cause
+mti.com.telegram.exception.TelegramNestedRuntimeException: null
+	at java.nio.HeapByteBuffer.put(HeapByteBuffer.java:238) ~[?:?]
+	at java.nio.ByteBuffer.put(ByteBuffer.java:1242) ~[?:?]
+	at mti.com.telegram.mapping.ByteEncoder.handleListField(ByteEncoder.java:169) ~[classes/:?]
+	at mti.com.telegram.mapping.ByteEncoder.appendSerializedField(ByteEncoder.java:135) ~[classes/:?]
+	at mti.com.telegram.mapping.ByteEncoder.convertObjectToBytes(ByteEncoder.java:47) ~[classes/:?]
+	at mti.com.telegram.mapping.ByteEncoder.appendSerializedField(ByteEncoder.java:133) ~[classes/:?]
+	at mti.com.telegram.mapping.ByteEncoder.convertObjectToBytes(ByteEncoder.java:47) ~[classes/:?]
+	at mti.com.telegram.mapping.ByteEncoder.appendSerializedField(ByteEncoder.java:133) ~[classes/:?]
+	at mti.com.telegram.mapping.ByteEncoder.convertObjectToBytes(ByteEncoder.java:47) ~[classes/:?]
+	at mti.com.telegram.util.InterfaceTelegram.interfaceTuxedo(InterfaceTelegram.java:26) ~[classes/:?]
+	at maas.bcap.common.ServiceSupport.tuxedoTransaction(ServiceSupport.java:63) ~[classes/:?]
+	at maas.bcap.service.FileManagerService.interfaceTuxedo(FileManagerService.java:81) ~[classes/:?]
+	at maas.bcap.service.FileManagerService.saveFilesToDevonC(FileManagerService.java:34) ~[classes/:?]
+	at maas.bcap.service.FileUploadService.registerNewFiles(FileUploadService.java:148) ~[classes/:?]
+	at maas.bcap.service.FileUploadService.upload(FileUploadService.java:77) ~[classes/:?]
+	at maas.bcap.controller.FileManagerController.upload(FileManagerController.java:48) ~[classes/:?]
+	at jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555) ~[tomcat-embed-core-9.0.83.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623) ~[tomcat-embed-core-9.0.83.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:111) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:337) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:96) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at maas.bcap.security.JwtAuthFilter.doFilterInternal(JwtAuthFilter.java:70) ~[classes/:?]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96) ~[spring-boot-actuator-2.7.18.jar:2.7.18]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1794) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at java.lang.Thread.run(Thread.java:1583) ~[?:?]

@@ -9,8 +9,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.VarHandle;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
@@ -20,6 +23,7 @@ import java.net.NetworkInterface;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.regex.Pattern;
+import org.springframework.util.ReflectionUtils;
 
 public class TelegramUtil {
     private static final Logger log = LogManager.getLogger(TelegramUtil.class);
@@ -324,19 +328,40 @@ public class TelegramUtil {
     }
 
     public static int getPacketSize(Object var0) throws Exception {
+        log.info("TelegramUtil.getPacketSize");
         int packetSize = 0;
         Field[] fields = var0.getClass().getDeclaredFields();
 
+        // reuse lookup for your own classes
+        MethodHandles.Lookup lookup = MethodHandles.lookup();
+
         for (Field field : fields) {
-            field.setAccessible(true); // Ensure we can access private fields
-
-            Object fieldValue = field.get(var0);
             FIELD fieldAnnotation = field.getAnnotation(FIELD.class);
-
             if (fieldAnnotation == null) {
-                continue; // Skip if the annotation is not present
+                continue;
             }
 
+            Object fieldValue;
+
+            try {
+                // Detect if it's a JDK class (like java.util.*)
+                if (field.getDeclaringClass().getPackageName().startsWith("java.")) {
+                    // Use normal reflection for JDK classes
+                    field.setAccessible(true);
+                    fieldValue = field.get(var0);
+                } else {
+                    // Safe for your own annotated VO classes
+                    VarHandle handle = MethodHandles.privateLookupIn(
+                            var0.getClass(), lookup).unreflectVarHandle(field);
+                    fieldValue = handle.get(var0);
+                }
+            } catch (Exception e) {
+                // Fallback if anything goes wrong
+                field.setAccessible(true);
+                fieldValue = field.get(var0);
+            }
+
+            // === your existing packet size logic ===
             switch (fieldAnnotation.type()) {
                 case NUMBER -> {
                     DATATYPE dataTypeAnnotation = field.getAnnotation(DATATYPE.class);

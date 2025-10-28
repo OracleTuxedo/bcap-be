@@ -1,0 +1,63 @@
+2025-10-28 14:39:53 [http-nio-8080-exec-5] INFO  AuthService:57  - AuthInfoDto [AuthInfoDto(userId=1787130271, encryptionPassword=null)]
+2025-10-28 14:39:53 [http-nio-8080-exec-5] INFO  AuthService:60  - token [eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwiZW5jcnlwdGlvblBhc3N3b3JkIjpudWxsfSwic3ViIjoiMTc4NzEzMDI3MSIsImV4cCI6MTc2MTcyMzU5M30.boNq-t2Ron2OeiD8ga0cdFywXLebF-KXKAfQXxy7xGo]
+2025-10-28 14:40:44 [http-nio-8080-exec-2] INFO  AuthService:57  - AuthInfoDto [AuthInfoDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A)]
+2025-10-28 14:40:44 [http-nio-8080-exec-2] INFO  AuthService:60  - token [eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwiZW5jcnlwdGlvblBhc3N3b3JkIjoiN0RCM0M4QUU1MDE1NzI2RkIxQjAxMjBEQ0E5QzZDNzQ1MjI3OTIxOTU1M0RDRjQ4MThDNERGODg1MTY0NDYzQSJ9LCJzdWIiOiIxNzg3MTMwMjcxIiwiZXhwIjoxNzYxNzIzNjQ0fQ.r0XWs2s8Gox1jviTNLYIsK_7UgEFvL7iO7RragGSQc0]
+2025-10-28 20:52:18 [http-nio-8080-exec-2] INFO  FileManagerService:49  - FileUploadService.upload
+2025-10-28 20:52:18 [http-nio-8080-exec-2] INFO  FileManagerService:53  - Content-Type multipart/form-data; boundary=----WebKitFormBoundaryYD8rKWc8rSPrPbKx
+2025-10-28 20:52:18 [http-nio-8080-exec-2] INFO  FileManagerService:70  - UserInfoFileManagerDto(screenId=FileUpload, userIp=0:0:0:0:0:0:0:1)
+2025-10-28 20:52:18 [http-nio-8080-exec-2] INFO  FileUploadService:59  - FileUploadService.selectFileList
+2025-10-28 20:52:18 [http-nio-8080-exec-2] INFO  FileUploadService:63  - FileInVo(attach_file_id=1111, attach_file_clcd=div1, attach_file_expl=null, upd_yn=null, req_clcd=S2, sub1Vos=null)
+2025-10-28 20:52:18 [http-nio-8080-exec-2] INFO  FileUploadService:91  - FileUploadService.interfaceTuxedo
+2025-10-28 20:54:24 [http-nio-8080-exec-4] INFO  FileManagerService:49  - FileUploadService.upload
+2025-10-28 20:54:24 [http-nio-8080-exec-4] INFO  FileManagerService:53  - Content-Type multipart/form-data; boundary=----WebKitFormBoundaryBbgqcfwvPomZIKmv
+2025-10-28 20:54:24 [http-nio-8080-exec-4] INFO  FileManagerService:70  - UserInfoFileManagerDto(screenId=FileUpload, userIp=0:0:0:0:0:0:0:1)
+2025-10-28 20:54:24 [http-nio-8080-exec-4] INFO  FileManagerService:89  - FileManagerService.registerFiles
+2025-10-28 20:54:24 [http-nio-8080-exec-4] INFO  FileManagerService:95  - [org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@2a3bd4bb]
+2025-10-28 20:54:24 [http-nio-8080-exec-4] INFO  FileManagerService:288 - FileUploadService.checkFileExtension
+2025-10-28 20:54:24 [http-nio-8080-exec-4] INFO  FileManagerService:290 - originFileName : [v2.jpg]
+2025-10-28 20:54:24 [http-nio-8080-exec-4] INFO  FileManagerService:292 - jpg
+2025-10-28 20:55:52 [http-nio-8080-exec-8] INFO  FileManagerService:49  - FileUploadService.upload
+2025-10-28 20:55:52 [http-nio-8080-exec-8] INFO  FileManagerService:53  - Content-Type multipart/form-data; boundary=----WebKitFormBoundary7s9I6AyrQJLB9gzG
+2025-10-28 20:55:52 [http-nio-8080-exec-8] INFO  FileManagerService:70  - UserInfoFileManagerDto(screenId=FileUpload, userIp=0:0:0:0:0:0:0:1)
+2025-10-28 20:55:52 [http-nio-8080-exec-8] INFO  FileManagerService:89  - FileManagerService.registerFiles
+2025-10-28 20:55:52 [http-nio-8080-exec-8] INFO  FileManagerService:95  - [org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@6d78d2fa]
+2025-10-28 20:55:52 [http-nio-8080-exec-8] INFO  FileManagerService:288 - FileUploadService.checkFileExtension
+2025-10-28 20:55:52 [http-nio-8080-exec-8] INFO  FileManagerService:290 - originFileName : [v2.jpg]
+2025-10-28 20:55:52 [http-nio-8080-exec-8] INFO  FileManagerService:292 - jpg
+2025-10-28 20:58:19 [http-nio-8080-exec-2] INFO  FileManagerService:49  - FileUploadService.upload
+2025-10-28 20:58:19 [http-nio-8080-exec-2] INFO  FileManagerService:53  - Content-Type multipart/form-data; boundary=----WebKitFormBoundary6Jy65TA7bWSzgn18
+2025-10-28 20:58:19 [http-nio-8080-exec-2] INFO  FileManagerService:70  - UserInfoFileManagerDto(screenId=FileUpload, userIp=0:0:0:0:0:0:0:1)
+2025-10-28 20:58:19 [http-nio-8080-exec-2] INFO  FileManagerService:89  - FileManagerService.registerFiles
+2025-10-28 20:58:19 [http-nio-8080-exec-2] INFO  FileManagerService:95  - [org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@76a6029e]
+2025-10-28 20:58:19 [http-nio-8080-exec-2] INFO  FileManagerService:288 - FileUploadService.checkFileExtension
+2025-10-28 20:58:19 [http-nio-8080-exec-2] INFO  FileManagerService:290 - originFileName : [v2.jpg]
+2025-10-28 20:58:19 [http-nio-8080-exec-2] INFO  FileManagerService:292 - jpg
+2025-10-28 20:58:19 [http-nio-8080-exec-2] INFO  FileManagerService:124 - [FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=v2.jpg, upl_file_size=52277, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)]
+2025-10-28 20:58:19 [http-nio-8080-exec-2] INFO  FileManagerService:133 - FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=null, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=v2.jpg, upl_file_size=52277, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-28 20:58:19 [http-nio-8080-exec-2] INFO  FileManagerService:155 - [FileOutSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=v2.jpg, upl_file_size=52277, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)]
+2025-10-28 20:58:19 [http-nio-8080-exec-2] INFO  FileManagerService:156 - FileOutVo(rson_cd=null, attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=null, sub1Vos=[FileOutSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=v2.jpg, upl_file_size=52277, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-28 21:00:49 [http-nio-8080-exec-4] INFO  FileManagerService:49  - FileUploadService.upload
+2025-10-28 21:00:49 [http-nio-8080-exec-4] INFO  FileManagerService:53  - Content-Type multipart/form-data; boundary=----WebKitFormBoundary7US9QiE7k05V1V2L
+2025-10-28 21:00:49 [http-nio-8080-exec-4] INFO  FileManagerService:70  - UserInfoFileManagerDto(screenId=FileUpload, userIp=0:0:0:0:0:0:0:1)
+2025-10-28 21:00:49 [http-nio-8080-exec-4] INFO  FileManagerService:89  - FileManagerService.registerFiles
+2025-10-28 21:00:49 [http-nio-8080-exec-4] INFO  FileManagerService:95  - [org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@4f6fcc5d]
+2025-10-28 21:00:49 [http-nio-8080-exec-4] INFO  FileManagerService:288 - FileUploadService.checkFileExtension
+2025-10-28 21:00:49 [http-nio-8080-exec-4] INFO  FileManagerService:290 - originFileName : [v2.jpg]
+2025-10-28 21:00:49 [http-nio-8080-exec-4] INFO  FileManagerService:292 - jpg
+2025-10-28 21:00:49 [http-nio-8080-exec-4] INFO  FileManagerService:124 - [FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=v2.jpg, upl_file_size=52277, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)]
+2025-10-28 21:00:49 [http-nio-8080-exec-4] INFO  FileManagerService:133 - FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=null, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=v2.jpg, upl_file_size=52277, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-28 21:00:49 [http-nio-8080-exec-4] INFO  FileManagerService:155 - [FileOutSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=v2.jpg, upl_file_size=52277, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)]
+2025-10-28 21:00:49 [http-nio-8080-exec-4] INFO  FileManagerService:156 - FileOutVo(rson_cd=null, attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=null, sub1Vos=[FileOutSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=v2.jpg, upl_file_size=52277, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-28 21:15:07 [http-nio-8080-exec-3] INFO  FileManagerService:49  - FileUploadService.upload
+2025-10-28 21:15:07 [http-nio-8080-exec-3] INFO  FileManagerService:53  - Content-Type multipart/form-data; boundary=----WebKitFormBoundary7Ac7Zgutagf0W7gV
+2025-10-28 21:15:07 [http-nio-8080-exec-3] INFO  FileManagerService:70  - UserInfoFileManagerDto(screenId=FileUpload, userIp=0:0:0:0:0:0:0:1)
+2025-10-28 21:15:07 [http-nio-8080-exec-3] INFO  FileManagerService:89  - FileManagerService.registerFiles
+2025-10-28 21:15:07 [http-nio-8080-exec-3] INFO  FileManagerService:95  - [org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@60fee370]
+2025-10-28 21:15:07 [http-nio-8080-exec-3] INFO  FileManagerService:289 - FileUploadService.checkFileExtension
+2025-10-28 21:15:07 [http-nio-8080-exec-3] INFO  FileManagerService:291 - originFileName : [v2.jpg]
+2025-10-28 21:15:07 [http-nio-8080-exec-3] INFO  FileManagerService:293 - jpg
+2025-10-28 21:15:07 [http-nio-8080-exec-3] INFO  FileManagerService:124 - [FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=v2.jpg, upl_file_size=52277, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)]
+2025-10-28 21:15:07 [http-nio-8080-exec-3] INFO  FileManagerService:133 - FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=null, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=v2.jpg, upl_file_size=52277, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-28 21:15:07 [http-nio-8080-exec-3] INFO  FileManagerService:155 - [FileOutSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=v2.jpg, upl_file_size=52277, upl_file_nm=v2.jpg, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)]
+2025-10-28 21:15:07 [http-nio-8080-exec-3] INFO  FileManagerService:156 - FileOutVo(rson_cd=null, attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=null, sub1Vos=[FileOutSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=v2.jpg, upl_file_size=52277, upl_file_nm=v2.jpg, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-28 21:15:07 [http-nio-8080-exec-3] INFO  FileManagerService:245 - FileManagerService.saveToDisk

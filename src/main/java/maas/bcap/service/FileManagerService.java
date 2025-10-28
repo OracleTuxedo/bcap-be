@@ -1,19 +1,6 @@
 package maas.bcap.service;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
-import maas.bcap.dto.FileInSub1Vo;
-import maas.bcap.dto.FileInVo;
-import maas.bcap.dto.FileOutSub1Vo;
-import maas.bcap.dto.FileOutVo;
-
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,13 +8,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.StringTokenizer;
+import java.util.stream.Collectors;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import maas.bcap.dto.AuthInfoDto;
+import maas.bcap.dto.FileInSub1Vo;
+import maas.bcap.dto.FileInVo;
+import maas.bcap.dto.FileOutSub1Vo;
+import maas.bcap.dto.FileOutVo;
+import maas.bcap.dto.FileUploadInDto;
+import maas.bcap.dto.UserInfoFileManagerDto;
 
 @Service
 public class FileManagerService {
@@ -39,222 +38,233 @@ public class FileManagerService {
     @Value("${file.ext.filter}")
     private String fileExtFilter;
 
-    public void upload(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        log.info("FileManagerService.upload");
+    @Autowired
+    private FileUploadService fileUploadService;
 
-        Optional<String> checkMultiPartOptional = Optional.ofNullable(request.getContentType());
-        Optional<MultipartHttpServletRequest> multipartRequest = Optional.empty();
-        Map<String, MultipartFile> multipartFileMap = new HashMap<String, MultipartFile>();
-        List<MultipartFile> multipartFileList = new ArrayList<>();
+    public int upload(
+            HttpServletRequest request,
+            AuthInfoDto authInfoDto,
+            FileUploadInDto inDto,
+            List<MultipartFile> files) throws Exception {
+        log.info("FileUploadService.upload");
 
-        if (checkMultiPartOptional.isPresent()
-                && checkMultiPartOptional.get().contains(MediaType.MULTIPART_FORM_DATA_VALUE)) {
-            multipartRequest = Optional.of((MultipartHttpServletRequest) request);
-            multipartFileMap = multipartRequest.get().getFileMap();
+        /// Check Content Type
+        Optional<String> contentType = Optional.ofNullable(request.getContentType());
+        log.info("Content-Type {}", contentType.get());
+        if (contentType.isEmpty()
+                || (contentType.isPresent() && !contentType.get().startsWith(MediaType.MULTIPART_FORM_DATA_VALUE))) {
+            log.error("Content Type is not {}", MediaType.MULTIPART_FORM_DATA_VALUE);
+            throw new Exception("Content Type is not " + MediaType.MULTIPART_FORM_DATA_VALUE);
         }
 
-        for (Map.Entry<String, MultipartFile> entry : multipartFileMap.entrySet()) {
-            multipartFileList.add(entry.getValue());
+        if (files == null || files.isEmpty()) {
+            log.error("There is no files uploaded");
+            throw new Exception("There is no files uploaded");
         }
 
-        log.info(checkMultiPartOptional.get());
-        // log.info(multipartRequest.get());
-        log.info(multipartFileMap);
-        log.info(multipartFileList);
+        String userIp = getClientIpAddress(request);
+        final UserInfoFileManagerDto userInfoFileManagerDto = UserInfoFileManagerDto.builder()
+                .screenId(inDto.getScreenId())
+                .userIp(userIp)
+                .build();
+        log.info(userInfoFileManagerDto);
 
-        /// DTO
-        String fileDiv = validateFilePath(Optional.ofNullable(request.getParameter("fileDiv")).orElse(""));
-        String fileDesc = Optional.ofNullable(request.getParameter("fileDesc")).orElse("");
-        String extraPath = validateFilePath(Optional.ofNullable(request.getParameter("extraPath")).orElse(""));
-        String attachFileId = Optional.ofNullable(request.getParameter("attachFileId")).orElse("");
-        String[] deleteTargetSeqInfo = request.getParameterValues("attachFileSeqNo");
+        if (inDto.getFileDiv().equals("") || inDto.getFileDiv() == null) {
+            log.error("Path Set Error");
+            throw new Exception("Path Set Error");
+        }
 
-        String usrId = request.getParameter("usrId");
-        String scrId = request.getParameter("scrId");
-        String usrIp = getClientIpAddress(request);
+        if (inDto.getAttachFileId() != null && !inDto.getAttachFileId().equals(""))
+            return updateFiles(authInfoDto, inDto, files, userInfoFileManagerDto);
+        else
+            return registerFiles(authInfoDto, inDto, files, userInfoFileManagerDto);
 
-        log.info(fileDiv);
-        log.info(fileDesc);
-        log.info(extraPath);
-        log.info(attachFileId);
-        log.info(deleteTargetSeqInfo);
-        log.info(usrId);
-        log.info(scrId);
-        log.info(usrIp);
+    }
 
-        Boolean isNewFiles = true;
-        String errorMessage = "";
+    private int registerFiles(
+            AuthInfoDto authInfoDto,
+            FileUploadInDto inDto,
+            List<MultipartFile> files,
+            UserInfoFileManagerDto userInfoFileManagerDto) throws Exception {
+        log.info("FileManagerService.registerFiles");
+
+        files = files.stream().filter(file -> {
+            String originalFileName = file.getOriginalFilename();
+            return originalFileName != null && !originalFileName.isBlank();
+        }).toList();
+        log.info(files);
+
         String filePath = "";
 
-        if (fileDiv.equals("")) {
-            errorMessage = "Path Set Error";
-            // Throw
+        /// TODO Dummy
+        List<FileInSub1Vo> inSub1Vos = new ArrayList<>();
+        for (MultipartFile file : files) {
+            String originalFileName = Optional.ofNullable(file.getOriginalFilename()).orElse("");
+
+            if (!checkFileExtension(file)) {
+                log.error("File Extention Error");
+                throw new Exception("File Extention Error");
+            }
+
+            /// File Path
+            if (inDto.getExtraPath() == null || inDto.getExtraPath().equals(""))
+                filePath = fileUploadPath + File.separator + inDto.getFileDiv();
+            else
+                filePath = fileUploadPath + File.separator + inDto.getFileDiv() + inDto.getExtraPath();
+
+            FileInSub1Vo inSub1Vo = FileInSub1Vo.builder()
+                    .file_nm(originalFileName)
+                    .upl_file_size(file.getSize())
+                    .file_path(filePath)
+                    .inp_pgm_id(inDto.getScreenId())
+                    .inp_usr_id(authInfoDto.getUserId())
+                    .build();
+            inSub1Vos.add(inSub1Vo);
+        }
+        log.info(inSub1Vos);
+
+        FileInVo inVo = FileInVo.builder()
+                .attach_file_clcd(inDto.getFileDiv())
+                .attach_file_expl(inDto.getFileDesc())
+                .upd_yn("N")
+                .sub1Vos(inSub1Vos)
+                .build();
+
+        log.info(inVo);
+
+        /// Save Files Info into DevonC
+        // FileOutVo outVo = fileUploadService.saveFilesToDevonC(authInfoDto, inVo,
+        /// userInfoFileManagerDto);
+
+        /// TODO Dummy
+        List<FileOutSub1Vo> outSub1Vos = inSub1Vos.stream().map(inSub1Vo -> FileOutSub1Vo.builder()
+                .file_nm(inSub1Vo.file_nm)
+                .upl_file_size(inSub1Vo.upl_file_size)
+                .upl_file_nm(inSub1Vo.file_nm)
+                .file_path(inSub1Vo.file_path)
+                .inp_pgm_id(inSub1Vo.inp_pgm_id)
+                .inp_usr_id(inSub1Vo.inp_usr_id)
+                .build()).collect(Collectors.toList());
+        /// TODO Dummy
+        FileOutVo outVo = FileOutVo.builder()
+                .attach_file_clcd(inDto.getFileDiv())
+                .attach_file_expl(inDto.getFileDesc())
+                .upd_yn("N")
+                .sub1Vos(outSub1Vos)
+                .build();
+        log.info(outSub1Vos);
+        log.info(outVo);
+
+        /// Store / Save files to Disk
+        saveToDisk(outVo, files, filePath);
+        return 1;
+    }
+
+    private int updateFiles(
+            AuthInfoDto authInfoDto,
+            FileUploadInDto inDto,
+            List<MultipartFile> files,
+            UserInfoFileManagerDto userInfoFileManagerDto) throws Exception {
+        FileInVo inVo = FileInVo.builder()
+                .attach_file_id(inDto.getAttachFileId())
+                .attach_file_clcd(inDto.getFileDiv())
+                .build();
+
+        FileOutVo outVo = fileUploadService.selectFileList(authInfoDto, inVo, userInfoFileManagerDto);
+        List<FileOutSub1Vo> outSub1Vos = outVo.getSub1Vos();
+
+        String filePath = "";
+        if (outSub1Vos != null && !outSub1Vos.isEmpty()) {
+            filePath = outSub1Vos.get(0).getFile_path();
+        } else {
+            if (inDto.getExtraPath() == null || inDto.getExtraPath().equals(""))
+                filePath = fileUploadPath + File.separator + inDto.getFileDiv();
+            else
+                filePath = fileUploadPath + File.separator + inDto.getFileDiv() + inDto.getExtraPath();
         }
 
-        if (!attachFileId.equals("")) {
-            isNewFiles = false;
+        /// Delete Target Exists
+        if (inDto.getAttachFileSeqNo() != null && !inDto.getAttachFileSeqNo().isEmpty()) {
+            deleteTargetFile(authInfoDto, inDto, outVo, filePath);
         }
+        addTargetFile(authInfoDto, inDto, filePath, files);
+        return 0;
+    }
 
-        /// Register New Files
-        if (1 == 1) {
+    private void deleteTargetFile(AuthInfoDto authInfoDto, FileUploadInDto inDto, FileOutVo outVo, String filePath) {
+        List<FileInSub1Vo> inSub1Vos = new ArrayList<>();
 
-            List<FileInSub1Vo> inSub1Vos = new ArrayList<>();
+        for (FileOutSub1Vo outSub1Vo : outVo.getSub1Vos()) {
+            int fileSeqNo = Integer.parseInt(outSub1Vo.getAttach_file_seq_no());
 
-            // TODO Dummy nanti di hapus
-            List<FileOutSub1Vo> outSub1Vos = new ArrayList<>();
-
-            for (MultipartFile file : multipartFileList) {
-                String originFileName = Optional.ofNullable(file.getOriginalFilename()).orElse("");
-                if (originFileName.equals(""))
+            for (String deleteSeq : inDto.getAttachFileSeqNo()) {
+                if (Integer.parseInt(deleteSeq) != fileSeqNo)
                     continue;
-
-                /// Check Extenion
-                if (!checkFileExtension(file)) {
-                    errorMessage = "File Extention Error";
-                    // throw
-                }
-
-                if (extraPath.equals(""))
-                    filePath = fileUploadPath + File.separator + fileDiv;
-                else
-                    filePath = fileUploadPath + File.separator + fileDiv + extraPath;
-
                 FileInSub1Vo inSub1Vo = FileInSub1Vo.builder()
-                        .file_nm(originFileName)
-                        .upl_file_size(file.getSize())
-                        .file_path(filePath)
-                        .inp_pgm_id(scrId)
-                        .inp_usr_id(usrIp)
+                        .attach_file_id(outSub1Vo.getAttach_file_id())
+                        .attach_file_seq_no(outSub1Vo.getAttach_file_seq_no())
+                        .del_yn("Y")
+                        .chng_usr_id(authInfoDto.getUserId())
+                        .chng_pgm_id(inDto.getScreenId())
                         .build();
                 inSub1Vos.add(inSub1Vo);
-
-                // TODO Dummy nanti di hapus
-                FileOutSub1Vo outSub1Vo = FileOutSub1Vo.builder()
-                        .file_nm(originFileName)
-                        .upl_file_size(file.getSize())
-                        .file_path(filePath)
-                        .upl_file_nm(originFileName)
-                        .inp_pgm_id(scrId)
-                        .inp_usr_id(usrIp)
-                        .build();
-                outSub1Vos.add(outSub1Vo);
+                break;
             }
-
-            FileInVo fileInVo = FileInVo.builder()
-                    .attach_file_clcd(fileDiv)
-                    .attach_file_expl(fileDesc)
-                    .upd_yn("N")
-                    .sub1Vos(inSub1Vos)
-                    .build();
-
-            /// TODO Save Files Info into DevonC
-
-            /// TODO Dummy
-            FileOutVo fileOutVo = FileOutVo.builder()
-                    .attach_file_clcd(fileDiv)
-                    .attach_file_expl(fileDesc)
-                    .upd_yn("N")
-                    .sub1Vos(outSub1Vos)
-                    .build();
-
-            /// Save Files to Disk
-            saveToDisk(fileOutVo, multipartFileList, filePath);
         }
     }
 
-    public void download(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        log.info("FileManagerService.download");
+    private void addTargetFile(
+            AuthInfoDto authInfoDto,
+            FileUploadInDto inDto,
+            String filePath,
+            List<MultipartFile> files) throws Exception {
+        List<FileInSub1Vo> inSub1Vos = new ArrayList<>();
+        for (MultipartFile file : files) {
+            String originalFileName = Optional.ofNullable(file.getOriginalFilename()).orElse("");
 
-        String filePath = "D:/bcap/aaa/535999.png";
-
-        File file = new File(filePath);
-        if (!file.exists()) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND, "File Not Found");
-            return;
-        }
-
-        response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
-        response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
-        response.setContentLengthLong(file.length());
-
-        try {
-            BufferedInputStream inStream = new BufferedInputStream(new FileInputStream(file));
-            ServletOutputStream outStream = response.getOutputStream();
-
-            byte[] buffer = new byte[10240];
-            int bytesRead;
-
-            while ((bytesRead = inStream.read(buffer)) != -1) {
-                outStream.write(buffer, 0, bytesRead);
+            if (!checkFileExtension(file)) {
+                log.error("File Extention Error");
+                throw new Exception("File Extention Error");
             }
-            outStream.flush();
 
-        } catch (Exception e) {
-            // TODO: handle exception
-            log.error("Error during file download", e);
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error downloading file");
+            FileInSub1Vo inSub1Vo = FileInSub1Vo.builder()
+                    .del_yn("N")
+                    .file_nm(originalFileName)
+                    .upl_file_size(file.getSize())
+                    .file_path(filePath)
+                    .inp_pgm_id(inDto.getScreenId())
+                    .inp_usr_id(authInfoDto.getUserId())
+                    .build();
+
+            inSub1Vos.add(inSub1Vo);
         }
     }
 
-    private void saveToDisk(FileOutVo fileOutVo, List<MultipartFile> multipartFileList, String filePath)
-            throws Exception {
-        for (MultipartFile file : multipartFileList) {
-            String originFileName = Optional.ofNullable(file.getOriginalFilename()).orElse("");
+    private void saveToDisk(FileOutVo outVo, List<MultipartFile> files, String filePath)
+            throws IllegalStateException, IOException {
+        log.info("FileManagerService.saveToDisk");
+        for (MultipartFile file : files) {
+            String originalFileName = file.getOriginalFilename();
 
-            List<FileOutSub1Vo> outSub1Vos = fileOutVo.getSub1Vos();
-
+            List<FileOutSub1Vo> outSub1Vos = outVo.getSub1Vos();
             for (FileOutSub1Vo outSub1Vo : outSub1Vos) {
-                if (outSub1Vo.getFile_nm() != null && outSub1Vo.getFile_nm().equals(originFileName)) {
-                    String fileSaveName = outSub1Vo.getUpl_file_nm();
-                    File saveFolder = new File(filePath);
+                if (outSub1Vo.getFile_nm() == null || !outSub1Vo.getFile_nm().equals(originalFileName))
+                    continue;
 
-                    if (!saveFolder.exists() || saveFolder.isFile())
-                        saveFolder.mkdirs();
+                String fileSaveName = outSub1Vo.getUpl_file_nm();
+                File saveFolder = new File(filePath);
 
-                    String saveFile = saveFolder + File.separator + fileSaveName;
-                    file.transferTo(new File(saveFile));
+                if (!saveFolder.exists() || saveFolder.isFile())
+                    saveFolder.mkdirs();
 
-                    break;
-                }
+                String saveFile = saveFolder + File.separator + fileSaveName;
+                file.transferTo(new File(saveFile));
+                break;
             }
-
         }
     }
 
-    private String validateFilePath(String filePath) {
-        String result = null;
-
-        if (filePath != null) {
-            result = filePath.replaceAll("../", "");
-        }
-
-        return result;
-    }
-
-    private boolean checkFileExtension(MultipartFile file) throws Exception {
-        boolean rslt = false;
-
-        String originFileName = Optional.ofNullable(file.getOriginalFilename()).orElse("");
-        String ext = originFileName.substring(originFileName.lastIndexOf(".") + 1, originFileName.length());
-        String allowList = fileExtFilter;
-        StringTokenizer tk = new StringTokenizer(allowList, ",");
-        Map<String, String> allowMap = new HashMap<String, String>();
-
-        while (tk.hasMoreTokens()) {
-            String tmpExt = tk.nextToken();
-            allowMap.put(tmpExt, tmpExt);
-        }
-
-        String chkRslt = allowMap.get(ext.toLowerCase());
-
-        if (chkRslt == null) {
-            throw new IOException("BAD Extension file upload!");
-        } else
-            rslt = true;
-        return rslt;
-    }
-
-    public String getClientIpAddress(HttpServletRequest request) {
+    private String getClientIpAddress(HttpServletRequest request) {
         String ip = request.getHeader("X-Forwarded-For");
 
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
@@ -273,5 +283,19 @@ public class FileManagerService {
             ip = request.getRemoteAddr();
         }
         return ip;
+    }
+
+    private boolean checkFileExtension(MultipartFile file) throws Exception {
+        log.info("FileUploadService.checkFileExtension");
+        String originFileName = Optional.ofNullable(file.getOriginalFilename()).orElse("");
+        log.info("originFileName : [{}]", originFileName);
+        for (String allowExt : fileExtFilter.split(",")) {
+            log.info(allowExt);
+            if (originFileName.endsWith(allowExt))
+                return true;
+        }
+
+        log.error("BAD Extension file upload!");
+        throw new IOException("BAD Extension file upload!");
     }
 }

@@ -16,8 +16,6 @@ public class CookieVo implements Serializable {
     @Serial
     private static final long serialVersionUID = -9186253543640336258L;
 
-    /// TODO Refactor all properties with snake_case
-
     // Never change this value
     public static final String SESSION_DATA_KEY = "MaasWebUserSession";
 

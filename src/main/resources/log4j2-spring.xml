@@ -63,7 +63,7 @@
             <AppenderRef ref="DailyServiceFile"/>
         </Logger>
 
-        <Root level="debug">
+        <Root level="info">
             <AppenderRef ref="LogToConsole"/>
             <AppenderRef ref="DailyFile"/>
         </Root>

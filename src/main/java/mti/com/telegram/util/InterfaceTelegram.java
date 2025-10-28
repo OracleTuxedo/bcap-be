@@ -20,7 +20,9 @@ public class InterfaceTelegram {
         log.info(outVo.toString());
         boolean limited = true;
         ByteEncoder encoder = new ByteEncoder();
+        log.info("ByteEncoder");
         TelegramIn<V> in = TelegramBuilder.getTelegramIn(userDataInput, inVo);
+        log.info(in);
         byte[] requestToTuxedo = encoder.convertObjectToBytes(in, limited);
 
         log.info(new String(requestToTuxedo, StandardCharsets.UTF_8));
