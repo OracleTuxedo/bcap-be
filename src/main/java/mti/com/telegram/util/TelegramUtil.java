@@ -328,7 +328,6 @@ public class TelegramUtil {
     }
 
     public static int getPacketSize(Object var0) throws Exception {
-        log.info("TelegramUtil.getPacketSize");
         int packetSize = 0;
         Field[] fields = var0.getClass().getDeclaredFields();
 
@@ -348,17 +347,20 @@ public class TelegramUtil {
                 if (field.getDeclaringClass().getPackageName().startsWith("java.")) {
                     // Use normal reflection for JDK classes
                     field.setAccessible(true);
-                    fieldValue = field.get(var0);
+                    // fieldValue = field.get(var0);
+                    fieldValue = ReflectionUtils.getField(field, var0);
                 } else {
                     // Safe for your own annotated VO classes
                     VarHandle handle = MethodHandles.privateLookupIn(
                             var0.getClass(), lookup).unreflectVarHandle(field);
-                    fieldValue = handle.get(var0);
+                    // fieldValue = handle.get(var0);
+                    fieldValue = ReflectionUtils.getField(field, handle);
                 }
             } catch (Exception e) {
                 // Fallback if anything goes wrong
                 field.setAccessible(true);
-                fieldValue = field.get(var0);
+                // fieldValue = field.get(var0);
+                fieldValue = ReflectionUtils.getField(field, var0);
             }
 
             // === your existing packet size logic ===

@@ -16,6 +16,7 @@ import mti.com.telegram.model.annotation.FIELD;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FileInVo {
+
     @FIELD(kind = Kind.DATA, length = 8, type = FieldType.STRING, trim = TrimType.RTRIM)
     public String attach_file_id;
 

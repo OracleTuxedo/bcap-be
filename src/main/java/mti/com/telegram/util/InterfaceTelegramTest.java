@@ -51,7 +51,7 @@ public class InterfaceTelegramTest {
         log.info("################################### Response START ###################################");
 
         byte[] arrayOfByte = response
-            .getBytes();
+                .getBytes();
 
         TelegramUserDataOutput<T> telegramUserDataOutput = parse(arrayOfByte, outVo);
 
@@ -77,7 +77,7 @@ public class InterfaceTelegramTest {
                 object = telegramOut2.getData().getData();
             } else {
                 throw new TelegramNestedRuntimeException(
-                    "Response Telegram Length is not Matched !!");
+                        "Response Telegram Length is not Matched !!");
             }
             TelegramMessage telegramMessage1 = telegramOut2.getMessage();
             TelegramUserDataOutput<T> telegramUserDataOutput = new TelegramUserDataOutput<>();

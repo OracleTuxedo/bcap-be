@@ -6,13 +6,18 @@ import mti.com.telegram.model.annotation.DATATYPE;
 import mti.com.telegram.model.annotation.FIELD;
 import mti.com.telegram.util.TelegramUtil;
 
+import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.nio.ByteBuffer;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class ByteEncoder {
+    private static final Logger log = LogManager.getLogger(ByteEncoder.class);
     private String charSet = "UTF-8";
     private boolean limited = true;
 
@@ -30,37 +35,43 @@ public class ByteEncoder {
         }
 
         int packetSize = TelegramUtil.getPacketSize(obj);
-        ByteBuffer byteBuffer = ByteBuffer.allocate(packetSize);
+        // ByteBuffer byteBuffer = ByteBuffer.allocate(packetSize);
+        ByteArrayOutputStream out = new ByteArrayOutputStream(packetSize);
         Field[] fields = obj.getClass().getDeclaredFields();
 
         for (Field field : fields) {
+
             FIELD fieldAnnotation = field.getAnnotation(FIELD.class);
             Object fieldValue = field.get(obj);
-
             try {
                 if (fieldValue == null) {
                     byte[] placeholderBytes = createPlaceholderBytes(fieldAnnotation, field);
                     if (placeholderBytes != null) {
-                        byteBuffer.put(placeholderBytes);
+                        // byteBuffer.put(placeholderBytes);
+                        out.write(placeholderBytes);
                     }
                 } else {
                     byte[] serializedField = appendSerializedField(fieldValue, field);
                     if (serializedField != null) {
-                        byteBuffer.put(serializedField);
+                        // byteBuffer.put(serializedField);
+                        out.write(serializedField);
                     }
                 }
             } catch (Exception e) {
-                TelegramNestedRuntimeException ex = new TelegramNestedRuntimeException(e.getMessage());
-                ex.setFieldName(field.getName());
-                ex.setFtype(fieldAnnotation.type().getTypeName());
-                ex.setObjName(obj.getClass().getName());
-                ex.setParser("ByteEncoder");
-                ex.setStackTrace(e.getStackTrace());
-                throw ex;
+                throw e;
+                // TelegramNestedRuntimeException ex = new
+                // TelegramNestedRuntimeException(e.getMessage());
+                // ex.setFieldName(field.getName());
+                // ex.setFtype(fieldAnnotation.type().getTypeName());
+                // ex.setObjName(obj.getClass().getName());
+                // ex.setParser("ByteEncoder");
+                // ex.setStackTrace(e.getStackTrace());
+                // throw ex;
             }
         }
 
-        return byteBuffer.array();
+        // return byteBuffer.array();
+        return out.toByteArray();
     }
 
     private byte[] createPlaceholderBytes(FIELD fieldAnnotation, Field field) {
@@ -162,14 +173,18 @@ public class ByteEncoder {
         // FIELD fieldAnnotation = field.getAnnotation(FIELD.class);
         int packetSize = TelegramUtil.getPacketSize((List<?>) fieldValue);
         int listSize = ((List<?>) fieldValue).size();
-        ByteBuffer buffer = ByteBuffer.allocate(packetSize + 8);
+        // ByteBuffer buffer = ByteBuffer.allocate(packetSize + 8);
+        ByteArrayOutputStream out = new ByteArrayOutputStream(packetSize + 8);
 
-        buffer.put(TelegramUtil.lpadString2Byte(Integer.toString(listSize), 8, "0", charSet));
+        // buffer.put(TelegramUtil.lpadString2Byte(Integer.toString(listSize), 8, "0", charSet));
+        out.write(TelegramUtil.lpadString2Byte(Integer.toString(listSize), 8, "0", charSet));
         for (Object item : (List<?>) fieldValue) {
-            buffer.put(convertObjectToBytes(item, limited));
+            // buffer.put(convertObjectToBytes(item, limited));
+            out.write(convertObjectToBytes(item, limited));
         }
 
-        return buffer.array();
+        // return buffer.array();
+        return out.toByteArray();
     }
 
     private byte[] handleNonPrimitiveField(Object fieldValue, Field field) throws Exception {

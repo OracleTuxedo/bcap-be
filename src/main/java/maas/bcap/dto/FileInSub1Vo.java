@@ -31,8 +31,8 @@ public class FileInSub1Vo {
     @FIELD(kind = Kind.DATA, length = 200, type = FieldType.STRING, trim = TrimType.RTRIM)
     public String file_nm;
 
-    @FIELD(kind = Kind.DATA, length = 20, type = FieldType.NUMBER, trim = TrimType.RTRIM)
-    @DATATYPE(type = NumberType.DECIMAL, decimal = 0, point_length = 1)
+    @FIELD(kind = Kind.DATA, length = 20, type = FieldType.NUMBER, trim = TrimType.LTRIM)
+    @DATATYPE(type = NumberType.LONG, decimal = 0, point_length = 1)
     public long upl_file_size;
 
     @FIELD(kind = Kind.DATA, length = 220, type = FieldType.STRING, trim = TrimType.RTRIM)
@@ -41,7 +41,7 @@ public class FileInSub1Vo {
     @FIELD(kind = Kind.DATA, length = 500, type = FieldType.STRING, trim = TrimType.RTRIM)
     public String file_path;
 
-    @FIELD(kind = Kind.DATA, length = 5, type = FieldType.NUMBER, trim = TrimType.RTRIM)
+    @FIELD(kind = Kind.DATA, length = 5, type = FieldType.NUMBER, trim = TrimType.LTRIM)
     @DATATYPE(type = NumberType.LONG, decimal = 0)
     public long pfr_rank;
 

@@ -14,7 +14,8 @@ import java.nio.charset.StandardCharsets;
 public class InterfaceTelegram {
     private static final Logger log = LogManager.getLogger(InterfaceTelegram.class);
 
-    public static <T, V> TelegramUserDataOutput<T> interfaceTuxedo(TelegramUserDataInput userDataInput, V inVo, T outVo) throws Exception {
+    public static <T, V> TelegramUserDataOutput<T> interfaceTuxedo(TelegramUserDataInput userDataInput, V inVo, T outVo)
+            throws Exception {
         log.info("#################### Interface Tuxedo ####################");
         log.info(inVo.toString());
         log.info(outVo.toString());
@@ -28,16 +29,19 @@ public class InterfaceTelegram {
         log.info(new String(requestToTuxedo, StandardCharsets.UTF_8));
         log.info(in.toString());
 
-        byte[] responseFromTuxedo = WeblogicConnector.connectTuxedo(requestToTuxedo);
+        // throw new Exception("STOP SAMPAI SINI");
 
-        if (responseFromTuxedo.length == 0) return null;
+        byte[] responseFromTuxedo = new byte[0]; //WeblogicConnector.connectTuxedo(requestToTuxedo);
 
-//        log.info(new String(responseFromTuxedo, StandardCharsets.UTF_8));
-//        StringBuilder le = new StringBuilder();
-//        for (byte b : responseFromTuxedo) {
-//            le.append(b).append(", ");
-//        }
-//        log.info(le.toString());
+        if (responseFromTuxedo.length == 0)
+            return null;
+
+        // log.info(new String(responseFromTuxedo, StandardCharsets.UTF_8));
+        // StringBuilder le = new StringBuilder();
+        // for (byte b : responseFromTuxedo) {
+        // le.append(b).append(", ");
+        // }
+        // log.info(le.toString());
 
         TelegramHeader header = getHeaderFromBytes(responseFromTuxedo);
         TelegramTail tail;
