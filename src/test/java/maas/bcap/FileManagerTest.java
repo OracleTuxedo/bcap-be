@@ -52,52 +52,52 @@ public class FileManagerTest {
     @DisplayName("File Upload - Register")
     public void uploadRegister() throws Exception {
 
-        SAC02F452RInVo sac02f452rInVo = SAC02F452RInVo.builder()
-                .page_no(1)
-                .page_size(10)
-                .mid("71000204442")
-                .auth_strt_date("20240101")
-                .auth_end_date("20240919")
-                .build();
-        String request1 = InterfaceTelegramTest.request("SAC02F452R",
-                sac02f452rInVo);
-        System.out.println(request1);
+        // SAC02F452RInVo sac02f452rInVo = SAC02F452RInVo.builder()
+        //         .page_no(1)
+        //         .page_size(10)
+        //         .mid("71000204442")
+        //         .auth_strt_date("20240101")
+        //         .auth_end_date("20240919")
+        //         .build();
+        // String request1 = InterfaceTelegramTest.request("SAC02F452R",
+        //         sac02f452rInVo);
+        // System.out.println(request1);
 
-        /////////////////////
-        SAC04V127UInSub1Vo inSub1Vo1 = SAC04V127UInSub1Vo.builder()
-                .row_no(1)
-                .pmt_date("20230331")
-                .acq_mb_no("008")
-                .mid("71000204442")
-                .auth_batch_no("308800350789")
-                .pmt_seq_no(1)
-                .reg_date("20230331")
-                .reg_seq_no(1)
-                .build();
+        // /////////////////////
+        // SAC04V127UInSub1Vo inSub1Vo1 = SAC04V127UInSub1Vo.builder()
+        //         .row_no(1)
+        //         .pmt_date("20230331")
+        //         .acq_mb_no("008")
+        //         .mid("71000204442")
+        //         .auth_batch_no("308800350789")
+        //         .pmt_seq_no(1)
+        //         .reg_date("20230331")
+        //         .reg_seq_no(1)
+        //         .build();
 
-        SAC04V127UInVo inVo2 = SAC04V127UInVo.builder()
-                .sub1_vo(List.of(inSub1Vo1))
-                .build();
-        String request2 = InterfaceTelegramTest.request("SAC04V127U", inVo2);
-        System.out.println(request2);
+        // SAC04V127UInVo inVo2 = SAC04V127UInVo.builder()
+        //         .sub1_vo(List.of(inSub1Vo1))
+        //         .build();
+        // String request2 = InterfaceTelegramTest.request("SAC04V127U", inVo2);
+        // System.out.println(request2);
 
-        //////////////////////
-        SMC04V041UInSub1Vo smc04v041uInSub1Vo = SMC04V041UInSub1Vo.builder()
-                .biz_clcd("U")
-                .supics_trns_tp_seq_no("0074")
-                .supics_trns_tp_cd("98")
-                .appl_strt_date("20240905")
-                .appl_end_date("29991231")
-                .min_day_avg_sale_icr_rt(0)
-                .build();
+        // //////////////////////
+        // SMC04V041UInSub1Vo smc04v041uInSub1Vo = SMC04V041UInSub1Vo.builder()
+        //         .biz_clcd("U")
+        //         .supics_trns_tp_seq_no("0074")
+        //         .supics_trns_tp_cd("98")
+        //         .appl_strt_date("20240905")
+        //         .appl_end_date("29991231")
+        //         .min_day_avg_sale_icr_rt(0)
+        //         .build();
 
-        SMC04V041UInVo smc04v041uInVo = SMC04V041UInVo.builder()
-                .sub1_vo(List.of(smc04v041uInSub1Vo))
-                .build();
+        // SMC04V041UInVo smc04v041uInVo = SMC04V041UInVo.builder()
+        //         .sub1_vo(List.of(smc04v041uInSub1Vo))
+        //         .build();
 
-        String request3 = InterfaceTelegramTest.request("SMC04V041U",
-                smc04v041uInVo);
-        System.out.println(request3);
+        // String request3 = InterfaceTelegramTest.request("SMC04V041U",
+        //         smc04v041uInVo);
+        // System.out.println(request3);
 
         ////////////////////
         TelegramUserDataInput userDataInput = buildTelegramUserDataInput();

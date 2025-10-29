@@ -31,7 +31,7 @@ public class InterfaceTelegram {
 
         // throw new Exception("STOP SAMPAI SINI");
 
-        byte[] responseFromTuxedo = new byte[0]; //WeblogicConnector.connectTuxedo(requestToTuxedo);
+        byte[] responseFromTuxedo = WeblogicConnector.connectTuxedo(requestToTuxedo);
 
         if (responseFromTuxedo.length == 0)
             return null;

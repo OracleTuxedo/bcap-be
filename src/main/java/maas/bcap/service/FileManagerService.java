@@ -96,7 +96,6 @@ public class FileManagerService {
 
         String filePath = "";
 
-        /// TODO Dummy
         List<FileInSub1Vo> inSub1Vos = new ArrayList<>();
         for (MultipartFile file : files) {
             String originalFileName = Optional.ofNullable(file.getOriginalFilename()).orElse("");
@@ -133,27 +132,27 @@ public class FileManagerService {
         log.info(inVo);
 
         // Save Files Info into DevonC
-        FileOutVo outVo = fileUploadService.saveFilesToDevonC(authInfoDto, inVo, userInfoFileManagerDto);
+        FileOutVo outVo = fileUploadService.saveFilesToDevonC(authInfoDto, inVo,
+        userInfoFileManagerDto);
 
-        /// TODO Dummy
-        // List<FileOutSub1Vo> outSub1Vos = inSub1Vos.stream().map(inSub1Vo ->
-        /// FileOutSub1Vo.builder()
-        // .file_nm(inSub1Vo.file_nm)
-        // .upl_file_size(inSub1Vo.upl_file_size)
-        // .upl_file_nm(inSub1Vo.file_nm)
-        // .file_path(inSub1Vo.file_path)
-        // .inp_pgm_id(inSub1Vo.inp_pgm_id)
-        // .inp_usr_id(inSub1Vo.inp_usr_id)
-        // .build()).collect(Collectors.toList());
+        // /// TODO Dummy
+        // List<FileOutSub1Vo> outSub1Vos = inSub1Vos.stream().map(inSub1Vo -> FileOutSub1Vo.builder()
+        //         .file_nm(inSub1Vo.file_nm)
+        //         .upl_file_size(inSub1Vo.upl_file_size)
+        //         .upl_file_nm(inSub1Vo.file_nm)
+        //         .file_path(inSub1Vo.file_path)
+        //         .inp_pgm_id(inSub1Vo.inp_pgm_id)
+        //         .inp_usr_id(inSub1Vo.inp_usr_id)
+        //         .build()).collect(Collectors.toList());
         // /// TODO Dummy
         // FileOutVo outVo = FileOutVo.builder()
-        // .attach_file_clcd(inDto.getFileDiv())
-        // .attach_file_expl(inDto.getFileDesc())
-        // .upd_yn("N")
-        // .sub1Vos(outSub1Vos)
-        // .build();
+        //         .attach_file_clcd(inDto.getFileDiv())
+        //         .attach_file_expl(inDto.getFileDesc())
+        //         .upd_yn("N")
+        //         .sub1Vos(outSub1Vos)
+        //         .build();
         // log.info(outSub1Vos);
-        log.info(outVo);
+        // log.info(outVo);
 
         /// Store / Save files to Disk
         saveToDisk(outVo, files, filePath);
