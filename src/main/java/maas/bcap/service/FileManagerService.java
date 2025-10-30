@@ -133,24 +133,25 @@ public class FileManagerService {
 
         // Save Files Info into DevonC
         FileOutVo outVo = fileUploadService.saveFilesToDevonC(authInfoDto, inVo,
-        userInfoFileManagerDto);
+                userInfoFileManagerDto);
 
         // /// TODO Dummy
-        // List<FileOutSub1Vo> outSub1Vos = inSub1Vos.stream().map(inSub1Vo -> FileOutSub1Vo.builder()
-        //         .file_nm(inSub1Vo.file_nm)
-        //         .upl_file_size(inSub1Vo.upl_file_size)
-        //         .upl_file_nm(inSub1Vo.file_nm)
-        //         .file_path(inSub1Vo.file_path)
-        //         .inp_pgm_id(inSub1Vo.inp_pgm_id)
-        //         .inp_usr_id(inSub1Vo.inp_usr_id)
-        //         .build()).collect(Collectors.toList());
+        // List<FileOutSub1Vo> outSub1Vos = inSub1Vos.stream().map(inSub1Vo ->
+        // FileOutSub1Vo.builder()
+        // .file_nm(inSub1Vo.file_nm)
+        // .upl_file_size(inSub1Vo.upl_file_size)
+        // .upl_file_nm(inSub1Vo.file_nm)
+        // .file_path(inSub1Vo.file_path)
+        // .inp_pgm_id(inSub1Vo.inp_pgm_id)
+        // .inp_usr_id(inSub1Vo.inp_usr_id)
+        // .build()).collect(Collectors.toList());
         // /// TODO Dummy
         // FileOutVo outVo = FileOutVo.builder()
-        //         .attach_file_clcd(inDto.getFileDiv())
-        //         .attach_file_expl(inDto.getFileDesc())
-        //         .upd_yn("N")
-        //         .sub1Vos(outSub1Vos)
-        //         .build();
+        // .attach_file_clcd(inDto.getFileDiv())
+        // .attach_file_expl(inDto.getFileDesc())
+        // .upd_yn("N")
+        // .sub1Vos(outSub1Vos)
+        // .build();
         // log.info(outSub1Vos);
         // log.info(outVo);
 
@@ -182,15 +183,37 @@ public class FileManagerService {
                 filePath = fileUploadPath + File.separator + inDto.getFileDiv() + inDto.getExtraPath();
         }
 
+        List<FileInSub1Vo> inSub1Vos = new ArrayList<>();
+
         /// Delete Target Exists
         if (inDto.getAttachFileSeqNo() != null && !inDto.getAttachFileSeqNo().isEmpty()) {
-            deleteTargetFile(authInfoDto, inDto, outVo, filePath);
+            inSub1Vos.addAll(deleteTargetFile(authInfoDto, inDto, outVo, filePath));
         }
-        addTargetFile(authInfoDto, inDto, filePath, files);
+        inSub1Vos.addAll(addTargetFile(authInfoDto, inDto, filePath, files));
+
+        inVo = FileInVo.builder()
+                .attach_file_id(inDto.getAttachFileId())
+                .upd_yn("Y")
+                .sub1Vos(inSub1Vos)
+                .build();
+
+        // Save Files Info into DevonC
+        outVo = fileUploadService.saveFilesToDevonC(authInfoDto, inVo, userInfoFileManagerDto);
+
+        /// Store / Save files to Disk
+        saveToDisk(outVo, files, filePath);
+
+        /// Delete Files from Disk
+        deleteFromDisk(outVo, filePath);
+
         return 0;
     }
 
-    private void deleteTargetFile(AuthInfoDto authInfoDto, FileUploadInDto inDto, FileOutVo outVo, String filePath) {
+    private List<FileInSub1Vo> deleteTargetFile(
+            AuthInfoDto authInfoDto,
+            FileUploadInDto inDto,
+            FileOutVo outVo,
+            String filePath) {
         List<FileInSub1Vo> inSub1Vos = new ArrayList<>();
 
         for (FileOutSub1Vo outSub1Vo : outVo.getSub1Vos()) {
@@ -210,9 +233,10 @@ public class FileManagerService {
                 break;
             }
         }
+        return inSub1Vos;
     }
 
-    private void addTargetFile(
+    private List<FileInSub1Vo> addTargetFile(
             AuthInfoDto authInfoDto,
             FileUploadInDto inDto,
             String filePath,
@@ -237,6 +261,7 @@ public class FileManagerService {
 
             inSub1Vos.add(inSub1Vo);
         }
+        return inSub1Vos;
     }
 
     private void saveToDisk(FileOutVo outVo, List<MultipartFile> files, String filePath)
@@ -260,6 +285,22 @@ public class FileManagerService {
                 file.transferTo(new File(saveFile));
                 break;
             }
+        }
+    }
+
+    private void deleteFromDisk(FileOutVo outVo, String filePath) {
+        log.info("FileManagerService.deleteFromDisk");
+        for (FileOutSub1Vo outSub1Vo : outVo.getSub1Vos()) {
+            String delYn = outSub1Vo.getDel_yn();
+            if (delYn == null || !delYn.equals("Y"))
+                continue;
+
+            String fileSaveName = outSub1Vo.getUpl_file_nm();
+            String savedFile = filePath + File.separator + fileSaveName;
+
+            File file = new File(savedFile);
+            if (file.exists())
+                file.delete();
         }
     }
 
