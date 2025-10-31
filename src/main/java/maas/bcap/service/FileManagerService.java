@@ -52,58 +52,25 @@ public class FileManagerService {
             HttpServletResponse response,
             AuthInfoDto authInfoDto,
             FileDownloadInDto inDto) throws Exception {
-        String userIp = getClientIpAddress(request);
-        final UserInfoFileManagerDto userInfoFileManagerDto = UserInfoFileManagerDto.builder()
-                .screenId(inDto.getScreenId())
-                .userId(authInfoDto.getUserId())
-                .userIp(userIp)
-                .build();
+        log.info("FileManagerService.download");
 
-        FileInSub1Vo inSub1Vo = FileInSub1Vo.builder()
-                .attach_file_id(inDto.getAttachFileId())
-                .attach_file_seq_no(inDto.getAttachFileSeqNo())
-                .build();
-        FileInVo inVo = FileInVo.builder()
-                .attach_file_id(inDto.getAttachFileId())
-                .attach_file_clcd(inDto.getFileDiv())
-                .sub1Vos(List.of(inSub1Vo))
-                .build();
-
-        FileOutVo outVo = fileUploadService.selectFileInfo(authInfoDto, inVo, userInfoFileManagerDto);
-
-        if (outVo.getSub1Vos() == null || outVo.getSub1Vos().isEmpty())
-            throw new Exception("File not found");
-
-        FileOutSub1Vo outSub1Vo = outVo.getSub1Vos().get(0);
-        File file = new File(outSub1Vo.getFile_path() + File.separator + outSub1Vo.getUpl_file_nm());
+        /// TODO Dummy
+        // File file = new File(fileUploadPath + File.separator + "div1" +
+        /// File.separator + "v2.jpg");
+        // File file = new File("D:/bcap/div1/v2.jpg");
+        File file = new File("D/bcap/div2/web1.png");
         if (!file.exists()) {
             /// return response yang mengatakan bawha File Not Found
+            log.error("File Tidak Ada");
             return 0;
         }
-        if (inDto.getChkFlag().equals("chk")) {
-            /// return response mengatakan bahwa File Exist
-            return 1;
-
-        }
-        outSub1Vo.setInp_usr_id(authInfoDto.getUserId());
-        outSub1Vo.setInp_pgm_id(inDto.getScreenId());
-
-        inSub1Vo = FileInSub1Vo.builder()
-                .attach_file_id(inDto.getAttachFileId())
-                .attach_file_seq_no(inDto.getAttachFileSeqNo())
-                .upl_file_nm(outSub1Vo.getUpl_file_nm())
-                .upl_file_size(outSub1Vo.getUpl_file_size())
-                .inp_usr_id(authInfoDto.getUserId())
-                .inp_pgm_id(inDto.getScreenId())
-                .build();
-
-        inVo.setSub1Vos(List.of(inSub1Vo));
-
-        /// History Download Insert
-        fileUploadService.insertFileDownloadHistory(authInfoDto, inVo, userInfoFileManagerDto);
+        log.info("File Ada");
 
         try {
-            setDisposition(outSub1Vo.getFile_nm(), request, response);
+            // setDisposition(outSub1Vo.getFile_nm(), request, response);
+
+            /// TODO Dummy
+            setDisposition("v2.jpg", request, response);
 
             ServletOutputStream outStream = response.getOutputStream();
             BufferedInputStream inStream = new BufferedInputStream(new FileInputStream(file));
@@ -463,19 +430,19 @@ public class FileManagerService {
         String encodedFilename;
 
         switch (browser) {
-            case "MSIE": // IE 10 and below
-            case "Trident": // IE 11
-            case "Edge": // ✅ Microsoft Edge (Chromium and Legacy)
+            case "MSIE":
+            case "Trident":
+            case "Edge":
                 encodedFilename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
                 break;
 
             case "Firefox":
             case "Opera":
-                encodedFilename = "\"" + new String(filename.getBytes("UTF-8"), "ISO-8859-1") + "\"";
+                encodedFilename = new String(filename.getBytes("UTF-8"), "ISO-8859-1");
                 break;
 
             case "Chrome":
-            case "Safari": // ✅ Added Safari (same logic as Chrome)
+            case "Safari":
                 StringBuilder sb = new StringBuilder();
                 for (char c : filename.toCharArray()) {
                     if (c > '~') {
@@ -488,14 +455,19 @@ public class FileManagerService {
                 break;
 
             default:
-                // Safer fallback — browsers should still handle UTF-8
                 encodedFilename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
                 break;
         }
 
-        response.setHeader("Content-Disposition", dispositionPrefix + encodedFilename);
+        // ✅ Send both traditional and RFC 5987 filename
+        response.setHeader("Content-Disposition",
+                dispositionPrefix + "\"" + encodedFilename + "\"" +
+                        "; filename*=UTF-8''" + URLEncoder.encode(filename, "UTF-8"));
 
-        // Opera bug workaround: charset must be declared
+        // ✅ Safer content type
+        response.setContentType("application/octet-stream; charset=UTF-8");
+
+        // Opera workaround
         if ("Opera".equals(browser)) {
             response.setContentType("application/octet-stream;charset=UTF-8");
         }
