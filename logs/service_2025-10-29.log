@@ -1,0 +1,13 @@
+2025-10-29 14:14:59 [http-nio-8080-exec-6] INFO  FileManagerService:49  - FileUploadService.upload
+2025-10-29 14:14:59 [http-nio-8080-exec-6] INFO  FileManagerService:53  - Content-Type multipart/form-data; boundary=----WebKitFormBoundary7suPf8ArlRLDdhfA
+2025-10-29 14:14:59 [http-nio-8080-exec-6] INFO  FileManagerService:70  - UserInfoFileManagerDto(screenId=FileUpload, userIp=0:0:0:0:0:0:0:1)
+2025-10-29 14:14:59 [http-nio-8080-exec-6] INFO  FileManagerService:89  - FileManagerService.registerFiles
+2025-10-29 14:14:59 [http-nio-8080-exec-6] INFO  FileManagerService:95  - [org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@325aa927]
+2025-10-29 14:14:59 [http-nio-8080-exec-6] INFO  FileManagerService:288 - FileUploadService.checkFileExtension
+2025-10-29 14:14:59 [http-nio-8080-exec-6] INFO  FileManagerService:290 - originFileName : [v2.jpg]
+2025-10-29 14:14:59 [http-nio-8080-exec-6] INFO  FileManagerService:292 - jpg
+2025-10-29 14:14:59 [http-nio-8080-exec-6] INFO  FileManagerService:123 - [FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=v2.jpg, upl_file_size=52277, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)]
+2025-10-29 14:14:59 [http-nio-8080-exec-6] INFO  FileManagerService:132 - FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=null, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=v2.jpg, upl_file_size=52277, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-29 14:14:59 [http-nio-8080-exec-6] INFO  FileManagerService:154 - [FileOutSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=v2.jpg, upl_file_size=52277, upl_file_nm=v2.jpg, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)]
+2025-10-29 14:14:59 [http-nio-8080-exec-6] INFO  FileManagerService:155 - FileOutVo(rson_cd=null, attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=null, sub1Vos=[FileOutSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=v2.jpg, upl_file_size=52277, upl_file_nm=v2.jpg, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-29 14:14:59 [http-nio-8080-exec-6] INFO  FileManagerService:244 - FileManagerService.saveToDisk

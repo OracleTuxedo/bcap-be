@@ -33,7 +33,7 @@ import javax.transaction.RollbackException;
  */
 public class WeblogicConnector {
 
-    private static final Logger log = LogManager.getLogger(InterfaceTelegram.class);
+    private static final Logger log = LogManager.getLogger(WeblogicConnector.class);
 
     /// TODO Add exception related to WebClient connection
     public static byte[] connectTuxedo(byte[] request) throws ServletException, IOException, Exception {
@@ -51,14 +51,16 @@ public class WeblogicConnector {
         log.info("request [{}]", new String(request, StandardCharsets.UTF_8));
         // TODO: Configuration to application.properties
         // String baseUrlWeblogic = "http://localhost:7011/bcap";
-        String baseUrlWeblogic = "https://0967c38ee258.ngrok-free.app/bcap";
+        String baseUrlWeblogic = "https://7a109613f333.ngrok-free.app/bcap";
         String url = baseUrlWeblogic + "/message/forward/weblogic";
+        String token = "eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwiZW5jcnlwdGlvblBhc3N3b3JkIjoiN0RCM0M4QUU1MDE1NzI2RkIxQjAxMjBEQ0E5QzZDNzQ1MjI3OTIxOTU1M0RDRjQ4MThDNERGODg1MTY0NDYzQSJ9LCJzdWIiOiIxNzg3MTMwMjcxIiwiZXhwIjoxNzYxODkyNjgxfQ.5e1peMu_bTZLKAlQCpjkWmx273NXAHbkwSMkvfQNrgk";
 
         // Set headers to indicate plain text content
         HttpHeaders headers = new HttpHeaders();
 
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         headers.setAccept(List.of(MediaType.APPLICATION_OCTET_STREAM));
+        headers.setBearerAuth(token);
 
         // Create the HTTP entity with the plain text body and headers
         HttpEntity<byte[]> requestEntity = new HttpEntity<byte[]>(request, headers);
@@ -70,6 +72,7 @@ public class WeblogicConnector {
 
         // Return the response body
         byte[] output = response.getBody();
+        log.info("response [{}]", new String(output, StandardCharsets.UTF_8));
 
         return output;
     }

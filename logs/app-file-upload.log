@@ -1,0 +1,161 @@
+2025-10-30 16:19:41 [main] INFO  BcapApplication:55 - Starting BcapApplication using Java 21.0.6 on LeRuccoLOQ with PID 21932 (C:\bcap\bcap-be\target\classes started by drucc in C:\bcap\bcap-be)
+2025-10-30 16:19:41 [main] INFO  BcapApplication:632 - No active profile set, falling back to 1 default profile: "default"
+2025-10-30 16:19:42 [main] INFO  TomcatWebServer:108 - Tomcat initialized with port(s): 8080 (http)
+2025-10-30 16:19:42 [main] INFO  Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-10-30 16:19:42 [main] INFO  StandardService:173 - Starting service [Tomcat]
+2025-10-30 16:19:42 [main] INFO  StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-10-30 16:19:42 [main] INFO  [/]:173 - Initializing Spring embedded WebApplicationContext
+2025-10-30 16:19:42 [main] INFO  ServletWebServerApplicationContext:292 - Root WebApplicationContext: initialization completed in 1128 ms
+2025-10-30 16:19:42 [main] WARN  UserDetailsServiceAutoConfiguration:89 - 
+
+Using generated security password: b38b70ad-9bc1-42cd-b060-96670acb4f07
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-30 16:19:42 [main] INFO  DefaultSecurityFilterChain:55 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@195580ba, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3c25cfe1, org.springframework.security.web.context.SecurityContextPersistenceFilter@7455dacb, org.springframework.security.web.header.HeaderWriterFilter@49cd946c, org.springframework.web.filter.CorsFilter@1d3c112a, org.springframework.security.web.authentication.logout.LogoutFilter@58f31629, maas.bcap.security.JwtAuthFilter@9ab310b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1d15c0a1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@611e5819, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2a140ce5, org.springframework.security.web.session.SessionManagementFilter@50b46e24, org.springframework.security.web.access.ExceptionTranslationFilter@4c731956, org.springframework.security.web.access.intercept.AuthorizationFilter@531ec978]
+2025-10-30 16:19:42 [main] INFO  EndpointLinksResolver:58 - Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-10-30 16:19:42 [main] INFO  Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2025-10-30 16:19:42 [main] INFO  TomcatWebServer:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2025-10-30 16:19:42 [main] INFO  BcapApplication:61 - Started BcapApplication in 2.363 seconds (JVM running for 2.883)
+2025-10-30 16:19:42 [main] INFO  BcapApplication:18 - Start Application
+2025-10-30 16:20:56 [http-nio-8080-exec-1] INFO  [/]:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-30 16:20:56 [http-nio-8080-exec-1] INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcherServlet'
+2025-10-30 16:20:56 [http-nio-8080-exec-1] INFO  DispatcherServlet:547 - Completed initialization in 2 ms
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileManagerController:45 - authInfoDto : AuthInfoDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A)
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileManagerController:46 - inDto : FileUploadInDto(fileDiv=div1, fileDesc=desc1, extraPath=null, attachFileId=null, attachFileSeqNo=null, screenId=FileUpload)
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileManagerController:47 - Files : [org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@15ed53a8]
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileManagerService:49 - FileUploadService.upload
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileManagerService:53 - Content-Type multipart/form-data; boundary=----WebKitFormBoundary77k5QSYAxGHyKInU
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileManagerService:70 - UserInfoFileManagerDto(screenId=FileUpload, userIp=0:0:0:0:0:0:0:1)
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileManagerService:89 - FileManagerService.registerFiles
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileManagerService:95 - [org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@15ed53a8]
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileManagerService:329 - FileUploadService.checkFileExtension
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileManagerService:331 - originFileName : [web1.png]
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileManagerService:333 - jpg
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileManagerService:333 - png
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileManagerService:123 - [FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=web1.png, upl_file_size=92233, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)]
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileManagerService:132 - FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=null, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=web1.png, upl_file_size=92233, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileUploadService:28 - FileUploadService.saveFilesToDevonC
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileUploadService:32 - FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=U1, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=web1.png, upl_file_size=92233, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileUploadService:91 - FileUploadService.interfaceTuxedo
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  FileUploadService:106 - TelegramUserDataInput(tx_code=SAZ06F010U, client_ip_no=0:0:0:0:0:0:0:1, client_mac=, scrn_id=FileUpload, op_id=1787130271, sync_type=A, async_rspn_yn=0, rspn_svc_code=, ttl_use_flag=0, ttl=0, long_msg_type=1, dst_inst_code=null, fail_knd=null, ap_host_name=null, ap_caller_id=null, lang_type=EN)
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  InterfaceTelegram:19 - #################### Interface Tuxedo ####################
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  InterfaceTelegram:20 - FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=U1, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=web1.png, upl_file_size=92233, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  InterfaceTelegram:21 - FileOutVo(rson_cd=null, attach_file_id=null, attach_file_clcd=null, attach_file_expl=null, upd_yn=null, req_clcd=null, sub1Vos=null)
+2025-10-30 16:20:56 [http-nio-8080-exec-6] INFO  InterfaceTelegram:24 - ByteEncoder
+2025-10-30 16:20:57 [http-nio-8080-exec-6] INFO  InterfaceTelegram:26 - TelegramIn(header=TelegramHeader(msg_len=803, gid_sysname=LeRuccoLOQ, gid_yyyyymmdd=20251030, gid_hhmmss=162056, gid_seq=002, gid_pid=00000, gid_stat=00, tx_code=SAZ06F010U, inst_no=MTI, send_rspn_type=S, rspn_svc_code=, ori_global_id=LeRuccoL202510301620560020000000, ori_send_time=20251030162057000002, chnl_id=WEB, client_ip_no=0:0:0:0:0:0:0:1, client_mac=, scrn_id=FileUpload, scrn_lock_yn=N, op_id=1787130271, xa_begin_flag=0, send_time=20251030162057000002, rspn_time=, sync_type=A, async_rspn_yn=0, call_depth=0, msg_count_no=0, ttl_use_flag=0, ttl_from_time=, ttl=0, long_msg_type=1, err_flag=0, err_src=, err_type=, err_code=, dst_inst_code=, fail_knd=null, ap_host_name=null, ap_caller_id=null, inf_id=, lang_type=EN, reserved=), data=TelegramInData(dataType=D, length=300, reserved=null, data=FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=U1, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=web1.png, upl_file_size=92233, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])), tail=@@)
+2025-10-30 16:20:57 [http-nio-8080-exec-6] INFO  InterfaceTelegram:29 - 00000803LeRuccoL202510301620560020000000SAZ06F010U              MTI S                        LeRuccoL20251030162056002000000020251030162057000002WEB       0:0:0:0:0:0:0:1                             FileUpload N1787130271     020251030162057000002                    A000000      00010                                                                        EN                                                                                                                                             D00000300                             div1desc1                                                                                                                                                                                                                                                           NU100000001                 web1.png                                                                                                                                                                                                000000000000000092233                                                                                                                                                                                                                            D:/bcap\div1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        000001787130271     FileUpload                           @@
+2025-10-30 16:20:57 [http-nio-8080-exec-6] INFO  InterfaceTelegram:30 - TelegramIn(header=TelegramHeader(msg_len=803, gid_sysname=LeRuccoLOQ, gid_yyyyymmdd=20251030, gid_hhmmss=162056, gid_seq=002, gid_pid=00000, gid_stat=00, tx_code=SAZ06F010U, inst_no=MTI, send_rspn_type=S, rspn_svc_code=, ori_global_id=LeRuccoL202510301620560020000000, ori_send_time=20251030162057000002, chnl_id=WEB, client_ip_no=0:0:0:0:0:0:0:1, client_mac=, scrn_id=FileUpload, scrn_lock_yn=N, op_id=1787130271, xa_begin_flag=0, send_time=20251030162057000002, rspn_time=, sync_type=A, async_rspn_yn=0, call_depth=0, msg_count_no=0, ttl_use_flag=0, ttl_from_time=, ttl=0, long_msg_type=1, err_flag=0, err_src=, err_type=, err_code=, dst_inst_code=, fail_knd=null, ap_host_name=null, ap_caller_id=null, inf_id=, lang_type=EN, reserved=), data=TelegramInData(dataType=D, length=300, reserved=null, data=FileInVo(attach_file_id=null, attach_file_clcd=div1, attach_file_expl=desc1, upd_yn=N, req_clcd=U1, sub1Vos=[FileInSub1Vo(attach_file_id=null, attach_file_seq_no=null, attach_file_clcd=null, del_yn=null, file_nm=web1.png, upl_file_size=92233, upl_file_nm=null, file_path=D:/bcap\div1, pfr_rank=0, inp_usr_id=1787130271, inp_pgm_id=FileUpload, chng_usr_id=null, chng_pgm_id=null)])), tail=@@)
+2025-10-30 16:20:57 [http-nio-8080-exec-6] INFO  WeblogicConnector:50 - WeblogicConnector.throughWeblogic
+2025-10-30 16:20:57 [http-nio-8080-exec-6] INFO  WeblogicConnector:51 - request [00000803LeRuccoL202510301620560020000000SAZ06F010U              MTI S                        LeRuccoL20251030162056002000000020251030162057000002WEB       0:0:0:0:0:0:0:1                             FileUpload N1787130271     020251030162057000002                    A000000      00010                                                                        EN                                                                                                                                             D00000300                             div1desc1                                                                                                                                                                                                                                                           NU100000001                 web1.png                                                                                                                                                                                                000000000000000092233                                                                                                                                                                                                                            D:/bcap\div1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        000001787130271     FileUpload                           @@]
+2025-10-30 16:20:57 [http-nio-8080-exec-6] INFO  WeblogicConnector:75 - response [00001128LeRuccoL202510301620560020000000SAZ06F010U              MTI R                        LeRuccoL20251030162056002000000020251030162057000002WEB       0:0:0:0:0:0:0:1                             FileUpload N1787130271     02025103016205700000220251030162057583346A00  00        011COREIN EPFIN0007                                                        EN                                                                                                                                             E00000625                     10system header conversion failure.                                                                                                                                                                                                                                                                           LeRuccoL202510301620560020000000 : SLCFPROXY->LcfProxy.c->LcfProxySysHdrM2S_Except->LINE:[875]      02Message validation error. tp length stamp [%ld], Actual length of received message [%ld]            system header conversion failure.                                                                   @@]
+2025-10-30 16:20:57 [http-nio-8080-exec-6] INFO  InterfaceTelegram:51 - TelegramHeader(msg_len=1128, gid_sysname=LeRuccoL, gid_yyyyymmdd=20251030, gid_hhmmss=162056, gid_seq=002, gid_pid=00000, gid_stat=00, tx_code=SAZ06F010U, inst_no=MTI, send_rspn_type=R, rspn_svc_code=, ori_global_id=LeRuccoL202510301620560020000000, ori_send_time=20251030162057000002, chnl_id=WEB, client_ip_no=0:0:0:0:0:0:0:1, client_mac=, scrn_id=FileUpload, scrn_lock_yn=N, op_id=1787130271, xa_begin_flag=0, send_time=20251030162057000002, rspn_time=20251030162057583346, sync_type=A, async_rspn_yn=0, call_depth=0, msg_count_no=0, ttl_use_flag=0, ttl_from_time=, ttl=0, long_msg_type=1, err_flag=1, err_src=CORE, err_type=IN, err_code=EPFIN0007, dst_inst_code=, fail_knd=, ap_host_name=, ap_caller_id=, inf_id=, lang_type=EN, reserved=)
+2025-10-30 16:20:57 [http-nio-8080-exec-6] INFO  InterfaceTelegram:52 - 1
+2025-10-30 16:20:57 [http-nio-8080-exec-6] INFO  InterfaceTelegram:81 - No Data
+2025-10-30 16:20:57 [http-nio-8080-exec-6] INFO  ServiceSupport:65 - TelegramUserDataOutput(header=TelegramHeader(msg_len=1128, gid_sysname=LeRuccoL, gid_yyyyymmdd=20251030, gid_hhmmss=162056, gid_seq=002, gid_pid=00000, gid_stat=00, tx_code=SAZ06F010U, inst_no=MTI, send_rspn_type=R, rspn_svc_code=, ori_global_id=LeRuccoL202510301620560020000000, ori_send_time=20251030162057000002, chnl_id=WEB, client_ip_no=0:0:0:0:0:0:0:1, client_mac=, scrn_id=FileUpload, scrn_lock_yn=N, op_id=1787130271, xa_begin_flag=0, send_time=20251030162057000002, rspn_time=20251030162057583346, sync_type=A, async_rspn_yn=0, call_depth=0, msg_count_no=0, ttl_use_flag=0, ttl_from_time=, ttl=0, long_msg_type=1, err_flag=1, err_src=CORE, err_type=IN, err_code=EPFIN0007, dst_inst_code=, fail_knd=, ap_host_name=, ap_caller_id=, inf_id=, lang_type=EN, reserved=), message=TelegramMessage(kind=E, length=625, reserved=, msgAttr=1, msgAlm=0, message=system header conversion failure., error_field_name=, error_info=LeRuccoL202510301620560020000000 : SLCFPROXY->LcfProxy.c->LcfProxySysHdrM2S_Except->LINE:[875], list=[]), output=null, outputList=null)
+2025-10-30 16:20:57 [http-nio-8080-exec-6] INFO  FileUploadService:113 - TelegramMessage(kind=E, length=625, reserved=, msgAttr=1, msgAlm=0, message=system header conversion failure., error_field_name=, error_info=LeRuccoL202510301620560020000000 : SLCFPROXY->LcfProxy.c->LcfProxySysHdrM2S_Except->LINE:[875], list=[])
+2025-10-30 16:20:57 [http-nio-8080-exec-6] INFO  FileManagerService:269 - FileManagerService.saveToDisk
+2025-10-30 16:20:57 [http-nio-8080-exec-6] ERROR [dispatcherServlet]:175 - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because "outSub1Vos" is null] with root cause
+java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because "outSub1Vos" is null
+	at maas.bcap.service.FileManagerService.saveToDisk(FileManagerService.java:274) ~[classes/:?]
+	at maas.bcap.service.FileManagerService.registerFiles(FileManagerService.java:159) ~[classes/:?]
+	at maas.bcap.service.FileManagerService.upload(FileManagerService.java:80) ~[classes/:?]
+	at maas.bcap.controller.FileManagerController.upload(FileManagerController.java:50) ~[classes/:?]
+	at jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555) ~[tomcat-embed-core-9.0.83.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623) ~[tomcat-embed-core-9.0.83.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:111) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:337) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:96) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at maas.bcap.security.JwtAuthFilter.doFilterInternal(JwtAuthFilter.java:70) ~[classes/:?]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186) ~[spring-security-web-5.7.11.jar:5.7.11]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96) ~[spring-boot-actuator-2.7.18.jar:2.7.18]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1794) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at java.lang.Thread.run(Thread.java:1583) ~[?:?]

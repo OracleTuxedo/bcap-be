@@ -54,9 +54,9 @@ public class FileUploadService {
         return outVo;
     }
 
-    public FileOutVo selectFileList(AuthInfoDto authInfoDto, FileInVo inVo,
+    public FileOutVo selectFileInfoList(AuthInfoDto authInfoDto, FileInVo inVo,
             UserInfoFileManagerDto userInfoFileManagerDto) throws Exception {
-        log.info("FileUploadService.selectFileList");
+        log.info("FileUploadService.selectFileInfoList");
 
         inVo.setReq_clcd("S2");
 
@@ -82,6 +82,67 @@ public class FileUploadService {
             }
         }
 
+        return outVo;
+    }
+
+    public FileOutVo selectFileInfo(AuthInfoDto authInfoDto, FileInVo inVo,
+            UserInfoFileManagerDto userInfoFileManagerDto)
+            throws Exception {
+        log.info("FileUploadService.selectFileInfo");
+
+        inVo.setReq_clcd("S3");
+
+        log.info(inVo);
+
+        TelegramUserDataOutput<FileOutVo> result = interfaceTuxedo(authInfoDto, inVo, userInfoFileManagerDto);
+
+        FileOutVo outVo = FileOutVo.builder().build();
+        TelegramMessage telegramMessage = result.getMessage();
+        String kind = telegramMessage.getKind();
+
+        if (kind == null) {
+            log.error("No Data Returned");
+            throw new Exception("No Data Returned");
+        } else if (kind.equals("N")) {
+            outVo = result.getOutput();
+            if (!outVo.getRson_cd().equals("00")) {
+                log.error("Error Occurred - Service failed");
+                throw new Exception("Error Occurred - Service failed");
+            } else {
+                log.error("Getting Abnormal Message");
+                throw new Exception("Getting Abnormal Message");
+            }
+        }
+        return outVo;
+    }
+
+    public FileOutVo insertFileDownloadHistory(AuthInfoDto authInfoDto, FileInVo inVo,
+            UserInfoFileManagerDto userInfoFileManagerDto) throws Exception {
+        log.info("FileUploadService.insertFileDonwloadHistory");
+
+        inVo.setReq_clcd("U3");
+
+        log.info(inVo);
+
+        TelegramUserDataOutput<FileOutVo> result = interfaceTuxedo(authInfoDto, inVo, userInfoFileManagerDto);
+
+        FileOutVo outVo = FileOutVo.builder().build();
+        TelegramMessage telegramMessage = result.getMessage();
+        String kind = telegramMessage.getKind();
+
+        if (kind == null) {
+            log.error("No Data Returned");
+            throw new Exception("No Data Returned");
+        } else if (kind.equals("N")) {
+            outVo = result.getOutput();
+            if (!outVo.getRson_cd().equals("00")) {
+                log.error("Error Occurred - Service failed");
+                throw new Exception("Error Occurred - Service failed");
+            } else {
+                log.error("Getting Abnormal Message");
+                throw new Exception("Getting Abnormal Message");
+            }
+        }
         return outVo;
     }
 

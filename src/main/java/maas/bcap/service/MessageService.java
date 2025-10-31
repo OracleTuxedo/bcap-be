@@ -54,7 +54,7 @@ public class MessageService {
 
         /// Do Encryption response messages from Tuxedo
         String encryptedMessage = encrypt(responseMessage, iv);
-        log.debug("encrypted message [" + encryptedMessage + "]");
+        // log.debug("encrypted message [" + encryptedMessage + "]");
 
         return MessageTransferOutDto.builder()
                 .encryptedMessage(encryptedMessage)
@@ -75,7 +75,7 @@ public class MessageService {
             InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
         // Decode Base64 untuk IV
         byte[] ivBytes = Base64.getDecoder().decode(iv);
-        log.debug("ivBytes encrypt [{}]", new String(ivBytes, StandardCharsets.UTF_8));
+        // log.debug("ivBytes encrypt [{}]", new String(ivBytes, StandardCharsets.UTF_8));
 
         // Setup secret key dan IV
         SecretKey key = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "AES");
@@ -87,7 +87,7 @@ public class MessageService {
 
         // Enkripsi data
         byte[] encryptedBytes = cipher.doFinal(message.getBytes(StandardCharsets.UTF_8));
-        log.debug("encrypted bytes [{}]", new String(encryptedBytes, StandardCharsets.UTF_8));
+        // log.debug("encrypted bytes [{}]", new String(encryptedBytes, StandardCharsets.UTF_8));
 
         // Encode hasil enkripsi ke Base64
         return Base64.getEncoder().encodeToString(encryptedBytes);

@@ -33,7 +33,7 @@ public class SecurityConfig {
                 // .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .exceptionHandling(eh -> eh.authenticationEntryPoint(customAuthEntryPoint))
                 .authorizeHttpRequests(auth -> auth
-                        .antMatchers("/message/**", "/auth/me/**").authenticated()
+                        .antMatchers("/message", "/auth/me/**", "/file-manager/**").authenticated()
                         .antMatchers("/**").permitAll() // covers OPTIONS automatically
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)

@@ -1,7 +1,10 @@
 package maas.bcap.service;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +13,9 @@ import java.util.Optional;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import maas.bcap.dto.AuthInfoDto;
+import maas.bcap.dto.FileDownloadInDto;
 import maas.bcap.dto.FileInSub1Vo;
 import maas.bcap.dto.FileInVo;
 import maas.bcap.dto.FileOutSub1Vo;
@@ -40,6 +46,85 @@ public class FileManagerService {
 
     @Autowired
     private FileUploadService fileUploadService;
+
+    public int download(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            AuthInfoDto authInfoDto,
+            FileDownloadInDto inDto) throws Exception {
+        String userIp = getClientIpAddress(request);
+        final UserInfoFileManagerDto userInfoFileManagerDto = UserInfoFileManagerDto.builder()
+                .screenId(inDto.getScreenId())
+                .userId(authInfoDto.getUserId())
+                .userIp(userIp)
+                .build();
+
+        FileInSub1Vo inSub1Vo = FileInSub1Vo.builder()
+                .attach_file_id(inDto.getAttachFileId())
+                .attach_file_seq_no(inDto.getAttachFileSeqNo())
+                .build();
+        FileInVo inVo = FileInVo.builder()
+                .attach_file_id(inDto.getAttachFileId())
+                .attach_file_clcd(inDto.getFileDiv())
+                .sub1Vos(List.of(inSub1Vo))
+                .build();
+
+        FileOutVo outVo = fileUploadService.selectFileInfo(authInfoDto, inVo, userInfoFileManagerDto);
+
+        if (outVo.getSub1Vos() == null || outVo.getSub1Vos().isEmpty())
+            throw new Exception("File not found");
+
+        FileOutSub1Vo outSub1Vo = outVo.getSub1Vos().get(0);
+        File file = new File(outSub1Vo.getFile_path() + File.separator + outSub1Vo.getUpl_file_nm());
+        if (!file.exists()) {
+            /// return response yang mengatakan bawha File Not Found
+            return 0;
+        }
+        if (inDto.getChkFlag().equals("chk")) {
+            /// return response mengatakan bahwa File Exist
+            return 1;
+
+        }
+        outSub1Vo.setInp_usr_id(authInfoDto.getUserId());
+        outSub1Vo.setInp_pgm_id(inDto.getScreenId());
+
+        inSub1Vo = FileInSub1Vo.builder()
+                .attach_file_id(inDto.getAttachFileId())
+                .attach_file_seq_no(inDto.getAttachFileSeqNo())
+                .upl_file_nm(outSub1Vo.getUpl_file_nm())
+                .upl_file_size(outSub1Vo.getUpl_file_size())
+                .inp_usr_id(authInfoDto.getUserId())
+                .inp_pgm_id(inDto.getScreenId())
+                .build();
+
+        inVo.setSub1Vos(List.of(inSub1Vo));
+
+        /// History Download Insert
+        fileUploadService.insertFileDownloadHistory(authInfoDto, inVo, userInfoFileManagerDto);
+
+        try {
+            setDisposition(outSub1Vo.getFile_nm(), request, response);
+
+            ServletOutputStream outStream = response.getOutputStream();
+            BufferedInputStream inStream = new BufferedInputStream(new FileInputStream(file));
+
+            int cnt = 0;
+            byte[] buffer = new byte[1024];
+            while ((cnt = inStream.read(buffer, 0, 1024)) != -1) {
+                outStream.write(buffer, 0, cnt);
+            }
+
+            inStream.close();
+            // outStream.close();
+        } catch (Exception e) {
+            /// File Download Error
+
+        } finally {
+
+        }
+
+        return -1;
+    }
 
     public int upload(
             HttpServletRequest request,
@@ -170,7 +255,7 @@ public class FileManagerService {
                 .attach_file_clcd(inDto.getFileDiv())
                 .build();
 
-        FileOutVo outVo = fileUploadService.selectFileList(authInfoDto, inVo, userInfoFileManagerDto);
+        FileOutVo outVo = fileUploadService.selectFileInfoList(authInfoDto, inVo, userInfoFileManagerDto);
         List<FileOutSub1Vo> outSub1Vos = outVo.getSub1Vos();
 
         String filePath = "";
@@ -338,4 +423,82 @@ public class FileManagerService {
         log.error("BAD Extension file upload!");
         throw new IOException("BAD Extension file upload!");
     }
+
+    private String getBrowser(HttpServletRequest request) {
+        String header = request.getHeader("User-Agent");
+        if (header == null)
+            return "Unknown";
+
+        if (header.contains("MSIE")) {
+            return "MSIE";
+        } else if (header.contains("Trident")) { // IE 11
+            return "IE11";
+        } else if (header.contains("Edg/")) { // ✅ Microsoft Edge (Chromium-based)
+            return "Edge";
+        } else if (header.contains("Edge/")) { // ✅ Legacy Edge (pre-Chromium)
+            return "Edge";
+        } else if (header.contains("Chrome")) {
+            return "Chrome";
+        } else if (header.contains("Safari")) {
+            // Safari must come after Chrome because Chrome UA also contains "Safari"
+            return "Safari";
+        } else if (header.contains("Opera") || header.contains("OPR/")) {
+            return "Opera";
+        } else if (header.contains("Firefox")) {
+            return "Firefox";
+        }
+
+        return "Unknown";
+    }
+
+    /**
+     * Sets the Content-Disposition header for file download,
+     * ensuring proper filename encoding across browsers.
+     */
+    private void setDisposition(String filename, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        String browser = getBrowser(request);
+
+        String dispositionPrefix = "attachment; filename=";
+        String encodedFilename;
+
+        switch (browser) {
+            case "MSIE": // IE 10 and below
+            case "Trident": // IE 11
+            case "Edge": // ✅ Microsoft Edge (Chromium and Legacy)
+                encodedFilename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
+                break;
+
+            case "Firefox":
+            case "Opera":
+                encodedFilename = "\"" + new String(filename.getBytes("UTF-8"), "ISO-8859-1") + "\"";
+                break;
+
+            case "Chrome":
+            case "Safari": // ✅ Added Safari (same logic as Chrome)
+                StringBuilder sb = new StringBuilder();
+                for (char c : filename.toCharArray()) {
+                    if (c > '~') {
+                        sb.append(URLEncoder.encode(String.valueOf(c), "UTF-8"));
+                    } else {
+                        sb.append(c);
+                    }
+                }
+                encodedFilename = sb.toString();
+                break;
+
+            default:
+                // Safer fallback — browsers should still handle UTF-8
+                encodedFilename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
+                break;
+        }
+
+        response.setHeader("Content-Disposition", dispositionPrefix + encodedFilename);
+
+        // Opera bug workaround: charset must be declared
+        if ("Opera".equals(browser)) {
+            response.setContentType("application/octet-stream;charset=UTF-8");
+        }
+    }
+
 }

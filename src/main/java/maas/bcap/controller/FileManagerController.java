@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import maas.bcap.dto.AuthInfoDto;
+import maas.bcap.dto.FileDownloadInDto;
 import maas.bcap.dto.FileUploadInDto;
 import maas.bcap.security.CurrentAuthInfoDto;
 import maas.bcap.service.FileManagerService;
@@ -51,7 +52,12 @@ public class FileManagerController {
     }
 
     @GetMapping("/download")
-    public void download(HttpServletRequest request, HttpServletResponse response) {
+    public void download(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            @CurrentAuthInfoDto AuthInfoDto authInfoDto,
+            @ModelAttribute FileDownloadInDto inDto) throws Exception {
+        fileManagerService.download(request, response, authInfoDto, inDto);
         return;
     }
 
