@@ -53,18 +53,69 @@ public class FileManagerService {
             AuthInfoDto authInfoDto,
             FileDownloadInDto inDto) throws Exception {
         log.info("FileManagerService.download");
+        // String userIp = getClientIpAddress(request);
+        // final UserInfoFileManagerDto userInfoFileManagerDto =
+        // UserInfoFileManagerDto.builder()
+        // .screenId(inDto.getScreenId())
+        // .userId(authInfoDto.getUserId())
+        // .userIp(userIp)
+        // .build();
 
-        /// TODO Dummy
+        // FileInSub1Vo inSub1Vo = FileInSub1Vo.builder()
+        // .attach_file_id(inDto.getAttachFileId())
+        // .attach_file_seq_no(inDto.getAttachFileSeqNo())
+        // .build();
+        // FileInVo inVo = FileInVo.builder()
+        // .attach_file_id(inDto.getAttachFileId())
+        // .attach_file_clcd(inDto.getFileDiv())
+        // .sub1Vos(List.of(inSub1Vo))
+        // .build();
+
+        // FileOutVo outVo = fileUploadService.selectFileInfo(authInfoDto, inVo,
+        // userInfoFileManagerDto);
+
+        // if (outVo.getSub1Vos() == null || outVo.getSub1Vos().isEmpty())
+        // throw new Exception("File not found");
+
+        // FileOutSub1Vo outSub1Vo = outVo.getSub1Vos().get(0);
+        // File file = new File(outSub1Vo.getFile_path() + File.separator +
+        // outSub1Vo.getUpl_file_nm());
+
+        // TODO Dummy
         // File file = new File(fileUploadPath + File.separator + "div1" +
-        /// File.separator + "v2.jpg");
-        // File file = new File("D:/bcap/div1/v2.jpg");
-        File file = new File("D/bcap/div2/web1.png");
+        // File.separator + "v2.jpg");
+
+        File file = new File("D:/bcap/div1/v2.jpg");
+        // File file = new File("D/bcap/div2/web1.png");
         if (!file.exists()) {
             /// return response yang mengatakan bawha File Not Found
             log.error("File Tidak Ada");
             return 0;
         }
         log.info("File Ada");
+
+        // if (inDto.getChkFlag().equals("chk")) {
+        // /// return response mengatakan bahwa File Exist
+        // return 1;
+
+        // }
+        // outSub1Vo.setInp_usr_id(authInfoDto.getUserId());
+        // outSub1Vo.setInp_pgm_id(inDto.getScreenId());
+
+        // inSub1Vo = FileInSub1Vo.builder()
+        // .attach_file_id(inDto.getAttachFileId())
+        // .attach_file_seq_no(inDto.getAttachFileSeqNo())
+        // .upl_file_nm(outSub1Vo.getUpl_file_nm())
+        // .upl_file_size(outSub1Vo.getUpl_file_size())
+        // .inp_usr_id(authInfoDto.getUserId())
+        // .inp_pgm_id(inDto.getScreenId())
+        // .build();
+
+        // inVo.setSub1Vos(List.of(inSub1Vo));
+
+        // /// History Download Insert
+        // fileUploadService.insertFileDownloadHistory(authInfoDto, inVo,
+        // userInfoFileManagerDto);
 
         try {
             // setDisposition(outSub1Vo.getFile_nm(), request, response);
@@ -184,28 +235,27 @@ public class FileManagerService {
         log.info(inVo);
 
         // Save Files Info into DevonC
-        FileOutVo outVo = fileUploadService.saveFilesToDevonC(authInfoDto, inVo,
-                userInfoFileManagerDto);
+        // FileOutVo outVo = fileUploadService.saveFilesToDevonC(authInfoDto, inVo,
+        // userInfoFileManagerDto);
 
-        // /// TODO Dummy
-        // List<FileOutSub1Vo> outSub1Vos = inSub1Vos.stream().map(inSub1Vo ->
-        // FileOutSub1Vo.builder()
-        // .file_nm(inSub1Vo.file_nm)
-        // .upl_file_size(inSub1Vo.upl_file_size)
-        // .upl_file_nm(inSub1Vo.file_nm)
-        // .file_path(inSub1Vo.file_path)
-        // .inp_pgm_id(inSub1Vo.inp_pgm_id)
-        // .inp_usr_id(inSub1Vo.inp_usr_id)
-        // .build()).collect(Collectors.toList());
-        // /// TODO Dummy
-        // FileOutVo outVo = FileOutVo.builder()
-        // .attach_file_clcd(inDto.getFileDiv())
-        // .attach_file_expl(inDto.getFileDesc())
-        // .upd_yn("N")
-        // .sub1Vos(outSub1Vos)
-        // .build();
-        // log.info(outSub1Vos);
-        // log.info(outVo);
+        /// TODO Dummy
+        List<FileOutSub1Vo> outSub1Vos = inSub1Vos.stream().map(inSub1Vo -> FileOutSub1Vo.builder()
+                .file_nm(inSub1Vo.file_nm)
+                .upl_file_size(inSub1Vo.upl_file_size)
+                .upl_file_nm(inSub1Vo.file_nm)
+                .file_path(inSub1Vo.file_path)
+                .inp_pgm_id(inSub1Vo.inp_pgm_id)
+                .inp_usr_id(inSub1Vo.inp_usr_id)
+                .build()).collect(Collectors.toList());
+        /// TODO Dummy
+        FileOutVo outVo = FileOutVo.builder()
+                .attach_file_clcd(inDto.getFileDiv())
+                .attach_file_expl(inDto.getFileDesc())
+                .upd_yn("N")
+                .sub1Vos(outSub1Vos)
+                .build();
+        log.info(outSub1Vos);
+        log.info(outVo);
 
         /// Store / Save files to Disk
         saveToDisk(outVo, files, filePath);
@@ -425,8 +475,6 @@ public class FileManagerService {
     private void setDisposition(String filename, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         String browser = getBrowser(request);
-
-        String dispositionPrefix = "attachment; filename=";
         String encodedFilename;
 
         switch (browser) {
@@ -435,12 +483,10 @@ public class FileManagerService {
             case "Edge":
                 encodedFilename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
                 break;
-
             case "Firefox":
             case "Opera":
                 encodedFilename = new String(filename.getBytes("UTF-8"), "ISO-8859-1");
                 break;
-
             case "Chrome":
             case "Safari":
                 StringBuilder sb = new StringBuilder();
@@ -453,24 +499,19 @@ public class FileManagerService {
                 }
                 encodedFilename = sb.toString();
                 break;
-
             default:
                 encodedFilename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
                 break;
         }
 
-        // ✅ Send both traditional and RFC 5987 filename
-        response.setHeader("Content-Disposition",
-                dispositionPrefix + "\"" + encodedFilename + "\"" +
-                        "; filename*=UTF-8''" + URLEncoder.encode(filename, "UTF-8"));
+        response.setHeader(
+                "Content-Disposition",
+                "attachment; filename=\"" + encodedFilename + "\"; filename*=UTF-8''"
+                        + URLEncoder.encode(filename, "UTF-8"));
+        response.setHeader("Content-Type", "application/octet-stream; charset=UTF-8");
 
-        // ✅ Safer content type
-        response.setContentType("application/octet-stream; charset=UTF-8");
-
-        // Opera workaround
-        if ("Opera".equals(browser)) {
-            response.setContentType("application/octet-stream;charset=UTF-8");
-        }
+        // ✅ The critical fix:
+        response.setHeader("Access-Control-Expose-Headers", "Content-Disposition, Content-Type");
     }
 
 }
