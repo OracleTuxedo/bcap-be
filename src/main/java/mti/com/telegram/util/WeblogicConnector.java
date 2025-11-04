@@ -51,7 +51,7 @@ public class WeblogicConnector {
         log.info("request [{}]", new String(request, StandardCharsets.UTF_8));
         // TODO: Configuration to application.properties
         // String baseUrlWeblogic = "http://localhost:7011/bcap";
-        String baseUrlWeblogic = "https://6a8ae8dbac6d.ngrok-free.app/bcap";
+        String baseUrlWeblogic = "https://a53b06d9736c.ngrok-free.app/bcap";
         String url = baseUrlWeblogic + "/message/forward/weblogic";
         String token = "eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwiZW5jcnlwdGlvblBhc3N3b3JkIjoiN0RCM0M4QUU1MDE1NzI2RkIxQjAxMjBEQ0E5QzZDNzQ1MjI3OTIxOTU1M0RDRjQ4MThDNERGODg1MTY0NDYzQSJ9LCJzdWIiOiIxNzg3MTMwMjcxIiwiZXhwIjoxNzYxODkyNjgxfQ.5e1peMu_bTZLKAlQCpjkWmx273NXAHbkwSMkvfQNrgk";
 

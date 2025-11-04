@@ -14,5 +14,7 @@ public class LoginInDto {
 
     private String encryptionPassword;
 
+    private String appType; // I = MTI, B = MBCS, M = MMP
+
     private String screenId;
 }

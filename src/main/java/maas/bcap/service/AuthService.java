@@ -32,12 +32,13 @@ public class AuthService {
 
     public String login(HttpServletRequest request, LoginInDto inDto) throws NoSuchAlgorithmException {
         /// Password encryption is FE Responsbility
-        // final String encryptedPassword = SHAEncryption.encrypt(inDto.getUserId() + inDto.getPassword());
+        // final String encryptedPassword = SHAEncryption.encrypt(inDto.getUserId() +
+        /// inDto.getPassword());
 
         /// TODO Only Development Local
         /// Call SAZ03F000U for notify DevonC about Login Activity
         // final SAZ03F000UInVo saz03f000uInVo = SAZ03F000UInVo.builder()
-        //         .usr_conn_clcd("I")
+        //         .usr_conn_clcd(inDto.getAppType())
         //         .usr_id(inDto.getUserId())
         //         .usr_paswd(inDto.getEncryptionPassword())
         //         .build();
@@ -66,17 +67,19 @@ public class AuthService {
         /// TODO Only Development Local
         /// Call SAZ03F000U for notify DevonC about Logout Activity
         // final SAZ03F000UInVo saz03f000uInVo = SAZ03F000UInVo.builder()
-        //         .usr_conn_clcd("O")
-        //         .usr_id(outDto.getUserId())
-        //         .build();
+        // .usr_conn_clcd("O")
+        // .usr_id(outDto.getUserId())
+        // .build();
         // log.info("SAZ03F000UInVo [{}]", saz03f000uInVo.toString());
-        // final TelegramUserDataOutput<SAZ03F000UOutVo> saz03v701uResult = saz03f000u.call(
-        //         request,
-        //         saz03f000uInVo,
-        //         outDto.getScreenId());
-        // final Optional<SAZ03F000UOutVo> saz03f000uOutVoOptional = Optional.of(saz03v701uResult.getOutput());
+        // final TelegramUserDataOutput<SAZ03F000UOutVo> saz03v701uResult =
+        /// saz03f000u.call(
+        // request,
+        // saz03f000uInVo,
+        // outDto.getScreenId());
+        // final Optional<SAZ03F000UOutVo> saz03f000uOutVoOptional =
+        /// Optional.of(saz03v701uResult.getOutput());
         // if (saz03f000uOutVoOptional.isPresent())
-        //     log.info("SAZ03F000UOutVo [{}]", saz03f000uOutVoOptional.get().toString());
+        // log.info("SAZ03F000UOutVo [{}]", saz03f000uOutVoOptional.get().toString());
         return;
     }
 }
