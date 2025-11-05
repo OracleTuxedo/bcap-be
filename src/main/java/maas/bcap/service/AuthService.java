@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 import maas.bcap.dto.AuthInfoDto;
@@ -64,9 +65,10 @@ public class AuthService {
 
             if (errCode.equals("WAZAP0060") || errCode.equals("WAZAP0058")) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(LoginOutDto.builder()
-                        .status("Unauthorized")
                         .message("Change Password Needed")
                         .build());
+                // throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Change Password
+                // needed");
             }
 
             /// Generate JWT Token with AuthInfoDto as Payload
@@ -80,15 +82,17 @@ public class AuthService {
             log.info("token [{}]", token);
 
             return ResponseEntity.ok().body(LoginOutDto.builder()
-                    .status("OK")
                     .message("OK")
                     .token(token)
                     .build());
+            // return LoginOutDto.builder()
+            // .token(token)
+            // .build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(LoginOutDto.builder()
-                    .status("Unauthorized")
                     .message(e.getMessage())
                     .build());
+            // throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "WADOH", e);
         }
 
     }

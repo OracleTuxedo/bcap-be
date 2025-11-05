@@ -10,14 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginOutDto {
-
-    // private String usr_ctgo_cd;
-
-    // private String adm_usr_yn;
-
     private String token;
 
-    private String status;
-
     private String message;
+
 }
