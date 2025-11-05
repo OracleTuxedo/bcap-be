@@ -20,7 +20,7 @@ public class BcapController {
         log.warn("warn");
         log.error("error");
         log.fatal("fatal");
-        return "Version 2.4";
+        return "Version 2.5";
     }
 
 }

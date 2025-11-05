@@ -18,7 +18,7 @@ public class BcapApplication {
             log.info("Start Application");
 
         } catch (Exception e) {
-            log.info("Application Failed Mayday Mayday Mayday");
+            log.info("Application Failed");
             throw new RuntimeException(e);
         }
 
