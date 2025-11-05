@@ -3,6 +3,7 @@ package maas.bcap.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import maas.bcap.dto.AuthInfoDto;
 import maas.bcap.dto.LogOutDto;
 import maas.bcap.dto.LoginInDto;
+import maas.bcap.dto.LoginOutDto;
 import maas.bcap.security.CurrentAuthInfoDto;
 import maas.bcap.security.JwtUtil;
 import maas.bcap.service.AuthService;
@@ -32,7 +34,7 @@ public class AuthController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/login")
-    public String login(
+    public ResponseEntity<LoginOutDto> login(
             javax.servlet.http.HttpServletRequest request,
             @RequestBody LoginInDto inDto) throws Exception {
         log.info("LoginInDto [{}]", inDto.toString());

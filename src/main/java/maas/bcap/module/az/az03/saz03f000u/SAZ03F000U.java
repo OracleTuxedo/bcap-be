@@ -19,25 +19,27 @@ public class SAZ03F000U implements BaseModuleInterface<SAZ03F000UOutVo, SAZ03F00
     private ServiceSupport support;
 
     @Override
-    public TelegramUserDataOutput<SAZ03F000UOutVo> call(HttpServletRequest request, SAZ03F000UInVo inVo, String screenId) {
+    public TelegramUserDataOutput<SAZ03F000UOutVo> call(HttpServletRequest request, SAZ03F000UInVo inVo,
+            String screenId) throws TelegramNestedRuntimeException, Exception {
         TelegramUserDataOutput<SAZ03F000UOutVo> result = TelegramUserDataOutput.<SAZ03F000UOutVo>builder().build();
         SAZ03F000UOutVo outVo = SAZ03F000UOutVo.builder().build();
 
         try {
-            TelegramUserDataInput userDataInput = support.tuxedoHeader(request, this.getClass().getSimpleName(), screenId);
+            TelegramUserDataInput userDataInput = support.tuxedoHeader(request, this.getClass().getSimpleName(),
+                    screenId);
             result = support.tuxedoTransaction(userDataInput, inVo, outVo);
         } catch (TelegramNestedRuntimeException e) {
-            log.info(e.toString());
-            log.info(e.getMsg());
+            log.error(e.toString());
+            log.error(e.getMsg());
+            throw e;
         } catch (Exception e) {
-            log.info(e.toString());
-            log.info(e.getClass());
-            log.info(e.getLocalizedMessage());
-            log.info(e.getMessage());
+            log.error(e.toString());
+            log.error(e.getClass());
+            log.error(e.getLocalizedMessage());
+            log.error(e.getMessage());
+            throw e;
         }
 
         return result;
     }
 }
-
-

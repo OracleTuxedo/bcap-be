@@ -6,9 +6,10 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-    "userId": "1787130271",
+    "userId": "178713027",
     "encryptionPassword": "7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A",
-    "screenId": "LOGIN"
+    "screenId": "LOGIN",
+    "appType": "I"
 }
 
 ### Logout

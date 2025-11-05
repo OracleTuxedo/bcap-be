@@ -116,8 +116,8 @@ public class ExampleService {
         log.info(Objects.requireNonNull(CookieManager.getUserData(request)).toString());
 
         return LoginOutDto.builder()
-                .usr_ctgo_cd(userVo.getUsrCtgoCd())
-                .adm_usr_yn(userVo.getAdm_usr_yn())
+                // .usr_ctgo_cd(userVo.getUsrCtgoCd())
+                // .adm_usr_yn(userVo.getAdm_usr_yn())
                 .build();
     }
 
