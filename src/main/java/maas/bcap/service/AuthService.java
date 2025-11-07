@@ -57,6 +57,11 @@ public class AuthService {
                     inDto.getScreenId());
             log.info("saz03f000uResult [{}]", saz03f000uResult);
             final SAZ03F000UOutVo saz03f000uOutVo = saz03f000uResult.getOutput();
+            if (saz03f000uOutVo == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(LoginOutDto.builder()
+                        .message("Wrong Credentials")
+                        .build());
+            }
             log.info("SAZ03F000UOutVo [{}]", saz03f000uOutVo.toString());
 
             final TelegramHeader saz03f000uHeader = saz03f000uResult.getHeader();
