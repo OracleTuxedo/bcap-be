@@ -1,0 +1,47 @@
+2025-12-01 09:28:08 [main] INFO  BcapApplication:55 - Starting BcapApplication using Java 21.0.6 on LeRuccoLOQ with PID 23616 (C:\bcap\bcap-be\target\classes started by drucc in C:\bcap\bcap-be)
+2025-12-01 09:28:08 [main] INFO  BcapApplication:632 - No active profile set, falling back to 1 default profile: "default"
+2025-12-01 09:28:11 [main] INFO  TomcatWebServer:108 - Tomcat initialized with port(s): 8080 (http)
+2025-12-01 09:28:11 [main] INFO  Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-01 09:28:11 [main] INFO  StandardService:173 - Starting service [Tomcat]
+2025-12-01 09:28:11 [main] INFO  StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-12-01 09:28:11 [main] INFO  [/]:173 - Initializing Spring embedded WebApplicationContext
+2025-12-01 09:28:11 [main] INFO  ServletWebServerApplicationContext:292 - Root WebApplicationContext: initialization completed in 3239 ms
+2025-12-01 09:28:12 [main] WARN  UserDetailsServiceAutoConfiguration:89 - 
+
+Using generated security password: ec3d9d8f-896d-450c-8a5d-f16535fc44d1
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-01 09:28:14 [main] INFO  DefaultSecurityFilterChain:55 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1b4872bc, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@498a612d, org.springframework.security.web.context.SecurityContextPersistenceFilter@d54d0f5, org.springframework.security.web.header.HeaderWriterFilter@577bf0aa, org.springframework.web.filter.CorsFilter@1e1237ab, org.springframework.security.web.authentication.logout.LogoutFilter@6f1c3f18, maas.bcap.security.JwtAuthFilter@10e5bf9c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@541bf968, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@61149fa5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4dfdfe7d, org.springframework.security.web.session.SessionManagementFilter@5696c927, org.springframework.security.web.access.ExceptionTranslationFilter@50b46e24, org.springframework.security.web.access.intercept.AuthorizationFilter@6c17c0f8]
+2025-12-01 09:28:15 [main] INFO  EndpointLinksResolver:58 - Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-12-01 09:28:15 [main] INFO  Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-01 09:28:15 [main] INFO  TomcatWebServer:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2025-12-01 09:28:15 [main] INFO  BcapApplication:61 - Started BcapApplication in 7.95 seconds (JVM running for 9.462)
+2025-12-01 09:28:15 [main] INFO  BcapApplication:18 - Start Application
+2025-12-01 10:07:48 [main] INFO  BcapApplication:55 - Starting BcapApplication using Java 21.0.6 on LeRuccoLOQ with PID 20296 (C:\bcap\bcap-be\target\classes started by drucc in C:\bcap\bcap-be)
+2025-12-01 10:07:48 [main] INFO  BcapApplication:632 - No active profile set, falling back to 1 default profile: "default"
+2025-12-01 10:07:50 [main] INFO  TomcatWebServer:108 - Tomcat initialized with port(s): 8080 (http)
+2025-12-01 10:07:51 [main] INFO  Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-01 10:07:51 [main] INFO  StandardService:173 - Starting service [Tomcat]
+2025-12-01 10:07:51 [main] INFO  StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-12-01 10:07:51 [main] INFO  [/]:173 - Initializing Spring embedded WebApplicationContext
+2025-12-01 10:07:51 [main] INFO  ServletWebServerApplicationContext:292 - Root WebApplicationContext: initialization completed in 2729 ms
+2025-12-01 10:07:57 [main] WARN  UserDetailsServiceAutoConfiguration:89 - 
+
+Using generated security password: 3993de06-837f-4f1a-9b9a-65909f3df8d2
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-01 10:07:57 [main] INFO  DefaultSecurityFilterChain:55 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1b4872bc, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@498a612d, org.springframework.security.web.context.SecurityContextPersistenceFilter@d54d0f5, org.springframework.security.web.header.HeaderWriterFilter@577bf0aa, org.springframework.web.filter.CorsFilter@1e1237ab, org.springframework.security.web.authentication.logout.LogoutFilter@6f1c3f18, maas.bcap.security.JwtAuthFilter@252744a1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@541bf968, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@61149fa5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4dfdfe7d, org.springframework.security.web.session.SessionManagementFilter@5696c927, org.springframework.security.web.access.ExceptionTranslationFilter@50b46e24, org.springframework.security.web.access.intercept.AuthorizationFilter@6c17c0f8]
+2025-12-01 10:07:59 [main] INFO  EndpointLinksResolver:58 - Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-12-01 10:08:00 [main] INFO  Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-01 10:08:00 [main] INFO  TomcatWebServer:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2025-12-01 10:08:00 [main] INFO  BcapApplication:61 - Started BcapApplication in 12.013 seconds (JVM running for 12.68)
+2025-12-01 10:08:00 [main] INFO  BcapApplication:18 - Start Application
+2025-12-01 10:08:00 [http-nio-8080-exec-1] INFO  [/]:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-01 10:08:00 [http-nio-8080-exec-1] INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcherServlet'
+2025-12-01 10:08:00 [http-nio-8080-exec-1] INFO  DispatcherServlet:547 - Completed initialization in 2 ms
+2025-12-01 10:08:00 [http-nio-8080-exec-1] INFO  BcapController:19 - info
+2025-12-01 10:08:00 [http-nio-8080-exec-1] WARN  BcapController:20 - warn
+2025-12-01 10:08:00 [http-nio-8080-exec-1] ERROR BcapController:21 - error
+2025-12-01 10:08:00 [http-nio-8080-exec-1] FATAL BcapController:22 - fatal

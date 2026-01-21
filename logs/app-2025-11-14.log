@@ -1,0 +1,52 @@
+2025-11-14 11:35:34 [main] INFO  BcapApplication:55 - Starting BcapApplication using Java 21.0.6 on LeRuccoLOQ with PID 47548 (C:\bcap\bcap-be\target\classes started by drucc in C:\bcap\bcap-be)
+2025-11-14 11:35:34 [main] INFO  BcapApplication:632 - No active profile set, falling back to 1 default profile: "default"
+2025-11-14 11:35:36 [main] INFO  TomcatWebServer:108 - Tomcat initialized with port(s): 8080 (http)
+2025-11-14 11:35:36 [main] INFO  Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-14 11:35:36 [main] INFO  StandardService:173 - Starting service [Tomcat]
+2025-11-14 11:35:36 [main] INFO  StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-14 11:35:36 [main] INFO  [/]:173 - Initializing Spring embedded WebApplicationContext
+2025-11-14 11:35:36 [main] INFO  ServletWebServerApplicationContext:292 - Root WebApplicationContext: initialization completed in 1914 ms
+2025-11-14 11:35:37 [main] WARN  UserDetailsServiceAutoConfiguration:89 - 
+
+Using generated security password: 77b2b240-d087-4a3f-bb72-fcc1f2261895
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-14 11:35:37 [main] INFO  DefaultSecurityFilterChain:55 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@50fdf44f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@172f4514, org.springframework.security.web.context.SecurityContextPersistenceFilter@739e8b96, org.springframework.security.web.header.HeaderWriterFilter@5696c927, org.springframework.web.filter.CorsFilter@7df6d663, org.springframework.security.web.authentication.logout.LogoutFilter@195580ba, maas.bcap.security.JwtAuthFilter@712ac7e6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@54ffa561, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@30aec673, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@13d019a4, org.springframework.security.web.session.SessionManagementFilter@1a2e0d57, org.springframework.security.web.access.ExceptionTranslationFilter@4d98e41b, org.springframework.security.web.access.intercept.AuthorizationFilter@74667e6a]
+2025-11-14 11:35:37 [main] INFO  EndpointLinksResolver:58 - Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-11-14 11:35:37 [main] INFO  Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-14 11:35:37 [main] INFO  TomcatWebServer:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2025-11-14 11:35:37 [main] INFO  BcapApplication:61 - Started BcapApplication in 3.859 seconds (JVM running for 4.704)
+2025-11-14 11:35:37 [main] INFO  BcapApplication:18 - Start Application
+2025-11-14 11:38:58 [main] INFO  BcapApplication:55 - Starting BcapApplication using Java 21.0.6 on LeRuccoLOQ with PID 28916 (C:\bcap\bcap-be\target\classes started by drucc in C:\bcap\bcap-be)
+2025-11-14 11:38:58 [main] INFO  BcapApplication:632 - No active profile set, falling back to 1 default profile: "default"
+2025-11-14 11:39:02 [main] INFO  TomcatWebServer:108 - Tomcat initialized with port(s): 8080 (http)
+2025-11-14 11:39:02 [main] INFO  Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-14 11:39:02 [main] INFO  StandardService:173 - Starting service [Tomcat]
+2025-11-14 11:39:02 [main] INFO  StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-14 11:39:02 [main] INFO  [/]:173 - Initializing Spring embedded WebApplicationContext
+2025-11-14 11:39:02 [main] INFO  ServletWebServerApplicationContext:292 - Root WebApplicationContext: initialization completed in 3574 ms
+2025-11-14 11:39:03 [main] WARN  UserDetailsServiceAutoConfiguration:89 - 
+
+Using generated security password: cf78c958-a786-485f-bd47-750b373408c5
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-14 11:39:03 [main] INFO  DefaultSecurityFilterChain:55 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@236fdf, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@16e99306, org.springframework.security.web.context.SecurityContextPersistenceFilter@31acfd4e, org.springframework.security.web.header.HeaderWriterFilter@5b1efaaf, org.springframework.web.filter.CorsFilter@653fb8d1, org.springframework.security.web.authentication.logout.LogoutFilter@3d9f0a5, maas.bcap.security.JwtAuthFilter@287ae90c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4e80a001, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@577bf0aa, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@48581a3b, org.springframework.security.web.session.SessionManagementFilter@4e140497, org.springframework.security.web.access.ExceptionTranslationFilter@2ba42204, org.springframework.security.web.access.intercept.AuthorizationFilter@489bc8fd]
+2025-11-14 11:39:03 [main] INFO  EndpointLinksResolver:58 - Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-11-14 11:39:03 [main] INFO  Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-14 11:39:03 [main] INFO  TomcatWebServer:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2025-11-14 11:39:03 [main] INFO  BcapApplication:61 - Started BcapApplication in 5.829 seconds (JVM running for 6.917)
+2025-11-14 11:39:03 [main] INFO  BcapApplication:18 - Start Application
+2025-11-14 11:41:49 [http-nio-8080-exec-1] INFO  [/]:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-14 11:41:49 [http-nio-8080-exec-1] INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcherServlet'
+2025-11-14 11:41:49 [http-nio-8080-exec-1] INFO  DispatcherServlet:547 - Completed initialization in 1 ms
+2025-11-14 11:41:49 [http-nio-8080-exec-2] INFO  AuthController:40 - LoginInDto [LoginInDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A, appType=I, screenId=Login)]
+2025-11-14 11:41:49 [http-nio-8080-exec-2] INFO  AuthService:84 - AuthInfoDto [AuthInfoDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A)]
+2025-11-14 11:41:49 [http-nio-8080-exec-2] INFO  AuthService:87 - token [eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwiZW5jcnlwdGlvblBhc3N3b3JkIjoiN0RCM0M4QUU1MDE1NzI2RkIxQjAxMjBEQ0E5QzZDNzQ1MjI3OTIxOTU1M0RDRjQ4MThDNERGODg1MTY0NDYzQSJ9LCJzdWIiOiIxNzg3MTMwMjcxIiwiZXhwIjoxNzYzMTgxNzA5fQ.WyaGOEWct2Xrw8Fd9Pch2E17uVfPJxGJhoNHayvm2H8]
+2025-11-14 13:08:39 [http-nio-8080-exec-8] INFO  AuthController:40 - LoginInDto [LoginInDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A, appType=I, screenId=Login)]
+2025-11-14 13:08:39 [http-nio-8080-exec-8] INFO  AuthService:84 - AuthInfoDto [AuthInfoDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A)]
+2025-11-14 13:08:39 [http-nio-8080-exec-8] INFO  AuthService:87 - token [eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwiZW5jcnlwdGlvblBhc3N3b3JkIjoiN0RCM0M4QUU1MDE1NzI2RkIxQjAxMjBEQ0E5QzZDNzQ1MjI3OTIxOTU1M0RDRjQ4MThDNERGODg1MTY0NDYzQSJ9LCJzdWIiOiIxNzg3MTMwMjcxIiwiZXhwIjoxNzYzMTg2OTE5fQ.G9BJ40gYxXcB9gpiubEFFkfgGUgd07sj-4uaQNPey6E]
+2025-11-14 14:32:55 [http-nio-8080-exec-3] INFO  AuthController:40 - LoginInDto [LoginInDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A, appType=I, screenId=Login)]
+2025-11-14 14:32:55 [http-nio-8080-exec-3] INFO  AuthService:84 - AuthInfoDto [AuthInfoDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A)]
+2025-11-14 14:32:55 [http-nio-8080-exec-3] INFO  AuthService:87 - token [eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwiZW5jcnlwdGlvblBhc3N3b3JkIjoiN0RCM0M4QUU1MDE1NzI2RkIxQjAxMjBEQ0E5QzZDNzQ1MjI3OTIxOTU1M0RDRjQ4MThDNERGODg1MTY0NDYzQSJ9LCJzdWIiOiIxNzg3MTMwMjcxIiwiZXhwIjoxNzYzMTkxOTc1fQ.l833SKUkQQxRUAK-gGVRiJN8aqaTdOyercQjxL4fG6k]

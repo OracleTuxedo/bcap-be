@@ -1,0 +1,89 @@
+2025-12-02 13:46:50 [main] INFO  BcapApplication:55 - Starting BcapApplication using Java 21.0.6 on LeRuccoLOQ with PID 24012 (C:\bcap\bcap-be\target\classes started by drucc in C:\bcap\bcap-be)
+2025-12-02 13:46:50 [main] INFO  BcapApplication:632 - No active profile set, falling back to 1 default profile: "default"
+2025-12-02 13:46:51 [main] INFO  TomcatWebServer:108 - Tomcat initialized with port(s): 8080 (http)
+2025-12-02 13:46:51 [main] INFO  Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-02 13:46:51 [main] INFO  StandardService:173 - Starting service [Tomcat]
+2025-12-02 13:46:51 [main] INFO  StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-12-02 13:46:51 [main] INFO  [/]:173 - Initializing Spring embedded WebApplicationContext
+2025-12-02 13:46:51 [main] INFO  ServletWebServerApplicationContext:292 - Root WebApplicationContext: initialization completed in 1192 ms
+2025-12-02 13:46:51 [main] WARN  UserDetailsServiceAutoConfiguration:89 - 
+
+Using generated security password: cd36faa9-6881-4d4a-b060-f2255b770c40
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-02 13:46:51 [main] INFO  DefaultSecurityFilterChain:55 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@a54acec, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@19da993b, org.springframework.security.web.context.SecurityContextPersistenceFilter@30aec673, org.springframework.security.web.header.HeaderWriterFilter@739265f1, org.springframework.web.filter.CorsFilter@3380ca3d, org.springframework.security.web.authentication.logout.LogoutFilter@70716259, maas.bcap.security.JwtAuthFilter@64387c17, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@188a5fc2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@124d26ba, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@23310248, org.springframework.security.web.session.SessionManagementFilter@49c099b, org.springframework.security.web.access.ExceptionTranslationFilter@6d6bff89, org.springframework.security.web.access.intercept.AuthorizationFilter@13d019a4]
+2025-12-02 13:46:52 [main] INFO  EndpointLinksResolver:58 - Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-12-02 13:46:52 [main] INFO  Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-02 13:46:52 [main] INFO  TomcatWebServer:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2025-12-02 13:46:52 [main] INFO  BcapApplication:61 - Started BcapApplication in 2.55 seconds (JVM running for 3.215)
+2025-12-02 13:46:52 [main] INFO  BcapApplication:18 - Start Application
+2025-12-02 13:48:46 [http-nio-8080-exec-1] INFO  [/]:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-02 13:48:46 [http-nio-8080-exec-1] INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcherServlet'
+2025-12-02 13:48:46 [http-nio-8080-exec-1] INFO  DispatcherServlet:547 - Completed initialization in 2 ms
+2025-12-02 13:49:00 [http-nio-8080-exec-5] INFO  AuthController:40 - LoginInDto [LoginInDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A, appType=I, screenId=Login)]
+2025-12-02 13:49:00 [http-nio-8080-exec-5] INFO  AuthService:53 - SAZ03F000UInVo [SAZ03F000UInVo(usr_conn_clcd=I, usr_id=1787130271, usr_paswd=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A)]
+2025-12-02 13:49:00 [http-nio-8080-exec-5] INFO  ServiceSupport:80 - EN
+2025-12-02 13:49:00 [http-nio-8080-exec-5] INFO  ServiceSupport:55 - TelegramUserDataInput(tx_code=SAZ03F000U, client_ip_no=0:0:0:0:0:0:0:1, client_mac=null, scrn_id=Login, op_id=undefined, sync_type=A, async_rspn_yn=0, rspn_svc_code=, ttl_use_flag=0, ttl=0, long_msg_type=1, dst_inst_code=null, fail_knd=null, ap_host_name=null, ap_caller_id=null, lang_type=EN)
+2025-12-02 13:49:00 [http-nio-8080-exec-5] INFO  InterfaceTelegram:19 - #################### Interface Tuxedo ####################
+2025-12-02 13:49:00 [http-nio-8080-exec-5] INFO  InterfaceTelegram:20 - SAZ03F000UInVo(usr_conn_clcd=I, usr_id=1787130271, usr_paswd=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A)
+2025-12-02 13:49:00 [http-nio-8080-exec-5] INFO  InterfaceTelegram:21 - SAZ03F000UOutVo(trns_cnt=0)
+2025-12-02 13:49:00 [http-nio-8080-exec-5] INFO  InterfaceTelegram:24 - ByteEncoder
+2025-12-02 13:49:00 [http-nio-8080-exec-5] INFO  InterfaceTelegram:26 - TelegramIn(header=TelegramHeader(msg_len=604, gid_sysname=LeRuccoLOQ, gid_yyyyymmdd=20251202, gid_hhmmss=134900, gid_seq=002, gid_pid=00000, gid_stat=00, tx_code=SAZ03F000U, inst_no=MTI, send_rspn_type=S, rspn_svc_code=, ori_global_id=LeRuccoL202512021349000020000000, ori_send_time=20251202134900000188, chnl_id=WEB, client_ip_no=0:0:0:0:0:0:0:1, client_mac=null, scrn_id=Login, scrn_lock_yn=N, op_id=undefined, xa_begin_flag=0, send_time=20251202134900000189, rspn_time=, sync_type=A, async_rspn_yn=0, call_depth=0, msg_count_no=0, ttl_use_flag=0, ttl_from_time=, ttl=0, long_msg_type=1, err_flag=0, err_src=, err_type=, err_code=, dst_inst_code=, fail_knd=null, ap_host_name=null, ap_caller_id=null, inf_id=, lang_type=EN, reserved=), data=TelegramInData(dataType=D, length=101, reserved=null, data=SAZ03F000UInVo(usr_conn_clcd=I, usr_id=1787130271, usr_paswd=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A)), tail=@@)
+2025-12-02 13:49:00 [http-nio-8080-exec-5] INFO  InterfaceTelegram:29 - 00000604LeRuccoL202512021349000020000000SAZ03F000U              MTI S                        LeRuccoL20251202134900002000000020251202134900000188WEB       0:0:0:0:0:0:0:1                             Login      Nundefined      020251202134900000189                    A000000      00010                                                                        EN                                                                                                                                             D00000101                     I1787130271     7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A@@
+2025-12-02 13:49:00 [http-nio-8080-exec-5] INFO  InterfaceTelegram:30 - TelegramIn(header=TelegramHeader(msg_len=604, gid_sysname=LeRuccoLOQ, gid_yyyyymmdd=20251202, gid_hhmmss=134900, gid_seq=002, gid_pid=00000, gid_stat=00, tx_code=SAZ03F000U, inst_no=MTI, send_rspn_type=S, rspn_svc_code=, ori_global_id=LeRuccoL202512021349000020000000, ori_send_time=20251202134900000188, chnl_id=WEB, client_ip_no=0:0:0:0:0:0:0:1, client_mac=null, scrn_id=Login, scrn_lock_yn=N, op_id=undefined, xa_begin_flag=0, send_time=20251202134900000189, rspn_time=, sync_type=A, async_rspn_yn=0, call_depth=0, msg_count_no=0, ttl_use_flag=0, ttl_from_time=, ttl=0, long_msg_type=1, err_flag=0, err_src=, err_type=, err_code=, dst_inst_code=, fail_knd=null, ap_host_name=null, ap_caller_id=null, inf_id=, lang_type=EN, reserved=), data=TelegramInData(dataType=D, length=101, reserved=null, data=SAZ03F000UInVo(usr_conn_clcd=I, usr_id=1787130271, usr_paswd=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A)), tail=@@)
+2025-12-02 13:49:00 [http-nio-8080-exec-5] INFO  WeblogicConnector:81 - WeblogicConnector.directConnectTuxedo
+2025-12-02 13:49:00 [http-nio-8080-exec-5] INFO  WeblogicConnector:102 - Could not get TuxedoConnectionFactory : NamingException:
+Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
+2025-12-02 13:49:00 [http-nio-8080-exec-5] INFO  WeblogicConnector:103 - Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
+2025-12-02 13:49:00 [http-nio-8080-exec-5] ERROR SAZ03F000U:36 - java.lang.NullPointerException: Cannot invoke "weblogic.wtc.gwt.TuxedoConnection.tpterm()" because "var3" is null
+2025-12-02 13:49:00 [http-nio-8080-exec-5] ERROR SAZ03F000U:37 - class java.lang.NullPointerException
+2025-12-02 13:49:00 [http-nio-8080-exec-5] ERROR SAZ03F000U:38 - Cannot invoke "weblogic.wtc.gwt.TuxedoConnection.tpterm()" because "var3" is null
+2025-12-02 13:49:00 [http-nio-8080-exec-5] ERROR SAZ03F000U:39 - Cannot invoke "weblogic.wtc.gwt.TuxedoConnection.tpterm()" because "var3" is null
+2025-12-02 13:50:36 [main] INFO  BcapApplication:55 - Starting BcapApplication using Java 21.0.6 on LeRuccoLOQ with PID 9692 (C:\bcap\bcap-be\target\classes started by drucc in C:\bcap\bcap-be)
+2025-12-02 13:50:36 [main] INFO  BcapApplication:632 - No active profile set, falling back to 1 default profile: "default"
+2025-12-02 13:50:37 [main] INFO  TomcatWebServer:108 - Tomcat initialized with port(s): 8080 (http)
+2025-12-02 13:50:37 [main] INFO  Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-02 13:50:37 [main] INFO  StandardService:173 - Starting service [Tomcat]
+2025-12-02 13:50:37 [main] INFO  StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-12-02 13:50:37 [main] INFO  [/]:173 - Initializing Spring embedded WebApplicationContext
+2025-12-02 13:50:37 [main] INFO  ServletWebServerApplicationContext:292 - Root WebApplicationContext: initialization completed in 1110 ms
+2025-12-02 13:50:37 [main] WARN  UserDetailsServiceAutoConfiguration:89 - 
+
+Using generated security password: aa95f6b4-6db6-483d-826f-0e3eaf951844
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-02 13:50:37 [main] INFO  DefaultSecurityFilterChain:55 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4971f459, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4c07d1fc, org.springframework.security.web.context.SecurityContextPersistenceFilter@5b35c7d, org.springframework.security.web.header.HeaderWriterFilter@674da77b, org.springframework.web.filter.CorsFilter@2eada095, org.springframework.security.web.authentication.logout.LogoutFilter@58eac00e, maas.bcap.security.JwtAuthFilter@63f9b562, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4c731956, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@14d25b6e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@52831a73, org.springframework.security.web.session.SessionManagementFilter@5b1efaaf, org.springframework.security.web.access.ExceptionTranslationFilter@39da5e49, org.springframework.security.web.access.intercept.AuthorizationFilter@4a89ef44]
+2025-12-02 13:50:38 [main] INFO  EndpointLinksResolver:58 - Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-12-02 13:50:38 [main] INFO  Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-02 13:50:38 [main] INFO  TomcatWebServer:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2025-12-02 13:50:38 [main] INFO  BcapApplication:61 - Started BcapApplication in 2.182 seconds (JVM running for 2.753)
+2025-12-02 13:50:38 [main] INFO  BcapApplication:18 - Start Application
+2025-12-02 13:52:03 [http-nio-8080-exec-1] INFO  [/]:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-02 13:52:03 [http-nio-8080-exec-1] INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcherServlet'
+2025-12-02 13:52:03 [http-nio-8080-exec-1] INFO  DispatcherServlet:547 - Completed initialization in 3 ms
+2025-12-02 13:52:04 [http-nio-8080-exec-2] INFO  AuthController:40 - LoginInDto [LoginInDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A, appType=I, screenId=Login)]
+2025-12-02 13:52:04 [http-nio-8080-exec-2] INFO  AuthService:84 - AuthInfoDto [AuthInfoDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A)]
+2025-12-02 13:52:04 [http-nio-8080-exec-2] INFO  AuthService:87 - token [eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwiZW5jcnlwdGlvblBhc3N3b3JkIjoiN0RCM0M4QUU1MDE1NzI2RkIxQjAxMjBEQ0E5QzZDNzQ1MjI3OTIxOTU1M0RDRjQ4MThDNERGODg1MTY0NDYzQSJ9LCJzdWIiOiIxNzg3MTMwMjcxIiwiZXhwIjoxNzY0NzQ0NzI0fQ.cLmie-zcyC0KmW-FnxUdcOUkmRJ-EGumnJwRdngkYX0]
+2025-12-02 14:55:37 [http-nio-8080-exec-7] INFO  AuthController:40 - LoginInDto [LoginInDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A, appType=I, screenId=Login)]
+2025-12-02 14:55:37 [http-nio-8080-exec-7] INFO  AuthService:84 - AuthInfoDto [AuthInfoDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A)]
+2025-12-02 14:55:37 [http-nio-8080-exec-7] INFO  AuthService:87 - token [eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwiZW5jcnlwdGlvblBhc3N3b3JkIjoiN0RCM0M4QUU1MDE1NzI2RkIxQjAxMjBEQ0E5QzZDNzQ1MjI3OTIxOTU1M0RDRjQ4MThDNERGODg1MTY0NDYzQSJ9LCJzdWIiOiIxNzg3MTMwMjcxIiwiZXhwIjoxNzY0NzQ4NTM3fQ.QUKVIUtb4XxyfkcCoXAP2KpQCyBRy9Xh9IbSqUyIol4]
+2025-12-02 15:21:23 [http-nio-8080-exec-10] INFO  AuthController:40 - LoginInDto [LoginInDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A, appType=I, screenId=Login)]
+2025-12-02 15:21:23 [http-nio-8080-exec-10] INFO  AuthService:84 - AuthInfoDto [AuthInfoDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A)]
+2025-12-02 15:21:23 [http-nio-8080-exec-10] INFO  AuthService:87 - token [eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwiZW5jcnlwdGlvblBhc3N3b3JkIjoiN0RCM0M4QUU1MDE1NzI2RkIxQjAxMjBEQ0E5QzZDNzQ1MjI3OTIxOTU1M0RDRjQ4MThDNERGODg1MTY0NDYzQSJ9LCJzdWIiOiIxNzg3MTMwMjcxIiwiZXhwIjoxNzY0NzUwMDgzfQ.9xZvozp6bNTFEwsyoVPX-li9WvokmLuLjAwI1A6pdfc]
+2025-12-02 15:40:04 [http-nio-8080-exec-3] INFO  AuthController:40 - LoginInDto [LoginInDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A, appType=I, screenId=Login)]
+2025-12-02 15:40:04 [http-nio-8080-exec-3] INFO  AuthService:84 - AuthInfoDto [AuthInfoDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A)]
+2025-12-02 15:40:04 [http-nio-8080-exec-3] INFO  AuthService:87 - token [eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwiZW5jcnlwdGlvblBhc3N3b3JkIjoiN0RCM0M4QUU1MDE1NzI2RkIxQjAxMjBEQ0E5QzZDNzQ1MjI3OTIxOTU1M0RDRjQ4MThDNERGODg1MTY0NDYzQSJ9LCJzdWIiOiIxNzg3MTMwMjcxIiwiZXhwIjoxNzY0NzUxMjA0fQ.2YCeRjzapSq8v3i1pVN-alsZSLRvsRf9qVUTUkvq7U0]
+2025-12-02 15:43:51 [http-nio-8080-exec-6] INFO  AuthController:40 - LoginInDto [LoginInDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A, appType=I, screenId=Login)]
+2025-12-02 15:43:51 [http-nio-8080-exec-6] INFO  AuthService:84 - AuthInfoDto [AuthInfoDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A)]
+2025-12-02 15:43:52 [http-nio-8080-exec-6] INFO  AuthService:87 - token [eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwiZW5jcnlwdGlvblBhc3N3b3JkIjoiN0RCM0M4QUU1MDE1NzI2RkIxQjAxMjBEQ0E5QzZDNzQ1MjI3OTIxOTU1M0RDRjQ4MThDNERGODg1MTY0NDYzQSJ9LCJzdWIiOiIxNzg3MTMwMjcxIiwiZXhwIjoxNzY0NzUxNDMyfQ.hzTHvonl-qJhuOsi2lyxzrwpUwj3LxZ2HnD_RYft7x8]
+2025-12-02 15:48:31 [http-nio-8080-exec-9] INFO  AuthController:40 - LoginInDto [LoginInDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A, appType=I, screenId=Login)]
+2025-12-02 15:48:31 [http-nio-8080-exec-9] INFO  AuthService:84 - AuthInfoDto [AuthInfoDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A)]
+2025-12-02 15:48:31 [http-nio-8080-exec-9] INFO  AuthService:87 - token [eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwiZW5jcnlwdGlvblBhc3N3b3JkIjoiN0RCM0M4QUU1MDE1NzI2RkIxQjAxMjBEQ0E5QzZDNzQ1MjI3OTIxOTU1M0RDRjQ4MThDNERGODg1MTY0NDYzQSJ9LCJzdWIiOiIxNzg3MTMwMjcxIiwiZXhwIjoxNzY0NzUxNzExfQ.fpMpJ5pBgFo1DN9blEVHtdEVHo2GLHnEltEZxgsl1oA]
+2025-12-02 15:49:41 [http-nio-8080-exec-2] INFO  AuthController:40 - LoginInDto [LoginInDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A, appType=I, screenId=Login)]
+2025-12-02 15:49:41 [http-nio-8080-exec-2] INFO  AuthService:84 - AuthInfoDto [AuthInfoDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A)]
+2025-12-02 15:49:41 [http-nio-8080-exec-2] INFO  AuthService:87 - token [eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwiZW5jcnlwdGlvblBhc3N3b3JkIjoiN0RCM0M4QUU1MDE1NzI2RkIxQjAxMjBEQ0E5QzZDNzQ1MjI3OTIxOTU1M0RDRjQ4MThDNERGODg1MTY0NDYzQSJ9LCJzdWIiOiIxNzg3MTMwMjcxIiwiZXhwIjoxNzY0NzUxNzgxfQ.ZaINlnaFf_IGc1gBAB9xgMKWcocrfeZiy5zBQPylm_Q]
+2025-12-02 15:54:02 [http-nio-8080-exec-5] INFO  AuthController:40 - LoginInDto [LoginInDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A, appType=I, screenId=Login)]
+2025-12-02 15:54:02 [http-nio-8080-exec-5] INFO  AuthService:84 - AuthInfoDto [AuthInfoDto(userId=1787130271, encryptionPassword=7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A)]
+2025-12-02 15:54:02 [http-nio-8080-exec-5] INFO  AuthService:87 - token [eyJhbGciOiJIUzI1NiJ9.eyJBdXRoSW5mbyI6eyJ1c2VySWQiOiIxNzg3MTMwMjcxIiwiZW5jcnlwdGlvblBhc3N3b3JkIjoiN0RCM0M4QUU1MDE1NzI2RkIxQjAxMjBEQ0E5QzZDNzQ1MjI3OTIxOTU1M0RDRjQ4MThDNERGODg1MTY0NDYzQSJ9LCJzdWIiOiIxNzg3MTMwMjcxIiwiZXhwIjoxNzY0NzUyMDQyfQ.yD1ul4Os5uHjAnnUepuLPQWzBg1YbwM0wAvcblpl_QU]
