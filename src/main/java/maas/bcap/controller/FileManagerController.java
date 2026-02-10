@@ -1,9 +1,6 @@
 package maas.bcap.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,11 +40,9 @@ public class FileManagerController {
             @ModelAttribute FileUploadInDto inDto,
             @RequestPart("files") List<MultipartFile> files) throws Exception {
 
-        log.info("authInfoDto : {}", authInfoDto);
-        log.info("inDto : {}", inDto);
-        log.info("Files : {}", files);
-        // AuthInfoDto authInfoDto =
-        // AuthInfoDto.builder().userId("1787130271").encryptionPassword("aaaaa").build();
+        log.info("Upload request from userId [{}], fileCount [{}]", authInfoDto.getUserId(), files != null ? files.size() : 0);
+        log.debug("inDto : {}", inDto);
+        log.debug("Files : {}", files);
         fileManagerService.upload(request, authInfoDto, inDto, files);
     }
 

@@ -9,11 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginOutDto {
-    private String token;
-
+public class RefreshTokenOutDto {
+    private String accessToken;
     private String refreshToken;
-
     private String message;
-
 }

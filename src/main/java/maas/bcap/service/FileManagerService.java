@@ -5,12 +5,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletOutputStream;
@@ -53,74 +51,15 @@ public class FileManagerService {
             AuthInfoDto authInfoDto,
             FileDownloadInDto inDto) throws Exception {
         log.info("FileManagerService.download");
-        // String userIp = getClientIpAddress(request);
-        // final UserInfoFileManagerDto userInfoFileManagerDto =
-        // UserInfoFileManagerDto.builder()
-        // .screenId(inDto.getScreenId())
-        // .userId(authInfoDto.getUserId())
-        // .userIp(userIp)
-        // .build();
 
-        // FileInSub1Vo inSub1Vo = FileInSub1Vo.builder()
-        // .attach_file_id(inDto.getAttachFileId())
-        // .attach_file_seq_no(inDto.getAttachFileSeqNo())
-        // .build();
-        // FileInVo inVo = FileInVo.builder()
-        // .attach_file_id(inDto.getAttachFileId())
-        // .attach_file_clcd(inDto.getFileDiv())
-        // .sub1Vos(List.of(inSub1Vo))
-        // .build();
-
-        // FileOutVo outVo = fileUploadService.selectFileInfo(authInfoDto, inVo,
-        // userInfoFileManagerDto);
-
-        // if (outVo.getSub1Vos() == null || outVo.getSub1Vos().isEmpty())
-        // throw new Exception("File not found");
-
-        // FileOutSub1Vo outSub1Vo = outVo.getSub1Vos().get(0);
-        // File file = new File(outSub1Vo.getFile_path() + File.separator +
-        // outSub1Vo.getUpl_file_nm());
-
-        // TODO Dummy
-        // File file = new File(fileUploadPath + File.separator + "div1" +
-        // File.separator + "v2.jpg");
-
-        File file = new File("D:/bcap/div1/v2.jpg");
-        // File file = new File("D/bcap/div2/web1.png");
+        // TODO Dummy — replace with real DevonC file lookup
+        File file = new File(fileUploadPath + File.separator + "div1" + File.separator + "v2.jpg");
         if (!file.exists()) {
-            /// return response yang mengatakan bawha File Not Found
-            log.error("File Tidak Ada");
+            log.error("File not found");
             return 0;
         }
-        log.info("File Ada");
-
-        // if (inDto.getChkFlag().equals("chk")) {
-        // /// return response mengatakan bahwa File Exist
-        // return 1;
-
-        // }
-        // outSub1Vo.setInp_usr_id(authInfoDto.getUserId());
-        // outSub1Vo.setInp_pgm_id(inDto.getScreenId());
-
-        // inSub1Vo = FileInSub1Vo.builder()
-        // .attach_file_id(inDto.getAttachFileId())
-        // .attach_file_seq_no(inDto.getAttachFileSeqNo())
-        // .upl_file_nm(outSub1Vo.getUpl_file_nm())
-        // .upl_file_size(outSub1Vo.getUpl_file_size())
-        // .inp_usr_id(authInfoDto.getUserId())
-        // .inp_pgm_id(inDto.getScreenId())
-        // .build();
-
-        // inVo.setSub1Vos(List.of(inSub1Vo));
-
-        // /// History Download Insert
-        // fileUploadService.insertFileDownloadHistory(authInfoDto, inVo,
-        // userInfoFileManagerDto);
 
         try {
-            // setDisposition(outSub1Vo.getFile_nm(), request, response);
-
-            /// TODO Dummy
             setDisposition("v2.jpg", request, response);
 
             ServletOutputStream outStream = response.getOutputStream();
@@ -133,12 +72,8 @@ public class FileManagerService {
             }
 
             inStream.close();
-            // outStream.close();
         } catch (Exception e) {
-            /// File Download Error
-
-        } finally {
-
+            log.error("File download error", e);
         }
 
         return -1;
@@ -172,7 +107,7 @@ public class FileManagerService {
                 .build();
         log.info(userInfoFileManagerDto);
 
-        if (inDto.getFileDiv().equals("") || inDto.getFileDiv() == null) {
+        if (inDto.getFileDiv() == null || inDto.getFileDiv().equals("")) {
             log.error("Path Set Error");
             throw new Exception("Path Set Error");
         }
@@ -212,7 +147,7 @@ public class FileManagerService {
             if (inDto.getExtraPath() == null || inDto.getExtraPath().equals(""))
                 filePath = fileUploadPath + File.separator + inDto.getFileDiv();
             else
-                filePath = fileUploadPath + File.separator + inDto.getFileDiv() + inDto.getExtraPath();
+                filePath = buildSafeFilePath(fileUploadPath, inDto.getFileDiv(), inDto.getExtraPath());
 
             FileInSub1Vo inSub1Vo = FileInSub1Vo.builder()
                     .file_nm(originalFileName)
@@ -234,11 +169,7 @@ public class FileManagerService {
 
         log.info(inVo);
 
-        // Save Files Info into DevonC
-        // FileOutVo outVo = fileUploadService.saveFilesToDevonC(authInfoDto, inVo,
-        // userInfoFileManagerDto);
-
-        /// TODO Dummy
+        // TODO Dummy — replace with: fileUploadService.saveFilesToDevonC(authInfoDto, inVo, userInfoFileManagerDto)
         List<FileOutSub1Vo> outSub1Vos = inSub1Vos.stream().map(inSub1Vo -> FileOutSub1Vo.builder()
                 .file_nm(inSub1Vo.file_nm)
                 .upl_file_size(inSub1Vo.upl_file_size)
@@ -247,7 +178,6 @@ public class FileManagerService {
                 .inp_pgm_id(inSub1Vo.inp_pgm_id)
                 .inp_usr_id(inSub1Vo.inp_usr_id)
                 .build()).collect(Collectors.toList());
-        /// TODO Dummy
         FileOutVo outVo = FileOutVo.builder()
                 .attach_file_clcd(inDto.getFileDiv())
                 .attach_file_expl(inDto.getFileDesc())
@@ -282,7 +212,7 @@ public class FileManagerService {
             if (inDto.getExtraPath() == null || inDto.getExtraPath().equals(""))
                 filePath = fileUploadPath + File.separator + inDto.getFileDiv();
             else
-                filePath = fileUploadPath + File.separator + inDto.getFileDiv() + inDto.getExtraPath();
+                filePath = buildSafeFilePath(fileUploadPath, inDto.getFileDiv(), inDto.getExtraPath());
         }
 
         List<FileInSub1Vo> inSub1Vos = new ArrayList<>();
@@ -431,14 +361,28 @@ public class FileManagerService {
         log.info("FileUploadService.checkFileExtension");
         String originFileName = Optional.ofNullable(file.getOriginalFilename()).orElse("");
         log.info("originFileName : [{}]", originFileName);
+
+        // Sanitize filename - strip path components to prevent path traversal
+        originFileName = new File(originFileName).getName();
+
         for (String allowExt : fileExtFilter.split(",")) {
             log.info(allowExt);
-            if (originFileName.endsWith(allowExt))
+            if (originFileName.toLowerCase().endsWith("." + allowExt.trim().toLowerCase()))
                 return true;
         }
 
         log.error("BAD Extension file upload!");
         throw new IOException("BAD Extension file upload!");
+    }
+
+    private String buildSafeFilePath(String basePath, String fileDiv, String extraPath) throws Exception {
+        Path base = Path.of(basePath).normalize().toAbsolutePath();
+        Path resolved = base.resolve(fileDiv + extraPath).normalize().toAbsolutePath();
+        if (!resolved.startsWith(base)) {
+            log.error("Path traversal attempt detected: extraPath [{}]", extraPath);
+            throw new Exception("Invalid file path");
+        }
+        return resolved.toString();
     }
 
     private String getBrowser(HttpServletRequest request) {

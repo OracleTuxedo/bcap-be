@@ -8,8 +8,6 @@ import mti.com.utility.ExceptionUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.nio.charset.StandardCharsets;
-
 /// Interface Telegram for Tuxedo Connection
 public class InterfaceTelegram {
     private static final Logger log = LogManager.getLogger(InterfaceTelegram.class);
@@ -17,17 +15,17 @@ public class InterfaceTelegram {
     public static <T, V> TelegramUserDataOutput<T> interfaceTuxedo(TelegramUserDataInput userDataInput, V inVo, T outVo)
             throws Exception {
         log.info("#################### Interface Tuxedo ####################");
-        log.info(inVo.toString());
-        log.info(outVo.toString());
+        log.debug(inVo.toString());
+        log.debug(outVo.toString());
         boolean limited = true;
         ByteEncoder encoder = new ByteEncoder();
-        log.info("ByteEncoder");
+        log.debug("ByteEncoder");
         TelegramIn<V> in = TelegramBuilder.getTelegramIn(userDataInput, inVo);
-        log.info(in);
+        log.debug(in);
         byte[] requestToTuxedo = encoder.convertObjectToBytes(in, limited);
 
-        log.info(new String(requestToTuxedo, StandardCharsets.UTF_8));
-        log.info(in.toString());
+        log.info("Tuxedo request size [{}] bytes", requestToTuxedo.length);
+        log.debug(in.toString());
 
         // throw new Exception("STOP SAMPAI SINI");
 
@@ -48,26 +46,26 @@ public class InterfaceTelegram {
         TelegramMessage message;
         TelegramUserDataOutput<T> outputUserData;
 
-        log.info(header.toString());
-        log.info(header.getErr_flag());
+        log.debug(header.toString());
+        log.info("Tuxedo response err_flag [{}]", header.getErr_flag());
         // Success With Data
         if (header.getErr_flag() == 0) {
             ByteDecoder<TelegramOut<T>> decoder = new ByteDecoder<>();
-            log.info("With Data");
+            log.debug("With Data");
             TelegramOut<T> out1 = TelegramBuilder.getTelegramOutData(outVo);
-            log.info("out 1");
+            log.debug("out 1");
             TelegramOut<T> out2 = decoder.convertBytes2Object(responseFromTuxedo, out1, limited);
-            log.info("out 2");
+            log.debug("out 2");
             tail = out2.getTail();
-            log.info(tail.toString());
-            log.info(tail.getTail());
+            log.debug(tail.toString());
+            log.debug(tail.getTail());
             if ("@@".equals(tail.getTail())) {
                 T outVoTemp = out2.getData().getData();
                 message = out2.getMessage();
-                log.info("###################### TelegramOutputUserData ######################");
-                log.info(header.toString());
-                log.info(message.toString());
-                log.info(outVoTemp.toString());
+                log.debug("###################### TelegramOutputUserData ######################");
+                log.debug(header.toString());
+                log.debug(message.toString());
+                log.debug(outVoTemp.toString());
                 outputUserData = new TelegramUserDataOutput<T>();
                 outputUserData.setMessage(message);
                 outputUserData.setOutput(outVoTemp);
@@ -78,7 +76,7 @@ public class InterfaceTelegram {
             }
         } else {
             ByteDecoder<TelegramOutNoData> decoder = new ByteDecoder<>();
-            log.info("No Data");
+            log.debug("No Data");
             TelegramOutNoData outNoData1 = TelegramBuilder.getTelegramOutDataNoData();
             TelegramOutNoData outNoData2 = decoder.convertBytes2Object(responseFromTuxedo, outNoData1, limited);
             tail = outNoData2.getTail();

@@ -24,9 +24,11 @@ import maas.bcap.dto.AuthInfoDto;
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
+    private final JwtBlacklist jwtBlacklist;
 
-    public JwtAuthFilter(JwtUtil jwtUtil) {
+    public JwtAuthFilter(JwtUtil jwtUtil, JwtBlacklist jwtBlacklist) {
         this.jwtUtil = jwtUtil;
+        this.jwtBlacklist = jwtBlacklist;
     }
 
     @Override
@@ -41,8 +43,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             String token = authHeader.substring(7);
 
             try {
+                if (jwtBlacklist.isBlacklisted(token)) {
+                    throw new JwtAuthenticationException("Token has been revoked", null);
+                }
+
                 if (jwtUtil.validateToken(token)) {
-                    // ✅ Extract DTO first
                     AuthInfoDto authInfoDto = jwtUtil.extractAuthInfo(token);
 
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(

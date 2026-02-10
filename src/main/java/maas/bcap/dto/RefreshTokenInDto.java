@@ -1,6 +1,5 @@
 package maas.bcap.dto;
 
-
 import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
@@ -12,13 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LogOutDto {
-
-    @NotBlank(message = "User ID is required")
-    private String userId;
-
-    @NotBlank(message = "Screen ID is required")
-    private String screenId;
-
+public class RefreshTokenInDto {
+    @NotBlank(message = "Refresh token is required")
     private String refreshToken;
 }

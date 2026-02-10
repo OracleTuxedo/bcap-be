@@ -40,14 +40,13 @@ public class MessageService {
         log.info("MessageService.messageTransfer");
         /// Get original message after decryption
         String originalMessage = decrypt(inDto.getEncryptedMessage(), inDto.getIv());
-        log.info("original message [{}]", originalMessage);
+        log.debug("Decrypted message length [{}]", originalMessage.length());
 
         /// Connect to Telegram Layer
         byte[] requestToTuxedo = originalMessage.getBytes();
         byte[] responseFromTuxedo = WeblogicConnector.connectTuxedo(requestToTuxedo);
         String responseMessage = new String(responseFromTuxedo, StandardCharsets.UTF_8);
-        log.info("request to tuxedo [{}]", new String(requestToTuxedo, StandardCharsets.UTF_8));
-        log.info("response from tuxedo [{}]", responseMessage);
+        log.info("Tuxedo request size [{}] bytes, response size [{}] bytes", requestToTuxedo.length, responseFromTuxedo.length);
 
         /// Generate new IV for another encryption
         String iv = generateRandomIv();
@@ -65,9 +64,7 @@ public class MessageService {
     public byte[] forwardWeblogic(HttpServletRequest request, byte[] requestToTuxedo) throws ServletException, IOException, Exception{
         log.info("MessageService.forwardWeblogic");
         byte[] responseFromTuxedo = WeblogicConnector.connectTuxedo(requestToTuxedo);
-        String responseMessage = new String(responseFromTuxedo, StandardCharsets.UTF_8);
-        log.info("request to tuxedo [{}]", new String(requestToTuxedo, StandardCharsets.UTF_8));
-        log.info("response from tuxedo [{}]", responseMessage);
+        log.info("Tuxedo forward request size [{}] bytes, response size [{}] bytes", requestToTuxedo.length, responseFromTuxedo.length);
         return responseFromTuxedo;
     }
 

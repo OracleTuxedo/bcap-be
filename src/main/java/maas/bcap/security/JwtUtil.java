@@ -25,11 +25,9 @@ public class JwtUtil {
     @Value("${jwt_secret}")
     private String secret;
 
-    // private final String secret = "javainuse-secret-key";
-
     private Key key;
 
-    private final long expiration = 1000 * 60 * 60 * 24; // 24 Hours
+    private final long expiration = 1000 * 60 * 15; // 15 Minutes
 
     private final ObjectMapper mapper = new ObjectMapper();
 

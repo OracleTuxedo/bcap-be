@@ -52,7 +52,8 @@ public class ServiceSupport {
         userData.setTtl_use_flag(0);
         userData.setLang_type(getLocaleCd(request));
 
-        log.info(userData.toString());
+        log.info("tuxedoHeader tx_code [{}] scrn_id [{}] op_id [{}]", tuxedoCode, screenId, userData.getOp_id());
+        log.debug(userData.toString());
 
         return userData;
     }
@@ -62,7 +63,7 @@ public class ServiceSupport {
         throws Exception {
         TelegramUserDataOutput<T> result = InterfaceTelegram.interfaceTuxedo(userDataInput, in, out);
         if (result != null) {
-            log.info(result.toString());
+            log.debug(result.toString());
         }
         return result;
     }
@@ -77,7 +78,7 @@ public class ServiceSupport {
             lang = (locale.toString()).equalsIgnoreCase("EN") ? "EN" : "ID";
         }
 
-        log.info(lang);
+        log.debug("locale [{}]", lang);
 
         return lang;
     }
