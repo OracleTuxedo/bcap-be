@@ -5,6 +5,38 @@
 
 ## CHANGELOG (Frontend Breaking Changes)
 
+### 2026-02-11 — Security Review Round 2 (fix/security branch)
+
+| Change | Type | Frontend Impact |
+|--------|------|-----------------|
+| `POST /message/forward/weblogic` endpoint removed | **BREAKING** | This raw binary proxy to Tuxedo has been removed entirely. Frontend does not use it (confirmed by grep). Any direct callers must be removed. |
+| `spring.profiles.active=dev` removed from shared config | **BREAKING** | Profile must now be set explicitly via `-Dspring.profiles.active=dev` or `SPRING_PROFILES_ACTIVE=dev` env var. Without it, no profile-specific properties load. |
+| File uploads now validate magic bytes (JPEG/PNG/PDF) | **INFO** | Files with mismatched content and extension (e.g., `.jpg` containing EXE bytes) are rejected with `400`. Normal files unaffected. |
+| Filename sanitization on upload (defense-in-depth) | **INFO** | Path components stripped from uploaded filenames at all entry points. Normal filenames unaffected. |
+| Refresh token rotation is now atomic | **INFO** | No frontend impact. Prevents race condition on concurrent `/auth/refresh` with same token. |
+| `.bak` file with PCI data removed from git tracking | **INFO** | No frontend impact. Git history scrub recommended as follow-up. |
+| Test files no longer contain real credentials | **INFO** | No frontend impact. Test data only. |
+
+### 2026-02-11 — Security Review Fixes (fix/security branch)
+
+| Change | Type | Frontend Impact |
+|--------|------|-----------------|
+| `POST /file-manager/upload` now validates `fileDiv` and `screenId` as required | **BREAKING** | Sending empty or null `fileDiv`/`screenId` will now return `400` with validation error messages. `fileDesc`, `extraPath`, `attachFileId` have max-length validation. **Affected:** `src/pages/MC/MC02/WMC0200300.tsx` — upload FormData missing `screenId`. Fix: `formData.append('screenId', 'WMC0200300')`. |
+| `GET /file-manager/download` now validates `fileDiv` and `screenId` as required | **BREAKING** | Sending empty or null `fileDiv`/`screenId` will now return `400` with validation error messages. All string fields have max-length validation. **Affected:** `src/gfn/file.gfn.ts` — download params missing `screenId`. Fix: add `screenId` to params object. |
+| `fileDiv` path traversal protection | **INFO** | `fileDiv` containing `../` sequences is now rejected. Previously only `extraPath` was sanitized. Normal values still work. |
+| JWT `validateToken()` now propagates specific exceptions | **INFO** | No frontend impact. Expired/malformed/unsigned tokens now return proper error responses instead of generic `401`. |
+| WeblogicConnector error messages genericized | **INFO** | `502` errors now return `"A backend service error occurred"` without JNDI/Tuxedo internal details. |
+| Debug log cleanup in `MessageService` and `TelegramUtil` | **INFO** | No frontend impact. Decrypted content and debug output no longer logged even at DEBUG level. |
+
+### 2026-02-10 (Update 5) — Security Hardening (fix/security branch)
+
+| Change | Type | Frontend Impact |
+|--------|------|-----------------|
+| `WeblogicConnector` now re-throws exceptions instead of silently swallowing | **INFO** | Tuxedo connection failures now propagate as exceptions. Frontend may see `502` errors from `GlobalExceptionHandler` where previously it received empty responses. |
+| `/auth/refresh` now has rate limiting (5 attempts / 15 min) | **INFO** | Excessive refresh attempts return `429 Too Many Requests` with message `"Too many refresh attempts. Please try again later."` |
+| File upload per-file size validation (10MB max) | **INFO** | Individual files over 10MB rejected with `400`. Same as existing Spring config, now enforced in code too. |
+| `TelegramUtil` debug methods no longer use `System.out.println` | **INFO** | No frontend impact. Internal debugging output moved to log.debug. |
+
 ### 2026-02-10 (Update 4) — Deep Scan Security Fixes
 
 | Change | Type | Frontend Impact |
@@ -54,6 +86,12 @@
 - [ ] Ensure `POST /auth/refresh` always sends non-empty `refreshToken`
 - [ ] Ensure `POST /auth/logout` always sends non-empty `userId` and `screenId`
 - [ ] Ensure `POST /message` always sends non-empty `encryptedMessage` and `iv`
+- [ ] **`src/pages/MC/MC02/WMC0200300.tsx`**: Add `formData.append('screenId', 'WMC0200300')` to upload FormData
+- [ ] **`src/gfn/file.gfn.ts`**: Add `screenId` param to `/file-manager/download` request
+- [ ] Ensure all future `/file-manager/upload` calls send non-empty `fileDiv` and `screenId`
+- [ ] Ensure all future `/file-manager/download` calls send non-empty `fileDiv` and `screenId`
+- [ ] Remove any calls to `POST /message/forward/weblogic` (endpoint removed)
+- [ ] Set `spring.profiles.active` explicitly in deployment config (no longer defaults to `dev`)
 - [ ] Handle `400` validation error responses (new format below)
 
 #### New 400 Validation Error Format
@@ -269,12 +307,12 @@ Content-Type: multipart/form-data
 
 Fields:
   - files: File[]              (multipart files, max 10MB each)
-  - fileDiv: string            (file division/category)
-  - fileDesc: string           (description)
-  - extraPath: string          (sub-directory)
-  - attachFileId: string       (attachment group ID)
+  - fileDiv: string            (required, max 50 chars, file division/category)
+  - fileDesc: string           (optional, max 200 chars, description)
+  - extraPath: string          (optional, max 200 chars, sub-directory)
+  - attachFileId: string       (optional, max 50 chars, attachment group ID)
   - attachFileSeqNo: string[]  (sequence numbers)
-  - screenId: string
+  - screenId: string           (required, max 50 chars)
 ```
 
 **Allowed extensions:** `jpg`, `png`, `pdf`
@@ -284,6 +322,9 @@ Fields:
 ```
 GET /file-manager/download?fileDiv=...&attachFileId=...&attachFileSeqNo=...&chkFlag=...&screenId=...
 Authorization: Bearer <access_token>
+
+Required: fileDiv (max 50), screenId (max 50)
+Optional: attachFileId (max 50), attachFileSeqNo (max 20), chkFlag (max 10)
 ```
 
 ### 2.5 Error Responses
@@ -321,7 +362,7 @@ All errors follow a consistent format:
 {
   "status": 502,
   "error": "Backend Service Error",
-  "message": "Tuxedo error description"
+  "message": "A backend service error occurred"
 }
 ```
 
@@ -431,7 +472,6 @@ axios.post('/message', body, {
 | POST | `/auth/logout` | Yes | Blacklists access token, invalidates refresh token |
 | GET | `/auth/me` | Yes | Get current user info (returns `userId`) |
 | POST | `/message` | Yes | Main gateway: encrypted message to/from Tuxedo |
-| POST | `/message/forward/weblogic` | Yes | Raw byte forwarding to Tuxedo |
 | POST | `/file-manager/upload` | Yes | Upload files (multipart) |
 | GET | `/file-manager/download` | Yes | Download files |
 
@@ -448,12 +488,12 @@ axios.post('/message', body, {
 | Refresh Token | UUID, 24-hour expiry, rotation on use |
 | Token Blacklist | In-memory (Caffeine), auto-expires with token TTL |
 | Login Rate Limiting | 5 attempts per userId, 15-minute lockout |
-| Input Validation | `@Valid` + `@NotBlank` on login, refresh, logout, and message DTOs |
-| Path Traversal Protection | `extraPath` sanitized via path normalization + base directory validation |
+| Input Validation | `@Valid` + `@NotBlank`/`@Size` on login, refresh, logout, message, file upload, and file download DTOs |
+| Path Traversal Protection | `fileDiv` + `extraPath` sanitized via `buildSafeFilePath()` — path normalization + base directory validation |
 | Security Headers | `X-Content-Type-Options`, `X-Frame-Options: DENY`, `X-XSS-Protection`, `HSTS` |
 | CORS | Configurable via `cors.allowed.origins` in profile properties |
 | Audit Log | Logs user, method, path, status, duration for every request |
-| File Upload | Extension whitelist (`jpg,png,pdf`), path traversal protection |
+| File Upload | Extension whitelist (`jpg,png,pdf`), magic-byte validation, filename sanitization, path traversal protection |
 | HMAC Request Signing | HmacSHA256 on all POST bodies, `X-HMAC-Signature` header |
 | Exception Handling | Global `@ControllerAdvice`, never exposes stack traces |
 
@@ -469,13 +509,12 @@ src/main/resources/
 └── application-uat.properties      # UAT secrets + paths (gitignored)
 ```
 
-Default active profile: `dev`. Switch via `-Dspring.profiles.active=prod`.
+No default profile. Set explicitly via `-Dspring.profiles.active=dev` or `SPRING_PROFILES_ACTIVE` env var.
 
 **Shared config (`application.properties`):**
 
 | Property | Value |
 |----------|-------|
-| `spring.profiles.active` | `dev` |
 | `file.ext.filter` | `jpg,png,pdf` |
 | `spring.servlet.multipart.max-file-size` | `10MB` |
 

@@ -119,7 +119,7 @@ public class ByteEncoder {
                     Object nestedObject = TelegramUtil.getObjectFromField(field);
                     placeholderBytes = convertObjectToBytes(nestedObject, limited);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    log.error("Failed to create placeholder bytes for nested VO field [{}]", field.getName(), e);
                 }
                 break;
 

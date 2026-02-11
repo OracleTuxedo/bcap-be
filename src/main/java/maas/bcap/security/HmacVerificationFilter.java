@@ -44,8 +44,9 @@ public class HmacVerificationFilter extends OncePerRequestFilter {
             FilterChain filterChain)
             throws ServletException, IOException {
 
-        /// Skip GET requests and paths that don't have a body
-        if (HttpMethod.GET.matches(request.getMethod())) {
+        /// Skip methods that do not carry a request body
+        String method = request.getMethod();
+        if (HttpMethod.GET.matches(method) || HttpMethod.HEAD.matches(method) || HttpMethod.OPTIONS.matches(method)) {
             filterChain.doFilter(request, response);
             return;
         }

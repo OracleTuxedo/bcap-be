@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
+
 import maas.bcap.dto.AuthInfoDto;
 import maas.bcap.dto.FileDownloadInDto;
 import maas.bcap.dto.FileUploadInDto;
@@ -37,7 +39,7 @@ public class FileManagerController {
             HttpServletRequest request,
             HttpServletResponse response,
             @CurrentAuthInfoDto AuthInfoDto authInfoDto,
-            @ModelAttribute FileUploadInDto inDto,
+            @Valid @ModelAttribute FileUploadInDto inDto,
             @RequestPart("files") List<MultipartFile> files) throws Exception {
 
         log.info("Upload request from userId [{}], fileCount [{}]", authInfoDto.getUserId(), files != null ? files.size() : 0);
@@ -51,7 +53,7 @@ public class FileManagerController {
             HttpServletRequest request,
             HttpServletResponse response,
             @CurrentAuthInfoDto AuthInfoDto authInfoDto,
-            @ModelAttribute FileDownloadInDto inDto) throws Exception {
+            @Valid @ModelAttribute FileDownloadInDto inDto) throws Exception {
         fileManagerService.download(request, response, authInfoDto, inDto);
         return;
     }

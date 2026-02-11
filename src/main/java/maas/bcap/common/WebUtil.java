@@ -79,39 +79,4 @@ public class WebUtil {
         return false;
     }
 
-    /**
-     * Return String URI.
-     * <pre>
-     * WebUtil.getURI(request) == "/app/member/userInfoListPageView.do?param1=value"
-     * </pre>
-     *
-     * @param request
-     * @return URI String
-     */
-    public static String getURI(HttpServletRequest request) {
-        return getURI(request, true);
-    }
-
-    /**
-     * Return String URI.
-     * <pre>
-     * WebUtil.getURI(request, true)  == "/app/member/userInfoListPageView.do?param1=value"
-     * WebUtil.getURI(request, false) == "/app/member/userInfoListPageView.do"
-     * </pre>
-     *
-     * @param request
-     * @param appendQueryString
-     * @return URI String
-     */
-    public static String getURI(HttpServletRequest request, boolean appendQueryString) {
-        String requestURI = request.getRequestURI();
-        String queryString = request.getQueryString();
-
-        StringBuilder buff = new StringBuilder();
-        buff.append(requestURI);
-        if (appendQueryString && queryString != null) {
-            buff.append("?").append(queryString);
-        }
-        return buff.toString();
-    }
 }

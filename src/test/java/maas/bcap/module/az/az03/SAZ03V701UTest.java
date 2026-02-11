@@ -17,8 +17,8 @@ class SAZ03V701UTest {
     @DisplayName("InVo To Request")
     public void request() throws Exception {
         SAZ03V701UInVo saz03v701uInVo = SAZ03V701UInVo.builder()
-            .usr_id("1787130271")
-            .usr_paswd("7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A")
+            .usr_id("0000000001")
+            .usr_paswd("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
             .admin_yn("N")
             .chnl_clcd("1")
             .req_tp("I")
@@ -33,7 +33,7 @@ class SAZ03V701UTest {
     @Test
     @DisplayName("Response To OutVo")
     public void response() throws Exception {
-        String response = "00001070devaps01202410221334230014256400SAZ03V701U              MTI R                        devaps0120241022133423001425640020241022133423036   UNIT      192.168.1.3                     581CF8933F96            1787130271     020241022133423036   20241022133423725174  0  00        000       IAZAP0000                                                        EN                                                                                                                                             N00000425                     30Login success.                                                                                                                                                                                                                                                                                                                                                                                                  00D00000133                     1787130271     Yosua Sutandar                                    N1787130271                                 10Y@@";
+        String response = "00001070devaps01202410221334230014256400SAZ03V701U              MTI R                        devaps0120241022133423001425640020241022133423036   UNIT      192.168.1.3                     581CF8933F96            0000000001     020241022133423036   20241022133423725174  0  00        000       IAZAP0000                                                        EN                                                                                                                                             N00000425                     30Login success.                                                                                                                                                                                                                                                                                                                                                                                                  00D00000133                     0000000001     Test User                                         N0000000001                                 10Y@@";
         SAZ03V701UOutVo saz03v701uOutVo = SAZ03V701UOutVo.builder().build();
         TelegramUserDataOutput<SAZ03V701UOutVo> output = InterfaceTelegramTest.response(response, saz03v701uOutVo);
 
@@ -44,10 +44,10 @@ class SAZ03V701UTest {
     @Test
     @DisplayName("SHA Algorithm")
     public void encrypt1() throws NoSuchAlgorithmException {
-        String userId = "1787130271";
-        String password = "@Yokkemti";
+        String userId = "0000000001";
+        String password = "TestPassword123!";
 
-        String value = "7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A";
+        String value = "4605A9295AFC78A4E86176DC1544BBE53D37CE4DFB8CC060506EF069F8E78801";
 
         String result = SHAEncryption.encrypt(userId + password);
 
@@ -60,10 +60,10 @@ class SAZ03V701UTest {
     @Test
     @DisplayName("SHA Algorithm")
     public void encryp2t() throws NoSuchAlgorithmException {
-        String userId = "2197130504";
-        String password = "2197130504y";
+        String userId = "0000000002";
+        String password = "TestPassword456!";
 
-        String value = "1A63C9D2E66C3D5D20380BD2832F00B8F9B68CD94A4DA95DC56427D8E08D9FF1";
+        String value = "66B4ADFEA74C1E3B4866FF7B779FB2F8C371ABACB545D33BE96C5B24353D1C10";
 
         String result = SHAEncryption.encrypt(userId + password);
 

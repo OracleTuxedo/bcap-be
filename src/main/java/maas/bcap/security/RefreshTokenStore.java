@@ -26,6 +26,14 @@ public class RefreshTokenStore {
         return refreshTokens.getIfPresent(refreshToken);
     }
 
+    /**
+     * Atomically validates and invalidates a refresh token.
+     * Returns the userId if the token was valid, null otherwise.
+     */
+    public String validateAndInvalidate(String refreshToken) {
+        return refreshTokens.asMap().remove(refreshToken);
+    }
+
     public void invalidate(String refreshToken) {
         refreshTokens.invalidate(refreshToken);
     }

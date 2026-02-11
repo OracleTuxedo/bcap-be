@@ -35,7 +35,7 @@ public class AuditLogFilter extends OncePerRequestFilter {
         audit.info("AUDIT | user={} | {} {} | status={} | {}ms",
                 userId,
                 request.getMethod(),
-                request.getRequestURI(),
+                request.getServletPath(),
                 response.getStatus(),
                 duration);
     }

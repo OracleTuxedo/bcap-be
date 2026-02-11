@@ -116,15 +116,21 @@ public class AuthService {
     }
 
     public ResponseEntity<RefreshTokenOutDto> refresh(RefreshTokenInDto inDto) {
-        String userId = refreshTokenStore.validateAndGetUserId(inDto.getRefreshToken());
+        /// Rate limit refresh attempts by token prefix (prevent brute-force guessing)
+        String rateLimitKey = "refresh:" + inDto.getRefreshToken().substring(0, Math.min(8, inDto.getRefreshToken().length()));
+        if (rateLimiter.isBlocked(rateLimitKey)) {
+            return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(RefreshTokenOutDto.builder()
+                    .message("Too many refresh attempts. Please try again later.")
+                    .build());
+        }
+
+        String userId = refreshTokenStore.validateAndInvalidate(inDto.getRefreshToken());
         if (userId == null) {
+            rateLimiter.recordFailedAttempt(rateLimitKey);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(RefreshTokenOutDto.builder()
                     .message("Invalid or expired refresh token")
                     .build());
         }
-
-        /// Invalidate old refresh token (rotation)
-        refreshTokenStore.invalidate(inDto.getRefreshToken());
 
         /// Generate new tokens
         final AuthInfoDto authInfoDto = AuthInfoDto.builder()

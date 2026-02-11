@@ -15,8 +15,8 @@ public class SAZ03F000UTest {
     public void request() throws Exception {
         SAZ03F000UInVo saz03F000UInVo = SAZ03F000UInVo.builder()
             .usr_conn_clcd("I")
-            .usr_id("1787130271")
-            .usr_paswd("7DB3C8AE5015726FB1B0120DCA9C6C7452279219553DCF4818C4DF885164463A")
+            .usr_id("0000000001")
+            .usr_paswd("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
             .build();
 
         String request = InterfaceTelegramTest.request("SAZ03F000U", saz03F000UInVo);

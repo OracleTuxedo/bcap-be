@@ -54,16 +54,16 @@ public class WeblogicConnector {
 
         } catch (NamingException var15) {
             log.error("Could not get TuxedoConnectionFactory: NamingException: {}", var15.getMessage());
-            // throw var15;
+            throw new Exception("Tuxedo connection failed", var15);
         } catch (TPReplyException var16) {
             log.error("tpcall threw TPReplyException: {}", var16.getMessage());
-            // throw var16;
+            throw new Exception("Tuxedo call failed", var16);
         } catch (TPException var17) {
             log.error("tpcall threw TPException: {}", var17.getMessage());
-            // throw var17;
+            throw new Exception("Tuxedo call failed", var17);
         } catch (Exception var18) {
             log.error("tpcall threw exception: {}", var18.getMessage());
-            // throw var18;
+            throw var18;
         } finally {
             if (var3 != null) {
                 var3.tpterm();

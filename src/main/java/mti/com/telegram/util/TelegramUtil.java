@@ -516,22 +516,16 @@ public class TelegramUtil {
     public static byte[] cutBytes1(byte[] var0, int var1, int var2) throws Exception {
         byte[] var3 = new byte[var2];
         int var4 = var1 + var2;
-        System.out.println("소스[" + var1 + ":" + var4 + ":" + var2 + "] : [" + new String(var0) + "]");
-        System.out.println("소스 길이 : " + var0.length);
+        log.debug("cutBytes1 source [{}:{}:{}] length [{}]", var1, var4, var2, var0.length);
         int var5 = var1;
 
         for (int var6 = 0; var5 < var4; ++var6) {
             var3[var6] = var0[var5];
-            log.info("bytes[{}] : {}", var5, (Byte.valueOf(var0[var5])).toString());
+            log.debug("bytes[{}] : {}", var5, Byte.valueOf(var0[var5]));
             ++var5;
         }
 
-        for (var5 = 0; var5 < var0.length; ++var5) {
-            System.out.print("bytes[" + var5 + "] : " + (Byte.valueOf(var0[var5])) + ",");
-        }
-
-        System.out.println();
-        System.out.println("Result : " + new String(var3));
+        log.debug("cutBytes1 result length [{}]", var3.length);
         return var3;
     }
 
@@ -683,24 +677,23 @@ public class TelegramUtil {
 
     public static void viewObjectMethod(Object object) {
         Field[] fields = object.getClass().getDeclaredFields();
-        System.out.println("****************** " + object.getClass().getName());
+        log.debug("****************** {}", object.getClass().getName());
 
         for (var field : fields) {
             Class<?> declaringClass = field.getDeclaringClass();
             Method[] methods = declaringClass.getMethods();
 
             for (var method : methods) {
-                System.out.println(declaringClass.getName() + "                    " + method.getName());
+                log.debug("{} - {}", declaringClass.getName(), method.getName());
                 Type[] parameterTypes = method.getGenericParameterTypes();
 
                 for (var parameterType : parameterTypes) {
-                    System.out.println(
-                            declaringClass.getName() + "                        " + parameterType.getTypeName());
+                    log.debug("{}   param: {}", declaringClass.getName(), parameterType.getTypeName());
                 }
             }
         }
 
-        System.out.println("*****************************************************");
+        log.debug("*****************************************************");
     }
 
     public static String getHexaString(byte[] var0) {
@@ -1231,6 +1224,6 @@ public class TelegramUtil {
 
     public static void main(String[] var0) {
         String var1 = "abcd";
-        System.out.println(addRightZeroPaddingByLength(var1, 5));
+        log.debug("addRightZeroPaddingByLength result: [{}]", addRightZeroPaddingByLength(var1, 5));
     }
 }

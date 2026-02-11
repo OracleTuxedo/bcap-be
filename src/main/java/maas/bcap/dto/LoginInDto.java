@@ -18,6 +18,7 @@ public class LoginInDto {
     private String userId;
 
     @NotBlank(message = "password is required")
+    @Size(max = 500, message = "encryptionPassword must be at most 500 characters")
     private String encryptionPassword;
 
     @NotBlank(message = "appType is required")
@@ -25,5 +26,6 @@ public class LoginInDto {
     private String appType; // I = MTI, B = MBCS, M = MMP
 
     @NotBlank(message = "screenId is required")
+    @Size(max = 50, message = "screenId must be at most 50 characters")
     private String screenId;
 }

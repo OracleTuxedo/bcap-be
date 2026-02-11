@@ -6,6 +6,14 @@ target/
 /jar
 bin/
 
+### AI ###
+.claude/
+.agent/
+.agents/
+.continue/
+.cursor/
+nul
+
 ### STS ###
 .apt_generated
 .classpath
@@ -20,6 +28,7 @@ bin/
 *.iws
 *.iml
 *.ipr
+*.bak
 
 ### NetBeans ###
 /nbproject/private/

@@ -35,6 +35,7 @@ import maas.bcap.dto.UserInfoFileManagerDto;
 @Service
 public class FileManagerService {
     private static final Logger log = LogManager.getLogger(FileManagerService.class);
+    private static final long MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB per file
 
     @Value("${file.upload.path}")
     private String fileUploadPath;
@@ -100,6 +101,14 @@ public class FileManagerService {
             throw new Exception("There is no files uploaded");
         }
 
+        /// Validate individual file sizes
+        for (MultipartFile file : files) {
+            if (file.getSize() > MAX_FILE_SIZE) {
+                log.warn("File [{}] exceeds max size: {} bytes", sanitizeForLog(file.getOriginalFilename()), file.getSize());
+                throw new IOException("File size exceeds maximum allowed size of 10MB");
+            }
+        }
+
         String userIp = getClientIpAddress(request);
         final UserInfoFileManagerDto userInfoFileManagerDto = UserInfoFileManagerDto.builder()
                 .screenId(inDto.getScreenId())
@@ -136,7 +145,7 @@ public class FileManagerService {
 
         List<FileInSub1Vo> inSub1Vos = new ArrayList<>();
         for (MultipartFile file : files) {
-            String originalFileName = Optional.ofNullable(file.getOriginalFilename()).orElse("");
+            String originalFileName = new File(Optional.ofNullable(file.getOriginalFilename()).orElse("")).getName();
 
             if (!checkFileExtension(file)) {
                 log.error("File Extention Error");
@@ -144,10 +153,8 @@ public class FileManagerService {
             }
 
             /// File Path
-            if (inDto.getExtraPath() == null || inDto.getExtraPath().equals(""))
-                filePath = fileUploadPath + File.separator + inDto.getFileDiv();
-            else
-                filePath = buildSafeFilePath(fileUploadPath, inDto.getFileDiv(), inDto.getExtraPath());
+            String extraPath = (inDto.getExtraPath() != null) ? inDto.getExtraPath() : "";
+            filePath = buildSafeFilePath(fileUploadPath, inDto.getFileDiv(), extraPath);
 
             FileInSub1Vo inSub1Vo = FileInSub1Vo.builder()
                     .file_nm(originalFileName)
@@ -209,10 +216,8 @@ public class FileManagerService {
         if (outSub1Vos != null && !outSub1Vos.isEmpty()) {
             filePath = outSub1Vos.get(0).getFile_path();
         } else {
-            if (inDto.getExtraPath() == null || inDto.getExtraPath().equals(""))
-                filePath = fileUploadPath + File.separator + inDto.getFileDiv();
-            else
-                filePath = buildSafeFilePath(fileUploadPath, inDto.getFileDiv(), inDto.getExtraPath());
+            String extraPath = (inDto.getExtraPath() != null) ? inDto.getExtraPath() : "";
+            filePath = buildSafeFilePath(fileUploadPath, inDto.getFileDiv(), extraPath);
         }
 
         List<FileInSub1Vo> inSub1Vos = new ArrayList<>();
@@ -275,7 +280,7 @@ public class FileManagerService {
             List<MultipartFile> files) throws Exception {
         List<FileInSub1Vo> inSub1Vos = new ArrayList<>();
         for (MultipartFile file : files) {
-            String originalFileName = Optional.ofNullable(file.getOriginalFilename()).orElse("");
+            String originalFileName = new File(Optional.ofNullable(file.getOriginalFilename()).orElse("")).getName();
 
             if (!checkFileExtension(file)) {
                 log.error("File Extention Error");
@@ -300,7 +305,7 @@ public class FileManagerService {
             throws IllegalStateException, IOException {
         log.info("FileManagerService.saveToDisk");
         for (MultipartFile file : files) {
-            String originalFileName = file.getOriginalFilename();
+            String originalFileName = new File(Optional.ofNullable(file.getOriginalFilename()).orElse("")).getName();
 
             List<FileOutSub1Vo> outSub1Vos = outVo.getSub1Vos();
             for (FileOutSub1Vo outSub1Vo : outSub1Vos) {
@@ -357,32 +362,65 @@ public class FileManagerService {
         return ip;
     }
 
+    private static final byte[] JPEG_MAGIC = {(byte) 0xFF, (byte) 0xD8, (byte) 0xFF};
+    private static final byte[] PNG_MAGIC  = {(byte) 0x89, 0x50, 0x4E, 0x47};
+    private static final byte[] PDF_MAGIC  = {0x25, 0x50, 0x44, 0x46}; // %PDF
+
     private boolean checkFileExtension(MultipartFile file) throws Exception {
         log.info("FileUploadService.checkFileExtension");
         String originFileName = Optional.ofNullable(file.getOriginalFilename()).orElse("");
-        log.info("originFileName : [{}]", originFileName);
+        log.info("originFileName : [{}]", sanitizeForLog(originFileName));
 
         // Sanitize filename - strip path components to prevent path traversal
         originFileName = new File(originFileName).getName();
 
         for (String allowExt : fileExtFilter.split(",")) {
-            log.info(allowExt);
-            if (originFileName.toLowerCase().endsWith("." + allowExt.trim().toLowerCase()))
+            String ext = allowExt.trim().toLowerCase();
+            if (originFileName.toLowerCase().endsWith("." + ext)) {
+                if (!validateFileContent(file, ext)) {
+                    log.error("File content does not match extension [{}]", ext);
+                    throw new IOException("File content validation failed");
+                }
                 return true;
+            }
         }
 
         log.error("BAD Extension file upload!");
         throw new IOException("BAD Extension file upload!");
     }
 
+    private boolean validateFileContent(MultipartFile file, String extension) throws IOException {
+        byte[] header = new byte[8];
+        try (java.io.InputStream is = file.getInputStream()) {
+            int bytesRead = is.read(header);
+            if (bytesRead < 3) return false;
+        }
+
+        if (extension.equals("jpg") || extension.equals("jpeg")) {
+            return header[0] == JPEG_MAGIC[0] && header[1] == JPEG_MAGIC[1] && header[2] == JPEG_MAGIC[2];
+        } else if (extension.equals("png")) {
+            return header[0] == PNG_MAGIC[0] && header[1] == PNG_MAGIC[1]
+                && header[2] == PNG_MAGIC[2] && header[3] == PNG_MAGIC[3];
+        } else if (extension.equals("pdf")) {
+            return header[0] == PDF_MAGIC[0] && header[1] == PDF_MAGIC[1]
+                && header[2] == PDF_MAGIC[2] && header[3] == PDF_MAGIC[3];
+        }
+        return false;
+    }
+
     private String buildSafeFilePath(String basePath, String fileDiv, String extraPath) throws Exception {
         Path base = Path.of(basePath).normalize().toAbsolutePath();
         Path resolved = base.resolve(fileDiv + extraPath).normalize().toAbsolutePath();
         if (!resolved.startsWith(base)) {
-            log.error("Path traversal attempt detected: extraPath [{}]", extraPath);
+            log.error("Path traversal attempt detected: fileDiv [{}], extraPath [{}]", fileDiv, extraPath);
             throw new Exception("Invalid file path");
         }
         return resolved.toString();
+    }
+
+    private static String sanitizeForLog(String input) {
+        if (input == null) return "null";
+        return input.replaceAll("[\\r\\n\\t]", "_");
     }
 
     private String getBrowser(HttpServletRequest request) {

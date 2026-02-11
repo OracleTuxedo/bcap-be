@@ -61,13 +61,6 @@ public class MessageService {
                 .build();
     }
 
-    public byte[] forwardWeblogic(HttpServletRequest request, byte[] requestToTuxedo) throws ServletException, IOException, Exception{
-        log.info("MessageService.forwardWeblogic");
-        byte[] responseFromTuxedo = WeblogicConnector.connectTuxedo(requestToTuxedo);
-        log.info("Tuxedo forward request size [{}] bytes, response size [{}] bytes", requestToTuxedo.length, responseFromTuxedo.length);
-        return responseFromTuxedo;
-    }
-
     private String encrypt(String message, String iv) throws NoSuchAlgorithmException, NoSuchPaddingException,
             InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
         // Decode Base64 untuk IV
@@ -97,8 +90,8 @@ public class MessageService {
         /// Decode Base64 for IV and encrypted message
         byte[] ivBytes = Base64.getDecoder().decode(iv);
         byte[] encryptedMessageBytes = Base64.getDecoder().decode(encryptedMessage);
-        log.debug("ivBytes decrypt [{}]", new String(ivBytes, StandardCharsets.UTF_8));
-        log.debug("encrypted messages bytes [{}]", new String(encryptedMessageBytes, StandardCharsets.UTF_8));
+        // log.debug("ivBytes decrypt [{}]", new String(ivBytes, StandardCharsets.UTF_8));
+        // log.debug("encrypted messages bytes [{}]", new String(encryptedMessageBytes, StandardCharsets.UTF_8));
 
         /// Setup secret key and IV
         SecretKey key = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "AES");
@@ -110,7 +103,7 @@ public class MessageService {
 
         /// Perform decryption
         byte[] originalMessage = cipher.doFinal(encryptedMessageBytes);
-        log.debug("original message [{}]", new String(originalMessage, StandardCharsets.UTF_8));
+        // log.debug("original message [{}]", new String(originalMessage, StandardCharsets.UTF_8));
 
         return new String(originalMessage, StandardCharsets.UTF_8);
     }
@@ -118,7 +111,7 @@ public class MessageService {
     private String generateRandomIv() {
         byte[] iv = new byte[16];
         new SecureRandom().nextBytes(iv);
-        log.debug("generateRandomIv [{}]", iv);
+        // log.debug("generateRandomIv [{}]", iv);
         return Base64.getEncoder().encodeToString(iv);
     }
 }

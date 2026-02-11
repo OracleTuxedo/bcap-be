@@ -1,5 +1,32 @@
 # BCAP-BE Project Context
 
+## Pre-Development Workflow (MANDATORY)
+
+**Before writing, modifying, or deleting ANY code**, you MUST follow this workflow:
+
+### Step 1: Load Project Context
+Read the `bcap-context` skill to understand backend architecture, conventions, and patterns.
+
+### Step 2: Load Relevant Skills (as needed)
+| Skill | When to load |
+|-------|-------------|
+| `frontend-context` | Changing DTOs, response formats, error handling, auth flow, encryption |
+| `security-review` | Auth, secrets, API endpoints, input validation |
+| `springboot-security` | Spring Security configuration changes |
+| `spring-boot-test-patterns` | Writing tests |
+| `api-security-review` | API security patterns |
+| `code-reviewer` | Code review |
+
+### Step 3: Execute the Task
+Only after loading context, proceed with implementation following the established patterns.
+
+### Cross-Project Reference
+- **Frontend project**: `C:\Users\billy\work\Personal Project\maas-web\maas-web-fe` (Next.js 15 / React 19)
+- You can directly `Read` frontend source files when needed for API contract verification
+- Frontend has a `backend-context` skill that mirrors this setup
+
+---
+
 ## What is this?
 Spring Boot 2.7.18 REST API gateway (WAR) deployed on **WebLogic 14c (14.1.2)**.
 Sits between a Next.js frontend and Oracle Tuxedo backend (200+ services via SLCFPROXY).
@@ -20,7 +47,7 @@ Frontend -> HMAC Filter -> JWT Filter -> Audit Filter -> Controller -> Service -
 ```
 
 ### Security Filter Chain Order
-1. `HmacVerificationFilter` — HMAC-SHA256 body integrity (POST only, constant-time via `MessageDigest.isEqual()`)
+1. `HmacVerificationFilter` — HMAC-SHA256 body integrity (all body-bearing methods: POST, PUT, PATCH, DELETE; constant-time via `MessageDigest.isEqual()`)
 2. `JwtAuthFilter` — Bearer token extraction + blacklist check
 3. `AuditLogFilter` — Logs user, method, path, status, duration
 
@@ -69,7 +96,7 @@ src/main/java/
 ### Security Rules
 - Never log passwords, tokens, decrypted messages, or full request/response bodies
 - Log only userId for identification, sizes for debugging
-- All POST endpoints require `X-HMAC-Signature` header (except public paths)
+- All body-bearing endpoints (POST, PUT, PATCH, DELETE) require `X-HMAC-Signature` header (except public paths)
 - All DTOs that receive user input must have `@Valid` on controller + `@NotBlank`/`@Size` on fields
 - Use `MessageDigest.isEqual()` for security-critical string comparisons (timing-safe)
 - Dev-only code must be gated with `@Profile("dev")`
@@ -106,7 +133,7 @@ src/main/java/
 ### Adding a new endpoint
 1. Add DTO in `dto/` with `@NotBlank`/`@Size` validation annotations
 2. Add controller method with `@Valid @RequestBody`
-3. HMAC filter auto-applies to all POST requests
+3. HMAC filter auto-applies to all body-bearing requests (POST, PUT, PATCH, DELETE)
 4. JWT filter auto-applies to all non-public paths
 
 ### Security checklist for code changes
